@@ -17,6 +17,8 @@
 
 /**
  * this is an example function
+ *
+ * @param value the value that we want to evaluate
  */
 void foo(int value)
 {
