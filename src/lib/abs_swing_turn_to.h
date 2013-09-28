@@ -11,13 +11,9 @@
 #define ABS_SWING_TURN_TO_H
 
 #include "xzander/hitechnic-gyro.h"
-/** macros */
+#include "abs_turn_utils.h"
 
-typedef enum
-{
-	CLOCKWISE,
-	COUNTERCLOCKWISE
-} e_direction;
+/** macros */
 
 //=======================================
 // Swing Turn
