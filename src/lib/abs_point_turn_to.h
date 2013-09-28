@@ -11,13 +11,9 @@
 #define ABS_POINT_TURN_TO_H
 
 #include "xzander/hitechnic-gyro.h"
+#include "abs_turn_utils.h"
 /** macros */
 
-typedef enum
-{
-	CLOCKWISE,
-	COUNTERCLOCKWISE
-}e_direction;
 
 //=======================================
 // point turn
@@ -27,15 +23,6 @@ void abs_point_turn_to(int degree,e_direction dir,int speed)
 	int i = 0;
 	float rotSpeed = 0;
 	float heading = 0;
-
-	HTGYROstartCal(HTGYRO);
-
-	time1[T1] = 0;
-
-	while (time1[T1] < 20)
-		wait1Msec(1);
-
-	time1[T1]=0;
 
 if(dir == COUNTERCLOCKWISE)
 	{
@@ -50,7 +37,7 @@ if(dir == COUNTERCLOCKWISE)
 
 	while(i < 5)
 	{
-		if (heading > degree) i++;
+		if (abs(heading) > degree) i++;
 
 		rotSpeed = HTGYROreadRot(HTGYRO);
 
