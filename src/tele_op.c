@@ -12,11 +12,37 @@
  */
 #include "drivers/hitechnic-gyro.h"
 
-task main()
+task main ()
 {
-while(true)
-{
+  float rotSpeed = 0;
+  float heading = 0;
 
-nxtDisplayTextLine(2, "Offset: %f", HTGYROstartCal(HTGYRO));
-}
+  // Calibrate the gyro, make sure you hold the sensor still
+  HTGYROstartCal(HTGYRO);
+
+  // Reset the timer.
+  time1[T1] = 0;
+
+  while (true)
+  {
+    // Wait until 20ms has passed
+    while (time1[T1] < 20)
+      wait1Msec(1);
+
+    // Reset the timer
+    time1[T1]=0;
+
+    // Read the current rotation speed
+    rotSpeed = HTGYROreadRot(HTGYRO);
+
+    // Calculate the new heading by adding the amount of degrees
+    // we've turned in the last 20ms
+    // If our current rate of rotation is 100 degrees/second,
+    // then we will have turned 100 * (20/1000) = 2 degrees since
+    // the last time we measured.
+    heading += rotSpeed * 0.02;
+
+    // Display our current heading on the screen
+    nxtDisplayCenteredBigTextLine(3, "%2.0f", heading);
+  }
 }
