@@ -9,8 +9,9 @@
  */
 #ifndef MATH_UTILS_H
 #define MATH_UTILS_H
-     
+
 /** macros */
+#define gyro_degrees(X) (X*9000/360)
 #define product(X, Y) ((X) * (Y))
 #define sum(X, Y) ((X) + (Y))
 #define min(X, Y) ((X) < (Y) ? (X) : (Y))
