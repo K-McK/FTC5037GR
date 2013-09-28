@@ -12,6 +12,7 @@
 
 #include "xzander/hitechnic-gyro.h"
 #include "abs_turn_utils.h"
+#include "lib/abs_gyro_read.h"
 /** macros */
 
 
@@ -39,9 +40,9 @@ if(dir == COUNTERCLOCKWISE)
 	{
 		if (abs(heading) > degree) i++;
 
-		rotSpeed = HTGYROreadRot(HTGYRO);
+		heading = abs_gyro_read(HTGYRO);
 
-		heading += rotSpeed * 0.02;
+		//heading += rotSpeed * 0.02;
 
 		nxtDisplayCenteredBigTextLine(3, "%2.0f", heading);
 	}

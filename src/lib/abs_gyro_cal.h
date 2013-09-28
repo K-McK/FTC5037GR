@@ -29,7 +29,7 @@ float abs_gyro_cal(long caltime)
 		if (highest < data) highest = data;			// adjust the highest value if necessary
 			if (lowest> data) lowest = data;				// likewise for the lowest value
 	}
-	gyro_noise=abs(highest-lowest);						// save the spread in the data for diagnostic display
+	//gyro_noise=abs(highest-lowest);						// save the spread in the data for diagnostic display
 	return average/samples;										// and return the average drift
 }
 
