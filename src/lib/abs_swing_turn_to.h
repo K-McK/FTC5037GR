@@ -12,6 +12,7 @@
 
 #include "xzander/hitechnic-gyro.h"
 #include "abs_turn_utils.h"
+#include "abs_gyro_read.h"
 
 /** macros */
 
