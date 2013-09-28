@@ -27,16 +27,7 @@ void abs_point_turn_to(int degree,e_direction dir,int speed)
 	int i = 0;
 	float rotSpeed = 0;
 	float heading = 0;
-	if(dir == COUNTERCLOCKWISE)
-	{
-		motor[right_motor] = speed;
-		motor[left_motor] = -speed;
-	}
-	else
-	{
-		motor[right_motor] = -speed;
-		motor[left_motor] = speed;
-	}
+
 	HTGYROstartCal(HTGYRO);
 
 	time1[T1] = 0;
@@ -46,9 +37,20 @@ void abs_point_turn_to(int degree,e_direction dir,int speed)
 
 	time1[T1]=0;
 
+if(dir == COUNTERCLOCKWISE)
+	{
+		motor[right_motor] = speed;
+		motor[left_motor] = -speed;
+	}
+	else
+	{
+		motor[right_motor] = -speed;
+		motor[left_motor] = speed;
+	}
+
 	while(i < 5)
 	{
-		if (HTGYRO > degree) i++;
+		if (heading > degree) i++;
 
 		rotSpeed = HTGYROreadRot(HTGYRO);
 
