@@ -7,32 +7,23 @@
 *  Copyright 2013, Got Robot! FTC Team 5037
 *
 */
-#ifndef ABS_SWING_TURN_TO_H
-#define ABS_SWING_TURN_TO_H
+#ifndef ABS_POINT_TURN_TO_H
+#define ABS_POINT_TURN_TO_H
 
 #include "xzander/hitechnic-gyro.h"
 #include "abs_turn_utils.h"
-#include "abs_gyro_read.h"
-
+#include "lib/abs_gyro_read.h"
 /** macros */
 
+
 //=======================================
-// Swing Turn
+// point turn
 //=======================================
 void abs_point_turn_to(int degree,e_direction dir,int speed)
 {
 	int i = 0;
 	float rotSpeed = 0;
 	float heading = 0;
-
-	HTGYROstartCal(HTGYRO);
-
-	time1[T1] = 0;
-
-	while (time1[T1] < 20)
-		wait1Msec(1);
-
-	time1[T1]=0;
 
 if(dir == COUNTERCLOCKWISE)
 	{
@@ -47,11 +38,11 @@ if(dir == COUNTERCLOCKWISE)
 
 	while(i < 5)
 	{
-		if (heading > degree) i++;
+		if (abs(heading) > degree) i++;
 
-		rotSpeed = HTGYROreadRot(HTGYRO);
+		heading = abs_gyro_read(HTGYRO);
 
-		heading += rotSpeed * 0.02;
+		//heading += rotSpeed * 0.02;
 
 		nxtDisplayCenteredBigTextLine(3, "%2.0f", heading);
 	}
@@ -64,4 +55,4 @@ if(dir == COUNTERCLOCKWISE)
 //#define min(X, Y) ((X) < (Y) ? (X) : (Y))
 //#define max(X, Y) ((X) > (Y) ? (X) : (Y))
 
-#endif /* !ABS_SWING_TURN_TO_H */
+#endif /* !ABS_POINT_TURN_TO_H */
