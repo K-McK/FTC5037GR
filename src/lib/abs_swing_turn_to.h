@@ -7,8 +7,8 @@
 *  Copyright 2013, Got Robot! FTC Team 5037
 *
 */
-#ifndef ABS_POINT_TURN_TO_H
-#define ABS_POINT_TURN_TO_H
+#ifndef ABS_SWING_TURN_TO_H
+#define ABS_SWING_TURN_TO_H
 
 #include "xzander/hitechnic-gyro.h"
 #include "abs_turn_utils.h"
@@ -17,7 +17,7 @@
 
 
 //=======================================
-// point turn
+// swing turn
 //=======================================
 void abs_point_turn_to(int degree,e_direction dir,int speed)
 {
@@ -55,4 +55,4 @@ if(dir == COUNTERCLOCKWISE)
 //#define min(X, Y) ((X) < (Y) ? (X) : (Y))
 //#define max(X, Y) ((X) > (Y) ? (X) : (Y))
 
-#endif /* !ABS_POINT_TURN_TO_H */
+#endif /* !ABS_SWING_TURN_TO_H */
