@@ -1,8 +1,8 @@
 /**
  *
- *  Filename:  math_utils.h
+ *  Filename:  abs_gyro_cal.h
  *
- *  Description:  a collection of math operations
+ *  Description:  A hedder file that allows you to calculate the input comming from the gyro
  *
  *  Copyright 2013, Got Robot! FTC Team 5037
  *
@@ -33,4 +33,4 @@ float abs_gyro_cal(long caltime)
 	return average/samples;										// and return the average drift
 }
 
-#endif /* !MATH_UTILS_H */
+#endif /* !ABS_GYRO_CAL_H */

@@ -64,4 +64,4 @@ if(dir == COUNTERCLOCKWISE)
 //#define min(X, Y) ((X) < (Y) ? (X) : (Y))
 //#define max(X, Y) ((X) > (Y) ? (X) : (Y))
 
-#endif /* !MATH_UTILS_H */
+#endif /* !ABS_SWING_TURN_TO_H */

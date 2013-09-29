@@ -1,8 +1,8 @@
 /**
 *
-*  Filename:  math_utils.h
+*  Filename:  abs_point_turn_to.h
 *
-*  Description:  a collection of math operations
+*  Description:  The hedder file that alows you to do a point turn
 *
 *  Copyright 2013, Got Robot! FTC Team 5037
 *
@@ -55,4 +55,4 @@ if(dir == COUNTERCLOCKWISE)
 //#define min(X, Y) ((X) < (Y) ? (X) : (Y))
 //#define max(X, Y) ((X) > (Y) ? (X) : (Y))
 
-#endif /* !MATH_UTILS_H */
+#endif /* !ABS_POINT_TURN_TO_H */
