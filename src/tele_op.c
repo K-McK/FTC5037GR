@@ -8,19 +8,13 @@
 
 /**
  *
- *  Filename:  template.c (this should be the name of the function)
+ *  Filename:  tele_op.c
  *
- *  Description:  Enter a description of what this function does
+ *  Description:  The tele_op program for the robot
  *
  *  Copyright 2013, Got Robot! FTC Team 5037
  *
  */
-
-float drift;
-
-#include "lib/abs_point_turn_to.h"
-#include "lib/math_utils.h"
-#include "lib/abs_gyro_cal.h"
 
 //========================================
 // Main program
@@ -28,7 +22,5 @@ float drift;
 
 task main ()
 {
-	drift = abs_gyro_cal(8000);
-  abs_point_turn_to(gyro_degrees(360),CLOCKWISE,50);
-  abs_point_turn_to(gyro_degrees(180),COUNTERCLOCKWISE,80);
+
 }
