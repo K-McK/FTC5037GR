@@ -13,8 +13,6 @@
 /** macros */
 #define DYNAMIC_MEMORY_SIZE 40
 
-/** enumerations */
-
 /** structures */
 typedef struct
 {
@@ -22,8 +20,4 @@ typedef struct
   int field2;
 } my_struct;
 
-/** function prototypes */
-
-/** global constant variables */
-     
 #endif /* !MEMORY_H */
