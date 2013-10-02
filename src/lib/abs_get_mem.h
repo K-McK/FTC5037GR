@@ -7,14 +7,17 @@
  *  Copyright 2013, Got Robot! FTC Team 5037
  *
  */
-#ifndef MATH_UTILS_H
-#define MATH_UTILS_H
+#ifndef ABS_GET_MEM_H
+#define ABS_GET_MEM_H
 
 /** macros */
-#define gyro_degrees(X) (X)
-#define product(X, Y) ((X) * (Y))
-#define sum(X, Y) ((X) + (Y))
-#define min(X, Y) ((X) < (Y) ? (X) : (Y))
-#define max(X, Y) ((X) > (Y) ? (X) : (Y))
+
+int abs_get_mem(int size)
+{
+	int old_memory = mem_pointer;
+	int mem_pointer = mem_pointer + size;
+	return old_memory;
+}
+
 
 #endif /* !MATH_UTILS_H */

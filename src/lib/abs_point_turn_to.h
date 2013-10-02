@@ -35,12 +35,12 @@ if(dir == COUNTERCLOCKWISE)
 		motor[right_motor] = -speed;
 		motor[left_motor] = speed;
 	}
-
+//gyro pre turn start
 	while(i < 5)
 	{
 		if (abs(heading) > degree) i++;
 
-		heading = abs_gyro_read(HTGYRO);
+		heading = abs_gyro_read(HTGYRO); //gyro read
 
 		//heading += rotSpeed * 0.02;
 
