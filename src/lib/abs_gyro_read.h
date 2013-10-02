@@ -6,6 +6,8 @@
 *
 *  Copyright 2013, Got Robot! FTC Team 5037
 *
+*	@param gyro Gyro raw sensor value
+*
 */
 #ifndef ABS_GYRO_READ_H
 #define ABS_GYRO_READ_H

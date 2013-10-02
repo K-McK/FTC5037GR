@@ -17,4 +17,10 @@ typedef enum
 	COUNTERCLOCKWISE
 } e_direction;
 
+typedef struct
+{
+	int heading;
+	int time;
+} e_turn_context;
+
 #endif /* !ABS_TURN_UTILS */
