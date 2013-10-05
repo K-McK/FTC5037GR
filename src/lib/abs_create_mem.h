@@ -10,12 +10,12 @@
 #ifndef ABS_CREATE_MEM_H
 #define ABS_CREATE_MEM_H
 
-int abs_create_mem()
+void abs_create_mem()
 {
 	memset(buffer, 0x0, DYNAMIC_MEMORY_SIZE);
 
   /** now store the address of the buffer in the pointer */
-  next_available_memory_ptr = buffer;
+  next_available_memory_ptr = &buffer;
 }
 
 #endif /* !ABS_CREATE_MEM_H */

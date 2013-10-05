@@ -20,7 +20,7 @@
 /** defines structure */
 typedef struct
 {
-  int heading;
+  float heading;
   int time;
 } turn_context;
 
@@ -30,5 +30,5 @@ typedef struct
 /** defines pointer */
 char* next_available_memory_ptr;
 char buffer[DYNAMIC_MEMORY_SIZE];
-
+float drift;
 #endif /* !ABS_H */

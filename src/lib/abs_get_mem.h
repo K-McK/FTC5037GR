@@ -16,18 +16,18 @@
 
 /** macros */
 
-int abs_get_mem(int size)
+char* abs_get_mem(int size)
 {
 	/** makes sure that we dont corrupt any memory */
 	if(buffer + DYNAMIC_MEMORY_SIZE > next_available_memory_ptr + size)
 	{
-		int old_memory = next_available_memory_ptr;
+		char* old_memory = next_available_memory_ptr;
 		next_available_memory_ptr = next_available_memory_ptr + size;
 		return old_memory;
 	}
 	else
 	{
-		return NULL
+		return NULL;
 	}
 }
 

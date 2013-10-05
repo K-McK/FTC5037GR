@@ -14,17 +14,15 @@
 
 
 
-float abs_gyro_read (int GYRO)
+void abs_gyro_read (int GYRO, turn_context* tcontext)
 {
-	long currtime,prevtime;
+	long currtime;
 	float rawgyro = 0;
-	float constHeading=0;
 	currtime=nPgmTime;
 	rawgyro = HTGYROreadRot(GYRO);
-	constHeading += (rawgyro - drift) * (float)(currtime-prevtime)/1000;
-	//relHeading += (rawgyro - drift) * (float)(currtime-prevtime)/1000;
-	prevtime = currtime;
-	return constHeading;
+	tcontext->heading += (rawgyro - drift) * (float)(currtime - tcontext->time)/1000;
+	//relHeading += (rawgyro - drift) * (float)(currtime - tcontext->time)/1000;
+	tcontext->time = currtime;
 }
 
 #endif /* !ABS_GYRO_READ_H */
