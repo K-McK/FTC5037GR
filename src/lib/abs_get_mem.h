@@ -8,7 +8,7 @@
 *
 *  @return The pointer of old memory or null if not enough memory
 *
-*  Copyright 2013, Got Robot! FTC Team 5037
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
 #ifndef ABS_GET_MEM_H

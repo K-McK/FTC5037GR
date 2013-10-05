@@ -4,7 +4,7 @@
  *
  *  @brief  Enter a description of what this file contains
  *
- *  Copyright 2013, Got Robot! FTC Team 5037
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
  */
 #ifndef ABS_GLOBAL_H

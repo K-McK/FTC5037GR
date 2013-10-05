@@ -4,7 +4,7 @@
 *
 *  @brief The hedder file that alows you to do a swing turn
 *
-*  Copyright 2013, Got Robot! FTC Team 5037
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
 #ifndef ABS_SWING_TURN_TO_H

@@ -4,7 +4,7 @@
  *
  *  @brief a collection of math operations
  *
- *  Copyright 2013, Got Robot! FTC Team 5037
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
  */
 #ifndef MATH_UTILS_H

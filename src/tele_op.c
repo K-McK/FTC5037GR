@@ -12,7 +12,7 @@
  *
  *  @brief The tele_op program for the robot
  *
- *  Copyright 2013, Got Robot! FTC Team 5037
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
  */
 

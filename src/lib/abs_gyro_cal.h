@@ -4,7 +4,7 @@
  *
  *  @brief A hedder file that allows you to calculate the input comming from the gyro
  *
- *  Copyright 2013, Got Robot! FTC Team 5037
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
  */
 #ifndef ABS_GYRO_CAL_H

@@ -4,9 +4,9 @@
 *
 *  @brief A hedder file that allows you to read the input comming from the gyro
 *
-*  Copyright 2013, Got Robot! FTC Team 5037
+*	 @param gyro Gyro raw sensor value
 *
-*	@param gyro Gyro raw sensor value
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
 #ifndef ABS_GYRO_READ_H
