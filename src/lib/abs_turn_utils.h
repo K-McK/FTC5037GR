@@ -1,8 +1,8 @@
 /**
  *
- *  Filename:  abs_turn_utils.h
+ *  @file abs_turn_utils.h
  *
- *  Description:  a collection of math operations
+ *  @brief a collection of math operations
  *
  *  Copyright 2013, Got Robot! FTC Team 5037
  *

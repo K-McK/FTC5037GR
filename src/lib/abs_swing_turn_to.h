@@ -1,8 +1,8 @@
 /**
 *
-*  Filename:  abs_swing_turn_to.h
+*  @file abs_swing_turn_to.h
 *
-*  Description:  The hedder file that alows you to do a swing turn
+*  @brief The hedder file that alows you to do a swing turn
 *
 *  Copyright 2013, Got Robot! FTC Team 5037
 *

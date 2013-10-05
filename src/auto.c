@@ -8,9 +8,9 @@
 
 /**
 *
-*  Filename:  auto.c
+*  @file auto.c
 *
-*  Description:  The automatic program for the robot.
+*  @brief The automatic program for the robot.
 *
 *  Copyright 2013, Got Robot! FTC Team 5037
 *

@@ -1,8 +1,8 @@
 /**
 *
-*  Filename:  abs_gyro_read.h
+*  @file abs_gyro_read.h
 *
-*  Description:  A hedder file that allows you to read the input comming from the gyro
+*  @brief A hedder file that allows you to read the input comming from the gyro
 *
 *  Copyright 2013, Got Robot! FTC Team 5037
 *
@@ -13,7 +13,7 @@
 #define ABS_GYRO_READ_H
 
 
-/** macros */
+
 float abs_gyro_read (int GYRO)
 {
 	long currtime,prevtime;

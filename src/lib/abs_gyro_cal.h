@@ -1,8 +1,8 @@
 /**
  *
- *  Filename:  abs_gyro_cal.h
+ *  @file abs_gyro_cal.h
  *
- *  Description:  A hedder file that allows you to calculate the input comming from the gyro
+ *  @brief A hedder file that allows you to calculate the input comming from the gyro
  *
  *  Copyright 2013, Got Robot! FTC Team 5037
  *

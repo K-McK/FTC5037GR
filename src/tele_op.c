@@ -8,9 +8,9 @@
 
 /**
  *
- *  Filename:  tele_op.c
+ *  @file tele_op.c
  *
- *  Description:  The tele_op program for the robot
+ *  @brief The tele_op program for the robot
  *
  *  Copyright 2013, Got Robot! FTC Team 5037
  *

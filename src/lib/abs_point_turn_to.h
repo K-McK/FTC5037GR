@@ -1,8 +1,8 @@
 /**
 *
-*  Filename:  abs_point_turn_to.h
+*  @file abs_point_turn_to.h
 *
-*  Description:  The hedder file that alows you to do a point turn
+*  @brief The hedder file that alows you to do a point turn
 *
 *  Copyright 2013, Got Robot! FTC Team 5037
 *
