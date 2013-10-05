@@ -1,15 +1,18 @@
 /**
  *
- *  Filename:  template.h
+ *  @file template.c (this should be the name of the function)
  *
- *  Description:  Enter a description of what this file contains
+ *  @brief  Enter a description of what this function does
  *
- *  Copyright 2013, Got Robot! FTC Team 5037
+ *  @param
  *
+ *  @return
+ *
+ *  @copyright Copyright 2013, Got Robot! FTC Team 5037
  */
 #ifndef TEMPLATE_H
 #define TEMPLATE_H
-     
+
 /** macros */
 
 /** enumerations */
@@ -19,5 +22,5 @@
 /** function prototypes */
 
 /** global constant variables */
-     
+
 #endif /* !TEMPLATE_H */
