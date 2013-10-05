@@ -24,7 +24,6 @@
 #include "lib/abs_gyro_cal.h"
 #include "JoystickDriver.c"
 #include "lib/abs_create_mem.h"
-#include "lib/abs_get_mem.h"
 
 //========================================
 // Main program
@@ -33,9 +32,8 @@
 task main ()
 {
 	//waitforstart();
-	//abs_get_mem(sizeof(turn_context));
 	abs_create_mem();
-	drift = abs_gyro_cal(8000);
+	drift = abs_gyro_cal(CALIBRATION_TIME);
 	abs_point_turn_to(gyro_degrees(360),CLOCKWISE,50);
 	abs_point_turn_to(gyro_degrees(180),COUNTERCLOCKWISE,80);
 }

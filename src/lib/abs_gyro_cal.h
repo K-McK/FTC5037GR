@@ -2,7 +2,11 @@
  *
  *  @file abs_gyro_cal.h
  *
- *  @brief A hedder file that allows you to calculate the input comming from the gyro
+ *  @brief A header file that allows you to calculate the input comming from the gyro
+ *
+ *  @param caltime how long does the gyro calibrate for
+ *
+ *  @return The drift
  *
  *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *

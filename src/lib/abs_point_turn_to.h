@@ -4,6 +4,12 @@
 *
 *  @brief The hedder file that alows you to do a point turn
 *
+*  @param degree Tells the robot how much to turn
+*
+*  @param dir Tells the robot what way to turn
+*
+*  @param speed Tells the robot how fast to turn
+*
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */

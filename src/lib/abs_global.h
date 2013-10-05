@@ -13,19 +13,11 @@
 /** macros */
 /** defines memory size */
 #define DYNAMIC_MEMORY_SIZE 40
-
+#define CALIBRATION_TIME 8000
 /** enumerations */
-
 /** structures */
 /** defines structure */
-typedef struct
-{
-  float heading;
-  int time;
-} turn_context;
-
 /** function prototypes */
-
 /** global constant variables */
 /** defines pointer */
 char* next_available_memory_ptr;

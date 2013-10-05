@@ -21,6 +21,6 @@ typedef struct
 {
 	int heading;
 	int time;
-} e_turn_context;
+} turn_context;
 
 #endif /* !ABS_TURN_UTILS */
