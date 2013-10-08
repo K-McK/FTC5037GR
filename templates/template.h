@@ -1,6 +1,6 @@
 /**
  *
- *  @file template.c (this should be the name of the function)
+ *  @file template.h (this should be the name of the function)
  *
  *  @brief  Enter a description of what this function does
  *
