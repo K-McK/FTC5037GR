@@ -12,10 +12,11 @@
 
 void abs_create_mem()
 {
-	memset(buffer, 0x0, DYNAMIC_MEMORY_SIZE);
+	memset(g_buffer, 0x0, DYNAMIC_MEMORY_SIZE);
 
   /** now store the address of the buffer in the pointer */
-  next_available_memory_ptr = &buffer;
+
+  g_next_available_memory_ptr = &g_buffer;
 }
 
 #endif /* !ABS_CREATE_MEM_H */

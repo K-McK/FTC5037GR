@@ -33,7 +33,7 @@ task main ()
 {
 	//waitforstart();
 	abs_create_mem();
-	drift = abs_gyro_cal(CALIBRATION_TIME);
+	g_drift = abs_gyro_cal(CALIBRATION_TIME);
 	abs_point_turn_to(gyro_degrees(360),CLOCKWISE,50);
 	abs_point_turn_to(gyro_degrees(180),COUNTERCLOCKWISE,80);
 }

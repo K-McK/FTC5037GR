@@ -22,7 +22,7 @@ void abs_gyro_read (int GYRO, turn_context* tcontext)
 	float rawgyro = 0;
 	currtime=nPgmTime;
 	rawgyro = HTGYROreadRot(GYRO);
-	tcontext->heading += (rawgyro - drift) * (float)(currtime - tcontext->time)/1000;
+	tcontext->heading += (rawgyro - g_drift) * (float)(currtime - tcontext->time)/1000;
 	//relHeading += (rawgyro - drift) * (float)(currtime - tcontext->time)/1000;
 	tcontext->time = currtime;
 }

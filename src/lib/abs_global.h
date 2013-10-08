@@ -20,7 +20,7 @@
 /** function prototypes */
 /** global constant variables */
 /** defines pointer */
-char* next_available_memory_ptr;
-char buffer[DYNAMIC_MEMORY_SIZE];
-float drift;
+char* g_next_available_memory_ptr;
+char g_buffer[DYNAMIC_MEMORY_SIZE];
+float g_drift;
 #endif /* !ABS_H */
