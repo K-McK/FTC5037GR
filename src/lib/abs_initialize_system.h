@@ -1,10 +1,8 @@
 /**
  *
- *  @file abs_initialisa_system()
+ *  @file abs_initialize_system()
  *
  *  @brief Calibrates all sensors and prepares memory for use
- *
- *  @param calibration_time Tells the robot how long to calibrate
  *
  *  @copyright Copyright 2013, Got Robot! FTC Team 5037
  */
@@ -12,7 +10,7 @@
 #define TEMPLATE_H
 
 /** macros */
-void abs_initialisa_system (int calibration_time)
+void abs_initialize_system()
 {
 	abs_create_mem();
 	g_drift = abs_gyro_cal(CALIBRATION_TIME);

@@ -24,7 +24,7 @@
 #include "lib/abs_gyro_cal.h"
 #include "JoystickDriver.c"
 #include "lib/abs_create_mem.h"
-#include "lib/abs_initialise.h"
+#include "lib/abs_initialize_system.h"
 
 //========================================
 // Main program
@@ -33,7 +33,7 @@
 task main ()
 {
 	//waitforstart();
-	abs_initialise(CALIBRATION_TIME);
+	abs_initialize_system();
 	abs_point_turn_to(gyro_degrees(360),CLOCKWISE,50);
 	abs_point_turn_to(gyro_degrees(180),COUNTERCLOCKWISE,80);
 }
