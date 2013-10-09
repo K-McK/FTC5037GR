@@ -19,7 +19,7 @@ typedef enum
 
 typedef struct
 {
-	int heading;
+	float heading;
 	int time;
 } turn_context;
 

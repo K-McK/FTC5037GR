@@ -13,7 +13,7 @@
 /** macros */
 /** defines memory size */
 #define DYNAMIC_MEMORY_SIZE 40
-#define CALIBRATION_TIME 8000
+#define CALIBRATION_TIME 4000
 /** enumerations */
 /** structures */
 /** defines structure */

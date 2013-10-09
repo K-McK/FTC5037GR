@@ -29,12 +29,12 @@
 void abs_point_turn_to(int degree,e_direction dir,int speed)
 {
 	int i = 0;
-	float rotSpeed = 0;
-	float heading = 0;
+	//float rotSpeed = 0;
+	//float heading = 0;
 	turn_context* tcontext = 	(turn_context*)abs_get_mem(sizeof(turn_context));
 	tcontext->time = 0;
 	tcontext->heading = 0;
-if(dir == COUNTERCLOCKWISE)
+	if(dir == COUNTERCLOCKWISE)
 	{
 		motor[right_motor] = speed;
 		motor[left_motor] = -speed;
@@ -44,15 +44,18 @@ if(dir == COUNTERCLOCKWISE)
 		motor[right_motor] = -speed;
 		motor[left_motor] = speed;
 	}
-//gyro pre turn start
+	//gyro pre turn start
 	while(i < 5)
 	{
-		if (abs(heading) > degree) i++;
+		if (abs(tcontext->heading) > degree) i++;
+		nxtDisplayCenteredBigTextLine(1, "%d", degree);
 		abs_gyro_read(HTGYRO,tcontext); //gyro read
 
 		//heading += rotSpeed * 0.02;
 
-		nxtDisplayCenteredBigTextLine(3, "%2.0f", tcontext->heading);
+		//nxtDisplayCenteredBigTextLine(1, "%2.0f", tcontext->heading);
+		//nxtDisplayCenteredBigTextLine(3, "%d", degree);
+		//nxtDisplayCenteredBigTextLine(5, "%d", SensorValue(HTGYRO));
 	}
 	motor[right_motor] = 0;
 	motor[left_motor] = 0;

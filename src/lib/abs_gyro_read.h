@@ -18,11 +18,16 @@
 
 void abs_gyro_read (int GYRO, turn_context* tcontext)
 {
-	long currtime;
+	float currtime;
 	float rawgyro = 0;
 	currtime=nPgmTime;
 	rawgyro = HTGYROreadRot(GYRO);
+
 	tcontext->heading += (rawgyro - g_drift) * (float)(currtime - tcontext->time)/1000;
+
+			nxtDisplayCenteredBigTextLine(3, "%2.0f", rawgyro);
+			nxtDisplayCenteredBigTextLine(5, "%2.0f", tcontext->heading);
+
 	//relHeading += (rawgyro - drift) * (float)(currtime - tcontext->time)/1000;
 	tcontext->time = currtime;
 }
