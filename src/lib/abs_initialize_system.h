@@ -6,8 +6,8 @@
  *
  *  @copyright Copyright 2013, Got Robot! FTC Team 5037
  */
-#ifndef TEMPLATE_H
-#define TEMPLATE_H
+#ifndef ABS_INITIALIZE_SYSTEM_H
+#define ABS_INITIALIZE_SYSTEM_H
 
 /** macros */
 void abs_initialize_system()
@@ -23,4 +23,4 @@ void abs_initialize_system()
 
 /** global constant variables */
 
-#endif /* !TEMPLATE_H */
+#endif /* !ABS_INITIALIZE_SYSTEM_H */
