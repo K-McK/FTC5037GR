@@ -42,5 +42,5 @@ task main ()
 {
 	//waitforstart();
   abs_initialize_system();
-  abs_swing_turn(gyro_degrees(360),COUNTERCLOCKWISE,50);
+  abs_drive(FORWARDS, TIME, 9999, 50);
 }
