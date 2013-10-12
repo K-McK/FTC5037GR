@@ -26,6 +26,7 @@
 
 #include "lib/abs_global.h"
 #include "lib/abs_point_turn.h"
+#include "lib/abs_swing_turn.h"
 #include "lib/math_utils.h"
 #include "lib/abs_gyro_cal.h"
 //#include "JoystickDriver.c"
@@ -40,8 +41,6 @@
 task main ()
 {
 	//waitforstart();
-  //abs_initialize_system();
-  //abs_point_turn(gyro_degrees(360),CLOCKWISE,50);
-	//abs_point_turn(gyro_degrees(180),COUNTERCLOCKWISE,80);
-	abs_drive(BACKWARDS, ENCODER, 3600, 50);
+  abs_initialize_system();
+  abs_swing_turn(gyro_degrees(360),COUNTERCLOCKWISE,50);
 }
