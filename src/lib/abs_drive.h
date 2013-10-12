@@ -10,8 +10,8 @@
 *
 *  @copyright Copyright 2013, Got Robot! FTC Team 5037
 */
-#ifndef TEMPLATE_H
-#define TEMPLATE_H
+#ifndef ABS_DRIVE_H
+#define ABS_DRIVE_H
 
 /** macros */
 //=========================
@@ -57,4 +57,4 @@ void abs_drive(e_drive_direction dir, e_distance_method dist_method, int dist, i
 
 /** global constant variables */
 
-#endif /* !TEMPLATE_H */
+#endif /* !ABS_DRIVE_H */

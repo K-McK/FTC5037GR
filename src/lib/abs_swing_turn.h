@@ -1,8 +1,8 @@
 /**
 *
-*  @file abs_swing_turn_to.h
+*  @file abs_point_turn_to.h
 *
-*  @brief The hedder file that alows you to do a swing turn
+*  @brief The hedder file that alows you to do a point turn
 *
 *  @param degree Tells the robot how much to turn
 *
@@ -18,20 +18,23 @@
 
 #include "xzander/hitechnic-gyro.h"
 #include "abs_turn_utils.h"
-#include "lib/abs_gyro_read.h"
+#include "abs_gyro_read.h"
+#include "abs_get_mem.h"
 /** macros */
 
 
 //=======================================
-// swing turn
+// point turn
 //=======================================
 void abs_point_turn(int degree,e_direction dir,int speed)
 {
 	int i = 0;
-	float rotSpeed = 0;
-	float heading = 0;
-
-if(dir == COUNTERCLOCKWISE)
+	//float rotSpeed = 0;
+	//float heading = 0;
+	turn_context* tcontext = 	(turn_context*)abs_get_mem(sizeof(turn_context));
+	tcontext->time = 0;
+	tcontext->heading = 0;
+	if(dir == COUNTERCLOCKWISE)
 	{
 		motor[right_motor] = speed;
 		motor[left_motor] = 0;
@@ -41,16 +44,18 @@ if(dir == COUNTERCLOCKWISE)
 		motor[right_motor] = 0;
 		motor[left_motor] = speed;
 	}
-
+	//gyro pre turn start
 	while(i < 5)
 	{
-		if (abs(heading) > degree) i++;
-
-		heading = abs_gyro_read(HTGYRO);
+		if (abs(tcontext->heading) > degree) i++;
+		nxtDisplayCenteredBigTextLine(1, "%d", degree);
+		abs_gyro_read(HTGYRO,tcontext); //gyro read
 
 		//heading += rotSpeed * 0.02;
 
-		nxtDisplayCenteredBigTextLine(3, "%2.0f", heading);
+		//nxtDisplayCenteredBigTextLine(1, "%2.0f", tcontext->heading);
+		//nxtDisplayCenteredBigTextLine(3, "%d", degree);
+		//nxtDisplayCenteredBigTextLine(5, "%d", SensorValue(HTGYRO));
 	}
 	motor[right_motor] = 0;
 	motor[left_motor] = 0;
