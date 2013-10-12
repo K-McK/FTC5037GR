@@ -33,6 +33,6 @@ task main ()
 {
 	//waitforstart();
 	abs_initialize_system();
-	abs_point_turn_to(gyro_degrees(360),CLOCKWISE,50);
-	abs_point_turn_to(gyro_degrees(180),COUNTERCLOCKWISE,80);
+	abs_point_turn(gyro_degrees(360),CLOCKWISE,50);
+	abs_point_turn(gyro_degrees(180),COUNTERCLOCKWISE,80);
 }

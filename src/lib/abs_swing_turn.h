@@ -25,7 +25,7 @@
 //=======================================
 // swing turn
 //=======================================
-void abs_point_turn_to(int degree,e_direction dir,int speed)
+void abs_point_turn(int degree,e_direction dir,int speed)
 {
 	int i = 0;
 	float rotSpeed = 0;
