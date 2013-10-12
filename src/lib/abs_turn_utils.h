@@ -23,4 +23,15 @@ typedef struct
 	int time;
 } turn_context;
 
+typedef enum
+{
+	FORWARDS,
+	BACKWARDS
+} e_drive_direction;
+
+typedef enum
+{
+	TIME,
+	ENCODER
+} e_distance_method;
 #endif /* !ABS_TURN_UTILS */
