@@ -2,8 +2,8 @@
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     HTGYRO,         sensorAnalogActive)
 #pragma config(Motor,  motorC,           ,             tmotorNXT, openLoop)
-#pragma config(Motor,  mtr_S1_C1_1,     right_motor,   tmotorTetrix, openLoop, reversed, encoder)
-#pragma config(Motor,  mtr_S1_C1_2,     left_motor,    tmotorTetrix, openLoop, encoder)
+#pragma config(Motor,  mtr_S1_C1_1,     right_motor,   tmotorTetrix, openLoop, encoder)
+#pragma config(Motor,  mtr_S1_C1_2,     left_motor,    tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Servo,  srvo_S1_C2_1,    servo1,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_3,    servo3,               tServoNone)
@@ -25,8 +25,7 @@
 /*Includes*/
 
 #include "lib/abs_global.h"
-#include "lib/abs_point_turn.h"
-#include "lib/abs_swing_turn.h"
+#include "lib/abs_turn.h"
 #include "lib/math_utils.h"
 #include "lib/abs_gyro_cal.h"
 //#include "JoystickDriver.c"
@@ -38,12 +37,13 @@
 // Main program
 //========================================
 
-task main ()
+task main()
 {
 	//waitforstart();
   abs_initialize_system();
-  abs_drive(FORWARDS, ENCODER, 360, 50);
-  abs_drive(BACKWARDS, ENCODER, 360, 50);
-  abs_swing_turn(360, CLOCKWISE, 50);
-  abs_point_turn(360, CLOCKWISE, 50);
+  abs_drive(FORWARD, ENCODER, 360, 50);
+  abs_turn(COUNTERCLOCKWISE, SWING, 360, 50);
+  abs_drive(BACKWARD, E_TIME, 360, 50);
+  abs_turn(CLOCKWISE, POINT, 360, 50);
+  wait1Msec(5000);        // this is a hack because the last command isnt running because the program is ending as soon as it is run
 }

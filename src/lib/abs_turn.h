@@ -13,11 +13,11 @@
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
-#ifndef ABS_POINT_TURN_TO_H
-#define ABS_POINT_TURN_TO_H
+#ifndef ABS_SWING_TURN_TO_H
+#define ABS_SWING_TURN_TO_H
 
 #include "xzander/hitechnic-gyro.h"
-#include "abs_turn_utils.h"
+#include "abs_move_utils.h"
 #include "abs_gyro_read.h"
 #include "abs_get_mem.h"
 /** macros */
@@ -26,7 +26,7 @@
 //=======================================
 // point turn
 //=======================================
-void abs_point_turn(int degree,e_direction dir,int speed)
+void abs_turn(e_direction dir, e_turn_method turn_method, int degree, int speed)
 {
 	int i = 0;
 	//float rotSpeed = 0;
@@ -34,15 +34,31 @@ void abs_point_turn(int degree,e_direction dir,int speed)
 	turn_context* tcontext = 	(turn_context*)abs_get_mem(sizeof(turn_context));
 	tcontext->time = 0;
 	tcontext->heading = 0;
-	if(dir == COUNTERCLOCKWISE)
+	if(turn_method == SWING)
 	{
-		motor[right_motor] = speed;
-		motor[left_motor] = -speed;
+		if(dir == COUNTERCLOCKWISE)
+		{
+			motor[right_motor] = speed;
+			motor[left_motor] = 0;
+		}
+		else
+		{
+			motor[right_motor] = 0;
+			motor[left_motor] = speed;
+		}
 	}
-	else
+	else if(turn_method == POINT)
 	{
-		motor[right_motor] = -speed;
-		motor[left_motor] = speed;
+		if(dir == COUNTERCLOCKWISE)
+		{
+			motor[right_motor] = speed;
+			motor[left_motor] = -speed;
+		}
+		else
+		{
+			motor[right_motor] = -speed;
+			motor[left_motor] = speed;
+		}
 	}
 	//gyro pre turn start
 	while(i < 5)
@@ -66,4 +82,4 @@ void abs_point_turn(int degree,e_direction dir,int speed)
 //#define min(X, Y) ((X) < (Y) ? (X) : (Y))
 //#define max(X, Y) ((X) > (Y) ? (X) : (Y))
 
-#endif /* !ABS_POINT_TURN_TO_H */
+#endif /* !ABS_SWING_TURN_TO_H */

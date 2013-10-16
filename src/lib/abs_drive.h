@@ -22,7 +22,7 @@ void abs_drive(e_drive_direction dir, e_distance_method dist_method, int dist, i
 	int i = 0;
 	nMotorEncoder(right_motor)= 0;
 
-	if(dir == FORWARDS)  //Decides if you are driveing forwards or backwards
+	if(dir == FORWARD)  //Decides if you are driveing forwards or backwards
 	{
 		motor(right_motor)=speed;
 		motor(left_motor)=speed;
@@ -33,7 +33,7 @@ void abs_drive(e_drive_direction dir, e_distance_method dist_method, int dist, i
 		motor(left_motor)=-speed;
 	}
 
-	if(dist_method == TIME)   //time stopping method
+	if(dist_method == E_TIME)   //time stopping method
 	{
 		wait1Msec(dist);
 	}

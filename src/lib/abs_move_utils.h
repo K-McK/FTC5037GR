@@ -25,13 +25,19 @@ typedef struct
 
 typedef enum
 {
-	FORWARDS,
-	BACKWARDS
+	FORWARD,
+	BACKWARD
 } e_drive_direction;
 
 typedef enum
 {
-	TIME,
+	E_TIME,
 	ENCODER
 } e_distance_method;
+
+typedef enum
+{
+	SWING,
+	POINT
+} e_turn_method;
 #endif /* !ABS_TURN_UTILS */
