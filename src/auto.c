@@ -42,5 +42,8 @@ task main ()
 {
 	//waitforstart();
   abs_initialize_system();
-  abs_drive(FORWARDS, TIME, 9999, 50);
+  abs_drive(FORWARDS, ENCODER, 360, 50);
+  abs_drive(BACKWARDS, ENCODER, 360, 50);
+  abs_swing_turn(360, CLOCKWISE, 50);
+  abs_point_turn(360, CLOCKWISE, 50);
 }
