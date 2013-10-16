@@ -32,8 +32,9 @@ typedef enum
 typedef enum
 {
 	E_TIME,
-	ENCODER
-} e_distance_method;
+	ENCODER,
+	GYRO
+} e_stopping_method; //will make a method with a tilt sensor(wheel in the middle of the robot
 
 typedef enum
 {

@@ -24,14 +24,14 @@
 
 /*Includes*/
 
-#include "lib/abs_global.h"
-#include "lib/abs_turn.h"
-#include "lib/math_utils.h"
-#include "lib/abs_gyro_cal.h"
+#include "../src/lib/abs_global.h"
+#include "../src/lib/abs_turn.h"
+#include "../src/lib/math_utils.h"
+#include "../src/lib/abs_gyro_cal.h"
 //#include "JoystickDriver.c"
-#include "lib/abs_create_mem.h"
-#include "lib/abs_initialize_system.h"
-#include "lib/abs_drive.h"
+#include "../src/lib/abs_create_mem.h"
+#include "../src/lib/abs_initialize_system.h"
+#include "../src/lib/abs_drive.h"
 
 //========================================
 // Main program
@@ -41,6 +41,9 @@ task main()
 {
 	//waitforstart();
   abs_initialize_system();
-
+  abs_drive(FORWARD, ENCODER, 360, 50);
+  abs_turn(COUNTERCLOCKWISE, SWING, 360, 50);
+  abs_drive(BACKWARD, E_TIME, 360, 50);
+  abs_turn(CLOCKWISE, POINT, 360, 50);
   wait1Msec(5000);        // this is a hack because the last command isnt running because the program is ending as soon as it is run
 }

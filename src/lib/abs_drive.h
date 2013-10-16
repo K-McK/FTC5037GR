@@ -17,7 +17,7 @@
 //=========================
 //Drive
 //=========================
-void abs_drive(e_drive_direction dir, e_distance_method dist_method, int dist, int speed)
+void abs_drive(e_drive_direction dir, e_stopping_method dist_method, int dist, int speed)
 {
 	int i = 0;
 	nMotorEncoder(right_motor)= 0;
