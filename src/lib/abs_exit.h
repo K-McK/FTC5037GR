@@ -14,7 +14,7 @@
 #define ABS_EXIT_H
 
 /** macros */
-void abs_exit(int e_exit_code exit)
+void abs_exit(e_exit_code exit)
 {
 	if (exit == NULL_POINTER)
 	{

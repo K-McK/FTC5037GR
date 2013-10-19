@@ -36,7 +36,7 @@ void abs_turn(e_direction dir, e_turn_method turn_method, int degree, int speed)
 
 	if(tcontext == NULL)
 	{
-		abs_exit();
+		abs_exit(NULL_POINTER);
 	}
 	tcontext->time = 0;
 	tcontext->heading = 0;

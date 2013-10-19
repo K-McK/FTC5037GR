@@ -41,10 +41,11 @@
 task main()
 {
 	//waitforstart();
-  abs_initialize_system();
-  abs_drive(FORWARD, E_DISTANCE, 52, 50);
-  //abs_turn(COUNTERCLOCKWISE, SWING, 360, 50);
-  //abs_drive(BACKWARD, E_TIME, 360, 50);
-  //abs_turn(CLOCKWISE, POINT, 360, 50);
-  wait1Msec(5000);        // this is a hack because the last command isnt running because the program is ending as soon as it is run
+	abs_initialize_system();
+	abs_turn(CLOCKWISE, SWING, 360, 50);
+	//abs_drive(FORWARD, E_DISTANCE, 100, 50);
+	//abs_drive(BACKWARD, E_DISTANCE, 100, 50);
+	//abs_drive(FORWARD, E_TIME, 1, 50);
+	//abs_drive(FORWARD, E_TIME, 1, 50);
+	wait1Msec(5000);        // this is a hack because the last command isnt running because the program is ending as soon as it is run
 }
