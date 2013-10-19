@@ -32,9 +32,9 @@ typedef enum
 typedef enum
 {
 	E_TIME,
-	ENCODER,
-	GYRO,
-	E_ANGLE_SENSOR
+	E_DEGREES,
+	E_TILT,
+	E_DISTANCE
 } e_stopping_method; //will make a method with a tilt sensor(wheel in the middle of the robot
 
 typedef enum
@@ -42,4 +42,6 @@ typedef enum
 	SWING,
 	POINT
 } e_turn_method;
+
+#define distance_to_angle_derees(X) (X*360/ANGLE_SENSOR_CIRCUMFERENCE)
 #endif /* !ABS_TURN_UTILS */

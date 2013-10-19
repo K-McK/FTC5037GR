@@ -39,7 +39,7 @@ void abs_drive(e_drive_direction dir, e_stopping_method dist_method, int dist, i
 	{
 		wait1Msec(dist);
 	}
-	else if(dist_method == ENCODER)  //encoder stopping method
+	else if(dist_method == E_DEGREES)  //encoder stopping method
 	{
 		while(i<5)
 		{
@@ -49,21 +49,26 @@ void abs_drive(e_drive_direction dir, e_stopping_method dist_method, int dist, i
 	}
 	else
 	{
-while(HTANGreadAccumulatedAngle(ANGLE_SENSOR) < dist)
-{
-
-}
+		if(dir == FORWARD)
+		{
+			while(HTANGreadAccumulatedAngle(ANGLE_SENSOR) < distance_to_angle_derees(dist));
+		}
+		else
+		{
+			while(HTANGreadAccumulatedAngle(ANGLE_SENSOR) < distance_to_angle_derees(-dist));
+		}
+		motor(left_motor)=0;
+		motor(right_motor)=0;
 	}
-	motor(left_motor)=0;
-	motor(right_motor)=0;
 }
 
-/** enumerations */
 
-/** structures */
+	/** enumerations */
 
-/** function prototypes */
+	/** structures */
 
-/** global constant variables */
+	/** function prototypes */
+
+	/** global constant variables */
 
 #endif /* !ABS_DRIVE_H */

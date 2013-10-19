@@ -14,12 +14,7 @@
 /** defines memory size */
 #define DYNAMIC_MEMORY_SIZE 40
 #define CALIBRATION_TIME 4000
-/** enumerations */
-/** structures */
-/** defines structure */
-/** function prototypes */
-/** global constant variables */
-/** defines pointer */
+#define ANGLE_SENSOR_CIRCUMFERENCE 26
 char* g_next_available_memory_ptr;
 char g_buffer[DYNAMIC_MEMORY_SIZE];
 float g_drift;
