@@ -20,7 +20,9 @@
 
 #include "JoystickDriver.c"
 #include "lib/math_utils.h"
+#include "lib/abs_teleop_utils.h"
 #include "lib/abs_joystick_drive.h"
+
 //========================================
 // Main program
 //========================================
@@ -29,6 +31,6 @@ task main ()
 {
 	while(true)
 	{
-		abs_joystick_drive();//joystick.joy1_y1,joystick.joy1_y2);
+		abs_joystick_drive();
 	}
 }
