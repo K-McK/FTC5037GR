@@ -20,6 +20,7 @@
 #include "abs_move_utils.h"
 #include "abs_gyro_read.h"
 #include "abs_get_mem.h"
+#include "abs_exit.h"
 /** macros */
 
 
@@ -32,6 +33,11 @@ void abs_turn(e_direction dir, e_turn_method turn_method, int degree, int speed)
 	//float rotSpeed = 0;
 	//float heading = 0;
 	turn_context* tcontext = 	(turn_context*)abs_get_mem(sizeof(turn_context));
+
+	if(tcontext == NULL)
+	{
+		abs_exit();
+	}
 	tcontext->time = 0;
 	tcontext->heading = 0;
 	if(turn_method == SWING)
