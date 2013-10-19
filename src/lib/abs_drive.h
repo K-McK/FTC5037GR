@@ -13,12 +13,14 @@
 #ifndef ABS_DRIVE_H
 #define ABS_DRIVE_H
 
+#include "xzander/hitechnic-angle.h"
 /** macros */
 //=========================
 //Drive
 //=========================
 void abs_drive(e_drive_direction dir, e_stopping_method dist_method, int dist, int speed)
 {
+	HTANGresetAccumulatedAngle(ANGLE_SENSOR);
 	int i = 0;
 	nMotorEncoder(right_motor)= 0;
 
@@ -37,13 +39,20 @@ void abs_drive(e_drive_direction dir, e_stopping_method dist_method, int dist, i
 	{
 		wait1Msec(dist);
 	}
-	else   //encoder stopping method
+	else if(dist_method == ENCODER)  //encoder stopping method
 	{
 		while(i<5)
 		{
 			if(abs(nMotorEncoder(right_motor)) > dist)
 				i++;
 		}
+	}
+	else
+	{
+while(HTANGreadAccumulatedAngle(ANGLE_SENSOR) < dist)
+{
+
+}
 	}
 	motor(left_motor)=0;
 	motor(right_motor)=0;

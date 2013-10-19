@@ -1,6 +1,6 @@
 #pragma config(Hubs,  S1, HTMotor,  HTServo,  none,     none)
-#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     HTGYRO,         sensorAnalogActive)
+#pragma config(Sensor, S3,     ANGLE_SENSOR,   sensorI2CCustom)
 #pragma config(Motor,  motorC,           ,             tmotorNXT, openLoop)
 #pragma config(Motor,  mtr_S1_C1_1,     right_motor,   tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     left_motor,    tmotorTetrix, openLoop, reversed, encoder)
