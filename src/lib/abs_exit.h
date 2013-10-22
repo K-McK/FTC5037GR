@@ -4,9 +4,7 @@
 *
 *  @brief  Enter a description of what this function does
 *
-*  @param
-*
-*  @return
+*  @param exit tells the program what the exit name is
 *
 *  @copyright Copyright 2013, Got Robot! FTC Team 5037
 */
