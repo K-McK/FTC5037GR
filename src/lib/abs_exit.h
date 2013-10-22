@@ -1,8 +1,8 @@
 /**
 *
-*  @file template.h (this should be the name of the function)
+*  @file abs_exit.h
 *
-*  @brief  Enter a description of what this function does
+*  @brief  Exits the program in case something does wrong
 *
 *  @param exit tells the program what the exit name is
 *
