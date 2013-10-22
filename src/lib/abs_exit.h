@@ -2,7 +2,7 @@
 *
 *  @file abs_exit.h
 *
-*  @brief  Exits the program in case something does wrong
+*  @brief  Exits the program in case something does wrong or if we just want to gracefully exit the program
 *
 *  @param exit tells the program what the exit name is
 *
