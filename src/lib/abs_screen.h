@@ -73,6 +73,16 @@ task screen ()
 			nxtDisplayBigTextLine(3, error_list1[error]);
 			nxtDisplayBigTextLine(5, error_list2[error]);
 			break;
+		case s_smoke_test:
+			nxtDisplayBigTextLine(1, "%2d", smoke_test_num);
+			nxtDisplayBigTextLine(3, smoke_test1[smoke_test_num]);
+			nxtDisplayBigTextLine(5, smoke_test2[smoke_test_num]);
+			break;
+		case s_smoke_run:
+			nxtDisplayBigTextLine(1, smoke_test1[0]);
+			//nxtDisplayBigTextLine(3, error_list1[error]);
+			//nxtDisplayBigTextLine(5, error_list2[error]);
+			break;
 		}
 	}
 }

@@ -16,6 +16,14 @@ bool gyroTrue = false;
 #define DRIVE_WHEELS_CIRCUMFERENCE 26
 
 //=========================================================
+// Smoke test varaibles
+//=========================================================
+
+int smoke_test_num = 1;
+int smoke_test_total = 12;
+int smoke_run = false;
+
+//=========================================================
 // Misc
 //=========================================================
 
@@ -61,6 +69,8 @@ float currDir = 0.0;
 #define s_delay_wait 6
 #define s_gyro_show 7
 #define s_error 8
+#define s_smoke_test 9
+#define s_smoke_run 10
 
 int screen_state = 1;
 
@@ -135,6 +145,62 @@ string error_list1 [] = {
 	"Failure ",
 	"Mux     ",
 	"Mux     ",
+	"Test 4  ",
+	"Test 5  ",
+	"Test 6  ",
+	"Test 7  ",
+	"Test 8  ",
+	"Test 9  ",
+	"Test 10 ",
+	"Test 11 ",
+	"Test 12 ",
+	"Test 13 ",
+	"Test 14 ",
+	"Test 15 ",
+	"Test 16 ",
+	"Test 17 ",
+	"Test 18 ",
+	"Test 19 ",
+	"Test 20 ",
+	"Test 21 ",
+	"Test 22 "};
+
+//==============================================================================
+// Define the text to be displayed for smoke test line 1
+//==============================================================================
+string smoke_test1 [] = {
+	"Unknown ",
+	"GyroCal ",
+	"Gyro    ",
+	"Sensor  ",
+	"Test 4  ",
+	"Test 5  ",
+	"Test 6  ",
+	"Test 7  ",
+	"Test 8  ",
+	"Test 9  ",
+	"Test 10 ",
+	"Test 11 ",
+	"Test 12 ",
+	"Test 13 ",
+	"Test 14 ",
+	"Test 15 ",
+	"Test 16 ",
+	"Test 17 ",
+	"Test 18 ",
+	"Test 19 ",
+	"Test 20 ",
+	"Test 21 ",
+	"Test 22 "};
+
+	//==============================================================================
+// Define the text to be displayed for smoke test line 2
+//==============================================================================
+string smoke_test2 [] = {
+	"Unknown ",
+	"GyroCal ",
+	"Gyro    ",
+	"Sensor  ",
 	"Test 4  ",
 	"Test 5  ",
 	"Test 6  ",
