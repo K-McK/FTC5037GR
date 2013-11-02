@@ -12,7 +12,7 @@ bool gyroTrue = false;
 // Robot constants
 //=========================================================
 
-#define ANGLE_SENSOR_CIRCUMFERENCE 26
+#define ANGLE_SENSOR_CIRCUMFERENCE 17.6
 #define DRIVE_WHEELS_CIRCUMFERENCE 26
 
 //=========================================================
