@@ -21,6 +21,18 @@ void abs_joystick_gunner()
 
 	if(abs(joystick.joy2_y2) > 10) motor[block_grabber_right] = joystick.joy2_y2*100/127;
 	else motor[block_grabber_right] = 0;
+
+	if(joy2Btn(4))
+	{
+		motor(flag_motor)=75;
+	}
+
+	else if(joy2Btn(2))
+	{
+		motor(flag_motor)=-75;
+	}
+
+	else motor(flag_motor)=0;
 }
 
 #endif /* !ABS_JOYSTICK_DRIVE_H */
