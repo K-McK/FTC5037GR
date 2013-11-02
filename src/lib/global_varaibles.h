@@ -170,7 +170,7 @@ string error_list1 [] = {
 //==============================================================================
 string smoke_test1 [] = {
 	"Unknown ",
-	"GyroCal ",
+	"Flag    ",
 	"Gyro    ",
 	"Sensor  ",
 	"Test 4  ",
@@ -198,7 +198,7 @@ string smoke_test1 [] = {
 //==============================================================================
 string smoke_test2 [] = {
 	"Unknown ",
-	"GyroCal ",
+	"Motor   ",
 	"Gyro    ",
 	"Sensor  ",
 	"Test 4  ",
