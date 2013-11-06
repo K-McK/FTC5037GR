@@ -14,11 +14,6 @@
 #ifndef ABS_GYRO_CAL_H
 #define ABS_GYRO_CAL_H
 
-string sFileName = "gotrobot.txt";
-TFileIOResult nIoResult;
-TFileHandle hFileHandle;
-int nFileSize = 100;
-
 /** macros */
 //====================================
 // Gyro Calibration helper function
@@ -27,10 +22,10 @@ float abs_gyro_cal(long caltime)
 {
 	long highest = -1000, lowest = 10000;
 	float average = 0;
-	long starttime = nPgmTime;
+	starttime = nPgmTime;
 	long samples=0;
 	long data;
-	while (nPgmTime < starttime+caltime)			// loop for the requested number of seconds
+	while (nPgmTime < starttime+(caltime*1000))			// loop for the requested number of seconds
 	{
 		samples +=1;														// count the number of iterations for averaging
 		data = HTGYROreadRot(HTGYRO);						// get a new reading from the GYRO
@@ -39,6 +34,7 @@ float abs_gyro_cal(long caltime)
 			if (lowest> data) lowest = data;				// likewise for the lowest value
 	}
 	//gyro_noise=abs(highest-lowest);						// save the spread in the data for diagnostic display
+	gyro_noise=abs(highest-lowest);
 	return average/samples;										// and return the average drift
 }
 

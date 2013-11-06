@@ -13,16 +13,10 @@
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
-#ifndef ABS_SWING_TURN_TO_H
-#define ABS_SWING_TURN_TO_H
+#ifndef ABS_TURN_H
+#define ABS_TURN_H
 
-#include "xzander/hitechnic-gyro.h"
-#include "abs_move_utils.h"
-#include "abs_gyro_read.h"
-#include "abs_get_mem.h"
-#include "abs_exit.h"
 /** macros */
-
 
 //=======================================
 // point turn
@@ -30,16 +24,11 @@
 void abs_turn(e_direction dir, e_turn_method turn_method, int degree, int speed)
 {
 	int i = 0;
-	//float rotSpeed = 0;
-	//float heading = 0;
-	turn_context* tcontext = 	(turn_context*)abs_get_mem(sizeof(turn_context));
+	relHeading = 0;
 
-	if(tcontext == NULL)
-	{
-		abs_exit(NULL_POINTER);
-	}
-	tcontext->time = 0;
-	tcontext->heading = 0;
+	//-------------------------
+	// swing turn
+	//-------------------------
 	if(turn_method == SWING)
 	{
 		if(dir == COUNTERCLOCKWISE)
@@ -53,6 +42,10 @@ void abs_turn(e_direction dir, e_turn_method turn_method, int degree, int speed)
 			motor[left_motor] = speed;
 		}
 	}
+
+	//-------------------------
+	// point turn
+	//-------------------------
 	else if(turn_method == POINT)
 	{
 		if(dir == COUNTERCLOCKWISE)
@@ -66,26 +59,17 @@ void abs_turn(e_direction dir, e_turn_method turn_method, int degree, int speed)
 			motor[left_motor] = speed;
 		}
 	}
-	//gyro pre turn start
+
+	//-------------------------
+	// turn condition
+	//-------------------------
 	while(i < 5)
 	{
-		if (abs(tcontext->heading) > degree) i++;
+		if (abs(relHeading) > degree) i++;
 		nxtDisplayCenteredBigTextLine(1, "%d", degree);
-		abs_gyro_read(HTGYRO,tcontext); //gyro read
-
-		//heading += rotSpeed * 0.02;
-
-		//nxtDisplayCenteredBigTextLine(1, "%2.0f", tcontext->heading);
-		//nxtDisplayCenteredBigTextLine(3, "%d", degree);
-		//nxtDisplayCenteredBigTextLine(5, "%d", SensorValue(HTGYRO));
 	}
 	motor[right_motor] = 0;
 	motor[left_motor] = 0;
 }
 
-//#define product(X, Y) ((X) * (Y))
-//#define sum(X, Y) ((X) + (Y))
-//#define min(X, Y) ((X) < (Y) ? (X) : (Y))
-//#define max(X, Y) ((X) > (Y) ? (X) : (Y))
-
-#endif /* !ABS_SWING_TURN_TO_H */
+#endif /* !ABS_TURN_H */

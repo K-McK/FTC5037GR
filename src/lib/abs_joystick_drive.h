@@ -14,53 +14,45 @@
 //=======================================
 // joystick drive
 //=======================================
-void abs_joystick_drive()//int joy1,int joy2)
+void abs_joystick_drive(e_joystick_method joy_type)
 {
-	e_joystick_method method = LINEAR;
-		if(joy1Btn(5)) method = LINEAR;
-		else if(joy1Btn(7)) method = COUGAR;
+	int speed1;
+	int speed2;
 
+	int j1 = abs(joystick.joy1_y1);
+	int j2 = abs(joystick.joy1_y2);
 
-		int joy1 = joystick.joy1_y1;
-		int joy2 = joystick.joy1_y2;
+	if(joy_type == LINEAR)
+	{
+		speed1 = j1*100/127;
+		speed2 = j2*100/127;
+	}
+	else
+	{
+		speed1 = ((j1*j1) * 100/(128*128));
+		speed2 = ((j2*j2) * 100/(128*128));
+	}
 
-		int speed1;
-		int speed2;
+	if(joy1Btn(7))
+	{
+		speed1 = speed1/5;
+		speed2 = speed2/5;
+	}
+	else if(joy1Btn(5)){}
+	else
+	{
+		speed1 = speed1/3;
+		speed2 = speed2/3;
+	}
 
-		int j1 = abs(joy1);
-		int j2 = abs(joy2);
+	if(speed1<10) speed1 = 0;
+	if(speed2<10) speed2 = 0;
 
-		if(e_joystick_method == LINEAR)
-		{
+	if(joystick.joy1_y1<0) speed1 = -speed1;
+	if(joystick.joy1_y2<0) speed2 = -speed2;
 
-			speed1 = j1*100/127;
-			speed2 = j2*100/127;
-
-			if(speed1<10) speed1 = 0;
-			if(speed2<10) speed2 = 0;
-
-			nxtDisplayBigTextLine(0,"%d",speed1);
-
-			if(joy1<0) speed1 = -speed1;
-			if(joy2<0) speed2 = -speed2;
-		}
-		else
-		{
-			speed1 = ((j1*j1) * 100/(128*128));
-			speed2 = ((j2*j2) * 100/(128*128));
-		}
-
-		if(speed1<10) speed1 = 0;
-		if(speed2<10) speed2 = 0;
-
-		nxtDisplayBigTextLine(0,"%d",speed1);
-
-		if(joy1<0) speed1 = -speed1;
-		if(joy2<0) speed2 = -speed2;
-
-		motor[right_motor] = speed1;
-		motor[left_motor] = speed2;
-
+	motor[right_motor] = speed1;
+	motor[left_motor] = speed2;
 }
 
 #endif /* !ABS_JOYSTICK_DRIVE_H */

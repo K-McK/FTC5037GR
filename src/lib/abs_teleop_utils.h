@@ -13,7 +13,7 @@
 typedef enum
 {
 	LINEAR,
-	COUGAR
+	PARABOLIC
 } e_joystick_method;
 
 #endif /* !ABS_TELEOP_UTILS */

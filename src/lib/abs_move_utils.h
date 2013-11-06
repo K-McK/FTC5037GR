@@ -11,17 +11,15 @@
 #define ABS_TURN_UTILS_H
 
 /** macros */
+
+#define FORWARD_HEADING 0
+#define REVERSE_HEADING 180
+
 typedef enum
 {
 	CLOCKWISE,
 	COUNTERCLOCKWISE
 } e_direction;
-
-typedef struct
-{
-	float heading;
-	int time;
-} turn_context;
 
 typedef enum
 {
@@ -44,4 +42,5 @@ typedef enum
 } e_turn_method;
 
 #define distance_to_angle_derees(X) (X*360/ANGLE_SENSOR_CIRCUMFERENCE)
+#define distance_to_encoder_derees(X) (X*360/DRIVE_WHEELS_CIRCUMFERENCE)
 #endif /* !ABS_TURN_UTILS */
