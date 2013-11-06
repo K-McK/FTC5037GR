@@ -54,8 +54,8 @@ task main()
 	switch(mission_number)
 	{
 	case 1:
-		abs_drive(FORWARD, E_TILT, 10, 60, true);
-		abs_turn(COUNTERCLOCKWISE, POINT, 50, 60);
+		abs_drive(FORWARD, E_IR_DETECT, 10, 60, true);
+		PlayTone(20,200);
 		break;
 
 	case 2:

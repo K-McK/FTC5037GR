@@ -24,6 +24,7 @@
 
 task screen ()
 {
+	nxtDisplayBigTextLine(7, "              ");
 	while(true)
 	{
 		switch(screen_state)

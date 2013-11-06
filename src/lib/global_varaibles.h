@@ -29,6 +29,7 @@ int smoke_run = false;
 
 int auto_missions = 4;
 int drive_heading = 0;
+int IR_heading = 5;
 
 //=============================================================
 // Define user configurable parameters
@@ -89,7 +90,7 @@ int error = 0;
 //==============================================================================
 string MissionNames1 [] = {
 	"        ",
-	"Test 1  ",
+	"IR test ",
 	"Test 2  ",
 	"Test 3  ",
 	"Test 4  ",
@@ -170,8 +171,8 @@ string error_list1 [] = {
 //==============================================================================
 string smoke_test1 [] = {
 	"Unknown ",
-	"Flag    ",
-	"Gyro    ",
+	"Jolly   ",
+	"Drive   ",
 	"Sensor  ",
 	"Test 4  ",
 	"Test 5  ",
@@ -198,8 +199,8 @@ string smoke_test1 [] = {
 //==============================================================================
 string smoke_test2 [] = {
 	"Unknown ",
-	"Motor   ",
-	"Gyro    ",
+	"Roger   ",
+	"Train   ",
 	"Sensor  ",
 	"Test 4  ",
 	"Test 5  ",
