@@ -17,7 +17,7 @@
 //=========================
 //Drive
 //=========================
-void abs_drive(e_drive_direction dir, e_stopping_method dist_method, int dist, int speed, bool stop_at_end)
+void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end)
 {
 	HTANGresetAccumulatedAngle(ANGLE_SENSOR);
 	int i = 0;

@@ -21,55 +21,107 @@
 //=======================================
 // point turn
 //=======================================
-void abs_turn(e_direction dir, e_turn_method turn_method, int degree, int speed)
+void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method e_stop, int degree, int speed)
 {
 	int i = 0;
 	relHeading = 0;
-
+	int	heading = 0;
 	//-------------------------
-	// swing turn
+	//Turn To
 	//-------------------------
-	if(turn_method == SWING)
+	if(e_stop == TURN_TO)
 	{
-		if(dir == COUNTERCLOCKWISE)
+		//-------------------------
+		// swing turn
+		//-------------------------
+		if(turn_method == SWING)
 		{
-			motor[right_motor] = speed;
-			motor[left_motor] = 0;
+			if(dir == COUNTERCLOCKWISE)
+			{
+				motor[right_motor] = speed;
+				motor[left_motor] = 0;
+			}
+			else
+			{
+				motor[right_motor] = 0;
+				motor[left_motor] = speed;
+			}
+		}
+
+		//-------------------------
+		// point turn
+		//-------------------------
+		else if(turn_method == POINT)
+		{
+			if(dir == COUNTERCLOCKWISE)
+			{
+				motor[right_motor] = speed;
+				motor[left_motor] = -speed;
+			}
+			else
+			{
+				motor[right_motor] = -speed;
+				motor[left_motor] = speed;
+			}
+		}
+		else if(e_stop == TURN_TO)
+		{
+			//-------------------------
+			// swing turn
+			//-------------------------
+			if(turn_method == SWING)
+			{
+				if(dir == COUNTERCLOCKWISE)
+				{
+					motor[right_motor] = speed;
+					motor[left_motor] = 0;
+				}
+				else
+				{
+					motor[right_motor] = 0;
+					motor[left_motor] = speed;
+				}
+			}
+
+			//-------------------------
+			// point turn
+			//-------------------------
+			else if(turn_method == POINT)
+			{
+				if(dir == COUNTERCLOCKWISE)
+				{
+					motor[right_motor] = speed;
+					motor[left_motor] = -speed;
+				}
+				else
+				{
+					motor[right_motor] = -speed;
+					motor[left_motor] = speed;
+				}
+			}
+		}
+
+
+		//-------------------------
+		// turn condition
+		//-------------------------
+		if(e_stop == TURN_TO)
+		{
+			heading = constHeading;
 		}
 		else
 		{
-			motor[right_motor] = 0;
-			motor[left_motor] = speed;
+			heading = relHeading;
 		}
-	}
-
-	//-------------------------
-	// point turn
-	//-------------------------
-	else if(turn_method == POINT)
-	{
-		if(dir == COUNTERCLOCKWISE)
+		while(i < 5)
 		{
-			motor[right_motor] = speed;
-			motor[left_motor] = -speed;
-		}
-		else
-		{
-			motor[right_motor] = -speed;
-			motor[left_motor] = speed;
-		}
-	}
 
-	//-------------------------
-	// turn condition
-	//-------------------------
-	while(i < 5)
-	{
-		if (abs(relHeading) > degree) i++;
-		nxtDisplayCenteredBigTextLine(1, "%d", degree);
+			if (abs(heading) > degree) i++;
+			nxtDisplayCenteredBigTextLine(1, "%d", degree);
+		}
+		motor[right_motor] = 0;
+		motor[left_motor] = 0;
 	}
-	motor[right_motor] = 0;
-	motor[left_motor] = 0;
 }
 
 #endif /* !ABS_TURN_H */

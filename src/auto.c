@@ -23,10 +23,10 @@
 //-----------------------
 
 #include "joystickdriver.c"
-#include "drivers/hitechnic-sensormux.h"
-#include "drivers/hitechnic-irseeker-v2.h"
-#include "drivers/hitechnic-gyro.h"
-#include "drivers/hitechnic-angle.h"
+#include "lib/xander/hitechnic-sensormux.h"
+#include "lib/xander/hitechnic-irseeker-v2.h"
+#include "lib/xander/hitechnic-gyro.h"
+#include "lib/xander/hitechnic-angle.h"
 
 //-----------------------
 // custom functions includes
@@ -54,12 +54,12 @@ task main()
 	switch(mission_number)
 	{
 	case 1:
-		abs_drive(FORWARD, E_TILT, 10, 60, true);
-		abs_turn(COUNTERCLOCKWISE, POINT, 50, 60);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 50, 60);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, -50, 60);
 		break;
 
 	case 2:
-		abs_turn(CLOCKWISE, SWING, 120, 60);
+		abs_turn(CLOCKWISE, SWING, TURN, 120, 60);
 		break;
 
 	case 3:
@@ -67,12 +67,12 @@ task main()
 		break;
 
 	case 4:
-		abs_turn(COUNTERCLOCKWISE, POINT, 90, 60);
-		abs_turn(CLOCKWISE, POINT, 90, 60);
-		abs_turn(COUNTERCLOCKWISE, POINT, 90, 60);
-		abs_turn(CLOCKWISE, POINT, 90, 60);
-		abs_turn(COUNTERCLOCKWISE, POINT, 90, 60);
-		abs_turn(CLOCKWISE, POINT, 90, 60);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+		abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+		abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+		abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
 		break;
 	}
 }
