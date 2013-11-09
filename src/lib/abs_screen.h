@@ -24,9 +24,9 @@
 
 task screen ()
 {
-	nxtDisplayBigTextLine(7, "              ");
 	while(true)
 	{
+		nxtDisplayBigTextLine(7, "              ");
 		switch(screen_state)
 		{
 		case s_clear:
@@ -80,9 +80,9 @@ task screen ()
 			nxtDisplayBigTextLine(5, smoke_test2[smoke_test_num]);
 			break;
 		case s_smoke_run:
-			nxtDisplayBigTextLine(1, smoke_test1[0]);
-			//nxtDisplayBigTextLine(3, error_list1[error]);
-			//nxtDisplayBigTextLine(5, error_list2[error]);
+			nxtDisplayBigTextLine(1, smoke_test1[4]);
+			nxtDisplayBigTextLine(3, "%2d", test_value);
+			nxtDisplayBigTextLine(5, MissionNames1[0]);
 			break;
 		}
 	}

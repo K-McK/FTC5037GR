@@ -15,6 +15,9 @@ bool gyroTrue = false;
 #define ANGLE_SENSOR_CIRCUMFERENCE 17.6
 #define DRIVE_WHEELS_CIRCUMFERENCE 26
 
+const int LIFT_SPEED_DOWN = -40;
+const int LIFT_SPEED_UP = 50;
+
 //=========================================================
 // Smoke test varaibles
 //=========================================================
@@ -22,6 +25,7 @@ bool gyroTrue = false;
 int smoke_test_num = 1;
 int smoke_test_total = 12;
 int smoke_run = false;
+int test_value = 0;
 
 //=========================================================
 // Misc
@@ -174,7 +178,7 @@ string smoke_test1 [] = {
 	"Jolly   ",
 	"Drive   ",
 	"Sensor  ",
-	"Test 4  ",
+	"Lift    ",
 	"Test 5  ",
 	"Test 6  ",
 	"Test 7  ",
@@ -202,7 +206,7 @@ string smoke_test2 [] = {
 	"Roger   ",
 	"Train   ",
 	"Sensor  ",
-	"Test 4  ",
+	"        ",
 	"Test 5  ",
 	"Test 6  ",
 	"Test 7  ",
