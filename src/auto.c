@@ -55,7 +55,7 @@ task main()
 	{
 	case 1:
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 50, 60);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, -50, 60);
+		abs_turn(CLOCKWISE, POINT, TURN_TO, -50, 60);
 		break;
 
 	case 2:
