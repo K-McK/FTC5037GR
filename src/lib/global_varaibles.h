@@ -51,6 +51,7 @@ float relHeading = 0;
 long currtime = 0;
 long prevtime = 0;
 int rawgyro = 0;
+int recont_heading = 0; //this is the recalculated const gyro heading
 
 //=============================================================
 // Sensor variables
