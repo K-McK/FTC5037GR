@@ -36,8 +36,8 @@ void selection_program()
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kLeftButton){}
-			if(mission_number > 1) mission_number--;
-			else mission_number = 1;
+			if(mission_number > 0) mission_number--;
+			else mission_number = 0;
 		}
 	}
 	PlaySoundFile("! Click.rso");

@@ -35,4 +35,9 @@ void abs_joystick_gunner()
 	else motor(flag_motor)=0;
 }
 
+if(joystick.joy1_TopHat == 0)
+motor(lifter_motor)=LIFT_SPEED_UP
+if(joystick.joy1_TopHat == 4)
+motor(lifter_motor)=LIFT_SPEED_DOWN
+
 #endif /* !ABS_JOYSTICK_DRIVE_H */

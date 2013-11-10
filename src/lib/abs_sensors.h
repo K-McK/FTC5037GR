@@ -74,5 +74,8 @@ task abs_sensors_read ()
 		constHeading += (rawgyro - drift) * (float)(currtime-prevtime)/1000;
 		relHeading += (rawgyro - drift) * (float)(currtime-prevtime)/1000;
 		prevtime = currtime;
+
+		recont_heading = constHeading % 360;
+		if(recont_heading<0) recont_heading += 360;
 	}
 }
