@@ -15,6 +15,9 @@ bool gyroTrue = false;
 #define ANGLE_SENSOR_CIRCUMFERENCE 17.6
 #define DRIVE_WHEELS_CIRCUMFERENCE 26
 
+const int LIFT_SPEED_DOWN = -40;
+const int LIFT_SPEED_UP = 50;
+
 //=========================================================
 // Smoke test varaibles
 //=========================================================
@@ -22,6 +25,7 @@ bool gyroTrue = false;
 int smoke_test_num = 1;
 int smoke_test_total = 12;
 int smoke_run = false;
+int test_value = 0;
 
 //=========================================================
 // Misc
@@ -29,6 +33,7 @@ int smoke_run = false;
 
 int auto_missions = 4;
 int drive_heading = 0;
+int IR_heading = 5;
 
 bool Joy1Enabled = false;
 bool Joy2Enabled = false;
@@ -94,7 +99,7 @@ int error = 0;
 //==============================================================================
 string MissionNames1 [] = {
 	"        ",
-	"Test 1  ",
+	"IR test ",
 	"Test 2  ",
 	"Test 3  ",
 	"Test 4  ",
@@ -175,10 +180,10 @@ string error_list1 [] = {
 //==============================================================================
 string smoke_test1 [] = {
 	"Unknown ",
-	"GyroCal ",
-	"Gyro    ",
+	"Jolly   ",
+	"Drive   ",
 	"Sensor  ",
-	"Test 4  ",
+	"Lift    ",
 	"Test 5  ",
 	"Test 6  ",
 	"Test 7  ",
@@ -203,10 +208,10 @@ string smoke_test1 [] = {
 //==============================================================================
 string smoke_test2 [] = {
 	"Unknown ",
-	"GyroCal ",
-	"Gyro    ",
+	"Roger   ",
+	"Train   ",
 	"Sensor  ",
-	"Test 4  ",
+	"        ",
 	"Test 5  ",
 	"Test 6  ",
 	"Test 7  ",

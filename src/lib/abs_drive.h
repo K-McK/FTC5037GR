@@ -63,6 +63,13 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			abs_gyro_drive(speed,dir);
 		}
 	}
+	else if(dist_method == E_IR_DETECT)
+	{
+		while(IR_Bearing != IR_heading)
+		{
+			abs_gyro_drive(speed,dir);
+		}
+	}
 	//------------------------
 	// angle sensor stopping method
 	//------------------------

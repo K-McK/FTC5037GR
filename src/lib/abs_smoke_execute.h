@@ -24,16 +24,30 @@
 
 void abs_smoke_execute ()
 {
-	switch(smoke_test_num)
+	screen_state = s_smoke_run;
+	while(nNxtButtonPressed != kEnterButton)
 	{
-	case 1:
-		while(nNxtButtonPressed != kEnterButton)
+		switch(smoke_test_num)
 		{
+		case 1:
 			PlayTone(20,20);
 			wait1Msec(200);
+			PlaySoundFile("! Click.rso");
+			break;
+		case 4:
+			if(nNxtButtonPressed == kLeftButton)
+			{
+				motor[lifter_motor] = LIFT_SPEED_DOWN;
+				test_value = LIFT_SPEED_DOWN;
+			}
+			else if(nNxtButtonPressed == kRightButton)
+			{
+				motor[lifter_motor] = LIFT_SPEED_UP;
+				test_value = LIFT_SPEED_UP;
+			}
+			else test_value = 0;
+			break;
 		}
-		PlaySoundFile("! Click.rso");
-		break;
 	}
 }
 
