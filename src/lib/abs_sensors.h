@@ -77,5 +77,12 @@ task abs_sensors_read ()
 
 		recont_heading = constHeading % 360;
 		if(recont_heading<0) recont_heading += 360;
+
+		//-------------------------
+		// HiTechnic accelermoeter
+		//-------------------------
+
+		HTACreadAllAxes(HTAC, _x_axis, _y_axis, _z_axis);
+		accelermoeter_sensor = _x_axis;
 	}
 }

@@ -71,6 +71,16 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		}
 	}
 	//------------------------
+	// accelermeoter sensor stopping method
+	//------------------------
+	else if(dist_method == E_ANGLE)
+	{
+		while(accelermoeter_sensor < target_angle)
+		{
+			abs_gyro_drive(speed,dir);
+		}
+	}
+	//------------------------
 	// angle sensor stopping method
 	//------------------------
 	else
