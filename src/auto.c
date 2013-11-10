@@ -67,7 +67,7 @@ task main()
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 0, 60);
 		break;
 	case 1:
-
+		abs_drive(FORWARD, E_IR_DETECT, 5, 50, true);
 		break;
 
 	case 2:

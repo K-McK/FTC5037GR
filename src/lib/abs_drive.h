@@ -65,7 +65,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	}
 	else if(dist_method == E_IR_DETECT)
 	{
-		while(IR_Bearing != IR_heading)
+		while(IR_Bearing != dist)
 		{
 			abs_gyro_drive(speed,dir);
 		}

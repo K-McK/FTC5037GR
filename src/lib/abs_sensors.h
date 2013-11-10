@@ -64,6 +64,7 @@ task abs_sensors_read ()
 				}
 			}
 			IR_Bearing = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
+			nxtDisplayBigTextLine(3, "%2d", IR_Bearing);
 		}
 		//-------------------------
 		// HiTechnic Gyro
