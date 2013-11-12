@@ -21,6 +21,7 @@ void initialize()
 	selection_program();
 	drift = abs_gyro_cal(gyroCalTime);
 
+	if (!HTACreadAllAxes(HTAC, _x_axis, _y_axis, _z_axis)) error = e_accelermoeter;
 	if (gyro_noise>10) error = e_gyro_cal;
 	if(HTSMUXreadPowerStatus(SENSOR_MUX)) error = e_sensor_mux;
 	if(HTSMUXreadPowerStatus(GYRO_MUX)) error = e_gyro_mux;

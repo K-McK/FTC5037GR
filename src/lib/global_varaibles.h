@@ -4,6 +4,7 @@
 // Define sensor multiplexor connectivity and port allocations
 //============================================================
 const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
+const tMUXSensor HTAC = msensor_S3_2;
 const tMUXSensor HTGYRO = msensor_S2_1;			// HiTechnic GYRO sensor
 
 bool gyroTrue = false;
@@ -66,9 +67,18 @@ float IR_Bearing = 0.0;
 int acS[5];
 float currDir = 0.0;
 
-//==============================================================
+//-----------------------------
+// accelermoeter variables
+//-----------------------------
+int accelermoeter_sensor = 0;
+int _x_axis = 0;
+int _y_axis = 0;
+int _z_axis = 0;
+const int target_angle = 110;
+
+//=============================================================
 // Define screen related variables
-//==============================================================
+//=============================================================
 #define s_clear 0
 #define s_mission 1
 #define s_start_delay 2
@@ -91,6 +101,7 @@ int screen_state = 1;
 #define e_gyro_mux 2
 #define e_sensor_mux 3
 #define e_joysticks 4
+#define e_accelermoeter 5
 
 int error = 0;
 
@@ -150,7 +161,7 @@ string error_list1 [] = {
 	"Test 21 ",
 	"Test 22 "};
 
-	string error_list2 [] = {
+string error_list2 [] = {
 	"error   ",
 	"Failure ",
 	"Mux     ",
@@ -184,7 +195,7 @@ string smoke_test1 [] = {
 	"Drive   ",
 	"Sensor  ",
 	"Lift    ",
-	"Test 5  ",
+	"Servos  ",
 	"Test 6  ",
 	"Test 7  ",
 	"Test 8  ",
@@ -203,7 +214,7 @@ string smoke_test1 [] = {
 	"Test 21 ",
 	"Test 22 "};
 
-	//==============================================================================
+//==============================================================================
 // Define the text to be displayed for smoke test line 2
 //==============================================================================
 string smoke_test2 [] = {

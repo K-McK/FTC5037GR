@@ -30,9 +30,21 @@ void abs_smoke_execute ()
 		switch(smoke_test_num)
 		{
 		case 1:
-			PlayTone(20,20);
-			wait1Msec(200);
-			PlaySoundFile("! Click.rso");
+			break;
+		case 2:
+			if(nNxtButtonPressed == kLeftButton)
+			{
+				motor[right_motor] = 60;
+				motor[left_motor] = 60;
+				test_value = 60;
+			}
+			else if(nNxtButtonPressed == kRightButton)
+			{
+				motor[right_motor] = -60;
+				motor[left_motor] = -60;
+				test_value = -60;
+			}
+			else test_value = 0;
 			break;
 		case 4:
 			if(nNxtButtonPressed == kLeftButton)
@@ -46,6 +58,20 @@ void abs_smoke_execute ()
 				test_value = LIFT_SPEED_UP;
 			}
 			else test_value = 0;
+			break;
+		case 5:
+			if(nNxtButtonPressed == kLeftButton)
+			{
+				while(nNxtButtonPressed == kLeftButton) {}
+				if(test_value > 0) test_value -= 5;
+			}
+			else if(nNxtButtonPressed == kRightButton)
+			{
+				while(nNxtButtonPressed == kRightButton) {}
+				if(test_value < 255) test_value += 5;
+			}
+			servo[right_servo] = test_value;
+			servo[left_servo] =  255-test_value;
 			break;
 		}
 	}
