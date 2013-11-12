@@ -49,6 +49,11 @@ typedef enum
 	TURN_TO
 } e_turn_stopping_method;
 
+typedef enum
+{
+	LIFT,
+	FLAG
+} e_motor_move;
 #define distance_to_angle_derees(X) (X*360/ANGLE_SENSOR_CIRCUMFERENCE)
 #define distance_to_encoder_derees(X) (X*360/DRIVE_WHEELS_CIRCUMFERENCE)
 #endif /* !ABS_TURN_UTILS */

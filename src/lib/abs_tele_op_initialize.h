@@ -13,7 +13,7 @@
 #ifndef ABS_TELE_OP_INITIALIZE_H
 #define ABS_TELE_OP_INITIALIZE_H
 
-void abs_tele_op_initialize()
+void abs_tele_op_initialize();
 {
 if(joystick.joy1_TopHat == -1) Joy1Enabled = true;
 if(joystick.joy2_TopHat == -1) Joy2Enabled = true;
