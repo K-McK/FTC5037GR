@@ -13,79 +13,85 @@
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
-#ifndef ABS_SWING_TURN_TO_H
-#define ABS_SWING_TURN_TO_H
+#ifndef ABS_TURN_H
+#define ABS_TURN_H
 
-#include "xzander/hitechnic-gyro.h"
-#include "abs_move_utils.h"
-#include "abs_gyro_read.h"
-#include "abs_get_mem.h"
-#include "abs_exit.h"
 /** macros */
-
 
 //=======================================
 // point turn
 //=======================================
-void abs_turn(e_direction dir, e_turn_method turn_method, int degree, int speed)
+void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method e_stop, int degree, int speed)
 {
 	int i = 0;
-	//float rotSpeed = 0;
-	//float heading = 0;
-	turn_context* tcontext = 	(turn_context*)abs_get_mem(sizeof(turn_context));
+	relHeading = 0;
+	int target = 0;
 
-	if(tcontext == NULL)
-	{
-		abs_exit(NULL_POINTER);
-	}
-	tcontext->time = 0;
-	tcontext->heading = 0;
-	if(turn_method == SWING)
+	if(e_stop == TURN_TO)
 	{
 		if(dir == COUNTERCLOCKWISE)
 		{
-			motor[right_motor] = speed;
-			motor[left_motor] = 0;
+			if(degree<recont_heading) target = -(recont_heading-degree);
+			else target = -(360-(degree-recont_heading));
 		}
 		else
 		{
-			motor[right_motor] = 0;
-			motor[left_motor] = speed;
+			if(degree<recont_heading) target = 360-(recont_heading-degree);
+			else target = degree-recont_heading;
 		}
+		abs_turn(dir, turn_method, TURN, target, speed);
+		PlaySoundFile("! Click.rso");
 	}
-	else if(turn_method == POINT)
+	else
 	{
-		if(dir == COUNTERCLOCKWISE)
+		//-------------------------
+		// swing turn
+		//-------------------------
+		if(turn_method == SWING)
 		{
-			motor[right_motor] = speed;
-			motor[left_motor] = -speed;
+			if(dir == COUNTERCLOCKWISE)
+			{
+				motor[right_motor] = speed;
+				motor[left_motor] = 0;
+			}
+			else
+			{
+				motor[right_motor] = 0;
+				motor[left_motor] = speed;
+			}
 		}
+
+		//-------------------------
+		// point turn
+		//-------------------------
 		else
 		{
-			motor[right_motor] = -speed;
-			motor[left_motor] = speed;
+			if(dir == COUNTERCLOCKWISE)
+			{
+				motor[right_motor] = speed;
+				motor[left_motor] = -speed;
+			}
+			else
+			{
+				motor[right_motor] = -speed;
+				motor[left_motor] = speed;
+			}
 		}
 	}
-	//gyro pre turn start
-	while(i < 5)
+	//-------------------------
+	// turn condition
+	//-------------------------
+
+	if(e_stop == TURN)
 	{
-		if (abs(tcontext->heading) > degree) i++;
-		nxtDisplayCenteredBigTextLine(1, "%d", degree);
-		abs_gyro_read(HTGYRO,tcontext); //gyro read
-
-		//heading += rotSpeed * 0.02;
-
-		//nxtDisplayCenteredBigTextLine(1, "%2.0f", tcontext->heading);
-		//nxtDisplayCenteredBigTextLine(3, "%d", degree);
-		//nxtDisplayCenteredBigTextLine(5, "%d", SensorValue(HTGYRO));
+		while(i < 5)
+		{
+			if (abs(relHeading) > abs(degree)) i++;
+			nxtDisplayCenteredBigTextLine(5, "%d", recont_heading);
+		}
+		motor[right_motor] = 0;
+		motor[left_motor] = 0;
 	}
-	motor[right_motor] = 0;
-	motor[left_motor] = 0;
 }
 
-//#define product(X, Y) ((X) * (Y))
-//#define sum(X, Y) ((X) + (Y))
-//#define min(X, Y) ((X) < (Y) ? (X) : (Y))
-//#define max(X, Y) ((X) > (Y) ? (X) : (Y))
-
-#endif /* !ABS_SWING_TURN_TO_H */
+#endif /* !ABS_TURN_H */

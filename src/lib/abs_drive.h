@@ -13,83 +13,88 @@
 #ifndef ABS_DRIVE_H
 #define ABS_DRIVE_H
 
-#include "xzander/hitechnic-angle.h"
-#include "abs_gyro_drive.h"
-
-
 /** macros */
 //=========================
 //Drive
 //=========================
-void abs_drive(e_drive_direction dir, e_stopping_method dist_method, int dist, int speed)
+void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end)
 {
 	HTANGresetAccumulatedAngle(ANGLE_SENSOR);
 	int i = 0;
-	nMotorEncoder(right_motor)= 0;
-	turn_context* tcontext = 	(turn_context*)abs_get_mem(sizeof(turn_context));
-	tcontext->time = 0;
-	tcontext->heading = 0;
-	abs_gyro_read(HTGYRO,tcontext);
 
-	if(dir == FORWARD)  //Decides if you are driveing forwards or backwards
+	nMotorEncoder(right_motor)= 0;
+	relHeading = 0;
+
+	//------------------------
+	// Determines direction
+	//------------------------
+	if(dir == FORWARD)
 	{
+		drive_heading = FORWARD_HEADING;
 		motor(right_motor)=speed;
 		motor(left_motor)=speed;
 	}
 	else
 	{
+		drive_heading = REVERSE_HEADING;
 		motor(right_motor)=-speed;
 		motor(left_motor)=-speed;
 	}
 
-	if(dist_method == E_TIME)   //time stopping method
+	//------------------------
+	// time stopping method
+	//------------------------
+	if(dist_method == E_TIME)
 	{
 		ClearTimer(T1);
 		while(time1[T1] < dist)
 		{
-			abs_gyro_drive(tcontext,speed);
+			abs_gyro_drive(speed,dir);
 		}
-		//wait1Msec(dist);
 	}
-	else if(dist_method == E_DEGREES)  //encoder stopping method
+	//------------------------
+	// encoder stopping method
+	//------------------------
+	else if(dist_method == E_DEGREES)
 	{
 		while(i<5)
 		{
-			if(abs(nMotorEncoder(right_motor)) > dist)
-				i++;
-			abs_gyro_drive(tcontext,speed);
+			if(abs(nMotorEncoder(right_motor)) > distance_to_encoder_derees(dist)) i++;
+			abs_gyro_drive(speed,dir);
 		}
 	}
+	else if(dist_method == E_IR_DETECT)
+	{
+		while(IR_Bearing != dist)
+		{
+			abs_gyro_drive(speed,dir);
+		}
+	}
+	//------------------------
+	// accelermeoter sensor stopping method
+	//------------------------
+	else if(dist_method == E_ANGLE)
+	{
+		while(accelermoeter_sensor < target_angle)
+		{
+			abs_gyro_drive(speed,dir);
+		}
+	}
+	//------------------------
+	// angle sensor stopping method
+	//------------------------
 	else
 	{
-		if(dir == FORWARD)
+		while(abs(HTANGreadAccumulatedAngle(ANGLE_SENSOR)) < distance_to_angle_derees(dist))
 		{
-			while(HTANGreadAccumulatedAngle(ANGLE_SENSOR) < distance_to_angle_derees(dist))
-			{
-				abs_gyro_drive(tcontext,speed);
-			}
-
+			abs_gyro_drive(speed,dir);
 		}
-		else
-		{
-			while(HTANGreadAccumulatedAngle(ANGLE_SENSOR) < distance_to_angle_derees(-dist))
-			{
-				abs_gyro_drive(tcontext,speed);
-			}
-
-		}
-		motor(left_motor)=0;
-		motor(right_motor)=0;
+	}
+	if(stop_at_end)
+	{
+		motor[left_motor] = 0;
+		motor[right_motor] = 0;
 	}
 }
-
-
-/** enumerations */
-
-/** structures */
-
-/** function prototypes */
-
-/** global constant variables */
 
 #endif /* !ABS_DRIVE_H */

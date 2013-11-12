@@ -1,8 +1,8 @@
 #pragma config(Hubs,  S1, HTMotor,  HTServo,  none,     none)
-#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     HTGYRO,         sensorAnalogActive)
 #pragma config(Sensor, S3,     ANGLE_SENSOR,   sensorI2CCustom)
-#pragma config(Motor,  motorC,           ,             tmotorNXT, openLoop)
+#pragma config(Motor,  motorB,          block_grabber_left, tmotorNXT, PIDControl, encoder)
+#pragma config(Motor,  motorC,          block_grabber_right, tmotorNXT, openLoop)
 #pragma config(Motor,  mtr_S1_C1_1,     right_motor,   tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     left_motor,    tmotorTetrix, openLoop, encoder)
 #pragma config(Servo,  srvo_S1_C2_1,    servo1,               tServoNone)
@@ -25,13 +25,12 @@
 
 /*Includes*/
 
-#include "../src/lib/abs_global.h"
+#include "../src/lib/global_varaibles.h"
 #include "../src/lib/abs_turn.h"
 #include "../src/lib/math_utils.h"
 #include "../src/lib/abs_gyro_cal.h"
 //#include "JoystickDriver.c"
-#include "../src/lib/abs_create_mem.h"
-#include "../src/lib/abs_initialize_system.h"
+#include "../src/lib/abs_initialize.h"
 #include "../src/lib/abs_drive.h"
 
 //========================================
@@ -40,7 +39,6 @@
 
 task main()
 {
-	//waitforstart();
 	abs_initialize_system();
 	abs_turn(CLOCKWISE, SWING, 360, 50);
 	//abs_drive(FORWARD, E_DISTANCE, 100, 50);
