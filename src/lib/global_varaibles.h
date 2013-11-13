@@ -39,6 +39,8 @@ int IR_heading = 5;
 bool Joy1Enabled = false;
 bool Joy2Enabled = false;
 
+int selection_value = 0;
+
 //=============================================================
 // Define user configurable parameters
 //=============================================================
@@ -90,6 +92,7 @@ const int target_angle = 110;
 #define s_error 8
 #define s_smoke_test 9
 #define s_smoke_run 10
+#define s_screen_call 11
 
 int screen_state = 1;
 
@@ -109,6 +112,34 @@ int error = 0;
 // Define the text to be displayed for each mission
 //==============================================================================
 string MissionNames1 [] = {
+	"        ",
+	"IR test ",
+	"Test 2  ",
+	"Test 3  ",
+	"Test 4  ",
+	"Test 5  ",
+	"Test 6  ",
+	"Test 7  ",
+	"Test 8  ",
+	"Test 9  ",
+	"Test 10 ",
+	"Test 11 ",
+	"Test 12 ",
+	"Test 13 ",
+	"Test 14 ",
+	"Test 15 ",
+	"Test 16 ",
+	"Test 17 ",
+	"Test 18 ",
+	"Test 19 ",
+	"Test 20 ",
+	"Test 21 ",
+	"Test 22 "};
+
+//==============================================================================
+// Define the text to be displayed on the second line for each mission
+//==============================================================================
+string MissionNames2 [] = {
 	"        ",
 	"IR test ",
 	"Test 2  ",
