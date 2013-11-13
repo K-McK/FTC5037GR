@@ -35,8 +35,9 @@ task screen ()
 			nxtDisplayBigTextLine(5, MissionNames1[0]);
 			break;
 		case s_mission:
-			nxtDisplayBigTextLine(1, "Missons");
-			nxtDisplayBigTextLine(3, "%2d", mission_number);
+			nxtDisplayBigTextLine(1, "Misson ","2%d", mission_number);
+			//nxtDisplayBigTextLine(3, "%2d", mission_number);
+			nxtDisplayBigTextLine(3, MissionNames2[mission_number]);
 			nxtDisplayBigTextLine(5, MissionNames1[mission_number]);
 			break;
 		case s_start_delay:
@@ -80,6 +81,11 @@ task screen ()
 			nxtDisplayBigTextLine(5, smoke_test2[smoke_test_num]);
 			break;
 		case s_smoke_run:
+			nxtDisplayBigTextLine(1, smoke_test1[smoke_test_num]);
+			nxtDisplayBigTextLine(3, "%2d", test_value);
+			nxtDisplayBigTextLine(5, MissionNames1[0]);
+			break;
+		case s_screen_call:
 			nxtDisplayBigTextLine(1, smoke_test1[smoke_test_num]);
 			nxtDisplayBigTextLine(3, "%2d", test_value);
 			nxtDisplayBigTextLine(5, MissionNames1[0]);
