@@ -80,10 +80,15 @@ task screen ()
 			nxtDisplayBigTextLine(3, smoke_test1[smoke_test_num]);
 			nxtDisplayBigTextLine(5, smoke_test2[smoke_test_num]);
 			break;
-		case s_smoke_run:
+		case s_smoke_run1:
 			nxtDisplayBigTextLine(1, smoke_test1[smoke_test_num]);
 			nxtDisplayBigTextLine(3, "%2d", test_value);
 			nxtDisplayBigTextLine(5, MissionNames1[0]);
+			break;
+		case S_smoke_run2:
+			nxtDisplayBigTextLine(1, smoke_test1[smoke_test_num]);
+			nxtDisplayBigTextLine(5, sensor_list[sensor_num]);
+			nxtDisplayBigTextLine(3, "%2d", test_value);
 			break;
 		case s_screen_call:
 			nxtDisplayBigTextLine(1, smoke_test1[smoke_test_num]);

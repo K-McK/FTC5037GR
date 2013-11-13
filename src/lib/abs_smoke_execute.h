@@ -24,7 +24,7 @@
 
 void abs_smoke_execute ()
 {
-	screen_state = s_smoke_run;
+	screen_state = s_smoke_run1;
 	while(nNxtButtonPressed != kEnterButton)
 	{
 		switch(smoke_test_num)
@@ -45,6 +45,35 @@ void abs_smoke_execute ()
 				test_value = -60;
 			}
 			else test_value = 0;
+			break;
+		case 3:
+			screen_state = S_smoke_run2;
+			if(nNxtButtonPressed == kLeftButton)
+			{
+				if(test_value > 0) test_value--;
+				while(nNxtButtonPressed == kLeftButton) {}
+			}
+			if(nNxtButtonPressed == kRightButton)
+			{
+				if(test_value < sensor_max) test_value++;
+				while(nNxtButtonPressed == kLeftButton) {}
+			}
+			sensor_num = test_value;
+			switch(sensor_num)
+			{
+			case st_gyro:
+			sensor_value = relHeading;
+				break;
+				case st_IR:
+				sensor_value = IR_Bearing;
+				break;
+				case st_tilt:
+				sensor_value = HTANGreadAccumulatedAngle(ANGLE_SENSOR);
+				break;
+				case st_accelerometer:
+				sensor_value = accelermoeter_sensor;
+				break;
+			}
 			break;
 		case 4:
 			if(nNxtButtonPressed == kLeftButton)
