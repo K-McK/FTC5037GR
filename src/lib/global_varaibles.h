@@ -15,6 +15,21 @@ bool gyroTrue = false;
 
 #define ANGLE_SENSOR_CIRCUMFERENCE 17.6
 #define DRIVE_WHEELS_CIRCUMFERENCE 26
+#define GRABBER_OPEN 1
+#define GRABBER_MID 2
+#define GRABBER_CLOSE 3
+#define GRABBER_POS_RIGHT_CLOSE 4
+#define GRABBER_POS_RIGHT_OPEN 5
+#define GRABBER_POS_LEFT_CLOSE 6
+#define GRABBER_POS_LEFT_OPEN 7
+
+
+#define GRABBER_LEFT_OPEN 0
+#define GRABBER_RIGHT_OPEN 255
+#define GRABBER_LEFT_MID 50
+#define GRABBER_RIGHT_MID 180
+#define GRABBER_LEFT_CLOSE 100
+#define GRABBER_RIGHT_CLOSE 100
 
 const int LIFT_SPEED_DOWN = -40;
 const int LIFT_SPEED_UP = 50;
@@ -78,6 +93,25 @@ int _y_axis = 0;
 int _z_axis = 0;
 const int target_angle = 110;
 
+//-----------------------------
+// misc
+//-----------------------------
+int sensor_num = 1;
+int sensor_max = 4;
+int sensor_value = 0;
+
+#define st_gyro 1
+#define st_IR 2
+#define st_accelerometer 3
+#define st_tilt 4
+
+string sensor_list [] = {
+	"unknown ",
+	"gyro    ",
+	"IR      ",
+	"accel   ",
+	"tilt    "};
+
 //=============================================================
 // Define screen related variables
 //=============================================================
@@ -91,8 +125,10 @@ const int target_angle = 110;
 #define s_gyro_show 7
 #define s_error 8
 #define s_smoke_test 9
-#define s_smoke_run 10
-#define s_screen_call 11
+#define s_smoke_run1 10
+#define S_smoke_run2 11
+#define S_smoke_run3 12
+#define s_screen_call 13
 
 int screen_state = 1;
 
