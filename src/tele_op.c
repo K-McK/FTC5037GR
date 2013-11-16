@@ -42,16 +42,16 @@
 task main ()
 {
 	abs_tele_op_initialize();
-	//if(!Joy1Enabled || !Joy2Enabled)
-	//{
-	//	error = e_joysticks;
-	//	screen_state = s_error;
-	//	while(true)
-	//	{
-	//		PlayTone(20,200);
-	//		wait1Msec(500);
-	//	}
-	//}
+	if(!Joy1Enabled || !Joy2Enabled)
+	{
+		error = e_joysticks;
+		screen_state = s_error;
+		while(true)
+		{
+			PlayTone(20,200);
+			wait1Msec(500);
+		}
+	}
 	StartTask(abs_joystick_gunner);
 	while(true)
 	{
