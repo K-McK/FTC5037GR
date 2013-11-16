@@ -51,8 +51,8 @@ void abs_joystick_drive(e_joystick_method joy_type)
 	if(joystick.joy1_y1<0) speed1 = -speed1;
 	if(joystick.joy1_y2<0) speed2 = -speed2;
 
-	motor[right_motor] = speed1;
-	motor[left_motor] = speed2;
+	motor[right_motor] = speed2;
+	motor[left_motor] = speed1;
 }
 
 #endif /* !ABS_JOYSTICK_DRIVE_H */

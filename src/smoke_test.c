@@ -16,10 +16,11 @@
 //-----------------------
 
 #include "joystickdriver.c"
-#include "drivers/hitechnic-sensormux.h"
-#include "drivers/hitechnic-irseeker-v2.h"
-#include "drivers/hitechnic-gyro.h"
-#include "drivers/hitechnic-angle.h"
+#include "lib/xander/hitechnic-sensormux.h"
+#include "lib/xander/hitechnic-irseeker-v2.h"
+#include "lib/xander/hitechnic-gyro.h"
+#include "lib/xander/hitechnic-angle.h"
+#include "lib/xander/hitechnic-accelerometer.h"
 
 //-----------------------
 // custom functions includes
@@ -27,6 +28,8 @@
 
 #include "lib/global_varaibles.h"
 #include "lib/abs_screen.h"
+#include "lib/math_utils.h"
+#include "lib/abs_sensors.h"
 #include "lib/abs_smoke_execute.h"
 
 
@@ -36,6 +39,7 @@
 task main()
 {
 	StartTask(screen);
+	StartTask(abs_sensors_read);
 	while(true)
 	{
 		while(nNxtButtonPressed == kEnterButton){}
