@@ -70,6 +70,16 @@ task screen ()
 			nxtDisplayBigTextLine(3, "%2d", constHeading);
 			nxtDisplayBigTextLine(5, MissionNames1[0]);
 			break;
+		case s_IR_show:
+			nxtDisplayBigTextLine(1, "IR Value");
+			nxtDisplayBigTextLine(3, "%2d", IR_Bearing);
+			nxtDisplayBigTextLine(5, MissionNames1[0]);
+			break;
+		case s_ac_show:
+			nxtDisplayBigTextLine(1, "ac Value");
+			nxtDisplayBigTextLine(3, "%2d  %2d", accelermoeter_sensor, misc);
+			nxtDisplayBigTextLine(5, MissionNames1[0]);
+			break;
 		case s_error:
 			nxtDisplayBigTextLine(1, "ERROR");
 			nxtDisplayBigTextLine(3, error_list1[error]);
@@ -87,8 +97,8 @@ task screen ()
 			break;
 		case S_smoke_run2:
 			nxtDisplayBigTextLine(1, smoke_test1[smoke_test_num]);
+			nxtDisplayBigTextLine(3, "%2d", sensor_value);
 			nxtDisplayBigTextLine(5, sensor_list[sensor_num]);
-			nxtDisplayBigTextLine(3, "%2d", test_value);
 			break;
 		case s_screen_call:
 			nxtDisplayBigTextLine(1, smoke_test1[smoke_test_num]);

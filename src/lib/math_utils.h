@@ -16,5 +16,6 @@
 #define sum(X, Y) ((X) + (Y))
 #define min(X, Y) ((X) < (Y) ? (X) : (Y))
 #define max(X, Y) ((X) > (Y) ? (X) : (Y))
+//#define range(X, Y) ((X) > (Y) ? (X) : (Y))
 
 #endif /* !MATH_UTILS_H */
