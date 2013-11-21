@@ -64,7 +64,7 @@ task abs_sensors_read ()
 				}
 			}
 			IR_Bearing = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
-			nxtDisplayBigTextLine(3, "%2d", IR_Bearing);
+			//nxtDisplayBigTextLine(3, "%2d", IR_Bearing);
 		}
 		//-------------------------
 		// HiTechnic Gyro
@@ -85,5 +85,23 @@ task abs_sensors_read ()
 
 		HTACreadAllAxes(HTAC, _x_axis, _y_axis, _z_axis);
 		accelermoeter_sensor = _x_axis;
+
+		if(sensor_reference_drive == true)
+		{
+			accelermoeter_reads++;
+			accelermoeter_array[accelermoeter_reads%50]=accelermoeter_sensor;
+			for(int i=0;i<30;i++)
+			{
+				accelermoeter_total_value = accelermoeter_array[i];
+			}
+			accelermoeter_average = accelermoeter_total_value/50;
+		}
+		else
+		{
+			accelermoeter_reads = 0;
+			accelermoeter_total_value = 0;
+			accelermoeter_average = 0;
+			memset(accelermoeter_array,0,30);
+		}
 	}
 }

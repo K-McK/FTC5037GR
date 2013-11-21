@@ -18,41 +18,35 @@ task abs_joystick_gunner()
 {
 	while(true)
 	{
-		if(abs(joystick.joy2_y1) > 10) 	motor[block_grabber_left] = joystick.joy2_y1*100/127;
-		else motor[block_grabber_left] = 0;
+		if(joy1Btn(6))
+		{
+			motor[robot_lift]=-100;
+		}
+		else if(joy1Btn(8))
+		{
+			motor[robot_lift]=100;
+		}
+		else motor[robot_lift] = 0;
 
-		if(abs(joystick.joy2_y2) > 10) motor[block_grabber_right] = joystick.joy2_y2*100/127;
-		else motor[block_grabber_right] = 0;
+		//if(joy1Btn(9)) servo[roger_slide] = -60;
+		//else if(joy1Btn(10)) servo[roger_slide] = 60;
+		//else servo[roger_slide] = 0;
 
-		//if(joy2Btn(4))
-		//{
-		//	motor(flag_motor)=75;
-		//}
+		if(joy2Btn(4))
+		{
+			motor(flag_motor)=-60;
+		}
+		else motor(flag_motor)=0;
 
-		//else if(joy2Btn(2))
-		//{
-		//	motor(flag_motor)=-75;
-		//}
+		if(joy1Btn(9)) servo[roger_slide] = 0;
+		else if(joy1Btn(10)) servo[roger_slide] = 255;
+		else servo[roger_slide] = 127;
 
-		//else motor(flag_motor)=0;
-
-		//if(joystick.joy1_TopHat == 0)
-		//	motor(lifter_motor)=LIFT_SPEED_UP;
-		//if(joystick.joy1_TopHat == 4)
-		//	motor(lifter_motor)=LIFT_SPEED_DOWN;
+		if(abs(joystick.joy2_y2)>10) motor[lifter_motor] = joystick.joy2_y2*100/127;
+		else motor[lifter_motor] = 0;
 
 		int grabber_position;
 
-		//if(joy2Btn(8) && grabber_position < 3)
-		//{
-		//	grabber_position++;
-		//	while(joy2Btn(8));
-		//}
-		//if(joy2Btn(7) && grabber_position > 1)
-		//{
-		//	grabber_position--;
-		//	while(joy2Btn(7));
-		//}
 		if(joy2Btn(1) || joy1Btn(1)) grabber_position = GRABBER_OPEN;
 		if(joy2Btn(2) || joy1Btn(2)) grabber_position = GRABBER_MID;
 		if(joy2Btn(3) || joy1Btn(3)) grabber_position = GRABBER_CLOSE;
@@ -89,6 +83,7 @@ task abs_joystick_gunner()
 			servo[grabber_right] = GRABBER_RIGHT_OPEN;
 			break;
 		}
+
 	}
 }
 

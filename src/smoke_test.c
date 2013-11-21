@@ -40,6 +40,7 @@ task main()
 {
 	StartTask(screen);
 	StartTask(abs_sensors_read);
+	test_value = 1;
 	while(true)
 	{
 		while(nNxtButtonPressed == kEnterButton){}

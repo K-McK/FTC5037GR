@@ -3,9 +3,9 @@
 //============================================================
 // Define sensor multiplexor connectivity and port allocations
 //============================================================
-const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
-const tMUXSensor HTAC = msensor_S3_2;
-const tMUXSensor HTGYRO = msensor_S2_1;			// HiTechnic GYRO sensor
+//const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
+//const tMUXSensor HTAC = msensor_S3_2;
+//const tMUXSensor HTGYRO = msensor_S2_1;			// HiTechnic GYRO sensor
 
 bool gyroTrue = false;
 
@@ -79,10 +79,12 @@ int recont_heading = 0; //this is the recalculated const gyro heading
 //=============================================================
 // Sensor variables
 //=============================================================
+const int ac_time_limit = 200;
 int bearingAC = 0;
 float IR_Bearing = 0.0;
 int acS[5];
 float currDir = 0.0;
+int misc = 0;
 
 //-----------------------------
 // accelermoeter variables
@@ -92,6 +94,10 @@ int _x_axis = 0;
 int _y_axis = 0;
 int _z_axis = 0;
 const int target_angle = 110;
+ubyte long accelermoeter_reads = 0;
+int accelermoeter_array [] = {0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30};
+ubyte long accelermoeter_total_value = 0;
+int accelermoeter_average = 0;
 
 //-----------------------------
 // misc
@@ -104,6 +110,8 @@ int sensor_value = 0;
 #define st_IR 2
 #define st_accelerometer 3
 #define st_tilt 4
+
+bool sensor_reference_drive = false;
 
 string sensor_list [] = {
 	"unknown ",
@@ -129,6 +137,8 @@ string sensor_list [] = {
 #define S_smoke_run2 11
 #define S_smoke_run3 12
 #define s_screen_call 13
+#define s_IR_show 14
+#define s_ac_show 15
 
 int screen_state = 1;
 
