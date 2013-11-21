@@ -58,6 +58,8 @@
 #include "abs_gyro_drive.h"
 #include "lib/abs_drive.h"
 #include "lib/abs_initialize.h"
+#include "lib/abs_motor.h"
+
 //========================================
 // Main program
 //========================================
@@ -82,7 +84,11 @@ task main()
 		break;
 
 	case 2:
-		abs_drive(FORWARD, E_ANGLE, 30, 50, true);
+		abs_drive(FORWARD, E_ANGLE, 15, 50, true);
+		abs_motor(LIFT, 50);
+		wait10Msec(100);
+		abs_motor(FLAG, 50);
+		wait10Msec(100);
 		break;
 
 	case 3:
