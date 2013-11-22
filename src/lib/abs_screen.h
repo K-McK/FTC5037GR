@@ -105,6 +105,10 @@ task screen ()
 			nxtDisplayBigTextLine(3, "%2d", test_value);
 			nxtDisplayBigTextLine(5, MissionNames1[0]);
 			break;
+		case s_misc_show:
+			nxtDisplayBigTextLine(1, "misc Value");
+			nxtDisplayBigTextLine(3, "%2d", misc);
+			nxtDisplayBigTextLine(5, MissionNames1[0]);
 		}
 	}
 }
