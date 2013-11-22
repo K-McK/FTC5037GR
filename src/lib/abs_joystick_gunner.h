@@ -18,32 +18,32 @@ task abs_joystick_gunner()
 {
 	while(true)
 	{
-		if(joy1Btn(6))
+		if(joy1Btn())
 		{
-			motor[robot_lift]=-100;
+			motor[block_lift_motor]=-100;
 		}
-		else if(joy1Btn(8))
+		else if(joy1Btn())
 		{
-			motor[robot_lift]=100;
+			motor[]=100;
 		}
-		else motor[robot_lift] = 0;
+		else motor[] = 0;
 
 		//if(joy1Btn(9)) servo[roger_slide] = -60;
 		//else if(joy1Btn(10)) servo[roger_slide] = 60;
 		//else servo[roger_slide] = 0;
 
-		if(joy2Btn(4))
+		if(joy2Btn())
 		{
-			motor(flag_motor)=-60;
+			motor()=-60;
 		}
-		else motor(flag_motor)=0;
+		else motor()=0;
 
-		if(joy1Btn(9)) servo[roger_slide] = 0;
-		else if(joy1Btn(10)) servo[roger_slide] = 255;
+		if(joy1Btn()) servo[] = 0;
+		else if(joy1Btn()) servo[] = 255;
 		else servo[roger_slide] = 127;
 
-		if(abs(joystick.joy2_y2)>10) motor[lifter_motor] = joystick.joy2_y2*100/127;
-		else motor[lifter_motor] = 0;
+		if(abs(joystick.joy2_y2)>10) motor[] = joystick.joy2_y2*100/127;
+		else motor[] = 0;
 
 		int grabber_position;
 
