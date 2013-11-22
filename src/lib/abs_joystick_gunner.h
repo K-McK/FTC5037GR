@@ -18,33 +18,46 @@ task abs_joystick_gunner()
 {
 	while(true)
 	{
-		if(joy1Btn())
-		{
-			motor[]=-100;
-		}
-		else if(joy1Btn())
-		{
-			motor[]=100;
-		}
-		else motor[] = 0;
+		//-----------------------------
+		// robot lift
+		//-----------------------------
+		if(joystick.joy2_y2>10) motor[sky_hook]=ROBOT_LIFT_UP;
+		else if(joystick.joy2_y2<-10)motor[sky_hook]=ROBOT_LIFT_DOWN;
+		else motor[sky_hook] = 0;
 
-		//if(joy1Btn(9)) servo[roger_slide] = -60;
-		//else if(joy1Btn(10)) servo[roger_slide] = 60;
-		//else servo[roger_slide] = 0;
-
-		if(joy2Btn())
+		//-----------------------------
+		// flag motor control
+		//-----------------------------
+		switch(joystick.joy2_TopHat)
 		{
-			motor()=-60;
+		case -1:
+			motor[jolly_roger]= 0;
+			break;
+		case 1:
+			motor[jolly_roger] = FLAG_SPEED_UP;
+			break;
+		case 4:
+			motor[jolly_roger] = FLAG_SPEED_DOWN;
+			break;
 		}
-		else motor()=0;
 
-		if(joy1Btn()) servo[] = 0;
-		else if(joy1Btn()) servo[] = 255;
+		//-----------------------------
+		// roger slide
+		//-----------------------------
+		if(joy1Btn(9)) servo[roger_slide] = 0;
+		else if(joy1Btn(10)) servo[roger_slide] = 255;
 		else servo[roger_slide] = 127;
 
-		if(abs(joystick.joy2_y2)>10) motor[] = joystick.joy2_y2*100/127;
-		else motor[] = 0;
+		//-----------------------------
+		// block lift
+		//-----------------------------
+		if(joystick.joy2_y1>10) motor[block_lift_motor] = BLOCK_SPEED_UP;
+		else if(joystick.joy2_y1<-10) motor[block_lift_motor] = BLOCK_SPEED_DOWN;
+		else motor[block_lift_motor] = 0;
 
+		//-----------------------------
+		// block grabber
+		//-----------------------------
 		int grabber_position;
 
 		if(joy2Btn(1) || joy1Btn(1)) grabber_position = GRABBER_OPEN;
@@ -59,31 +72,30 @@ task abs_joystick_gunner()
 		switch(grabber_position)
 		{
 		case GRABBER_OPEN:
-			servo[grabber_left] = GRABBER_LEFT_OPEN;
-			servo[grabber_right] = GRABBER_RIGHT_OPEN;
+			servo[left_grabber] = GRABBER_LEFT_OPEN;
+			servo[right_grabber] = GRABBER_RIGHT_OPEN;
 			break;
 		case GRABBER_MID:
-			servo[grabber_left] = GRABBER_LEFT_MID;
-			servo[grabber_right] = GRABBER_RIGHT_MID;
+			servo[left_grabber] = GRABBER_LEFT_MID;
+			servo[right_grabber] = GRABBER_RIGHT_MID;
 			break;
 		case GRABBER_CLOSE:
-			servo[grabber_left] = GRABBER_LEFT_CLOSE;
-			servo[grabber_right] = GRABBER_RIGHT_CLOSE;
+			servo[left_grabber] = GRABBER_LEFT_CLOSE;
+			servo[right_grabber] = GRABBER_RIGHT_CLOSE;
 			break;
 		case GRABBER_POS_LEFT_CLOSE:
-			servo[grabber_left] = GRABBER_LEFT_CLOSE;
+			servo[left_grabber] = GRABBER_LEFT_CLOSE;
 			break;
 		case GRABBER_POS_LEFT_OPEN:
-			servo[grabber_left] = GRABBER_LEFT_OPEN;
+			servo[left_grabber] = GRABBER_LEFT_OPEN;
 			break;
 		case GRABBER_POS_RIGHT_CLOSE:
-			servo[grabber_right] = GRABBER_RIGHT_CLOSE;
+			servo[right_grabber] = GRABBER_RIGHT_CLOSE;
 			break;
 		case GRABBER_POS_RIGHT_OPEN:
-			servo[grabber_right] = GRABBER_RIGHT_OPEN;
+			servo[right_grabber] = GRABBER_RIGHT_OPEN;
 			break;
 		}
-
 	}
 }
 

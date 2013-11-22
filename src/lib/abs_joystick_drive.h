@@ -16,6 +16,10 @@
 //=======================================
 void abs_joystick_drive(e_joystick_method joy_type)
 {
+	//-----------------------------
+	// drive motor controls
+	//-----------------------------
+
 	int speed1;
 	int speed2;
 
