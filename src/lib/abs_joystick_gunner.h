@@ -20,7 +20,7 @@ task abs_joystick_gunner()
 	{
 		if(joy1Btn())
 		{
-			motor[block_lift_motor]=-100;
+			motor[]=-100;
 		}
 		else if(joy1Btn())
 		{
