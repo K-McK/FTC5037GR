@@ -166,7 +166,7 @@ int error = 0;
 string MissionNames1 [] = {
 	"        ",
 	"IR test ",
-	"Test 2  ",
+	"Test 2 ",
 	"Test 3  ",
 	"Test 4  ",
 	"Test 5  ",
@@ -194,7 +194,7 @@ string MissionNames1 [] = {
 string MissionNames2 [] = {
 	"        ",
 	"IR test ",
-	"Test 2  ",
+	"Motor Test  ",
 	"Test 3  ",
 	"Test 4  ",
 	"Test 5  ",

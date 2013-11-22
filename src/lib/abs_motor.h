@@ -13,15 +13,15 @@
 #ifndef ABS_MOTOR_H
 #define ABS_MOTOR_H
 
-void abs_move(e_motor_move move_type, int power)
+void abs_motor(e_motor_move move_type, int power)
 {
 	if(move_type == FLAG)
 	{
-		motor(flag_motor)==power
+		motor[flag_motor] = power;
 	}
-	else
+	else if(move_type == LIFT)
 	{
-		motor(lifter_motor)==power
+		motor[lifter_motor] = power;
 	}
 }
 #endif /* !ABS_MOTOR_H */
