@@ -6,7 +6,7 @@
 #pragma config(Motor,  mtr_S1_C1_1,     right_motor,   tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     left_motor,    tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C2_1,     robot_lift,    tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_2,     lifter_motor,  tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_2,     block_lift_motor, tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_1,     flag_motor,    tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     motorI,        tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S1_C4_1,    grabber_right,        tServoStandard)
@@ -61,16 +61,16 @@
 task main ()
 {
 	abs_tele_op_initialize();
-	//if(!Joy1Enabled || !Joy2Enabled)
-	//{
-	//	error = e_joysticks;
-	//	screen_state = s_error;
-	//	while(true)
-	//	{
-	//		PlayTone(20,200);
-	//		wait1Msec(500);
-	//	}
-	//}
+	if(!Joy1Enabled || !Joy2Enabled)
+	{
+		error = e_joysticks;
+		screen_state = s_error;
+		while(true)
+		{
+			PlayTone(20,200);
+			wait1Msec(500);
+		}
+	}
 	StartTask(abs_joystick_gunner);
 	while(true)
 	{

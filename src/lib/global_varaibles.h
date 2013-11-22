@@ -31,8 +31,14 @@ bool gyroTrue = false;
 #define GRABBER_LEFT_CLOSE 100
 #define GRABBER_RIGHT_CLOSE 100
 
-const int LIFT_SPEED_DOWN = -40;
-const int LIFT_SPEED_UP = 50;
+const int BLOCK_SPEED_DOWN = -40;
+const int BLOCK_SPEED_UP = 50;
+
+const int ROBOT_LIFT_DOWN = -40;
+const int ROBOT_LIFT_UP = 90;
+
+const int FLAG_SPEED_DOWN = -90;
+const int FLAG_SPEED_UP = 90;
 
 //=========================================================
 // Smoke test varaibles
