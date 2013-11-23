@@ -3,9 +3,11 @@
 //============================================================
 // Define sensor multiplexor connectivity and port allocations
 //============================================================
-//const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
-//const tMUXSensor HTAC = msensor_S3_2;
-//const tMUXSensor HTGYRO = msensor_S2_1;			// HiTechnic GYRO sensor
+const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
+const tMUXSensor HTAC = msensor_S3_2;
+const tMUXSensor HTGYRO = msensor_S2_1;	   // HiTechnic GYRO sensor
+const tMUXSensor HTANG = msensor_S3_3;
+const tMUXSensor LEGOLS = msensor_S3_4;
 
 bool gyroTrue = false;
 
@@ -100,9 +102,9 @@ int _x_axis = 0;
 int _y_axis = 0;
 int _z_axis = 0;
 const int target_angle = 110;
-ubyte long accelermoeter_reads = 0;
+ubyte accelermoeter_reads = 0;
 int accelermoeter_array [] = {0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30};
-ubyte long accelermoeter_total_value = 0;
+ubyte accelermoeter_total_value = 0;
 int accelermoeter_average = 0;
 
 //-----------------------------
