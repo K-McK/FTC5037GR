@@ -32,10 +32,10 @@ bool gyroTrue = false;
 #define GRABBER_RIGHT_CLOSE 100
 
 const int BLOCK_SPEED_DOWN = -40;
-const int BLOCK_SPEED_UP = 50;
+const int BLOCK_SPEED_UP = 100;
 
 const int ROBOT_LIFT_DOWN = -40;
-const int ROBOT_LIFT_UP = 90;
+const int ROBOT_LIFT_UP = 100;
 
 const int FLAG_SPEED_DOWN = -90;
 const int FLAG_SPEED_UP = 90;
@@ -145,6 +145,7 @@ string sensor_list [] = {
 #define s_screen_call 13
 #define s_IR_show 14
 #define s_ac_show 15
+#define s_misc_show 16
 
 int screen_state = 1;
 
