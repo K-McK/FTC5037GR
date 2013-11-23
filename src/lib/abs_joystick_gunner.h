@@ -1,6 +1,6 @@
 /**
 *
-*  @file abs_joystick_drive.h
+*  @file abs_joystick_gunner.h
 *
 *  @brief The header file that handles the joystick motor control
 *

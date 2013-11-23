@@ -2,7 +2,9 @@
 *
 *  @file abs_initialize.h
 *
-*  @brief A hedder file that handles the initialization
+*  @brief A hedder file that handles the initialization when we start the game
+*
+*  @param initialize initializes the robot
 *
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *

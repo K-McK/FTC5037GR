@@ -1,23 +1,12 @@
-//=====================================================================================
-//
-//  ***    ***   *****      ****    ***   ****    ***   *****     ***
-// *   *  *   *    *        *   *  *   *  *   *  *   *    *      *   *
-// *      *   *    *        *   *  *   *  *   *  *   *    *          *
-// *  **  *   *    *        ****   *   *  ****   *   *    *         *
-// *   *  *   *    *        * *    *   *  *   *  *   *    *        *
-// *   *  *   *    *        *  *   *   *  *   *  *   *    *
-//  ***    ***     *        *   *   ***   ****    ***     *        *
-//
-//=====================================================================================
-//
-// FTC TEAM 5037
-// Elgin Technlogy Center, Illinois
-// Ring It Up (2012-2013)
-// User Inferface Tasks
-//
-// These tasks (Display, Buttons) run in both Autonomous and Tele-Op modes.  They give the
-// drive team access to multiple configuration and diagnostic screen displays.
-//
+/**
+*
+*  @file abs_smoke_execute
+*
+*  @brief exucutes cammands sent in smoke test
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 
 #ifndef ABS_SMOKE_EXECUTE
 #define ABS_SMOKE_EXECUTE
