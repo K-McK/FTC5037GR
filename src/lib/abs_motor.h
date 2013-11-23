@@ -17,11 +17,11 @@ void abs_motor(e_motor_move move_type, int power)
 {
 	if(move_type == FLAG)
 	{
-		motor[flag_motor] = power;
+		motor[jolly_roger] = power;
 	}
 	else if(move_type == LIFT)
 	{
-		motor[lifter_motor] = power;
+		motor[sky_hook] = power;
 	}
 }
 #endif /* !ABS_MOTOR_H */
