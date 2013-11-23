@@ -4,8 +4,6 @@
 *
 *  @brief  Enter a description of what this function does
 *
-*  @param abs_motor.h allows us to use attachments in auto.c
-*
 *  @copyright Copyright 2013, Got Robot! FTC Team 5037
 */
 #ifndef ABS_MOTOR_H

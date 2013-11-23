@@ -4,8 +4,6 @@
 *
 *  @brief The header file that handles the joystick motor control
 *
-*  @param abs_joystick_drive drive controls for driveing the robot
-*
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
