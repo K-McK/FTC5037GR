@@ -6,6 +6,18 @@
 *
 *  @copyright Copyright 2013, Got Robot! FTC Team 5037
 */
+
+/**
+*
+*  @file abs_drive.h
+*
+*  @brief it allows the robot to drive forword and backwords
+*
+*  @param dir Tells the robot what direction to go
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 #ifndef ABS_DRIVE_H
 #define ABS_DRIVE_H
 
