@@ -18,6 +18,7 @@ void initialize()
 {
 	StartTask(screen);
 	disableDiagnosticsDisplay();
+	servo[abdd] = ABDD_DOWN;
 	selection_program();
 	drift = abs_gyro_cal(gyroCalTime);
 
