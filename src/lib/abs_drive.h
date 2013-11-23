@@ -1,12 +1,8 @@
 /**
 *
-*  @file template.h (this should be the name of the function)
+*  @file abs_drive.h
 *
-*  @brief  Enter a description of what this function does
-*
-*  @param
-*
-*  @return
+*  @brief it allows the robot to drive forword and backwords
 *
 *  @copyright Copyright 2013, Got Robot! FTC Team 5037
 */

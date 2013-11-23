@@ -1,23 +1,12 @@
-//=====================================================================================
-//
-//  ***    ***   *****      ****    ***   ****    ***   *****     ***
-// *   *  *   *    *        *   *  *   *  *   *  *   *    *      *   *
-// *      *   *    *        *   *  *   *  *   *  *   *    *          *
-// *  **  *   *    *        ****   *   *  ****   *   *    *         *
-// *   *  *   *    *        * *    *   *  *   *  *   *    *        *
-// *   *  *   *    *        *  *   *   *  *   *  *   *    *
-//  ***    ***     *        *   *   ***   ****    ***     *        *
-//
-//=====================================================================================
-//
-// FTC TEAM 5037
-// Elgin Technlogy Center, Illinois
-// Ring It Up (2012-2013)
-// User Inferface Tasks
-//
-// These tasks (Display, Buttons) run in both Autonomous and Tele-Op modes.  They give the
-// drive team access to multiple configuration and diagnostic screen displays.
-//
+/**
+ *
+ *  @file abs_screen.h
+ *
+ *  @brief adds a way to put things on the screen
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
 //========================================
 // Screen State
 //========================================

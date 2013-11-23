@@ -1,4 +1,13 @@
-#pragma systemFile								// treat as system file to eliminate warnings for unused variables
+#pragma systemFile // treat as system file to eliminate warnings for unused variables
+/**
+*
+*  @file global_varaibles.h
+*
+*  @brief varaibles that are global
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 //
 //============================================================
 // Define sensor multiplexor connectivity and port allocations

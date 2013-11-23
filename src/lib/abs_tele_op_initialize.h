@@ -1,12 +1,8 @@
 /**
  *
- *  @file template.h (this should be the name of the function)
+ *  @file abs_tele_op_initialize.h
  *
- *  @brief  Enter a description of what this function does
- *
- *  @param
- *
- *  @return
+ *  @brief  dose some important stuff before we do the teleop program
  *
  *  @copyright Copyright 2013, Got Robot! FTC Team 5037
  */
