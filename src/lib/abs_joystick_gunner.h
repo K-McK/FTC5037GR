@@ -28,12 +28,14 @@ task abs_joystick_gunner()
 		//-----------------------------
 		// flag motor control
 		//-----------------------------
+
+		misc = joystick.joy2_TopHat;
 		switch(joystick.joy2_TopHat)
 		{
 		case -1:
 			motor[jolly_roger]= 0;
 			break;
-		case 1:
+		case 0:
 			motor[jolly_roger] = FLAG_SPEED_UP;
 			break;
 		case 4:
@@ -44,8 +46,8 @@ task abs_joystick_gunner()
 		//-----------------------------
 		// roger slide
 		//-----------------------------
-		if(joy1Btn(9)) servo[roger_slide] = 0;
-		else if(joy1Btn(10)) servo[roger_slide] = 255;
+		if(joy2Btn(9)) servo[roger_slide] = 0;
+		else if(joy2Btn(10)) servo[roger_slide] = 255;
 		else servo[roger_slide] = 127;
 
 		//-----------------------------
@@ -72,28 +74,28 @@ task abs_joystick_gunner()
 		switch(grabber_position)
 		{
 		case GRABBER_OPEN:
-			servo[left_grabber] = GRABBER_LEFT_OPEN;
-			servo[right_grabber] = GRABBER_RIGHT_OPEN;
+			servo[grabber_left] = GRABBER_LEFT_OPEN;
+			servo[grabber_right] = GRABBER_RIGHT_OPEN;
 			break;
 		case GRABBER_MID:
-			servo[left_grabber] = GRABBER_LEFT_MID;
-			servo[right_grabber] = GRABBER_RIGHT_MID;
+			servo[grabber_left] = GRABBER_LEFT_MID;
+			servo[grabber_right] = GRABBER_RIGHT_MID;
 			break;
 		case GRABBER_CLOSE:
-			servo[left_grabber] = GRABBER_LEFT_CLOSE;
-			servo[right_grabber] = GRABBER_RIGHT_CLOSE;
+			servo[grabber_left] = GRABBER_LEFT_CLOSE;
+			servo[grabber_right] = GRABBER_RIGHT_CLOSE;
 			break;
 		case GRABBER_POS_LEFT_CLOSE:
-			servo[left_grabber] = GRABBER_LEFT_CLOSE;
+			servo[grabber_left] = GRABBER_LEFT_CLOSE;
 			break;
 		case GRABBER_POS_LEFT_OPEN:
-			servo[left_grabber] = GRABBER_LEFT_OPEN;
+			servo[grabber_left] = GRABBER_LEFT_OPEN;
 			break;
 		case GRABBER_POS_RIGHT_CLOSE:
-			servo[right_grabber] = GRABBER_RIGHT_CLOSE;
+			servo[grabber_right] = GRABBER_RIGHT_CLOSE;
 			break;
 		case GRABBER_POS_RIGHT_OPEN:
-			servo[right_grabber] = GRABBER_RIGHT_OPEN;
+			servo[grabber_right] = GRABBER_RIGHT_OPEN;
 			break;
 		}
 	}

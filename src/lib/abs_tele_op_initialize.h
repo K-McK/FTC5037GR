@@ -19,6 +19,7 @@ if(joystick.joy1_TopHat == -1) Joy1Enabled = true;
 if(joystick.joy2_TopHat == -1) Joy2Enabled = true;
 
 StartTask(screen);
-screen_state = s_ready;
+screen_state = s_misc_show;
+getJoystickSettings(joystick);
 }
 #endif /* !TEMPLATE_H */
