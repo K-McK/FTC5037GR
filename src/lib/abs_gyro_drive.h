@@ -1,6 +1,6 @@
 /**
 *
-*  @file abs_gyro_drive_to.h
+*  @file abs_gyro_drive.h
 *
 *  @brief handles the speed control for the motors based on the gyro
 *
