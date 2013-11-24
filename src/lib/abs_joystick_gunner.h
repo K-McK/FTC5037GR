@@ -4,6 +4,10 @@
 *
 *  @brief The header file that handles the joystick motor control
 *
+*  @param no paramiters
+*
+*  @return Returns nothing
+*
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */

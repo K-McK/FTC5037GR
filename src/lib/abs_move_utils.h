@@ -4,6 +4,10 @@
  *
  *  @brief abunch of things that help move the robot
  *
+ *  @param no paramiters
+ *
+ *  @returns Returns nothing
+ *
  *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
  */

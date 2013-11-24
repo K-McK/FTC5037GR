@@ -4,6 +4,10 @@
 *
 *  @brief The header file that handles the joystick motor control
 *
+*  @param joy_type Tells the robot if it should drive on a linear scale or a parabolic scale
+*
+*  @return Returns nothing
+*
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
