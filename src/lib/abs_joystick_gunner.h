@@ -19,16 +19,8 @@ task abs_joystick_gunner()
 	while(true)
 	{
 		//-----------------------------
-		// robot lift
-		//-----------------------------
-		if(joystick.joy2_y2>10) motor[sky_hook]=ROBOT_LIFT_UP;
-		else if(joystick.joy2_y2<-10)motor[sky_hook]=ROBOT_LIFT_DOWN;
-		else motor[sky_hook] = 0;
-
-		//-----------------------------
 		// flag motor control
 		//-----------------------------
-
 		misc = joystick.joy2_TopHat;
 		switch(joystick.joy2_TopHat)
 		{
@@ -38,6 +30,12 @@ task abs_joystick_gunner()
 		case 0:
 			motor[jolly_roger] = FLAG_SPEED_UP;
 			break;
+		case 2:
+			motor[jolly_roger] = FLAG_SPEED_RIGHT;
+			break;
+		case 6:
+			motor[jolly_roger] = FLAG_SPEED_LEFT;
+			break;
 		case 4:
 			motor[jolly_roger] = FLAG_SPEED_DOWN;
 			break;
@@ -46,9 +44,14 @@ task abs_joystick_gunner()
 		//-----------------------------
 		// roger slide
 		//-----------------------------
-		if(joy2Btn(9)) servo[roger_slide] = 0;
-		else if(joy2Btn(10)) servo[roger_slide] = 255;
+		if(joystick.joy2_y2>10) servo[roger_slide] = 255;
+		else if(joystick.joy2_y2<-10) servo[roger_slide] = 0;
 		else servo[roger_slide] = 127;
+
+		//-----------------------------
+		// robot kill switch
+		//-----------------------------
+		if((joy1Btn(9))&&(joy2Btn(9))&&(joy1Btn(10))&&(joy2Btn(10))) program_done = true;
 
 		//-----------------------------
 		// block lift

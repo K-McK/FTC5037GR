@@ -57,7 +57,7 @@ void abs_smoke_execute ()
 				sensor_value = IR_Bearing;
 				break;
 			case st_tilt:
-				sensor_value = HTANGreadAccumulatedAngle(ANGLE_SENSOR);
+				sensor_value = HTANGreadAccumulatedAngle(HTANG);
 				break;
 			case st_accelerometer:
 				sensor_value = accelermoeter_sensor;
@@ -67,13 +67,13 @@ void abs_smoke_execute ()
 		case 4:
 			if(nNxtButtonPressed == kLeftButton)
 			{
-				motor[lifter_motor] = LIFT_SPEED_DOWN;
-				test_value = LIFT_SPEED_DOWN;
+				motor[sky_hook] = ROBOT_LIFT_DOWN;
+				test_value = ROBOT_LIFT_DOWN;
 			}
 			else if(nNxtButtonPressed == kRightButton)
 			{
-				motor[lifter_motor] = LIFT_SPEED_UP;
-				test_value = LIFT_SPEED_UP;
+				motor[sky_hook] = ROBOT_LIFT_UP;
+				test_value = ROBOT_LIFT_UP;
 			}
 			else test_value = 0;
 			break;
@@ -88,8 +88,8 @@ void abs_smoke_execute ()
 				while(nNxtButtonPressed == kRightButton) {}
 				if(test_value < 255) test_value += 5;
 			}
-			servo[right_servo] = test_value;
-			servo[left_servo] =  255-test_value;
+			servo[grabber_right] = test_value;
+			servo[grabber_left] =  255-test_value;
 			break;
 		}
 	}
