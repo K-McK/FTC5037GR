@@ -2,7 +2,11 @@
 *
 *  @file abs_motor.h
 *
-*  @brief  Enter a description of what this function does
+*  @brief  Allows the robot to move attachments in auto.c
+*
+*  @param move_type lets the robot know what attchment to move
+*
+*  @param power tells the robot how much power it should use on the attachment
 *
 *  @copyright Copyright 2013, Got Robot! FTC Team 5037
 */
