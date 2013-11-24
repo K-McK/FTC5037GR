@@ -49,7 +49,12 @@ const int ROBOT_LIFT_DOWN = -40;
 const int ROBOT_LIFT_UP = 100;
 
 const int FLAG_SPEED_DOWN = -90;
+const int FLAG_SPEED_RIGHT = -20;
 const int FLAG_SPEED_UP = 90;
+const int FLAG_SPEED_LEFT = 20;
+
+const int ABDD_UP = 10;
+const int ABDD_DOWN = 235;
 
 //=========================================================
 // Smoke test varaibles
@@ -67,6 +72,7 @@ int test_value = 0;
 int auto_missions = 4;
 int drive_heading = 0;
 int IR_heading = 5;
+bool program_done = false;
 
 bool Joy1Enabled = false;
 bool Joy2Enabled = false;

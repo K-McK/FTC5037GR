@@ -21,6 +21,13 @@
 void abs_joystick_drive(e_joystick_method joy_type)
 {
 	//-----------------------------
+	// robot lift
+	//-----------------------------
+	if(joy1Btn(4)) motor[sky_hook]=ROBOT_LIFT_UP;
+	else if(joy1Btn(2))motor[sky_hook]=ROBOT_LIFT_DOWN;
+	else motor[sky_hook] = 0;
+
+	//-----------------------------
 	// drive motor controls
 	//-----------------------------
 
@@ -43,8 +50,8 @@ void abs_joystick_drive(e_joystick_method joy_type)
 
 	if(joy1Btn(7))
 	{
-		speed1 = speed1/5;
-		speed2 = speed2/5;
+		speed1 = speed1/6;
+		speed2 = speed2/6;
 	}
 	else if(joy1Btn(5)){}
 	else
