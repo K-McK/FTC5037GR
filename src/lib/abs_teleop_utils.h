@@ -14,6 +14,9 @@
 #ifndef ABS_TELEOP_UTILS_H
 #define ABS_TELEOP_UTILS_H
 
+//@enum e_joystick_method tells the robot if it should drive linear or parabolic
+//@enum e_joystick_method::LINEAR Drive linear
+//@enum e_joystick_method::PARRABOLIC Drive parabolic
 typedef enum
 {
 	LINEAR,
