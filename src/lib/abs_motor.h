@@ -13,15 +13,72 @@
 #ifndef ABS_MOTOR_H
 #define ABS_MOTOR_H
 
-void abs_motor(e_motor_move move_type, int power)
+
+
+void abs_motor(e_motor_move move_type)
 {
-	if(move_type == FLAG)
+	//-----------------------------
+	// flag motor control
+	//-----------------------------
+
+	//switch(joystick.joy2_TopHat)
+	//{
+	//case -1:
+	//	motor[jolly_roger]= 0;
+	//	break;
+	//case 0:
+	//	motor[jolly_roger] = FLAG_SPEED_UP;
+	//	break;
+	//case 2:
+	//	motor[jolly_roger] = FLAG_SPEED_RIGHT;
+	//	break;
+	//case 6:
+	//	motor[jolly_roger] = FLAG_SPEED_LEFT;
+	//	break;
+	//case 4:
+	//	motor[jolly_roger] = FLAG_SPEED_DOWN;
+	//	break;
+	//}
+
+	//-----------------------------
+	// roger slide
+	//-----------------------------
+	if(move_type == ROGGER_SLIDE) servo[roger_slide] = 0;
+
+	//-----------------------------
+	// block lift
+	//-----------------------------
+	//if(move_type == LIFT)
+	//{
+	//	motor[block_lift_motor] = BLOCK_SPEED_UP;
+	//	wait10Msec(50);
+	//	motor[block_lift_motor] = BLOCK_SPEED_DOWN;
+	//}
+
+	//-----------------------------
+	// block grabber
+	//-----------------------------
+	int grabber_position;
+
+	if(move_type == GRABBER) grabber_position = GRABBER_CLOSE;
+
+	switch(grabber_position)
 	{
-		motor[jolly_roger] = power;
+	case GRABBER_CLOSE:
+		servo[grabber_left] = GRABBER_LEFT_CLOSE;
+		servo[grabber_right] = GRABBER_RIGHT_CLOSE;
+		break;
 	}
-	else if(move_type == LIFT)
+
+	//-----------------------------
+	// ABDD
+	//-----------------------------
+	if(move_type == ABDD)
 	{
-		motor[sky_hook] = power;
+		servo[abdd] = ABDD_UP;
+		wait10Msec(70);
+		servo[abdd] = ABDD_DOWN;
 	}
 }
+
 #endif /* !ABS_MOTOR_H */

@@ -43,7 +43,7 @@
 
 #include "lib/global_varaibles.h"
 #include "lib/abs_selection_program.h"
-#include "lib/abs_selection_call.h"
+//#include "lib/abs_selection_call.h"
 #include "lib/abs_screen.h"
 #include "lib/abs_gyro_cal.h"
 #include "lib/math_utils.h"
@@ -78,16 +78,16 @@ task main()
 		abs_drive(FORWARD, E_IR_DETECT, 0, 40, true);
 		abs_drive(FORWARD, E_ANGLE, 200, 40, true);
 		wait1Msec(500);
-		servo[abdd] = ABDD_UP;
+		abs_motor(ABDD);
 		PlayTone(200,20);
 		while(true){}
 		break;
 
 	case 2:
 		abs_drive(FORWARD, E_ANGLE, 15, 50, true);
-		abs_motor(LIFT, 50);
+		//abs_motor(LIFT, 50);
 		wait10Msec(100);
-		abs_motor(FLAG, 50);
+		//abs_motor(FLAG, 50);
 		wait10Msec(100);
 		break;
 
