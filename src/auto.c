@@ -76,7 +76,6 @@ task main()
 
 	case 1:
 		abs_drive(FORWARD, E_IR_DETECT, 0, 40, true);
-		abs_drive(FORWARD, E_ANGLE, 200, 40, true);
 		wait1Msec(500);
 		servo[abdd] = ABDD_UP;
 		PlayTone(200,20);
