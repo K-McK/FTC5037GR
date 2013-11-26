@@ -10,6 +10,8 @@
 *
 *  @param speed Tells the robot how fast to turn
 *
+*  @return Returns nothing
+*
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */

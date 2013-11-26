@@ -4,6 +4,10 @@
  *
  *  @brief utils for teleop
  *
+ *  @param No paramiters
+ *
+ *  @returns returns nothing
+ *
  *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
  */
