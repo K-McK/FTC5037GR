@@ -30,10 +30,10 @@ bool gyroTrue = false;
 #define GRABBER_RIGHT_OPEN 255
 #define GRABBER_LEFT_MID 50
 #define GRABBER_RIGHT_MID 180
-#define GRABBER_LEFT_CLOSE 100
+#define GRABBER_LEFT_CLOSE 180
 #define GRABBER_RIGHT_CLOSE 100
 
-const int BLOCK_SPEED_DOWN = -40;
+const int BLOCK_SPEED_DOWN = -60;
 const int BLOCK_SPEED_UP = 100;
 
 const int ROBOT_LIFT_DOWN = -40;
