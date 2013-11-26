@@ -4,6 +4,10 @@
  *
  *  @brief a collection of math operations
  *
+ *  @param No paramiters
+ *
+ *  @return Returns nothing
+ *
  *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
  */

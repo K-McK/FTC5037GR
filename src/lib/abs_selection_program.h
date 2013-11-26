@@ -4,6 +4,10 @@
 *
 *  @brief A hedder file that handles the begining selection for robot actions
 *
+*  @param No paramiters
+*
+*  @return Returns nothing
+*
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */

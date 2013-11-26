@@ -4,6 +4,10 @@
 *
 *  @brief A hedder file that handles the sensors
 *
+*  @param no paramiters
+*
+*  @return returns nothing
+*
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
