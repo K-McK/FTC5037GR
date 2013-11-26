@@ -1,8 +1,14 @@
 /**
 *
-*  @file abs_gyro_drive_to.h
+*  @file abs_gyro_drive.h
 *
 *  @brief handles the speed control for the motors based on the gyro
+*
+*  @param speed tells the robot how fast to go
+*
+*  @param dir Tells the robot what direction to go
+*
+*  @return Returns nothing
 *
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *

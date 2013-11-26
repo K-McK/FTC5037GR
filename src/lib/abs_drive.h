@@ -1,14 +1,23 @@
 /**
 *
-*  @file template.h (this should be the name of the function)
+*  @file abs_drive.h
 *
-*  @brief  Enter a description of what this function does
+*  @brief it allows the robot to drive forword and backwords
 *
-*  @param
+*  @param dir Tells the robot what direction to go
 *
-*  @return
+*  @param dist_method tells the robot how it should know when to stop
 *
-*  @copyright Copyright 2013, Got Robot! FTC Team 5037
+*  @param dist tells the robot how far to go
+*
+*  @param speed tells the robot how fast to go
+*
+*  @param stop_at_end tells the robot if it should stop when it gets to were it needs to go or not
+*
+*  @return returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
 */
 #ifndef ABS_DRIVE_H
 #define ABS_DRIVE_H

@@ -4,7 +4,7 @@
  *
  *  @brief A header file that allows you to calculate the input comming from the gyro
  *
- *  @param caltime how long does the gyro calibrate for
+ *  @param caltime Tells the robot how long to calibrate the gyro
  *
  *  @return The drift
  *
