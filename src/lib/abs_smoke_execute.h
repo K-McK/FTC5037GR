@@ -1,6 +1,6 @@
 /**
 *
-*  @file abs_smoke_execute
+*  @file abs_smoke_execute.h
 *
 *  @brief exucutes cammands sent in smoke test
 *
