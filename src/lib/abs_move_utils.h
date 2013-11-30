@@ -4,7 +4,7 @@
  *
  *  @brief abunch of things that help move the robot
  *
- *  @param no paramiters
+ *  @param None n/a
  *
  *  @returns Returns nothing
  *

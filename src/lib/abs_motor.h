@@ -8,6 +8,8 @@
 *
 *  @param power tells the robot how much power it should use on the attachment
 *
+*  @return Returns nothing
+*
 *  @copyright Copyright 2013, Got Robot! FTC Team 5037
 */
 #ifndef ABS_MOTOR_H

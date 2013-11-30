@@ -4,7 +4,7 @@
  *
  *  @brief adds a way to put things on the screen
  *
- *  @param no paramiters
+ *  @param None n/a
  *
  *  @return Returns nothing
  *

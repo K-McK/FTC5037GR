@@ -4,9 +4,9 @@
  *
  *  @brief  does some important stuff before we do the teleop program
  *
- *  @param
+ *  @param None n/a
  *
- *  @return
+ *  @return Returns nothing
  *
  *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  */

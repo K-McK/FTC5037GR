@@ -5,7 +5,7 @@
 *
 *  @brief varaibles that are global
 *
-*  @param No paramiters
+*  @param None n/a
 *
 *  @return Returns nothing
 *

@@ -4,7 +4,7 @@
 *
 *  @brief The header file that handles the joystick motor control
 *
-*  @param no paramiters
+*  @param None n/a
 *
 *  @return Returns nothing
 *

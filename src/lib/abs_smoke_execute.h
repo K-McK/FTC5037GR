@@ -4,7 +4,7 @@
 *
 *  @brief exucutes cammands sent in smoke test
 *
-*  @param no paramiters
+*  @param None n/a
 *
 *  @return Returns nothing
 *

@@ -4,7 +4,7 @@
  *
  *  @brief a collection of math operations
  *
- *  @param No paramiters
+ *  @param None n/a
  *
  *  @return Returns nothing
  *
