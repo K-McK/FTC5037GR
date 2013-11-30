@@ -46,13 +46,11 @@ typedef enum
 //@enum e_move_stopping_method::E_ANGLE Drive for a certen amount of degrees
 typedef enum
 {
-	E_TIME,
-	E_DEGREES,
-	E_TILT,
-	E_DISTANCE,
-	E_IR_DETECT,
-	E_ANGLE,
-	E_LIGHT
+ 	E_TILT,
+ 	E_DISTANCE,
+ 	E_IR_DETECT,
+ 	E_ANGLE,
+  E_LIGHT
 } e_move_stopping_method; //will make a method with a tilt sensor(wheel in the middle of the robot
 
 //@enum e_turn_method Tells the robot what type of turn it should do

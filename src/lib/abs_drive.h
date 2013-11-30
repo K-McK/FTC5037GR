@@ -52,7 +52,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
   //------------------------
 	// Light stopping method
 	//------------------------
-	if(dist_method == E_
+
 	//------------------------
 	// time stopping method
 	//------------------------
