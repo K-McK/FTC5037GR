@@ -4,12 +4,19 @@
  *
  *  @brief utils for teleop
  *
+ *  @param No paramiters
+ *
+ *  @returns returns nothing
+ *
  *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
  */
 #ifndef ABS_TELEOP_UTILS_H
 #define ABS_TELEOP_UTILS_H
 
+//@enum e_joystick_method tells the robot if it should drive linear or parabolic
+//@enum e_joystick_method::LINEAR Drive linear
+//@enum e_joystick_method::PARRABOLIC Drive parabolic
 typedef enum
 {
 	LINEAR,

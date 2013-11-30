@@ -1,12 +1,16 @@
 /**
-*
-*  @file abs_screen.h
-*
-*  @brief adds a way to put things on the screen
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
+ *
+ *  @file abs_screen.h
+ *
+ *  @brief adds a way to put things on the screen
+ *
+ *  @param no paramiters
+ *
+ *  @return Returns nothing
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
 //========================================
 // Screen State
 //========================================

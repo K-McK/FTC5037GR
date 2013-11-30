@@ -2,7 +2,7 @@
 *
 *  @file abs_initialize.h
 *
-*  @brief A hedder file that handles the initialization when we start the game
+*  @brief A header file that handles the initialization when we start the game
 *
 *  @param No paramiters
 *
