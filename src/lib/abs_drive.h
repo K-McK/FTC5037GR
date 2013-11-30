@@ -49,7 +49,10 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		motor(right_motor)=-speed;
 		motor(left_motor)=-speed;
 	}
-
+  //------------------------
+	// Light stopping method
+	//------------------------
+	if(dist_method == E_
 	//------------------------
 	// time stopping method
 	//------------------------

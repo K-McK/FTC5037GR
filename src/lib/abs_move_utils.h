@@ -51,7 +51,8 @@ typedef enum
 	E_TILT,
 	E_DISTANCE,
 	E_IR_DETECT,
-	E_ANGLE
+	E_ANGLE,
+	E_LIGHT
 } e_move_stopping_method; //will make a method with a tilt sensor(wheel in the middle of the robot
 
 //@enum e_turn_method Tells the robot what type of turn it should do
@@ -84,7 +85,6 @@ typedef enum
 	GRABBER,
 	ROGGER_SLIDE
 } e_motor_move;
-
 #define distance_to_angle_derees(X) (X*360/ANGLE_SENSOR_CIRCUMFERENCE)
 #define distance_to_encoder_derees(X) (X*360/DRIVE_WHEELS_CIRCUMFERENCE)
 #endif /* !ABS_TURN_UTILS */
