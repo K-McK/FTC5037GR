@@ -49,7 +49,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		motor(right_motor)=-speed;
 		motor(left_motor)=-speed;
 	}
-  //------------------------
+	//------------------------
 	// Light stopping method
 	//------------------------
 
@@ -100,7 +100,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else if(dist_method == E_IR_DETECT2)
 	{
-			if(dir == FORWARD)
+		if(dir == FORWARD)
 		{
 			while(IR_Bearing2 > dist)
 			{
@@ -114,36 +114,37 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				abs_gyro_drive(speed,dir);
 			}
 		}
-	//------------------------
-	// accelermeoter sensor stopping method
-	//------------------------
-	else if(dist_method == E_TILT)
-	{
-		int j = 0;
-		sensor_reference_drive = true;
-		while(j<30)
+	}
+		//------------------------
+		// accelermeoter sensor stopping method
+		//------------------------
+		else if(dist_method == E_TILT)
 		{
-			abs_gyro_drive(speed,dir);
-			if(accelermoeter_average > dist) j++;
+			int j = 0;
+			sensor_reference_drive = true;
+			while(j<30)
+			{
+				abs_gyro_drive(speed,dir);
+				if(accelermoeter_average > dist) j++;
+			}
+			sensor_reference_drive = false;
 		}
-		sensor_reference_drive = false;
-	}
-	//------------------------
-	// angle sensor stopping method
-	//------------------------
-	else
-	{
-		HTANGresetAccumulatedAngle(angle_sensor);
-		while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (dist*18))
+		//------------------------
+		// angle sensor stopping method
+		//------------------------
+		else
 		{
-			//abs_gyro_drive(speed,dir);
+			HTANGresetAccumulatedAngle(angle_sensor);
+			while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (dist*18))
+			{
+				//abs_gyro_drive(speed,dir);
+			}
+		}
+		if(stop_at_end)
+		{
+			motor[left_motor] = 0;
+			motor[right_motor] = 0;
 		}
 	}
-	if(stop_at_end)
-	{
-		motor[left_motor] = 0;
-		motor[right_motor] = 0;
-	}
-}
 
 #endif /* !ABS_DRIVE_H */

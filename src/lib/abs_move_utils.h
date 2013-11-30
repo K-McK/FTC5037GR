@@ -47,7 +47,9 @@ typedef enum
 typedef enum
 {
  	E_TILT,
+ 	E_TIME,
  	E_DISTANCE,
+ 	E_DEGREES,
  	E_IR_DETECT,
  	E_IR_DETECT2,
  	E_ANGLE,
