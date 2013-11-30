@@ -30,8 +30,8 @@ task screen ()
 		case s_mission:
 			nxtDisplayBigTextLine(1, "Misson ","2%d", mission_number);
 			//nxtDisplayBigTextLine(3, "%2d", mission_number);
-			nxtDisplayBigTextLine(3, MissionNames2[mission_number]);
-			nxtDisplayBigTextLine(5, MissionNames1[mission_number]);
+			nxtDisplayBigTextLine(3, MissionNames1[mission_number]);
+			nxtDisplayBigTextLine(5, MissionNames2[mission_number]);
 			break;
 		case s_start_delay:
 			nxtDisplayBigTextLine(1, "Delay");
@@ -65,7 +65,7 @@ task screen ()
 			break;
 		case s_IR_show:
 			nxtDisplayBigTextLine(1, "IR Value");
-			nxtDisplayBigTextLine(3, "%2d", IR_Bearing);
+			nxtDisplayBigTextLine(3, "%2d", HTANGreadAccumulatedAngle(angle_sensor));
 			nxtDisplayBigTextLine(5, MissionNames1[0]);
 			break;
 		case s_ac_show:
@@ -102,6 +102,17 @@ task screen ()
 			nxtDisplayBigTextLine(1, "misc Value");
 			nxtDisplayBigTextLine(3, "%2d", misc);
 			nxtDisplayBigTextLine(5, MissionNames1[0]);
+			break;
+		case s_starting_point:
+			nxtDisplayBigTextLine(1, "startPnt");
+			nxtDisplayBigTextLine(3, StartingNames1[start_point]);
+			nxtDisplayBigTextLine(5, StartingNames2[start_point]);
+			break;
+			case s_ending_point:
+			nxtDisplayBigTextLine(1, "endPoint");
+			nxtDisplayBigTextLine(3, EndingNames1[end_point]);
+			nxtDisplayBigTextLine(5, EndingNames2[end_point]);
+			break;
 		}
 	}
 }
