@@ -75,6 +75,9 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			abs_gyro_drive(speed,dir);
 		}
 	}
+	//------------------------
+	// IR stopping method
+	//------------------------
 	else if(dist_method == E_IR_DETECT)
 	{
 		if(dir == FORWARD)
@@ -92,6 +95,25 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			}
 		}
 	}
+	//------------------------
+	// IR stopping method 2
+	//------------------------
+	else if(dist_method == E_IR_DETECT2)
+	{
+			if(dir == FORWARD)
+		{
+			while(IR_Bearing2 > dist)
+			{
+				abs_gyro_drive(speed,dir);
+			}
+		}
+		else
+		{
+			while(IR_Bearing2 < dist)
+			{
+				abs_gyro_drive(speed,dir);
+			}
+		}
 	//------------------------
 	// accelermeoter sensor stopping method
 	//------------------------
