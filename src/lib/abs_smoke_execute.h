@@ -1,10 +1,10 @@
 /**
 *
-*  @file abs_smoke_execute
+*  @file abs_smoke_execute.h
 *
 *  @brief exucutes cammands sent in smoke test
 *
-*  @param no paramiters
+*  @param None n/a
 *
 *  @return Returns nothing
 *

@@ -4,7 +4,7 @@
  *
  *  @brief utils for teleop
  *
- *  @param No paramiters
+ *  @param None n/a
  *
  *  @returns returns nothing
  *
