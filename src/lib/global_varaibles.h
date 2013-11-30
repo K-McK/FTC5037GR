@@ -19,7 +19,8 @@
 const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S3_2;
 const tMUXSensor HTGYRO = msensor_S2_1;	   // HiTechnic GYRO sensor
-const tMUXSensor HTANG = msensor_S3_3;
+const tMUXSensor HTIRS2_2 = msensor_S3_3;     // HiTechnic Infrared sensor 2
+//const tMUXSensor HTANG = msensor_S3_3;
 const tMUXSensor LEGOLS = msensor_S3_4;
 
 bool gyroTrue = false;
@@ -33,18 +34,14 @@ bool gyroTrue = false;
 #define GRABBER_OPEN 1
 #define GRABBER_MID 2
 #define GRABBER_CLOSE 3
-#define GRABBER_POS_RIGHT_CLOSE 4
-#define GRABBER_POS_RIGHT_OPEN 5
-#define GRABBER_POS_LEFT_CLOSE 6
-#define GRABBER_POS_LEFT_OPEN 7
 
 
-#define GRABBER_LEFT_OPEN 0
-#define GRABBER_RIGHT_OPEN 255
-#define GRABBER_LEFT_MID 50
+#define GRABBER_LEFT_OPEN 3
+#define GRABBER_RIGHT_OPEN 245
+#define GRABBER_LEFT_MID 60
 #define GRABBER_RIGHT_MID 180
-#define GRABBER_LEFT_CLOSE 180
-#define GRABBER_RIGHT_CLOSE 100
+#define GRABBER_LEFT_CLOSE 120
+#define GRABBER_RIGHT_CLOSE 131
 
 const int BLOCK_SPEED_DOWN = -60;
 const int BLOCK_SPEED_UP = 100;
@@ -52,13 +49,22 @@ const int BLOCK_SPEED_UP = 100;
 const int ROBOT_LIFT_DOWN = -40;
 const int ROBOT_LIFT_UP = 100;
 
-const int FLAG_SPEED_DOWN = -90;
-const int FLAG_SPEED_RIGHT = -20;
-const int FLAG_SPEED_UP = 90;
-const int FLAG_SPEED_LEFT = 20;
+const int FLAG_SPEED_DOWN = 90;
+const int FLAG_SPEED_RIGHT = 20;
+const int FLAG_SPEED_UP = -90;
+const int FLAG_SPEED_LEFT = -20;
 
 const int ABDD_UP = 10;
 const int ABDD_DOWN = 235;
+
+//=========================================================
+// auto movements
+//=========================================================
+int to_turn_dist = 0;
+const int crate1_to_turn_dist = 0;
+const int crate2_to_turn_dist = 0;
+const int crate3_to_turn_dist = 0;
+const int crate4_to_turn_dist = 40;
 
 //=========================================================
 // Smoke test varaibles
@@ -73,7 +79,10 @@ int test_value = 0;
 // Misc
 //=========================================================
 
-int auto_missions = 4;
+int auto_ending_points = 4;
+int travel_dist = 0;
+int auto_starting_points = 4;
+int auto_missions = 10;
 int drive_heading = 0;
 int IR_heading = 5;
 bool program_done = false;
@@ -86,6 +95,8 @@ int selection_value = 0;
 //=============================================================
 // Define user configurable parameters
 //=============================================================
+int end_point = 1;
+int start_point = 1;
 int mission_number = 1;
 int start_delay = 0;
 int gyroCalTime = 5;
@@ -108,10 +119,15 @@ int recont_heading = 0; //this is the recalculated const gyro heading
 //=============================================================
 const int ac_time_limit = 200;
 int bearingAC = 0;
+int bearingAC2 = 0;
 float IR_Bearing = 0.0;
+float IR_Bearing2 = 0.0;
 int acS[5];
+int acS2[5];
 float currDir = 0.0;
+float currDir2 = 0.0;
 int misc = 0;
+bool reset_angle = false;
 
 //-----------------------------
 // accelermoeter variables
@@ -167,6 +183,8 @@ string sensor_list [] = {
 #define s_IR_show 14
 #define s_ac_show 15
 #define s_misc_show 16
+#define s_starting_point 17
+#define s_ending_point 18
 
 int screen_state = 1;
 
@@ -183,15 +201,127 @@ int screen_state = 1;
 int error = 0;
 
 //==============================================================================
+// Define the text to be displayed for each starting point line 1
+//==============================================================================
+string StartingNames1 [] = {
+	"        ",
+	"S1      ",
+	"Test 2  ",
+	"Test 3  ",
+	"Test 4  ",
+	"Test 5  ",
+	"Test 6  ",
+	"Test 7  ",
+	"Test 8  ",
+	"Test 9  ",
+	"Test 10 ",
+	"Test 11 ",
+	"Test 12 ",
+	"Test 13 ",
+	"Test 14 ",
+	"Test 15 ",
+	"Test 16 ",
+	"Test 17 ",
+	"Test 18 ",
+	"Test 19 ",
+	"Test 20 ",
+	"Test 21 ",
+	"Test 22 "};
+
+//==============================================================================
+// Define the text to be displayed for each starting point line 2
+//==============================================================================
+string StartingNames2 [] = {
+	"        ",
+	"        ",
+	"Test 2  ",
+	"Test 3  ",
+	"Test 4  ",
+	"Test 5  ",
+	"Test 6  ",
+	"Test 7  ",
+	"Test 8  ",
+	"Test 9  ",
+	"Test 10 ",
+	"Test 11 ",
+	"Test 12 ",
+	"Test 13 ",
+	"Test 14 ",
+	"Test 15 ",
+	"Test 16 ",
+	"Test 17 ",
+	"Test 18 ",
+	"Test 19 ",
+	"Test 20 ",
+	"Test 21 ",
+	"Test 22 "};
+
+//==============================================================================
+// Define the text to be displayed for each ending point line 1
+//==============================================================================
+string EndingNames1 [] = {
+	"        ",
+	"Stop    ",
+	"Ramp    ",
+	"Test 3  ",
+	"Test 4  ",
+	"Test 5  ",
+	"Test 6  ",
+	"Test 7  ",
+	"Test 8  ",
+	"Test 9  ",
+	"Test 10 ",
+	"Test 11 ",
+	"Test 12 ",
+	"Test 13 ",
+	"Test 14 ",
+	"Test 15 ",
+	"Test 16 ",
+	"Test 17 ",
+	"Test 18 ",
+	"Test 19 ",
+	"Test 20 ",
+	"Test 21 ",
+	"Test 22 "};
+
+//==============================================================================
+// Define the text to be displayed for each ending point line 2
+//==============================================================================
+string EndingNames2 [] = {
+	"        ",
+	"        ",
+	"        ",
+	"Test 3  ",
+	"Test 4  ",
+	"Test 5  ",
+	"Test 6  ",
+	"Test 7  ",
+	"Test 8  ",
+	"Test 9  ",
+	"Test 10 ",
+	"Test 11 ",
+	"Test 12 ",
+	"Test 13 ",
+	"Test 14 ",
+	"Test 15 ",
+	"Test 16 ",
+	"Test 17 ",
+	"Test 18 ",
+	"Test 19 ",
+	"Test 20 ",
+	"Test 21 ",
+	"Test 22 "};
+
+//==============================================================================
 // Define the text to be displayed for each mission
 //==============================================================================
 string MissionNames1 [] = {
 	"        ",
-	"IR test ",
-	"Test 2 ",
-	"Test 3  ",
-	"Test 4  ",
-	"Test 5  ",
+	"IR crate",
+	"crate 4 ",
+	"crate 3 ",
+	"crate 2 ",
+	"crate 1 ",
 	"Test 6  ",
 	"Test 7  ",
 	"Test 8  ",
@@ -215,8 +345,8 @@ string MissionNames1 [] = {
 //==============================================================================
 string MissionNames2 [] = {
 	"        ",
-	"IR test ",
-	"Motor Test  ",
+	"Test 1  ",
+	"Test 2  ",
 	"Test 3  ",
 	"Test 4  ",
 	"Test 5  ",
@@ -299,10 +429,10 @@ string smoke_test1 [] = {
 	"Jolly   ",
 	"Drive   ",
 	"Sensor  ",
-	"Lift    ",
-	"Servos  ",
-	"Test 6  ",
-	"Test 7  ",
+	"Block   ",
+	"Grabbers",
+	"sky hook",
+	"roger   ",
 	"Test 8  ",
 	"Test 9  ",
 	"Test 10 ",
@@ -327,10 +457,10 @@ string smoke_test2 [] = {
 	"Roger   ",
 	"Train   ",
 	"Sensor  ",
+	"Lift    ",
 	"        ",
-	"Test 5  ",
-	"Test 6  ",
-	"Test 7  ",
+	"        ",
+	"slide   ",
 	"Test 8  ",
 	"Test 9  ",
 	"Test 10 ",

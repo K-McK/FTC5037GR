@@ -22,7 +22,10 @@ void initialize()
 {
 	StartTask(screen);
 	disableDiagnosticsDisplay();
+	servoChangeRate[abdd] = 3;
 	servo[abdd] = ABDD_DOWN;
+	servo[grabber_left] = GRABBER_LEFT_CLOSE;
+	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
 	selection_program();
 	drift = abs_gyro_cal(gyroCalTime);
 
@@ -44,6 +47,7 @@ void initialize()
 
 	screen_state = s_ready;
 	StartTask(abs_sensors_read);
+	HTANGresetAccumulatedAngle(angle_sensor);
 
 	waitForStart();
 	eraseDisplay();
@@ -51,7 +55,7 @@ void initialize()
 	screen_state = s_delay_wait;
 	wait1Msec(start_delay*1000);
 	eraseDisplay();
-	screen_state = s_ac_show;
+	screen_state = s_gyro_show;
 }
 
 #endif /* !ABS_INITIALIZE_H */
