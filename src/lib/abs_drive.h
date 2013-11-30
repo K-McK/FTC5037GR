@@ -74,9 +74,19 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	}
 	else if(dist_method == E_IR_DETECT)
 	{
-		while(IR_Bearing > dist)
+		if(dir == FORWARD)
 		{
-			abs_gyro_drive(speed,dir);
+			while(IR_Bearing > dist)
+			{
+				abs_gyro_drive(speed,dir);
+			}
+		}
+		else
+		{
+			while(IR_Bearing < dist)
+			{
+				abs_gyro_drive(speed,dir);
+			}
 		}
 	}
 	//------------------------
@@ -98,10 +108,10 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else
 	{
-		SensorValue(HTANG)=0;
-		while(abs(HTANGreadAccumulatedAngle(HTANG)) < distance_to_angle_derees(dist))
+		HTANGresetAccumulatedAngle(angle_sensor);
+		while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (dist*18))
 		{
-			abs_gyro_drive(speed,dir);
+			//abs_gyro_drive(speed,dir);
 		}
 	}
 	if(stop_at_end)

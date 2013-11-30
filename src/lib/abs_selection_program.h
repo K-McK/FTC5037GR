@@ -18,6 +18,32 @@ void selection_program()
 {
 	while(nNxtButtonPressed == kEnterButton){}
 
+	screen_state = s_starting_point;
+	//---------------------------------------
+	// Start point selection
+	//---------------------------------------
+
+	while(nNxtButtonPressed != kEnterButton)
+	{
+		if(nNxtButtonPressed == kRightButton)
+		{
+			PlaySoundFile("! Click.rso");
+			while(nNxtButtonPressed == kRightButton){}
+			if(start_point < auto_starting_points) start_point++;
+			else start_point = auto_starting_points;
+		}
+		if(nNxtButtonPressed == kLeftButton)
+		{
+			PlaySoundFile("! Click.rso");
+			while(nNxtButtonPressed == kLeftButton){}
+			if(start_point > 0) start_point--;
+			else start_point = 0;
+		}
+	}
+	PlaySoundFile("! Click.rso");
+	while(nNxtButtonPressed == kEnterButton){}
+	eraseDisplay();
+
 	screen_state = s_mission;
 	//---------------------------------------
 	// Start of mission selection
@@ -43,6 +69,33 @@ void selection_program()
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
 	eraseDisplay();
+
+	screen_state = s_ending_point;
+	//---------------------------------------
+	// Start of end point selection
+	//---------------------------------------
+
+	while(nNxtButtonPressed != kEnterButton)
+	{
+		if(nNxtButtonPressed == kRightButton)
+		{
+			PlaySoundFile("! Click.rso");
+			while(nNxtButtonPressed == kRightButton){}
+			if(end_point < auto_ending_points) end_point++;
+			else end_point = auto_ending_points;
+		}
+		if(nNxtButtonPressed == kLeftButton)
+		{
+			PlaySoundFile("! Click.rso");
+			while(nNxtButtonPressed == kLeftButton){}
+			if(end_point > 0) end_point--;
+			else end_point = 0;
+		}
+	}
+	PlaySoundFile("! Click.rso");
+	while(nNxtButtonPressed == kEnterButton){}
+	eraseDisplay();
+
 	//---------------------------------------
 	// Start of time selection
 	//---------------------------------------

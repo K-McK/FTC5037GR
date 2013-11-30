@@ -1,7 +1,7 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  HTServo)
-#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     GYRO_MUX,       sensorI2CCustom)
 #pragma config(Sensor, S3,     SENSOR_MUX,     sensorI2CCustom)
+#pragma config(Sensor, S4,     angle_sensor,   sensorI2CCustom)
 #pragma config(Motor,  mtr_S1_C1_1,     block_lift_motor, tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     sky_hook,      tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C2_1,     jolly_roger,   tmotorTetrix, openLoop)
@@ -43,7 +43,6 @@
 #include "lib/math_utils.h"
 #include "lib/abs_sensors.h"
 #include "lib/abs_smoke_execute.h"
-
 
 //==================================
 // main program

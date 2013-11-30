@@ -59,6 +59,47 @@ task abs_sensors_read ()
 			//nxtDisplayBigTextLine(3, "%2d", IR_Bearing);
 		}
 		//-------------------------
+		// HiTechnic IR Sensor 2
+		//-------------------------
+		bearingAC2 = HTIRS2readACDir(HTIRS2_2);				// Read the IR bearing from the sensor
+		currDir2 = (float) bearingAC2;
+
+		HTIRS2readAllACStrength(HTIRS2_2, acS2[0], acS2[1], acS2[2], acS2[3], acS2[4]);
+		//-----------------------------------
+		// code for the peaks of IR sensor 2
+		//-----------------------------------
+		if (bearingAC2!=0)								// we have a valid IR signal
+		{
+			int maximum = -1;
+			int peak = 0, offset=0;
+			for (int i=0;i<5;i++)	// scan array to find the peak entry
+			{	if (acS2[i]>maximum)
+				{
+					peak = i;
+					maximum = acS2[i];
+				}
+			}
+			offset=0;
+			if ((peak < 4) && (peak>0) && (acS2[peak] != 0))  // we are not working with extreme value
+			{
+				if (acS2[peak-1]!=acS2[peak+1]) // if the values either side of the peak are identical then peak is peak
+				{
+					if (acS2[peak-1]>acS2[peak+1])	// otherwise decide which side has higher signal
+					{
+						offset = -25*(1-(float)(acS2[peak]-acS2[peak-1])/		// calculate the bias away from the peak
+						max(acS2[peak], acS2[peak-1]));
+					}
+					else
+					{
+						offset = 25*(1-(float)(acS2[peak]-acS2[peak+1])/
+						max(acS2[peak], acS2[peak+1]));
+					}
+				}
+			}
+			IR_Bearing2 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
+			//nxtDisplayBigTextLine(3, "%2d", IR_Bearing);
+		}
+		//-------------------------
 		// HiTechnic Gyro
 		//-------------------------
 
@@ -95,5 +136,10 @@ task abs_sensors_read ()
 			accelermoeter_average = 0;
 			memset(accelermoeter_array,0,30);
 		}
+		//-------------------------
+		// HiTechnic angle sensor
+		//-------------------------
+		//if(reset_angle == true) HTANGresetAccumulatedAngle(HTANG);
+		//else angle_sensor = HTANGreadAccumulatedAngle(HTANG);
 	}
 }
