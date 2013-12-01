@@ -2,7 +2,7 @@
 *
 *  @file abs_sensors.h
 *
-*  @brief A hedder file that handles the sensors
+*  @brief A header file that handles the sensors
 *
 *  @param None n/a
 *
@@ -111,6 +111,10 @@ task abs_sensors_read ()
 		rawgyro = HTGYROreadRot(HTGYRO);
 		constHeading += (rawgyro - drift) * (float)(currtime-prevtime)/1000;
 		relHeading += (rawgyro - drift) * (float)(currtime-prevtime)/1000;
+		//constHeading += (rawgyro - (drift * (float)(currtime-prevtime)/1000));
+		//relHeading += (rawgyro - (drift * (float)(currtime-prevtime)/1000));
+		//constHeading = (rawgyro - (drift * (float)(currtime-prevtime)/1000));
+		//relHeading = (rawgyro - (drift * (float)(currtime-prevtime)/1000));
 		prevtime = currtime;
 
 		recont_heading = constHeading % 360;

@@ -73,14 +73,16 @@ const int FLAG_SPEED_LEFT = -20;
 const int ABDD_UP = 10;
 const int ABDD_DOWN = 235;
 
+const int g_GYRO_ADJUST = 10;
+
 //=========================================================
 // auto movements
 //=========================================================
 int to_turn_dist = 0;
-const int crate1_to_turn_dist = 0;
-const int crate2_to_turn_dist = 0;
-const int crate3_to_turn_dist = 0;
-const int crate4_to_turn_dist = 40;
+const int crate1_to_turn_dist = 135;
+const int crate2_to_turn_dist = 110;
+const int crate3_to_turn_dist = 60;
+const int crate4_to_turn_dist = 35;
 
 //=========================================================
 // Smoke test varaibles
@@ -262,26 +264,26 @@ int screen_state = 1;
 //==============================================================
 /**
 *
-*  @def e_none
+*  @def err_none
 *     Tells the robot that theres no error
-*  @def e_gyro_cal
+*  @def err_gyro_cal
 *     Tells the robot that theres a error with the gyro calibrate
-*  @def e_gyro_mux
+*  @def err_gyro_mux
 *     Tells the robot that theres a error with the gyro mux
-*  @def e_sensor_mux
+*  @def err_sensor_mux
 *     Tells the robot that theres a error with the sensor mux
-*  @def e_joysticks
+*  @def err_joysticks
 *     Tells the robot that theres a error with the joysticks
-*  @def e_accelermoeter
+*  @def err_accelermoeter
 *     Tells the robot that theres a error with the accelermoeter
 *
 */
-#define e_none 0
-#define e_gyro_cal 1
-#define e_gyro_mux 2
-#define e_sensor_mux 3
-#define e_joysticks 4
-#define e_accelermoeter 5
+#define err_none 0
+#define err_gyro_cal 1
+#define err_gyro_mux 2
+#define err_sensor_mux 3
+#define err_joysticks 4
+#define err_accelermoeter 5
 
 int error = 0;
 
@@ -347,8 +349,8 @@ string StartingNames2 [] = {
 string EndingNames1 [] = {
 	"        ",
 	"Stop    ",
-	"Ramp    ",
-	"Test 3  ",
+	"Ramp 1  ",
+	"Ramp 2  ",
 	"Test 4  ",
 	"Test 5  ",
 	"Test 6  ",

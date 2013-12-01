@@ -12,8 +12,8 @@
 *
 */
 
-#ifndef ABS_SMOKE_EXECUTE
-#define ABS_SMOKE_EXECUTE
+#ifndef ABS_SMOKE_EXECUTE_H
+#define ABS_SMOKE_EXECUTE_H
 
 void abs_smoke_execute ()
 {

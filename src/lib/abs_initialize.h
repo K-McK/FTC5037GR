@@ -23,16 +23,17 @@ void initialize()
 	StartTask(screen);
 	disableDiagnosticsDisplay();
 	servoChangeRate[abdd] = 3;
+	servo[roger_slide] = 127;
 	servo[abdd] = ABDD_DOWN;
 	servo[grabber_left] = GRABBER_LEFT_CLOSE;
 	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
 	selection_program();
 	drift = abs_gyro_cal(gyroCalTime);
 
-	if (!HTACreadAllAxes(HTAC, _x_axis, _y_axis, _z_axis)) error = e_accelermoeter;
-	if (gyro_noise>10) error = e_gyro_cal;
-	if(HTSMUXreadPowerStatus(SENSOR_MUX)) error = e_sensor_mux;
-	if(HTSMUXreadPowerStatus(GYRO_MUX)) error = e_gyro_mux;
+	if (!HTACreadAllAxes(HTAC, _x_axis, _y_axis, _z_axis)) error = err_accelermoeter;
+	if (gyro_noise>10) error = err_gyro_cal;
+	if(HTSMUXreadPowerStatus(SENSOR_MUX)) error = err_sensor_mux;
+	if(HTSMUXreadPowerStatus(GYRO_MUX)) error = err_gyro_mux;
 
 	if(error != 0)
 	{
