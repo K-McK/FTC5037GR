@@ -17,31 +17,31 @@
 /** macros */
 
 /**
- * @def gyro_degrees(X)(X)
+ * @def gyro_degrees(X)
  *      converts gyro value @a X to degrees
  */
 #define gyro_degrees(X)(X)
 
 /**
- * @def product(X, Y) ((X) * (Y)
+ * @def product(X, Y)
  *      computes the product of @a X and @a Y
  */
-#define product(X, Y) ((X) * (Y)
+#define product(X, Y) ((X) * (Y))
 
 /**
- * @def sum(X, Y) ((X) + (Y)
+ * @def sum(X, Y)
  *      computes the sum of @a X and @a Y
  */
 #define sum(X, Y) ((X) + (Y))
 
 /**
- * @def min(X, Y) ((X) < (Y) ? (X) : (Y))
+ * @def min(X, Y)
  *      computes the minimum of @a X and @a Y
  */
 #define min(X, Y) ((X) < (Y) ? (X) : (Y))
 
 /**
- * @def max(X, Y) ((X) > (Y) ? (X) : (Y))
+ * @def max(X, Y)
  *      computes the maximum of @a X and @a Y
  */
 #define max(X, Y) ((X) > (Y) ? (X) : (Y))
