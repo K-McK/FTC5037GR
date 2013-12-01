@@ -54,21 +54,21 @@ typedef enum
 /**
  *  @enum e_move_stopping_method Tells the robot what direction to drive
  *  @var e_move_stopping_method::E_TIME
- *     Drive for a set amount of time
+ *     Drive for a set amount of time spesified in dist
  *  @var e_move_stopping_method::E_DEGREES
- *     Drive for a certain amount of degrees
+ *     Drive for a certain amount of degrees spesified in dist
  *  @var e_move_stopping_method::E_TILT
- *     Drive until the robot tilts a certen amount
+ *     Drive until the robot tilts a certen amount spesified in dist
  *  @var e_move_stopping_method::E_DISTANCE
- *     Drive a certain amount of centameters
+ *     Drive a certain amount of centameters spesified in dist
  *  @var e_move_stopping_method::E_IR_DETECT
- *     Drive until the robot detects the IR becon using the first IR sensor
+ *     Drive until the robot detects the IR becon using the first IR sensor spesified in dist
  *  @var e_move_stopping_method::E_IR_DETECT2
- *     Drive until the robot detects the IR becon using the second IR sensor
+ *     Drive until the robot detects the IR becon using the second IR sensor spesified in dist
  *  @var e_move_stopping_method::E_ANGLE
- *     Drive for a certain amount of degrees
+ *     Drive for a certain amount of degrees spesified in dist
  *  @var e_move_stopping_method::E_LIGHT
- *     Drive until the light sensor detects the lighting condition specified
+ *     Drive until the light sensor detects the lighting condition specified in dist
  */
 typedef enum
 {
@@ -79,7 +79,7 @@ typedef enum
  	E_IR_DETECT,
  	E_IR_DETECT2,
  	E_ANGLE,
-  	E_LIGHT
+  E_LIGHT
 } e_move_stopping_method; //will make a method with a tilt sensor(wheel in the middle of the robot
 
 /**
