@@ -57,14 +57,16 @@ const int FLAG_SPEED_LEFT = -20;
 const int ABDD_UP = 10;
 const int ABDD_DOWN = 235;
 
+const int g_GYRO_ADJUST = 10;
+
 //=========================================================
 // auto movements
 //=========================================================
 int to_turn_dist = 0;
-const int crate1_to_turn_dist = 0;
-const int crate2_to_turn_dist = 0;
-const int crate3_to_turn_dist = 0;
-const int crate4_to_turn_dist = 40;
+const int crate1_to_turn_dist = 135;
+const int crate2_to_turn_dist = 110;
+const int crate3_to_turn_dist = 60;
+const int crate4_to_turn_dist = 35;
 
 //=========================================================
 // Smoke test varaibles
@@ -191,12 +193,12 @@ int screen_state = 1;
 //==============================================================
 // Define error numbers
 //==============================================================
-#define e_none 0
-#define e_gyro_cal 1
-#define e_gyro_mux 2
-#define e_sensor_mux 3
-#define e_joysticks 4
-#define e_accelermoeter 5
+#define err_none 0
+#define err_gyro_cal 1
+#define err_gyro_mux 2
+#define err_sensor_mux 3
+#define err_joysticks 4
+#define err_accelermoeter 5
 
 int error = 0;
 
@@ -262,8 +264,8 @@ string StartingNames2 [] = {
 string EndingNames1 [] = {
 	"        ",
 	"Stop    ",
-	"Ramp    ",
-	"Test 3  ",
+	"Ramp 1  ",
+	"Ramp 2  ",
 	"Test 4  ",
 	"Test 5  ",
 	"Test 6  ",

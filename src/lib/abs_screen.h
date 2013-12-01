@@ -61,7 +61,7 @@ task screen ()
 		case s_gyro_show:
 			nxtDisplayBigTextLine(1, "GyroValue");
 			nxtDisplayBigTextLine(3, "%2d", constHeading);
-			nxtDisplayBigTextLine(5, MissionNames1[0]);
+			nxtDisplayBigTextLine(5, "%2d", relHeading);
 			break;
 		case s_IR_show:
 			nxtDisplayBigTextLine(1, "IR Value");

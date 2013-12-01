@@ -84,12 +84,13 @@ task main()
 			servo[abdd] = ABDD_UP;
 			wait1Msec(2000);
 			servo[abdd] = ABDD_DOWN;
-			wait1Msec(2000);
 			break;
 
 		case 2:
+			screen_state = s_gyro_show;
 			to_turn_dist= crate4_to_turn_dist;
 			abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true);
+			wait1Msec(2000);
 			servo[abdd] = ABDD_UP;
 			wait1Msec(2000);
 			servo[abdd] = ABDD_DOWN;
@@ -101,8 +102,6 @@ task main()
 			servo[abdd] = ABDD_UP;
 			wait1Msec(2000);
 			servo[abdd] = ABDD_DOWN;
-			wait1Msec(2000);
-
 			break;
 
 		case 4:
@@ -111,8 +110,6 @@ task main()
 			servo[abdd] = ABDD_UP;
 			wait1Msec(2000);
 			servo[abdd] = ABDD_DOWN;
-			wait1Msec(2000);
-
 			break;
 
 		case 5:
@@ -121,8 +118,11 @@ task main()
 			servo[abdd] = ABDD_UP;
 			wait1Msec(2000);
 			servo[abdd] = ABDD_DOWN;
-			wait1Msec(2000);
+			break;
 
+		case 6:
+			screen_state = s_gyro_show;
+			while(true){}
 			break;
 
 		case 140:
@@ -148,6 +148,8 @@ task main()
 	switch(end_point)
 	{
 	case 1:
+		wait1Msec(2000);
+		servo[abdd] = ABDD_DOWN;
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
 		motor[sky_hook] = 0;
@@ -155,9 +157,18 @@ task main()
 		break;
 	case 2:
 		wait1Msec(2000);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/to_turn_dist, 50, true);
-		wait1Msec(1000);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+		servo[abdd] = ABDD_DOWN;
+		abs_drive(FORWARD, E_ANGLE, to_turn_dist, 50, true);
+		wait1Msec(200);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
+		wait1Msec(200);
+		abs_drive(FORWARD, E_ANGLE, 75, 50, true);
+		motor[block_lift_motor] = 40;
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 85, 60);
+		motor[block_lift_motor] = 0;
+		abs_drive(FORWARD, E_ANGLE, 75, 50, true);
+		break;
+	case 3:
 		break;
 	}
 }

@@ -111,6 +111,10 @@ task abs_sensors_read ()
 		rawgyro = HTGYROreadRot(HTGYRO);
 		constHeading += (rawgyro - drift) * (float)(currtime-prevtime)/1000;
 		relHeading += (rawgyro - drift) * (float)(currtime-prevtime)/1000;
+		//constHeading += (rawgyro - (drift * (float)(currtime-prevtime)/1000));
+		//relHeading += (rawgyro - (drift * (float)(currtime-prevtime)/1000));
+		//constHeading = (rawgyro - (drift * (float)(currtime-prevtime)/1000));
+		//relHeading = (rawgyro - (drift * (float)(currtime-prevtime)/1000));
 		prevtime = currtime;
 
 		recont_heading = constHeading % 360;
