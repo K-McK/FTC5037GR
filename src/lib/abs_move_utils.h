@@ -11,11 +11,17 @@
  *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
  */
-#ifndef ABS_TURN_UTILS_H
-#define ABS_TURN_UTILS_H
+#ifndef ABS_MOVE_UTILS_H
+#define ABS_MOVE_UTILS_H
 
 /** macros */
 
+/**
+ * @def FORWARD_HEADING
+ *      helps the robot calculate the gyro drive
+ * @def REVERSE_HEADING
+ *      helps the robot calculate the gyro drive
+ */
 #define FORWARD_HEADING 0
 #define REVERSE_HEADING 180
 
@@ -120,6 +126,14 @@ typedef enum
 	GRABBER,
 	ROGGER_SLIDE
 } e_motor_move;
+/**
+*  @def distance_to_angle_derees(X)
+*  converts @a X to degrees
+*/
 #define distance_to_angle_derees(X) ((float)(X*360/ANGLE_SENSOR_CIRCUMFERENCE))
+/**
+*  @def distance_to_encoder_derees(X)
+*  converts @a X to degrees
+*/
 #define distance_to_encoder_derees(X) (X*360/DRIVE_WHEELS_CIRCUMFERENCE)
 #endif /* !ABS_TURN_UTILS */
