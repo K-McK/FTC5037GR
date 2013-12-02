@@ -60,14 +60,30 @@ task abs_joystick_gunner()
 		//-----------------------------
 		// block lift
 		//-----------------------------
-		if(joystick.joy2_y1>10) motor[block_lift_motor] = BLOCK_SPEED_UP;
+		if(joystick.joy2_y1>10)
+		{
+			motor[block_lift_motor] = BLOCK_SPEED_UP;
+			motor[block_lift_motor2] = BLOCK_SPEED_UP;
+		}
 		else if(joystick.joy2_y1<-10)
 		{
-			if(joy2Btn(11)) motor[block_lift_motor] = -100;
-			else motor[block_lift_motor] = BLOCK_SPEED_DOWN;
+			if(joy2Btn(11))
+			{
+				motor[block_lift_motor] = -100;
+				motor[block_lift_motor2] = -100;
+			}
+			else
+			{
+				motor[block_lift_motor] = BLOCK_SPEED_DOWN;
+				motor[block_lift_motor2] = BLOCK_SPEED_DOWN;
+			}
 		}
 
-		else motor[block_lift_motor] = 0;
+		else
+		{
+			motor[block_lift_motor] = 0;
+			motor[block_lift_motor2] = 0;
+		}
 
 		//-----------------------------
 		// block grabber
