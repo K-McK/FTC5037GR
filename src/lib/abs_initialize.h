@@ -4,7 +4,7 @@
 *
 *  @brief A header file that handles the initialization when we start the game
 *
-*  @param No paramiters
+*  @param None n/a
 *
 *  @return Returns nothing
 *

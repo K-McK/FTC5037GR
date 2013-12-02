@@ -2,9 +2,9 @@
 *
 *  @file abs_selection_program.h
 *
-*  @brief A hedder file that handles the begining selection for robot actions
+*  @brief A header file that handles the begining selection for robot actions
 *
-*  @param No paramiters
+*  @param None n/a
 *
 *  @return Returns nothing
 *

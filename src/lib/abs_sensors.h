@@ -2,9 +2,9 @@
 *
 *  @file abs_sensors.h
 *
-*  @brief A hedder file that handles the sensors
+*  @brief A header file that handles the sensors
 *
-*  @param no paramiters
+*  @param None n/a
 *
 *  @return returns nothing
 *

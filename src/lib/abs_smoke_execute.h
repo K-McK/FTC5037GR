@@ -1,10 +1,10 @@
 /**
 *
-*  @file abs_smoke_execute
+*  @file abs_smoke_execute.h
 *
 *  @brief exucutes cammands sent in smoke test
 *
-*  @param no paramiters
+*  @param None n/a
 *
 *  @return Returns nothing
 *
@@ -12,8 +12,8 @@
 *
 */
 
-#ifndef ABS_SMOKE_EXECUTE
-#define ABS_SMOKE_EXECUTE
+#ifndef ABS_SMOKE_EXECUTE_H
+#define ABS_SMOKE_EXECUTE_H
 
 void abs_smoke_execute ()
 {

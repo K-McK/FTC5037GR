@@ -5,7 +5,7 @@
 *
 *  @brief varaibles that are global
 *
-*  @param No paramiters
+*  @param None n/a
 *
 *  @return Returns nothing
 *
@@ -29,12 +29,28 @@ bool gyroTrue = false;
 // Robot constants
 //=========================================================
 
+/**
+*
+*  @def ANGLE_SENSOR_CIRCUMFERENCE
+*     Tells the robot the circumference of the angle sensors wheel
+*  @def DRIVE_WHEELS_CIRCUMFERENCE
+*     Tells the robot the cercumference of the drive wheels
+*  @def GRABBER_LEFT_OPEN
+*     tells the robot where the left block grabber needs to be to be open
+*  @def GRABBER_RIGHT_OPEN
+*     tells the robot where the right block grabber needs to be to be open
+*  @def GRABBER_LEFT_MID
+*     tells the robot where the left block grabber needs to be to be in the middle
+*  @def GRABBER_RIGHT_MID
+*     tells the robot where the right block grabber needs to be to be in the middle
+*  @def GRABBER_LEFT_CLOSE
+*     tells the robot where the left block grabber needs to be to be closed
+*  @def GRABBER_RIGHT_CLOSE
+*     tells the robot where the left block grabber needs to be to be closed
+*
+*/
 #define ANGLE_SENSOR_CIRCUMFERENCE 17.6
 #define DRIVE_WHEELS_CIRCUMFERENCE 26
-#define GRABBER_OPEN 1
-#define GRABBER_MID 2
-#define GRABBER_CLOSE 3
-
 
 #define GRABBER_LEFT_OPEN 3
 #define GRABBER_RIGHT_OPEN 245
@@ -144,12 +160,20 @@ int accelermoeter_array [] = {0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,
 ubyte accelermoeter_total_value = 0;
 int accelermoeter_average = 0;
 
-//-----------------------------
-// misc
-//-----------------------------
 int sensor_num = 1;
 int sensor_max = 4;
 int sensor_value = 0;
+/**
+*
+*  @def st_gyro
+*     The reference value for the sensor in smoke test
+*  @def st_IR
+*     The reference value for the sensor in smoke test
+*  @def st_accelerometer
+*     The reference value for the sensor in smoke test
+*  @def st_tilt
+*     The reference value for the sensor in smoke test
+*/
 
 #define st_gyro 1
 #define st_IR 2
@@ -168,6 +192,49 @@ string sensor_list [] = {
 //=============================================================
 // Define screen related variables
 //=============================================================
+/**
+*
+*  @def s_clear
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_mission
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_start_delay
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_cal_time
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_gyro_cal
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_ready
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_delay_wait
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_gyro_show
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_error
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_smoke_test
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_smoke_run1
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_smoke_run2
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_smoke_run3
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_screen_call
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_IR_show
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_ac_show
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_misc_show
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_starting_point
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_ending_point
+*     Tells the robot the screen state number for this screen statestate
+*
+*/
+
 #define s_clear 0
 #define s_mission 1
 #define s_start_delay 2
@@ -193,6 +260,22 @@ int screen_state = 1;
 //==============================================================
 // Define error numbers
 //==============================================================
+/**
+*
+*  @def err_none
+*     Tells the robot that theres no error
+*  @def err_gyro_cal
+*     Tells the robot that theres a error with the gyro calibrate
+*  @def err_gyro_mux
+*     Tells the robot that theres a error with the gyro mux
+*  @def err_sensor_mux
+*     Tells the robot that theres a error with the sensor mux
+*  @def err_joysticks
+*     Tells the robot that theres a error with the joysticks
+*  @def err_accelermoeter
+*     Tells the robot that theres a error with the accelermoeter
+*
+*/
 #define err_none 0
 #define err_gyro_cal 1
 #define err_gyro_mux 2

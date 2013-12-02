@@ -2,7 +2,7 @@
 *
 *  @file abs_turn.h
 *
-*  @brief The hedder file that alows you to do a point turn
+*  @brief The header file that alows you to do a point turn
 *
 *  @param degree Tells the robot how much to turn
 *
