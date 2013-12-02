@@ -158,7 +158,7 @@ const int target_angle = 110;
 ubyte accelermoeter_reads = 0;
 int accelermoeter_array [] = {0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30};
 ubyte accelermoeter_total_value = 0;
-int accelermoeter_average = 0;\
+int accelermoeter_average = 0;
 
 int sensor_num = 1;
 int sensor_max = 4;
