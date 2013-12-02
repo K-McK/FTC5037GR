@@ -160,11 +160,10 @@ int accelermoeter_array [] = {0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,
 ubyte accelermoeter_total_value = 0;
 int accelermoeter_average = 0;
 
-//-----------------------------
-// misc
-//-----------------------------
-
-/*
+int sensor_num = 1;
+int sensor_max = 4;
+int sensor_value = 0;
+/**
 *
 *  @def st_gyro
 *     The reference value for the sensor in smoke test
@@ -175,9 +174,6 @@ int accelermoeter_average = 0;
 *  @def st_tilt
 *     The reference value for the sensor in smoke test
 */
-int sensor_num = 1;
-int sensor_max = 4;
-int sensor_value = 0;
 
 #define st_gyro 1
 #define st_IR 2
@@ -207,6 +203,8 @@ string sensor_list [] = {
 *  @def s_cal_time
 *     Tells the robot the screen state number for this screen statestate
 *  @def s_gyro_cal
+*     Tells the robot the screen state number for this screen statestate
+*  @def s_ready
 *     Tells the robot the screen state number for this screen statestate
 *  @def s_delay_wait
 *     Tells the robot the screen state number for this screen statestate
