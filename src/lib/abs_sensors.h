@@ -14,7 +14,6 @@
 
 #ifndef ABS_SENSOR_H
 #define ABS_SENSOR_H
-
 //========================================
 // Sensors not including gyro
 //========================================
@@ -25,6 +24,10 @@ task abs_sensor()
 
 	while(true)
 	{
+		//-------------------------
+		// Light Sensor
+		//-------------------------
+//	g_light_sensor = SensorValue(lightSensor);
 		//-------------------------
 		// HiTechnic IR Sensor
 		//-------------------------

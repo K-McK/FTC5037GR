@@ -160,6 +160,7 @@ int recont_heading = 0; //this is the recalculated const gyro heading
 //=============================================================
 // Sensor variables
 //=============================================================
+int g_light_sensor;
 const int ac_time_limit = 200;
 int bearingAC = 0;
 int bearingAC2 = 0;
