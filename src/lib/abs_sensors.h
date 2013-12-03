@@ -18,7 +18,7 @@
 // Sensors not including gyro
 //========================================
 
-task abs_sensor()
+task abs_sensors()
 {
 	prevtime = nPgmTime;
 
