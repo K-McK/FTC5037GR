@@ -17,7 +17,7 @@
 *  @enum e_joystick_method tells the robot if it should drive linear or parabolic
 *  @var e_joystick_method::LINEAR
 *     Drive linear
-*  @var e_joystick_method::PARRABOLIC
+*  @var e_joystick_method::PARABOLIC
 *     Drive parabolic
 */
 typedef enum
