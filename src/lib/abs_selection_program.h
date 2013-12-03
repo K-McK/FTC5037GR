@@ -168,11 +168,11 @@ void selection_program()
 	// Start of optional sub selection for grabbers on the ram
 	//---------------------------------------
 
-	if(end_point == 2 || end_point == 3)
+	if(g_end_point == 2 || g_end_point == 3)
 	{
 		misc = 1;
 		auto_selection_point = SELECTION_SUB_GRABBERS;
-		screen_state = s_selection_sub_grabbers;
+		g_screen_state = s_selection_sub_grabbers;
 
 		while(nNxtButtonPressed != kEnterButton)
 		{
@@ -187,7 +187,7 @@ void selection_program()
 				}
 				else
 				{
-					end_delay = 2;
+					g_end_delay = 2;
 					auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
 				}
 			}

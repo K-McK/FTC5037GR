@@ -21,7 +21,7 @@ void abs_S1_mission_exicute()
 	switch(g_mission_number)
 	{
 	case 0:
-		screen_state = s_angle_show;
+		g_screen_state = s_angle_show;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/200, 50, true);
 		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/200, 50, true);
 		//abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
