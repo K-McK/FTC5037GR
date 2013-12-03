@@ -96,10 +96,16 @@ auto_selection_points auto_selection_point = SELECTION_START_POINT;
 // auto movements
 //=========================================================
 int to_turn_dist = 0;
-const int crate1_to_turn_dist = 135;
-const int crate2_to_turn_dist = 110;
-const int crate3_to_turn_dist = 60;
-const int crate4_to_turn_dist = 35;
+
+const int forward_crate1_to_turn_dist = 135;
+const int forward_crate2_to_turn_dist = 110;
+const int forward_crate3_to_turn_dist = 60;
+const int forward_crate4_to_turn_dist = 35;
+
+const int backwards_crate1_to_turn_dist = 45;
+const int backwards_crate2_to_turn_dist = 70;
+const int backwards_crate3_to_turn_dist = 120;
+const int backwards_crate4_to_turn_dist = 145;
 
 //=========================================================
 // Smoke test varaibles
