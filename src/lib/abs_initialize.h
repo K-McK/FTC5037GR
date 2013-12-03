@@ -24,40 +24,40 @@ void initialize()
 	disableDiagnosticsDisplay();
 	servoChangeRate[abdd] = 3;
 	servo[roger_slide] = 127;
-	servo[abdd] = ABDD_DOWN;
+	servo[abdd] = g_abdd_down;
 	servo[grabber_left] = GRABBER_LEFT_CLOSE;
 	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
 	selection_program();
 	PlaySoundFile("! Click.rso");
-	drift = abs_gyro_cal(gyroCalTime);
+	g_drift = abs_gyro_cal(g_gyro_cal_time);
 
-	if (!HTACreadAllAxes(HTAC, _x_axis, _y_axis, _z_axis)) error = err_accelermoeter;
-	if (gyro_noise>10) error = err_gyro_cal;
-	if(HTSMUXreadPowerStatus(SENSOR_MUX)) error = err_sensor_mux;
-	if(HTSMUXreadPowerStatus(GYRO_MUX)) error = err_gyro_mux;
+	if (!HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis)) error = ERR_ACCELERMOETER;
+	if (g_gyro_noise>10) error = ERR_GYRO_CAL;
+	if(HTSMUXreadPowerStatus(SENSOR_MUX)) error = ERR_SENSOR_MUX;
+	if(HTSMUXreadPowerStatus(GYRO_MUX)) error = ERR_GYRO_MUX;
 
 	if(error != 0)
 	{
-		screen_state = s_error;
+		g_screen_state = S_ERROR;
 		while(true)
 		{
-			gyroTrue = true;
+			g_gyro_true = true;
 			PlayTone (250,25);
 			wait1Msec(500);
 		}
 	}
 
-	screen_state = s_ready;
-	StartTask(abs_sensors_read);
+	g_screen_state = S_READY;
+	StartTask(abs_sensors);
 	HTANGresetAccumulatedAngle(angle_sensor);
 
 	waitForStart();
 	eraseDisplay();
-	starttime = nPgmTime;
-	screen_state = s_delay_wait;
-	wait1Msec(start_delay*1000);
+	g_start_time = nPgmTime;
+	g_screen_state = S_DELAY_WAIT;
+	wait1Msec(g_start_delay*1000);
 	eraseDisplay();
-	screen_state = s_gyro_show;
+	g_screen_state = S_GYRO_SHOW;
 }
 
 #endif /* !ABS_INITIALIZE_H */

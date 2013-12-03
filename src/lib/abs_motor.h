@@ -29,16 +29,16 @@ void abs_motor(e_motor_move move_type)
 	//	motor[jolly_roger]= 0;
 	//	break;
 	//case 0:
-	//	motor[jolly_roger] = FLAG_SPEED_UP;
+	//	motor[jolly_roger] = g_flag_speed_up;
 	//	break;
 	//case 2:
-	//	motor[jolly_roger] = FLAG_SPEED_RIGHT;
+	//	motor[jolly_roger] = g_flag_speed_right;
 	//	break;
 	//case 6:
-	//	motor[jolly_roger] = FLAG_SPEED_LEFT;
+	//	motor[jolly_roger] = g_flag_speed_left;
 	//	break;
 	//case 4:
-	//	motor[jolly_roger] = FLAG_SPEED_DOWN;
+	//	motor[jolly_roger] = g_flag_speed_down;
 	//	break;
 	//}
 
@@ -52,9 +52,9 @@ void abs_motor(e_motor_move move_type)
 	//-----------------------------
 	//if(move_type == LIFT)
 	//{
-	//	motor[block_lift_motor] = BLOCK_SPEED_UP;
+	//	motor[block_lift_motor] = g_block_speed_up;
 	//	wait10Msec(50);
-	//	motor[block_lift_motor] = BLOCK_SPEED_DOWN;
+	//	motor[block_lift_motor] = g_block_speed_down;
 	//}
 
 	//-----------------------------
@@ -77,9 +77,9 @@ void abs_motor(e_motor_move move_type)
 	//-----------------------------
 	if(move_type == ABDD)
 	{
-		servo[abdd] = ABDD_UP;
+		servo[abdd] = g_abdd_up;
 		wait10Msec(70);
-		servo[abdd] = ABDD_DOWN;
+		servo[abdd] = g_abdd_down;
 	}
 }
 
