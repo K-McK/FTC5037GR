@@ -26,7 +26,7 @@ void selection_program()
 	// Start point selection
 	//---------------------------------------
 
-	auto_selection_point = SELECTION_START_POINT;
+	g_auto_selection_point = SELECTION_START_POINT;
 	g_screen_state = S_STARTING_POINT;
 
 	while(nNxtButtonPressed != kEnterButton)
@@ -54,12 +54,12 @@ void selection_program()
 	// Start of start time selection
 	//---------------------------------------
 
-	auto_selection_point = SELECTION_START_DELAY;
+	g_auto_selection_point = SELECTION_START_DELAY;
 	g_screen_state = S_DELAY;
 
 	while(nNxtButtonPressed != kEnterButton)
 	{
-		delay = g_start_delay;
+		g_delay = g_start_delay;
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
@@ -83,7 +83,7 @@ void selection_program()
 	// Start of mission selection
 	//---------------------------------------
 
-	auto_selection_point = SELECTION_MISSION_POINT;
+	g_auto_selection_point = SELECTION_MISSION_POINT;
 	g_screen_state = S_MISSION;
 
 	while(nNxtButtonPressed != kEnterButton)
@@ -111,12 +111,12 @@ void selection_program()
 	// Start of time selection
 	//---------------------------------------
 
-	auto_selection_point = SELECTION_MISSION_DELAY;
+	g_auto_selection_point = SELECTION_MISSION_DELAY;
 	g_screen_state = S_DELAY;
 
 	while(nNxtButtonPressed != kEnterButton)
 	{
-		delay = g_end_delay;
+		g_delay = g_end_delay;
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
@@ -141,7 +141,7 @@ void selection_program()
 	//---------------------------------------
 
 	g_screen_state = S_ENDING_POINT;
-	auto_selection_point = SELECTION_END_POINT;
+	g_auto_selection_point = SELECTION_END_POINT;
 
 	while(nNxtButtonPressed != kEnterButton)
 	{
@@ -170,9 +170,9 @@ void selection_program()
 
 	if(g_end_point == 2 || g_end_point == 3)
 	{
-		misc = 1;
-		auto_selection_point = SELECTION_SUB_GRABBERS;
-		g_screen_state = s_selection_sub_grabbers;
+		g_misc = 1;
+		g_auto_selection_point = SELECTION_SUB_GRABBERS;
+		g_screen_state = S_SELECTION_SUB_GRABBERS;
 
 		while(nNxtButtonPressed != kEnterButton)
 		{
@@ -180,30 +180,30 @@ void selection_program()
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
-				if(misc < 2)
+				if(g_misc < 2)
 				{
-					misc++;
-					auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
+					g_misc++;
+					g_auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
 				}
 				else
 				{
 					g_end_delay = 2;
-					auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
+					g_auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
 				}
 			}
 			if(nNxtButtonPressed == kLeftButton)
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kLeftButton){}
-				if(misc > 1)
+				if(g_misc > 1)
 				{
-					misc--;
-					auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+					g_misc--;
+					g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 				}
 				else
 				{
-					misc = 1;
-					auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+					g_misc = 1;
+					g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 				}
 			}
 		}

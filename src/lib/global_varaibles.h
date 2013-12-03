@@ -89,9 +89,9 @@ typedef enum
 	SELECTION_END_POINT,
 	SELECTION_SUB_GRABBERS,
 	SELECTION_GYRO_CAL
-} auto_selection_points;
+} e_auto_selection_points;
 
-auto_selection_points auto_selection_point = SELECTION_START_POINT;
+e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
 
 //=========================================================
 // auto sub selections
@@ -101,9 +101,9 @@ typedef enum
 {
 	SUB_SELECTION_GRABBERS_OUT,
 	SUB_SELECTION_GRABBERS_IN
-} auto_sub_selection;
+} e_auto_sub_selection;
 
-auto_sub_selection auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 
 //=========================================================
 // auto movements
@@ -152,7 +152,7 @@ int g_selection_value = 0;
 int g_end_point = 1;
 int g_start_point = 1;
 int g_mission_number = 1;
-int delay = 0;
+int g_delay = 0;
 int g_end_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
@@ -183,7 +183,7 @@ int g_acs1[5];
 int g_acs2[5];
 float g_curr_dir1 = 0.0;
 float g_curr_dir2 = 0.0;
-int misc = 0;
+int g_misc = 0;
 bool g_reset_angle = false;
 
 //-----------------------------
@@ -300,8 +300,8 @@ string g_sensor_list [] = {
 #define S_MISC_SHOW 16
 #define S_STARTING_POINT 17
 #define S_ENDING_POINT 18
-#define s_selection_sub_grabbers 19
-#define s_angle_show 20
+#define S_SELECTION_SUB_GRABBERS 19
+#define S_ANGLE_SHOW 20
 
 int g_screen_state = 1;
 
@@ -331,7 +331,7 @@ int g_screen_state = 1;
 #define ERR_JOYSTICKS 4
 #define ERR_ACCELERMOETER 5
 
-int error = 0;
+int g_error = 0;
 
 //==============================================================================
 // Define the text to be displayed for each starting point line 1
