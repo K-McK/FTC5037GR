@@ -4,7 +4,9 @@
 *
 *  @brief runs the missions from the starting point S1
 *
-*  @return returns nothing
+*  @param None n/a
+*
+*  @return Returns nothing
 *
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *

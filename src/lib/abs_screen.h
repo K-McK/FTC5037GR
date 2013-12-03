@@ -40,7 +40,7 @@ task screen ()
 			if(auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
 			else nxtDisplayBigTextLine(1, "Mission ");
 			nxtDisplayBigTextLine(3, "Delay");
-			nxtDisplayBigTextLine(5, "%2d", delay);
+			nxtDisplayBigTextLine(5, "%2d", g_delay);
 			break;
 		case S_CAL_TIME:
 			nxtDisplayBigTextLine(1, "CalTime");
@@ -74,13 +74,13 @@ task screen ()
 			break;
 		case S_AC_SHOW:
 			nxtDisplayBigTextLine(1, "ac Value");
-			nxtDisplayBigTextLine(3, "%2d  %2d", g_accelermoeter_sensor, misc);
+			nxtDisplayBigTextLine(3, "%2d  %2d", g_accelermoeter_sensor, g_misc);
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 			break;
 		case S_ERROR:
 			nxtDisplayBigTextLine(1, "ERROR");
-			nxtDisplayBigTextLine(3, error_list1[error]);
-			nxtDisplayBigTextLine(5, error_list2[error]);
+			nxtDisplayBigTextLine(3, error_list1[g_error]);
+			nxtDisplayBigTextLine(5, error_list2[g_error]);
 			break;
 		case S_SMOKE_TEST:
 			nxtDisplayBigTextLine(1, "%2d", g_smoke_test_num);
@@ -104,7 +104,7 @@ task screen ()
 			break;
 		case S_MISC_SHOW:
 			nxtDisplayBigTextLine(1, "misc Value");
-			nxtDisplayBigTextLine(3, "%2d", misc);
+			nxtDisplayBigTextLine(3, "%2d", g_misc);
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 		case s_angle_show:
 			nxtDisplayBigTextLine(1, "angle Value");
@@ -124,7 +124,7 @@ task screen ()
 		case s_selection_sub_grabbers:
 			nxtDisplayBigTextLine(1, "Grabbers");
 			nxtDisplayBigTextLine(3, "inOrOut?");
-			nxtDisplayBigTextLine(5, basic_word_list [misc]);
+			nxtDisplayBigTextLine(5, basic_word_list [g_misc]);
 			break;
 		}
 	}

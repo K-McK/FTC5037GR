@@ -59,7 +59,7 @@ void selection_program()
 
 	while(nNxtButtonPressed != kEnterButton)
 	{
-		delay = g_start_delay;
+		g_delay = g_start_delay;
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
@@ -116,7 +116,7 @@ void selection_program()
 
 	while(nNxtButtonPressed != kEnterButton)
 	{
-		delay = g_end_delay;
+		g_delay = g_end_delay;
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
@@ -170,7 +170,7 @@ void selection_program()
 
 	if(g_end_point == 2 || g_end_point == 3)
 	{
-		misc = 1;
+		g_misc = 1;
 		auto_selection_point = SELECTION_SUB_GRABBERS;
 		g_screen_state = s_selection_sub_grabbers;
 
@@ -180,9 +180,9 @@ void selection_program()
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
-				if(misc < 2)
+				if(g_misc < 2)
 				{
-					misc++;
+					g_misc++;
 					auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
 				}
 				else
@@ -195,14 +195,14 @@ void selection_program()
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kLeftButton){}
-				if(misc > 1)
+				if(g_misc > 1)
 				{
-					misc--;
+					g_misc--;
 					auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 				}
 				else
 				{
-					misc = 1;
+					g_misc = 1;
 					auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 				}
 			}
