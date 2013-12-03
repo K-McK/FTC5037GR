@@ -26,7 +26,7 @@ void selection_program()
 	// Start point selection
 	//---------------------------------------
 
-	auto_selection_point = SELECTION_START_POINT;
+	g_auto_selection_point = SELECTION_START_POINT;
 	g_screen_state = S_STARTING_POINT;
 
 	while(nNxtButtonPressed != kEnterButton)
@@ -54,7 +54,7 @@ void selection_program()
 	// Start of start time selection
 	//---------------------------------------
 
-	auto_selection_point = SELECTION_START_DELAY;
+	g_auto_selection_point = SELECTION_START_DELAY;
 	g_screen_state = S_DELAY;
 
 	while(nNxtButtonPressed != kEnterButton)
@@ -83,7 +83,7 @@ void selection_program()
 	// Start of mission selection
 	//---------------------------------------
 
-	auto_selection_point = SELECTION_MISSION_POINT;
+	g_auto_selection_point = SELECTION_MISSION_POINT;
 	g_screen_state = S_MISSION;
 
 	while(nNxtButtonPressed != kEnterButton)
@@ -111,7 +111,7 @@ void selection_program()
 	// Start of time selection
 	//---------------------------------------
 
-	auto_selection_point = SELECTION_MISSION_DELAY;
+	g_auto_selection_point = SELECTION_MISSION_DELAY;
 	g_screen_state = S_DELAY;
 
 	while(nNxtButtonPressed != kEnterButton)
@@ -141,7 +141,7 @@ void selection_program()
 	//---------------------------------------
 
 	g_screen_state = S_ENDING_POINT;
-	auto_selection_point = SELECTION_END_POINT;
+	g_auto_selection_point = SELECTION_END_POINT;
 
 	while(nNxtButtonPressed != kEnterButton)
 	{
@@ -171,7 +171,7 @@ void selection_program()
 	if(g_end_point == 2 || g_end_point == 3)
 	{
 		g_misc = 1;
-		auto_selection_point = SELECTION_SUB_GRABBERS;
+		g_auto_selection_point = SELECTION_SUB_GRABBERS;
 		g_screen_state = S_SELECTION_SUB_GRABBERS;
 
 		while(nNxtButtonPressed != kEnterButton)
@@ -183,12 +183,12 @@ void selection_program()
 				if(g_misc < 2)
 				{
 					g_misc++;
-					auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
+					g_auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
 				}
 				else
 				{
 					g_end_delay = 2;
-					auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
+					g_auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
 				}
 			}
 			if(nNxtButtonPressed == kLeftButton)
@@ -198,12 +198,12 @@ void selection_program()
 				if(g_misc > 1)
 				{
 					g_misc--;
-					auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+					g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 				}
 				else
 				{
 					g_misc = 1;
-					auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+					g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 				}
 			}
 		}

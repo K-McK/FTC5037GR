@@ -37,7 +37,7 @@ task screen ()
 			nxtDisplayBigTextLine(5, g_mission_names2[g_mission_number]);
 			break;
 		case S_DELAY:
-			if(auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
+			if(g_auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
 			else nxtDisplayBigTextLine(1, "Mission ");
 			nxtDisplayBigTextLine(3, "Delay");
 			nxtDisplayBigTextLine(5, "%2d", g_delay);

@@ -89,9 +89,9 @@ typedef enum
 	SELECTION_END_POINT,
 	SELECTION_SUB_GRABBERS,
 	SELECTION_GYRO_CAL
-} auto_selection_points;
+} e_auto_selection_points;
 
-auto_selection_points auto_selection_point = SELECTION_START_POINT;
+e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
 
 //=========================================================
 // auto sub selections
@@ -101,9 +101,9 @@ typedef enum
 {
 	SUB_SELECTION_GRABBERS_OUT,
 	SUB_SELECTION_GRABBERS_IN
-} auto_sub_selection;
+} e_auto_sub_selection;
 
-auto_sub_selection auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 
 //=========================================================
 // auto movements
