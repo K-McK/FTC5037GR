@@ -104,16 +104,19 @@ void abs_smoke_execute ()
 			if(nNxtButtonPressed == kLeftButton)
 			{
 				motor[block_lift_motor] = ROBOT_LIFT_DOWN;
+				motor[block_lift_motor2] = ROBOT_LIFT_DOWN;
 				test_value = ROBOT_LIFT_DOWN;
 			}
 			else if(nNxtButtonPressed == kRightButton)
 			{
 				motor[block_lift_motor] = ROBOT_LIFT_UP;
+				motor[block_lift_motor2] = ROBOT_LIFT_UP;
 				test_value = ROBOT_LIFT_UP;
 			}
 			else
 			{
 				motor[block_lift_motor] = 0;
+				motor[block_lift_motor2] = 0;
 				test_value = 0;
 			}
 			break;
