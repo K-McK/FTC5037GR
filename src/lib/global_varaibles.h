@@ -49,7 +49,8 @@ bool gyroTrue = false;
 *     tells the robot where the left block grabber needs to be to be closed
 *
 */
-#define ANGLE_SENSOR_CIRCUMFERENCE 17.6
+#define INT_ANGLE_SENSOR_CIRCUMFERENCE 18
+#define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE 17.6
 #define DRIVE_WHEELS_CIRCUMFERENCE 26
 
 #define GRABBER_LEFT_OPEN 3
@@ -95,10 +96,16 @@ auto_selection_points auto_selection_point = SELECTION_START_POINT;
 // auto movements
 //=========================================================
 int to_turn_dist = 0;
-const int crate1_to_turn_dist = 135;
-const int crate2_to_turn_dist = 110;
-const int crate3_to_turn_dist = 60;
-const int crate4_to_turn_dist = 35;
+
+const int forward_crate1_to_turn_dist = 135;
+const int forward_crate2_to_turn_dist = 110;
+const int forward_crate3_to_turn_dist = 60;
+const int forward_crate4_to_turn_dist = 35;
+
+const int backwards_crate1_to_turn_dist = 45;
+const int backwards_crate2_to_turn_dist = 70;
+const int backwards_crate3_to_turn_dist = 120;
+const int backwards_crate4_to_turn_dist = 145;
 
 //=========================================================
 // Smoke test varaibles
@@ -153,6 +160,7 @@ int recont_heading = 0; //this is the recalculated const gyro heading
 //=============================================================
 // Sensor variables
 //=============================================================
+int g_light_sensor;
 const int ac_time_limit = 200;
 int bearingAC = 0;
 int bearingAC2 = 0;

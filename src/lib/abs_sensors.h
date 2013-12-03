@@ -11,16 +11,23 @@
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
+
+#ifndef ABS_SENSOR_H
+#define ABS_SENSOR_H
 //========================================
 // Sensors not including gyro
 //========================================
 
-task abs_sensors_read ()
+task abs_sensors()
 {
 	prevtime = nPgmTime;
 
 	while(true)
 	{
+		//-------------------------
+		// Light Sensor
+		//-------------------------
+//	g_light_sensor = SensorValue(lightSensor);
 		//-------------------------
 		// HiTechnic IR Sensor
 		//-------------------------
@@ -151,3 +158,4 @@ task abs_sensors_read ()
 		//else angle_sensor = HTANGreadAccumulatedAngle(HTANG);
 	}
 }
+#endif

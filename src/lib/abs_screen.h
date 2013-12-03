@@ -11,6 +11,9 @@
  *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
  */
+
+#ifndef ABS_SCREEN_H
+#define ABS_SCREEN_H
 //========================================
 // Screen State
 //========================================
@@ -117,3 +120,5 @@ task screen ()
 		}
 	}
 }
+
+#endif
