@@ -228,7 +228,7 @@ string g_sensor_list [] = {
 	"accel   ",
 	"tilt    "};
 
-	string basic_word_list [] = {
+	string g_basic_word_list [] = {
 	"unknown ",
 	"in      ",
 	"out     ",
@@ -504,7 +504,7 @@ string g_mission_names2 [] = {
 //==============================================================================
 // Define the text to be displayed for the errors
 //==============================================================================
-string error_list1 [] = {
+string g_error_list1 [] = {
 	"Unknown ",
 	"GyroCal ",
 	"Gyro    ",
@@ -529,7 +529,7 @@ string error_list1 [] = {
 	"Test 21 ",
 	"Test 22 "};
 
-string error_list2 [] = {
+string g_error_list2 [] = {
 	"error   ",
 	"Failure ",
 	"Mux     ",
