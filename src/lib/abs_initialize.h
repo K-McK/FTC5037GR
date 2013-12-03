@@ -28,6 +28,7 @@ void initialize()
 	servo[grabber_left] = GRABBER_LEFT_CLOSE;
 	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
 	selection_program();
+	PlaySoundFile("! Click.rso");
 	drift = abs_gyro_cal(gyroCalTime);
 
 	if (!HTACreadAllAxes(HTAC, _x_axis, _y_axis, _z_axis)) error = err_accelermoeter;

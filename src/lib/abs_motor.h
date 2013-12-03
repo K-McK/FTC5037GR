@@ -60,17 +60,17 @@ void abs_motor(e_motor_move move_type)
 	//-----------------------------
 	// block grabber
 	//-----------------------------
-	int grabber_position;
+	//int grabber_position;
 
-	if(move_type == GRABBER) grabber_position = GRABBER_CLOSE;
+	//if(move_type == GRABBER) grabber_position = GRABBER_CLOSE;
 
-	switch(grabber_position)
-	{
-	case GRABBER_CLOSE:
-		servo[grabber_left] = GRABBER_LEFT_CLOSE;
-		servo[grabber_right] = GRABBER_RIGHT_CLOSE;
-		break;
-	}
+	//switch(grabber_position)
+	//{
+	//case GRABBER_CLOSE:
+	//	servo[grabber_left] = GRABBER_LEFT_CLOSE;
+	//	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
+	//	break;
+	//}
 
 	//-----------------------------
 	// ABDD
