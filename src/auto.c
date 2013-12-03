@@ -66,7 +66,7 @@
 task main()
 {
 	initialize();
-	switch(start_point)
+	switch(g_start_point)
 	{
 	case 1:
 		abs_S1_mission_exicute();

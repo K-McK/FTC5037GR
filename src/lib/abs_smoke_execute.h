@@ -17,10 +17,10 @@
 
 void abs_smoke_execute ()
 {
-	screen_state = s_smoke_run1;
+	g_screen_state = S_SMOKE_RUN1;
 	while(nNxtButtonPressed != kEnterButton)
 	{
-		switch(smoke_test_num)
+		switch(g_smoke_test_num)
 		{
 			//---------------------------------
 			// Jolly Roger
@@ -28,17 +28,17 @@ void abs_smoke_execute ()
 		case 1:
 			if(nNxtButtonPressed == kLeftButton)
 			{
-				motor[jolly_roger] = FLAG_SPEED_DOWN;
-				test_value = FLAG_SPEED_DOWN;
+				motor[jolly_roger] = g_flag_speed_down;
+				g_test_value = g_flag_speed_down;
 			}
 			else if(nNxtButtonPressed == kRightButton)
 			{
-				motor[jolly_roger] = FLAG_SPEED_UP;
-				test_value = FLAG_SPEED_UP;
+				motor[jolly_roger] = g_flag_speed_up;
+				g_test_value = g_flag_speed_up;
 			}
 			else
 			{
-				test_value = 0;
+				g_test_value = 0;
 				motor[jolly_roger] = 0;
 			}
 			break;
@@ -50,17 +50,17 @@ void abs_smoke_execute ()
 			{
 				motor[right_motor] = 60;
 				motor[left_motor] = 60;
-				test_value = 60;
+				g_test_value = 60;
 			}
 			else if(nNxtButtonPressed == kRightButton)
 			{
 				motor[right_motor] = -60;
 				motor[left_motor] = -60;
-				test_value = -60;
+				g_test_value = -60;
 			}
 			else
 			{
-				test_value = 0;
+				g_test_value = 0;
 				motor[right_motor] = 0;
 				motor[left_motor] = 0;
 			}
@@ -69,31 +69,31 @@ void abs_smoke_execute ()
 			// sensors
 			//---------------------------------
 		case 3:
-			screen_state = S_smoke_run2;
+			g_screen_state = S_SMOKE_RUN2;
 			if(nNxtButtonPressed == kLeftButton)
 			{
-				if(test_value > 1) test_value--;
+				if(g_test_value > 1) g_test_value--;
 				while(nNxtButtonPressed == kLeftButton) {}
 			}
 			if(nNxtButtonPressed == kRightButton)
 			{
-				if(test_value < sensor_max) test_value++;
+				if(g_test_value < g_sensor_max) g_test_value++;
 				while(nNxtButtonPressed == kRightButton) {}
 			}
-			sensor_num = test_value;
-			switch(sensor_num)
+			g_sensor_num = g_test_value;
+			switch(g_sensor_num)
 			{
-			case st_gyro:
-				sensor_value = relHeading;
+			case ST_GYRO:
+				g_sensor_value = g_rel_heading;
 				break;
-			case st_IR:
-				sensor_value = IR_Bearing;
+			case ST_IR:
+				g_sensor_value = g_ir_bearing1;
 				break;
-			case st_tilt:
-				sensor_value = HTANGreadAccumulatedAngle(angle_sensor);
+			case ST_TILT:
+				g_sensor_value = HTANGreadAccumulatedAngle(angle_sensor);
 				break;
-			case st_accelerometer:
-				sensor_value = accelermoeter_sensor;
+			case ST_ACCELEROMETER:
+				g_sensor_value = g_accelermoeter_sensor;
 				break;
 			}
 			break;
@@ -103,21 +103,21 @@ void abs_smoke_execute ()
 		case 4:
 			if(nNxtButtonPressed == kLeftButton)
 			{
-				motor[block_lift_motor] = ROBOT_LIFT_DOWN;
-				motor[block_lift_motor2] = ROBOT_LIFT_DOWN;
-				test_value = ROBOT_LIFT_DOWN;
+				motor[block_lift_motor] = g_robot_lift_down;
+				motor[block_lift_motor2] = g_robot_lift_down;
+				g_test_value = g_robot_lift_down;
 			}
 			else if(nNxtButtonPressed == kRightButton)
 			{
-				motor[block_lift_motor] = ROBOT_LIFT_UP;
-				motor[block_lift_motor2] = ROBOT_LIFT_UP;
-				test_value = ROBOT_LIFT_UP;
+				motor[block_lift_motor] = g_robot_lift_up;
+				motor[block_lift_motor2] = g_robot_lift_up;
+				g_test_value = g_robot_lift_up;
 			}
 			else
 			{
 				motor[block_lift_motor] = 0;
 				motor[block_lift_motor2] = 0;
-				test_value = 0;
+				g_test_value = 0;
 			}
 			break;
 			//---------------------------------
@@ -126,15 +126,15 @@ void abs_smoke_execute ()
 		case 5:
 			if(nNxtButtonPressed == kLeftButton)
 			{
-				if(test_value>1) test_value--;
+				if(g_test_value>1) g_test_value--;
 				while(nNxtButtonPressed == kLeftButton){}
 			}
 			if(nNxtButtonPressed == kRightButton)
 			{
-				if(test_value<3) test_value++;
+				if(g_test_value<3) g_test_value++;
 				while(nNxtButtonPressed == kRightButton){}
 			}
-			switch(test_value)
+			switch(g_test_value)
 			{
 			case 1:
 			servo[grabber_left] = GRABBER_LEFT_OPEN;
@@ -156,18 +156,18 @@ void abs_smoke_execute ()
 	case 6:
 		if(nNxtButtonPressed == kLeftButton)
 		{
-			motor[sky_hook] = ROBOT_LIFT_UP;
-			test_value = ROBOT_LIFT_UP;
+			motor[sky_hook] = g_robot_lift_up;
+			g_test_value = g_robot_lift_up;
 		}
 		else if(nNxtButtonPressed == kRightButton)
 		{
-			motor[sky_hook] = ROBOT_LIFT_DOWN;
-			test_value = ROBOT_LIFT_DOWN;
+			motor[sky_hook] = g_robot_lift_down;
+			g_test_value = g_robot_lift_down;
 		}
 		else
 		{
 			motor[sky_hook] = 0;
-			test_value = 0;
+			g_test_value = 0;
 		}
 		break;
 		//---------------------------------
@@ -177,17 +177,17 @@ void abs_smoke_execute ()
 		if(nNxtButtonPressed == kLeftButton)
 		{
 			servo[roger_slide] = 255;
-			test_value = 255;
+			g_test_value = 255;
 		}
 		else if(nNxtButtonPressed == kRightButton)
 		{
 			servo[roger_slide] = 0;
-			test_value = 0;
+			g_test_value = 0;
 		}
 		else
 		{
 			servo[roger_slide] = 127;
-			test_value = 127;
+			g_test_value = 127;
 		}
 		break;
 	}

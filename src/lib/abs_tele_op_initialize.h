@@ -15,13 +15,13 @@
 
 void abs_tele_op_initialize()
 {
-	if(joystick.joy1_TopHat == -1) Joy1Enabled = true;
-	if(joystick.joy2_TopHat == -1) Joy2Enabled = true;
+	if(joystick.joy1_TopHat == -1) g_joy1_enabled = true;
+	if(joystick.joy2_TopHat == -1) g_joy2_enabled = true;
 
-	servo[abdd] = ABDD_DOWN;
+	servo[abdd] = g_abdd_down;
 
 	StartTask(screen);
-	screen_state = s_misc_show;
+	g_screen_state = S_MISC_SHOW;
 	getJoystickSettings(joystick);
 }
 #endif /* ABS_TELE_OP_INITIALIZE_H */

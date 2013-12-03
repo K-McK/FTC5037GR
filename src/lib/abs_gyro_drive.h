@@ -24,17 +24,17 @@
 //=======================================
 void abs_gyro_drive(int speed,e_drive_direction dir)
 {
-	int error = drive_heading - relHeading;
+	int error = g_drive_heading - g_rel_heading;
 
 	if(dir == FORWARD)
 	{
-		motor[left_motor] = speed + (error*g_GYRO_ADJUST);
-		motor[right_motor] = speed - (error*g_GYRO_ADJUST);
+		motor[left_motor] = speed + (error*g_gyro_adjust);
+		motor[right_motor] = speed - (error*g_gyro_adjust);
 	}
 	else
 	{
-		motor[left_motor] = -(abs(speed) );//+ (error*g_GYRO_ADJUST));
-		motor[right_motor] = -(abs(speed) );//- (error*g_GYRO_ADJUST));
+		motor[left_motor] = -(abs(speed) );//+ (error*g_gyro_adjust));
+		motor[right_motor] = -(abs(speed) );//- (error*g_gyro_adjust));
 	}
 }
 #endif /* !ABS_GYRO_DRIVE_H */

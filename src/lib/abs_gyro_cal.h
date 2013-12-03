@@ -1,12 +1,12 @@
 /**
  *
- *  @file abs_gyro_cal.h
+ *  @file abS_GYRO_CAL.h
  *
  *  @brief A header file that allows you to calculate the input comming from the gyro
  *
  *  @param caltime Tells the robot how long to calibrate the gyro
  *
- *  @return The drift
+ *  @return The g_drift
  *
  *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
@@ -18,14 +18,14 @@
 //====================================
 // Gyro Calibration helper function
 //====================================
-float abs_gyro_cal(long caltime)
+float abS_GYRO_CAL(long caltime)
 {
 	long highest = -1000, lowest = 10000;
 	float average = 0;
-	starttime = nPgmTime;
+	g_start_time = nPgmTime;
 	long samples=0;
 	long data;
-	while (nPgmTime < starttime+(caltime*1000))			// loop for the requested number of seconds
+	while (nPgmTime < g_start_time+(caltime*1000))			// loop for the requested number of seconds
 	{
 		samples +=1;														// count the number of iterations for averaging
 		data = HTGYROreadRot(HTGYRO);						// get a new reading from the GYRO
@@ -33,9 +33,9 @@ float abs_gyro_cal(long caltime)
 		if (highest < data) highest = data;			// adjust the highest value if necessary
 			if (lowest> data) lowest = data;				// likewise for the lowest value
 	}
-	//gyro_noise=abs(highest-lowest);						// save the spread in the data for diagnostic display
-	gyro_noise=abs(highest-lowest);
-	return average/samples;										// and return the average drift
+	//g_gyro_noise=abs(highest-lowest);						// save the spread in the data for diagnostic display
+	g_gyro_noise=abs(highest-lowest);
+	return average/samples;										// and return the average g_drift
 }
 
 #endif /* !ABS_GYRO_CAL_H */

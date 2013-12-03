@@ -20,7 +20,7 @@
 
 task abs_sensors()
 {
-	prevtime = nPgmTime;
+	g_prev_time = nPgmTime;
 
 	while(true)
 	{
@@ -31,130 +31,130 @@ task abs_sensors()
 		//-------------------------
 		// HiTechnic IR Sensor
 		//-------------------------
-		bearingAC = HTIRS2readACDir(HTIRS2);				// Read the IR bearing from the sensor
-		currDir = (float) bearingAC;
+		g_bearing_ac1 = HTIRS2readACDir(HTIRS2);				// Read the IR bearing from the sensor
+		g_curr_dir1 = (float) g_bearing_ac1;
 
-		HTIRS2readAllACStrength(HTIRS2, acS[0], acS[1], acS[2], acS[3], acS[4]);
+		HTIRS2readAllACStrength(HTIRS2, g_acs1[0], g_acs1[1], g_acs1[2], g_acs1[3], g_acs1[4]);
 		//-----------------------------------
 		// code for the peaks of IR sensor
 		//-----------------------------------
-		if (bearingAC!=0)								// we have a valid IR signal
+		if (g_bearing_ac1!=0)								// we have a valid IR signal
 		{
 			int maximum = -1;
 			int peak = 0, offset=0;
 			for (int i=0;i<5;i++)	// scan array to find the peak entry
-			{	if (acS[i]>maximum)
+			{	if (g_acs1[i]>maximum)
 				{
 					peak = i;
-					maximum = acS[i];
+					maximum = g_acs1[i];
 				}
 			}
 			offset=0;
-			if ((peak < 4) && (peak>0) && (acS[peak] != 0))  // we are not working with extreme value
+			if ((peak < 4) && (peak>0) && (g_acs1[peak] != 0))  // we are not working with extreme value
 			{
-				if (acS[peak-1]!=acS[peak+1]) // if the values either side of the peak are identical then peak is peak
+				if (g_acs1[peak-1]!=g_acs1[peak+1]) // if the values either side of the peak are identical then peak is peak
 				{
-					if (acS[peak-1]>acS[peak+1])	// otherwise decide which side has higher signal
+					if (g_acs1[peak-1]>g_acs1[peak+1])	// otherwise decide which side has higher signal
 					{
-						offset = -25*(1-(float)(acS[peak]-acS[peak-1])/		// calculate the bias away from the peak
-						max(acS[peak], acS[peak-1]));
+						offset = -25*(1-(float)(g_acs1[peak]-g_acs1[peak-1])/		// calculate the bias away from the peak
+						max(g_acs1[peak], g_acs1[peak-1]));
 					}
 					else
 					{
-						offset = 25*(1-(float)(acS[peak]-acS[peak+1])/
-						max(acS[peak], acS[peak+1]));
+						offset = 25*(1-(float)(g_acs1[peak]-g_acs1[peak+1])/
+						max(g_acs1[peak], g_acs1[peak+1]));
 					}
 				}
 			}
-			IR_Bearing = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
-			//nxtDisplayBigTextLine(3, "%2d", IR_Bearing);
+			g_ir_bearing1 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
+			//nxtDisplayBigTextLine(3, "%2d", g_ir_bearing1);
 		}
 		//-------------------------
 		// HiTechnic IR Sensor 2
 		//-------------------------
-		bearingAC2 = HTIRS2readACDir(HTIRS2_2);				// Read the IR bearing from the sensor
-		currDir2 = (float) bearingAC2;
+		g_bearing_ac2 = HTIRS2readACDir(HTIRS2_2);				// Read the IR bearing from the sensor
+		g_curr_dir2 = (float) g_bearing_ac2;
 
-		HTIRS2readAllACStrength(HTIRS2_2, acS2[0], acS2[1], acS2[2], acS2[3], acS2[4]);
+		HTIRS2readAllACStrength(HTIRS2_2, g_acs2[0], g_acs2[1], g_acs2[2], g_acs2[3], g_acs2[4]);
 		//-----------------------------------
 		// code for the peaks of IR sensor 2
 		//-----------------------------------
-		if (bearingAC2!=0)								// we have a valid IR signal
+		if (g_bearing_ac2!=0)								// we have a valid IR signal
 		{
 			int maximum = -1;
 			int peak = 0, offset=0;
 			for (int i=0;i<5;i++)	// scan array to find the peak entry
-			{	if (acS2[i]>maximum)
+			{	if (g_acs2[i]>maximum)
 				{
 					peak = i;
-					maximum = acS2[i];
+					maximum = g_acs2[i];
 				}
 			}
 			offset=0;
-			if ((peak < 4) && (peak>0) && (acS2[peak] != 0))  // we are not working with extreme value
+			if ((peak < 4) && (peak>0) && (g_acs2[peak] != 0))  // we are not working with extreme value
 			{
-				if (acS2[peak-1]!=acS2[peak+1]) // if the values either side of the peak are identical then peak is peak
+				if (g_acs2[peak-1]!=g_acs2[peak+1]) // if the values either side of the peak are identical then peak is peak
 				{
-					if (acS2[peak-1]>acS2[peak+1])	// otherwise decide which side has higher signal
+					if (g_acs2[peak-1]>g_acs2[peak+1])	// otherwise decide which side has higher signal
 					{
-						offset = -25*(1-(float)(acS2[peak]-acS2[peak-1])/		// calculate the bias away from the peak
-						max(acS2[peak], acS2[peak-1]));
+						offset = -25*(1-(float)(g_acs2[peak]-g_acs2[peak-1])/		// calculate the bias away from the peak
+						max(g_acs2[peak], g_acs2[peak-1]));
 					}
 					else
 					{
-						offset = 25*(1-(float)(acS2[peak]-acS2[peak+1])/
-						max(acS2[peak], acS2[peak+1]));
+						offset = 25*(1-(float)(g_acs2[peak]-g_acs2[peak+1])/
+						max(g_acs2[peak], g_acs2[peak+1]));
 					}
 				}
 			}
-			IR_Bearing2 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
-			//nxtDisplayBigTextLine(3, "%2d", IR_Bearing);
+			g_ir_bearing2 = (float)((peak-2)*50) + offset;		// direction is the total of the peak bias plus the adjacent bias
+			//nxtDisplayBigTextLine(3, "%2d", g_ir_bearing1);
 		}
 		//-------------------------
 		// HiTechnic Gyro
 		//-------------------------
 
-		currtime=nPgmTime;
-		rawgyro = HTGYROreadRot(HTGYRO);
-		constHeading += (rawgyro - drift) * (float)(currtime-prevtime)/1000;
-		relHeading += (rawgyro - drift) * (float)(currtime-prevtime)/1000;
-		//constHeading += (rawgyro - (drift * (float)(currtime-prevtime)/1000));
-		//relHeading += (rawgyro - (drift * (float)(currtime-prevtime)/1000));
-		//constHeading = (rawgyro - (drift * (float)(currtime-prevtime)/1000));
-		//relHeading = (rawgyro - (drift * (float)(currtime-prevtime)/1000));
-		prevtime = currtime;
+		g_curr_time=nPgmTime;
+		g_raw_gyro = HTGYROreadRot(HTGYRO);
+		g_const_heading += (g_raw_gyro - g_drift) * (float)(g_curr_time-g_prev_time)/1000;
+		g_rel_heading += (g_raw_gyro - g_drift) * (float)(g_curr_time-g_prev_time)/1000;
+		//g_const_heading += (g_raw_gyro - (g_drift * (float)(g_curr_time-g_prev_time)/1000));
+		//g_rel_heading += (g_raw_gyro - (g_drift * (float)(g_curr_time-g_prev_time)/1000));
+		//g_const_heading = (g_raw_gyro - (g_drift * (float)(g_curr_time-g_prev_time)/1000));
+		//g_rel_heading = (g_raw_gyro - (g_drift * (float)(g_curr_time-g_prev_time)/1000));
+		g_prev_time = g_curr_time;
 
-		recont_heading = constHeading % 360;
-		if(recont_heading<0) recont_heading += 360;
+		g_recont_heading = g_const_heading % 360;
+		if(g_recont_heading<0) g_recont_heading += 360;
 
 		//-------------------------
 		// HiTechnic accelermoeter
 		//-------------------------
 
-		HTACreadAllAxes(HTAC, _x_axis, _y_axis, _z_axis);
-		accelermoeter_sensor = _x_axis;
+		HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis);
+		g_accelermoeter_sensor = g_x_axis;
 
-		if(sensor_reference_drive == true)
+		if(g_sensor_reference_drive == true)
 		{
-			accelermoeter_reads++;
-			accelermoeter_array[accelermoeter_reads%50]=accelermoeter_sensor;
+			g_accelermoeter_reads++;
+			g_accelermoeter_array[g_accelermoeter_reads%50]=g_accelermoeter_sensor;
 			for(int i=0;i<30;i++)
 			{
-				accelermoeter_total_value = accelermoeter_array[i];
+				g_accelermoeter_total_value = g_accelermoeter_array[i];
 			}
-			accelermoeter_average = accelermoeter_total_value/50;
+			g_accelermoeter_average = g_accelermoeter_total_value/50;
 		}
 		else
 		{
-			accelermoeter_reads = 0;
-			accelermoeter_total_value = 0;
-			accelermoeter_average = 0;
-			memset(accelermoeter_array,0,30);
+			g_accelermoeter_reads = 0;
+			g_accelermoeter_total_value = 0;
+			g_accelermoeter_average = 0;
+			memset(g_accelermoeter_array,0,30);
 		}
 		//-------------------------
 		// HiTechnic angle sensor
 		//-------------------------
-		//if(reset_angle == true) HTANGresetAccumulatedAngle(HTANG);
+		//if(g_reset_angle == true) HTANGresetAccumulatedAngle(HTANG);
 		//else angle_sensor = HTANGreadAccumulatedAngle(HTANG);
 	}
 }

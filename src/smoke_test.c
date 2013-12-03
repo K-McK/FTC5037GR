@@ -54,11 +54,11 @@ task main()
 {
 	StartTask(screen);
 	StartTask(abs_sensors_read);
-	test_value = 1;
+	g_test_value = 1;
 	while(true)
 	{
 		while(nNxtButtonPressed == kEnterButton){}
-		screen_state = s_smoke_test;
+		g_screen_state = S_SMOKE_TEST;
 		//---------------------------------------
 		// Start of mission selection
 		//---------------------------------------
@@ -69,15 +69,15 @@ task main()
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
-				if(smoke_test_num < smoke_test_total) smoke_test_num++;
-				else smoke_test_num = smoke_test_total;
+				if(g_smoke_test_num < g_smoke_test_total) g_smoke_test_num++;
+				else g_smoke_test_num = g_smoke_test_total;
 			}
 			if(nNxtButtonPressed == kLeftButton)
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kLeftButton){}
-				if(smoke_test_num > 1) smoke_test_num--;
-				else smoke_test_num = 1;
+				if(g_smoke_test_num > 1) g_smoke_test_num--;
+				else g_smoke_test_num = 1;
 			}
 		}
 		PlaySoundFile("! Click.rso");

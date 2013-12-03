@@ -32,16 +32,16 @@ task abs_joystick_gunner()
 			motor[jolly_roger]= 0;
 			break;
 		case 0:
-			motor[jolly_roger] = FLAG_SPEED_UP;
+			motor[jolly_roger] = g_flag_speed_up;
 			break;
 		case 2:
-			motor[jolly_roger] = FLAG_SPEED_RIGHT;
+			motor[jolly_roger] = g_flag_speed_right;
 			break;
 		case 6:
-			motor[jolly_roger] = FLAG_SPEED_LEFT;
+			motor[jolly_roger] = g_flag_speed_left;
 			break;
 		case 4:
-			motor[jolly_roger] = FLAG_SPEED_DOWN;
+			motor[jolly_roger] = g_flag_speed_down;
 			break;
 		}
 
@@ -49,7 +49,7 @@ task abs_joystick_gunner()
 		// sky hook
 		//-----------------------------
 
-		if(joy2Btn(4)) motor[sky_hook]=ROBOT_LIFT_UP;
+		if(joy2Btn(4)) motor[sky_hook]=g_robot_lift_up;
 
 		//-----------------------------
 		// roger slide
@@ -61,15 +61,15 @@ task abs_joystick_gunner()
 		//-----------------------------
 		// robot kill switch
 		//-----------------------------
-		if((joy1Btn(9))&&(joy2Btn(9))&&(joy1Btn(10))&&(joy2Btn(10))) program_done = true;
+		if((joy1Btn(9))&&(joy2Btn(9))&&(joy1Btn(10))&&(joy2Btn(10))) g_program_done = true;
 
 		//-----------------------------
 		// block lift
 		//-----------------------------
 		if(joystick.joy2_y1>10)
 		{
-			motor[block_lift_motor] = BLOCK_SPEED_UP;
-			motor[block_lift_motor2] = BLOCK_SPEED_UP;
+			motor[block_lift_motor] = g_block_speed_up;
+			motor[block_lift_motor2] = g_block_speed_up;
 		}
 		else if(joystick.joy2_y1<-10)
 		{
@@ -80,8 +80,8 @@ task abs_joystick_gunner()
 			}
 			else
 			{
-				motor[block_lift_motor] = BLOCK_SPEED_DOWN;
-				motor[block_lift_motor2] = BLOCK_SPEED_DOWN;
+				motor[block_lift_motor] = g_block_speed_down;
+				motor[block_lift_motor2] = g_block_speed_down;
 			}
 		}
 
