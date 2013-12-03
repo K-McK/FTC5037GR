@@ -26,20 +26,20 @@
 void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method e_stop, int degree, int speed)
 {
 	int i = 0;
-	relHeading = 0;
+	g_rel_heading = 0;
 	int target = 0;
 
 	if(e_stop == TURN_TO)
 	{
 		if(dir == COUNTERCLOCKWISE)
 		{
-			if(degree<recont_heading) target = -(recont_heading-degree);
-			else target = -(360-(degree-recont_heading));
+			if(degree<g_recont_heading) target = -(g_recont_heading-degree);
+			else target = -(360-(degree-g_recont_heading));
 		}
 		else
 		{
-			if(degree<recont_heading) target = 360-(recont_heading-degree);
-			else target = degree-recont_heading;
+			if(degree<g_recont_heading) target = 360-(g_recont_heading-degree);
+			else target = degree-g_recont_heading;
 		}
 		abs_turn(dir, turn_method, TURN, target, speed);
 		PlaySoundFile("! Click.rso");
@@ -88,8 +88,8 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 	{
 		while(i < 5)
 		{
-			if (abs(relHeading) > abs(degree)) i++;
-			nxtDisplayCenteredBigTextLine(5, "%d", recont_heading);
+			if (abs(g_rel_heading) > abs(degree)) i++;
+			nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
 		}
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;

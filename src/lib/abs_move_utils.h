@@ -22,8 +22,6 @@
  * @def REVERSE_HEADING
  *      helps the robot calculate the gyro drive
  */
-#define FORWARD_HEADING 0
-#define REVERSE_HEADING 180
 
 /**
  *  @enum e_direction This enum is used to let the robot know to turn clockwise or counterclickwise

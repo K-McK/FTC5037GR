@@ -23,7 +23,7 @@ const tMUXSensor HTIRS2_2 = msensor_S3_3;     // HiTechnic Infrared sensor 2
 //const tMUXSensor HTANG = msensor_S3_3;
 const tMUXSensor LEGOLS = msensor_S3_4;
 
-bool gyroTrue = false;
+bool g_gyro_true = false;
 
 //=========================================================
 // Robot constants
@@ -60,21 +60,21 @@ bool gyroTrue = false;
 #define GRABBER_LEFT_CLOSE 120
 #define GRABBER_RIGHT_CLOSE 131
 
-const int BLOCK_SPEED_DOWN = -60;
-const int BLOCK_SPEED_UP = 100;
+const int g_block_speed_down = -60;
+const int g_block_speed_up = 100;
 
-const int ROBOT_LIFT_DOWN = -40;
-const int ROBOT_LIFT_UP = 100;
+const int g_robot_lift_down = -40;
+const int g_robot_lift_up = 100;
 
-const int FLAG_SPEED_DOWN = 90;
-const int FLAG_SPEED_RIGHT = 20;
-const int FLAG_SPEED_UP = -90;
-const int FLAG_SPEED_LEFT = -20;
+const int g_flag_speed_down = 90;
+const int g_flag_speed_right = 20;
+const int g_flag_speed_up = -90;
+const int g_flag_speed_left = -20;
 
-const int ABDD_UP = 10;
-const int ABDD_DOWN = 235;
+const int g_abdd_up = 10;
+const int g_abdd_down = 235;
 
-const int g_GYRO_ADJUST = 10;
+const int g_gyro_adjust = 10;
 
 //=========================================================
 // auto selection points
@@ -87,239 +87,261 @@ typedef enum
 	SELECTION_MISSION_POINT,
 	SELECTION_MISSION_DELAY,
 	SELECTION_END_POINT,
+	SELECTION_SUB_GRABBERS,
 	SELECTION_GYRO_CAL
 } auto_selection_points;
 
 auto_selection_points auto_selection_point = SELECTION_START_POINT;
 
 //=========================================================
+// auto sub selections
+//=========================================================
+
+typedef enum
+{
+	SUB_SELECTION_GRABBERS_OUT,
+	SUB_SELECTION_GRABBERS_IN
+} auto_sub_selection;
+
+auto_sub_selection auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+
+//=========================================================
 // auto movements
 //=========================================================
-int to_turn_dist = 0;
+int g_to_turn_dist = 0;
 
-const int forward_crate1_to_turn_dist = 135;
-const int forward_crate2_to_turn_dist = 110;
-const int forward_crate3_to_turn_dist = 60;
-const int forward_crate4_to_turn_dist = 35;
+const int g_forward_crate1_to_turn_dist = 135;
+const int g_forward_crate2_to_turn_dist = 110;
+const int g_forward_crate3_to_turn_dist = 60;
+const int g_forward_crate4_to_turn_dist = 35;
 
-const int backwards_crate1_to_turn_dist = 45;
-const int backwards_crate2_to_turn_dist = 70;
-const int backwards_crate3_to_turn_dist = 120;
-const int backwards_crate4_to_turn_dist = 145;
+const int g_backwards_crate1_to_turn_dist = 45;
+const int g_backwards_crate2_to_turn_dist = 70;
+const int g_backwards_crate3_to_turn_dist = 120;
+const int g_backwards_crate4_to_turn_dist = 145;
 
 //=========================================================
 // Smoke test varaibles
 //=========================================================
 
-int smoke_test_num = 1;
-int smoke_test_total = 12;
-int smoke_run = false;
-int test_value = 0;
+int g_smoke_test_num = 1;
+int g_smoke_test_total = 12;
+int g_smoke_run = false;
+int g_test_value = 0;
 
 //=========================================================
 // Misc
 //=========================================================
 
-int auto_ending_points = 4;
-int travel_dist = 0;
-int auto_starting_points = 4;
-int auto_missions = 10;
-int drive_heading = 0;
-int IR_heading = 5;
-bool program_done = false;
+int g_auto_ending_points = 4;
+int g_travel_dist = 0;
+int g_auto_starting_points = 4;
+int g_auto_missions = 10;
+int g_drive_heading = 0;
+int g_ir_heading = 5;
+bool g_program_done = false;
 
-bool Joy1Enabled = false;
-bool Joy2Enabled = false;
+bool g_joy1_enabled = false;
+bool g_joy2_enabled = false;
 
-int selection_value = 0;
+int g_selection_value = 0;
 
 //=============================================================
 // Define user configurable parameters
 //=============================================================
-int end_point = 1;
-int start_point = 1;
-int mission_number = 1;
+int g_end_point = 1;
+int g_start_point = 1;
+int g_mission_number = 1;
 int delay = 0;
-int end_delay = 0;
-int start_delay = 0;
-int gyroCalTime = 5;
+int g_end_delay = 0;
+int g_start_delay = 0;
+int g_gyro_cal_time = 5;
 
 //=============================================================
 // Gyro variables
 //=============================================================
-int gyro_noise = 0;
-long starttime = 0;
-int drift = 0;
-float constHeading = 0;
-float relHeading = 0;
-long currtime = 0;
-long prevtime = 0;
-int rawgyro = 0;
-int recont_heading = 0; //this is the recalculated const gyro heading
+int g_gyro_noise = 0;
+long g_start_time = 0;
+int g_drift = 0;
+float g_const_heading = 0;
+float g_rel_heading = 0;
+long g_curr_time = 0;
+long g_prev_time = 0;
+int g_raw_gyro = 0;
+int g_recont_heading = 0; //this is the recalculated const gyro heading
 
 //=============================================================
 // Sensor variables
 //=============================================================
 int g_light_sensor;
-const int ac_time_limit = 200;
-int bearingAC = 0;
-int bearingAC2 = 0;
-float IR_Bearing = 0.0;
-float IR_Bearing2 = 0.0;
-int acS[5];
-int acS2[5];
-float currDir = 0.0;
-float currDir2 = 0.0;
+const int g_ac_time_limit = 200;
+int g_bearing_ac1 = 0;
+int g_bearing_ac2 = 0;
+float g_ir_bearing1 = 0.0;
+float g_ir_bearing2 = 0.0;
+int g_acs1[5];
+int g_acs2[5];
+float g_curr_dir1 = 0.0;
+float g_curr_dir2 = 0.0;
 int misc = 0;
-bool reset_angle = false;
+bool g_reset_angle = false;
 
 //-----------------------------
 // accelermoeter variables
 //-----------------------------
-int accelermoeter_sensor = 0;
-int _x_axis = 0;
-int _y_axis = 0;
-int _z_axis = 0;
-const int target_angle = 110;
-ubyte accelermoeter_reads = 0;
-int accelermoeter_array [] = {0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30};
-ubyte accelermoeter_total_value = 0;
-int accelermoeter_average = 0;
+int g_accelermoeter_sensor = 0;
+int g_x_axis = 0;
+int g_y_axis = 0;
+int g_z_axis = 0;
+const int g_target_angle = 110;
+ubyte g_accelermoeter_reads = 0;
+int g_accelermoeter_array [] = {0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30};
+ubyte g_accelermoeter_total_value = 0;
+int g_accelermoeter_average = 0;
 
-int sensor_num = 1;
-int sensor_max = 4;
-int sensor_value = 0;
+int g_sensor_num = 1;
+int g_sensor_max = 4;
+int g_sensor_value = 0;
 /**
 *
-*  @def st_gyro
+*  @def ST_GYRO
 *     The reference value for the sensor in smoke test
-*  @def st_IR
+*  @def ST_IR
 *     The reference value for the sensor in smoke test
-*  @def st_accelerometer
+*  @def ST_ACCELEROMETER
 *     The reference value for the sensor in smoke test
-*  @def st_tilt
+*  @def ST_TILT
 *     The reference value for the sensor in smoke test
 */
 
-#define st_gyro 1
-#define st_IR 2
-#define st_accelerometer 3
-#define st_tilt 4
+#define ST_GYRO 1
+#define ST_IR 2
+#define ST_ACCELEROMETER 3
+#define ST_TILT 4
 
-bool sensor_reference_drive = false;
+bool g_sensor_reference_drive = false;
 
-string sensor_list [] = {
+string g_sensor_list [] = {
 	"unknown ",
 	"gyro    ",
 	"IR      ",
 	"accel   ",
 	"tilt    "};
 
+	string basic_word_list [] = {
+	"unknown ",
+	"in      ",
+	"out     ",
+	"yes     ",
+	"no      "};
+
 //=============================================================
 // Define screen related variables
 //=============================================================
 /**
 *
-*  @def s_clear
+*  @def S_CLEAR
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_mission
+*  @def S_MISSION
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_delay
+*  @def S_DELAY
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_cal_time
+*  @def S_CAL_TIME
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_gyro_cal
+*  @def S_GYRO_CAL
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_ready
+*  @def S_READY
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_delay_wait
+*  @def S_DELAY_WAIT
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_gyro_show
+*  @def S_GYRO_SHOW
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_error
+*  @def S_ERROR
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_smoke_test
+*  @def S_SMOKE_TEST
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_smoke_run1
+*  @def S_SMOKE_RUN1
 *     Tells the robot the screen state number for this screen statestate
-*  @def S_smoke_run2
+*  @def S_SMOKE_RUN2
 *     Tells the robot the screen state number for this screen statestate
-*  @def S_smoke_run3
+*  @def S_SMOKE_RUN3
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_screen_call
+*  @def S_SCREEN_CALL
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_IR_show
+*  @def S_IR_SHOW
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_ac_show
+*  @def S_AC_SHOW
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_misc_show
+*  @def S_MISC_SHOW
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_starting_point
+*  @def S_STARTING_POINT
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_ending_point
+*  @def S_ENDING_POINT
 *     Tells the robot the screen state number for this screen statestate
 *
 */
 
-#define s_clear 0
-#define s_mission 1
-#define s_delay 2
-#define s_cal_time 3
-#define s_gyro_cal 4
-#define s_ready 5
-#define s_delay_wait 6
-#define s_gyro_show 7
-#define s_error 8
-#define s_smoke_test 9
-#define s_smoke_run1 10
-#define S_smoke_run2 11
-#define S_smoke_run3 12
-#define s_screen_call 13
-#define s_IR_show 14
-#define s_ac_show 15
-#define s_misc_show 16
-#define s_starting_point 17
-#define s_ending_point 18
+#define S_CLEAR 0
+#define S_MISSION 1
+#define S_DELAY 2
+#define S_CAL_TIME 3
+#define S_GYRO_CAL 4
+#define S_READY 5
+#define S_DELAY_WAIT 6
+#define S_GYRO_SHOW 7
+#define S_ERROR 8
+#define S_SMOKE_TEST 9
+#define S_SMOKE_RUN1 10
+#define S_SMOKE_RUN2 11
+#define S_SMOKE_RUN3 12
+#define S_SCREEN_CALL 13
+#define S_IR_SHOW 14
+#define S_AC_SHOW 15
+#define S_MISC_SHOW 16
+#define S_STARTING_POINT 17
+#define S_ENDING_POINT 18
+#define s_selection_sub_grabbers 19
+#define s_angle_show 20
 
-int screen_state = 1;
+int g_screen_state = 1;
 
 //==============================================================
 // Define error numbers
 //==============================================================
 /**
 *
-*  @def err_none
+*  @def ERR_NONE
 *     Tells the robot that theres no error
-*  @def err_gyro_cal
+*  @def ERR_GYRO_CAL
 *     Tells the robot that theres a error with the gyro calibrate
-*  @def err_gyro_mux
+*  @def ERR_GYRO_MUX
 *     Tells the robot that theres a error with the gyro mux
-*  @def err_sensor_mux
+*  @def ERR_SENSOR_MUX
 *     Tells the robot that theres a error with the sensor mux
-*  @def err_joysticks
+*  @def ERR_JOYSTICKS
 *     Tells the robot that theres a error with the joysticks
-*  @def err_accelermoeter
+*  @def ERR_ACCELERMOETER
 *     Tells the robot that theres a error with the accelermoeter
 *
 */
-#define err_none 0
-#define err_gyro_cal 1
-#define err_gyro_mux 2
-#define err_sensor_mux 3
-#define err_joysticks 4
-#define err_accelermoeter 5
+#define ERR_NONE 0
+#define ERR_GYRO_CAL 1
+#define ERR_GYRO_MUX 2
+#define ERR_SENSOR_MUX 3
+#define ERR_JOYSTICKS 4
+#define ERR_ACCELERMOETER 5
 
 int error = 0;
 
 //==============================================================================
 // Define the text to be displayed for each starting point line 1
 //==============================================================================
-string StartingNames1 [] = {
+string g_starting_names1 [] = {
 	"        ",
 	"S1      ",
-	"Test 2  ",
-	"Test 3  ",
-	"Test 4  ",
+	"S2      ",
+	"S3      ",
+	"S4  ",
 	"Test 5  ",
 	"Test 6  ",
 	"Test 7  ",
@@ -342,7 +364,7 @@ string StartingNames1 [] = {
 //==============================================================================
 // Define the text to be displayed for each starting point line 2
 //==============================================================================
-string StartingNames2 [] = {
+string g_starting_names2 [] = {
 	"        ",
 	"        ",
 	"Test 2  ",
@@ -370,7 +392,7 @@ string StartingNames2 [] = {
 //==============================================================================
 // Define the text to be displayed for each ending point line 1
 //==============================================================================
-string EndingNames1 [] = {
+string g_ending_names1 [] = {
 	"        ",
 	"Stop    ",
 	"Ramp 1  ",
@@ -398,7 +420,7 @@ string EndingNames1 [] = {
 //==============================================================================
 // Define the text to be displayed for each ending point line 2
 //==============================================================================
-string EndingNames2 [] = {
+string g_ending_names2 [] = {
 	"        ",
 	"        ",
 	"        ",
@@ -426,14 +448,14 @@ string EndingNames2 [] = {
 //==============================================================================
 // Define the text to be displayed for each mission
 //==============================================================================
-string MissionNames1 [] = {
+string g_mission_names1 [] = {
 	"        ",
 	"IR crate",
 	"crate 4 ",
 	"crate 3 ",
 	"crate 2 ",
 	"crate 1 ",
-	"ramp    ",
+	"defence ",
 	"Test 7  ",
 	"Test 8  ",
 	"Test 9  ",
@@ -454,7 +476,7 @@ string MissionNames1 [] = {
 //==============================================================================
 // Define the text to be displayed on the second line for each mission
 //==============================================================================
-string MissionNames2 [] = {
+string g_mission_names2 [] = {
 	"        ",
 	"Test 1  ",
 	"Test 2  ",
@@ -535,7 +557,7 @@ string error_list2 [] = {
 //==============================================================================
 // Define the text to be displayed for smoke test line 1
 //==============================================================================
-string smoke_test1 [] = {
+string g_smoke_test1 [] = {
 	"Unknown ",
 	"Jolly   ",
 	"Drive   ",
@@ -563,7 +585,7 @@ string smoke_test1 [] = {
 //==============================================================================
 // Define the text to be displayed for smoke test line 2
 //==============================================================================
-string smoke_test2 [] = {
+string g_smoke_test2 [] = {
 	"Unknown ",
 	"Roger   ",
 	"Train   ",

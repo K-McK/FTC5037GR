@@ -57,10 +57,10 @@
 task main ()
 {
 	abs_tele_op_initialize();
-	//if(!Joy1Enabled || !Joy2Enabled)
+	//if(!g_joy1_enabled || !g_joy2_enabled)
 	//{
 	//	error = e_joysticks;
-	//	screen_state = s_error;
+	//	g_screen_state = S_ERROR;
 	//	while(true)
 	//	{
 	//		PlayTone(20,200);
@@ -68,7 +68,7 @@ task main ()
 	//	}
 	//}
 	StartTask(abs_joystick_gunner);
-	while(program_done==false)
+	while(g_program_done==false)
 	{
 		abs_joystick_drive(LINEAR);
 	}

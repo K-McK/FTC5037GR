@@ -58,6 +58,9 @@
 #include "lib/abs_initialize.h"
 #include "lib/abs_motor.h"
 #include "lib/abs_S1_mission_exicute.h"
+#include "lib/abs_S2_mission_exicute.h"
+#include "lib/abs_S3_mission_exicute.h"
+#include "lib/abs_S4_mission_exicute.h"
 
 //========================================
 // Main program
@@ -66,10 +69,19 @@
 task main()
 {
 	initialize();
-	switch(start_point)
+	switch(g_start_point)
 	{
 	case 1:
 		abs_S1_mission_exicute();
+		break;
+	case 2:
+		abs_S2_mission_exicute();
+		break;
+	case 3:
+		abs_S3_mission_exicute();
+		break;
+	case 4:
+		abs_S4_mission_exicute();
 		break;
 	}
 }

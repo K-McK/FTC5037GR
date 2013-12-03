@@ -32,23 +32,23 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	int i = 0;
 
 	nMotorEncoder(right_motor)= 0;
-	relHeading = 0;
+	g_rel_heading = 0;
 
 	//------------------------
 	// Determines direction
 	//------------------------
-	if(dir == FORWARD)
-	{
-		drive_heading = FORWARD_HEADING;
-		//motor(right_motor)=speed;
-		//motor(left_motor)=speed;
-	}
-	else
-	{
-		drive_heading = REVERSE_HEADING;
-		//motor(right_motor)=-speed;
-		//motor(left_motor)=-speed;
-	}
+	//if(dir == FORWARD)
+	//{
+	//	g_drive_heading = FORWARD_HEADING;
+	//	//motor(right_motor)=speed;
+	//	//motor(left_motor)=speed;
+	//}
+	//else
+	//{
+	//	g_drive_heading = REVERSE_HEADING;
+	//	//motor(right_motor)=-speed;
+	//	//motor(left_motor)=-speed;
+	//}
 	//------------------------
 	// Light stopping method
 	//------------------------
@@ -86,14 +86,14 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	{
 		if(dir == FORWARD)
 		{
-			while(IR_Bearing > dist)
+			while(g_ir_bearing1 > dist)
 			{
 				abs_gyro_drive(speed,dir);
 			}
 		}
 		else
 		{
-			while(IR_Bearing < dist)
+			while(g_ir_bearing1 < dist)
 			{
 				abs_gyro_drive(speed,dir);
 			}
@@ -106,14 +106,14 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	{
 		if(dir == FORWARD)
 		{
-			while(IR_Bearing2 > dist)
+			while(g_ir_bearing2 > dist)
 			{
 				abs_gyro_drive(speed,dir);
 			}
 		}
 		else
 		{
-			while(IR_Bearing2 < dist)
+			while(g_ir_bearing2 < dist)
 			{
 				abs_gyro_drive(speed,dir);
 			}
@@ -125,13 +125,13 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		else if(dist_method == E_TILT)
 		{
 			int j = 0;
-			sensor_reference_drive = true;
+			g_sensor_reference_drive = true;
 			while(j<30)
 			{
 				abs_gyro_drive(speed,dir);
-				if(accelermoeter_average > dist) j++;
+				if(g_accelermoeter_average > dist) j++;
 			}
-			sensor_reference_drive = false;
+			g_sensor_reference_drive = false;
 		}
 		//------------------------
 		// angle sensor stopping method
