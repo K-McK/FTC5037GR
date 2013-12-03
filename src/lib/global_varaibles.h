@@ -76,6 +76,22 @@ const int ABDD_DOWN = 235;
 const int g_GYRO_ADJUST = 10;
 
 //=========================================================
+// auto selection points
+//=========================================================
+
+typedef enum
+{
+	SELECTION_START_POINT,
+	SELECTION_START_DELAY,
+	SELECTION_MISSION_POINT,
+	SELECTION_MISSION_DELAY,
+	SELECTION_END_POINT,
+	SELECTION_GYRO_CAL
+} auto_selection_points;
+
+auto_selection_points auto_selection_point = SELECTION_START_POINT;
+
+//=========================================================
 // auto movements
 //=========================================================
 int to_turn_dist = 0;
@@ -116,6 +132,8 @@ int selection_value = 0;
 int end_point = 1;
 int start_point = 1;
 int mission_number = 1;
+int delay = 0;
+int end_delay = 0;
 int start_delay = 0;
 int gyroCalTime = 5;
 
@@ -198,7 +216,7 @@ string sensor_list [] = {
 *     Tells the robot the screen state number for this screen statestate
 *  @def s_mission
 *     Tells the robot the screen state number for this screen statestate
-*  @def s_start_delay
+*  @def s_delay
 *     Tells the robot the screen state number for this screen statestate
 *  @def s_cal_time
 *     Tells the robot the screen state number for this screen statestate
@@ -237,7 +255,7 @@ string sensor_list [] = {
 
 #define s_clear 0
 #define s_mission 1
-#define s_start_delay 2
+#define s_delay 2
 #define s_cal_time 3
 #define s_gyro_cal 4
 #define s_ready 5
@@ -407,7 +425,7 @@ string MissionNames1 [] = {
 	"crate 3 ",
 	"crate 2 ",
 	"crate 1 ",
-	"Test 6  ",
+	"ramp    ",
 	"Test 7  ",
 	"Test 8  ",
 	"Test 9  ",
@@ -435,8 +453,8 @@ string MissionNames2 [] = {
 	"Test 3  ",
 	"Test 4  ",
 	"Test 5  ",
-	"Test 6  ",
-	"Test 7  ",
+	"score 4 ",
+	"score 3 ",
 	"Test 8  ",
 	"Test 9  ",
 	"Test 10 ",

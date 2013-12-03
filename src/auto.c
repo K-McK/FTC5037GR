@@ -57,6 +57,7 @@
 #include "lib/abs_drive.h"
 #include "lib/abs_initialize.h"
 #include "lib/abs_motor.h"
+#include "lib/abs_S1_mission_exicute.h"
 
 //========================================
 // Main program
@@ -68,113 +69,7 @@ task main()
 	switch(start_point)
 	{
 	case 1:
-		switch(mission_number)
-		{
-		case 0:
-			abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
-			wait10Msec(300);
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-			wait10Msec(300);
-			abs_turn(CLOCKWISE, POINT, TURN, 45, 60);
-			wait10Msec(300);
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 0, 60);
-			break;
-
-		case 1:
-			abs_drive(FORWARD, E_IR_DETECT, 0, 40, true);
-			abs_drive(FORWARD, E_ANGLE, /*distance in cm*/15, 50, true);
-			wait1Msec(500);
-			servo[abdd] = ABDD_UP;
-			wait1Msec(2000);
-			servo[abdd] = ABDD_DOWN;
-			break;
-
-		case 2:
-			screen_state = s_gyro_show;
-			to_turn_dist= crate4_to_turn_dist;
-			abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true);
-			wait1Msec(2000);
-			servo[abdd] = ABDD_UP;
-			wait1Msec(2000);
-			servo[abdd] = ABDD_DOWN;
-			break;
-
-		case 3:
-			to_turn_dist= crate3_to_turn_dist;
-			abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true);
-			servo[abdd] = ABDD_UP;
-			wait1Msec(2000);
-			servo[abdd] = ABDD_DOWN;
-			break;
-
-		case 4:
-			to_turn_dist= crate2_to_turn_dist;
-			abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true);
-			servo[abdd] = ABDD_UP;
-			wait1Msec(2000);
-			servo[abdd] = ABDD_DOWN;
-			break;
-
-		case 5:
-			to_turn_dist= crate1_to_turn_dist;
-			abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true);
-			servo[abdd] = ABDD_UP;
-			wait1Msec(2000);
-			servo[abdd] = ABDD_DOWN;
-			break;
-
-		case 6:
-			screen_state = s_gyro_show;
-			while(true){}
-			break;
-
-		case 140:
-			int dist = 30;
-			bool done = false;
-			while(done == false)
-			{
-				int ac_start_time = nPgmTime;
-				int i = 0;
-				while((accelermoeter_sensor < dist+5) && (accelermoeter_sensor > dist-5) && ((ac_start_time - nPgmTime)<500))
-				{
-					i++;
-					PlayTone(20,20);
-					wait1Msec(1);
-				}
-				if(i > 490) done = true;
-				PlayTone(20,20);
-			}
-			break;
-		}
-		break;
-	}
-	switch(end_point)
-	{
-	case 1:
-		wait1Msec(2000);
-		servo[abdd] = ABDD_DOWN;
-		motor[right_motor] = 0;
-		motor[left_motor] = 0;
-		motor[sky_hook] = 0;
-		motor[block_lift_motor] = 0;
-		motor[block_lift_motor2] = 0;
-		break;
-	case 2:
-		wait1Msec(2000);
-		servo[abdd] = ABDD_DOWN;
-		abs_drive(FORWARD, E_ANGLE, to_turn_dist, 50, true);
-		wait1Msec(200);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
-		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 85, 50, true);
-		motor[block_lift_motor] = 40;
-		motor[block_lift_motor2] = 40;
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-		motor[block_lift_motor] = 0;
-		motor[block_lift_motor2] = 0;
-		abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-		break;
-	case 3:
+		abs_S1_mission_exicute();
 		break;
 	}
 }

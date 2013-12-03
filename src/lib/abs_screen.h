@@ -33,10 +33,11 @@ task screen ()
 			nxtDisplayBigTextLine(3, MissionNames1[mission_number]);
 			nxtDisplayBigTextLine(5, MissionNames2[mission_number]);
 			break;
-		case s_start_delay:
-			nxtDisplayBigTextLine(1, "Delay");
-			nxtDisplayBigTextLine(3, "%2d", start_delay);
-			nxtDisplayBigTextLine(5, MissionNames1[0]);
+		case s_delay:
+		if(auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
+		else nxtDisplayBigTextLine(1, "Mission ");
+			nxtDisplayBigTextLine(3, "Delay");
+			nxtDisplayBigTextLine(5, "%2d", delay);
 			break;
 		case s_cal_time:
 			nxtDisplayBigTextLine(1, "CalTime");
