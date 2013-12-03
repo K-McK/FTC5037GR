@@ -86,10 +86,23 @@ typedef enum
 	SELECTION_MISSION_POINT,
 	SELECTION_MISSION_DELAY,
 	SELECTION_END_POINT,
+	SELECTION_SUB_GRABBERS,
 	SELECTION_GYRO_CAL
 } auto_selection_points;
 
 auto_selection_points auto_selection_point = SELECTION_START_POINT;
+
+//=========================================================
+// auto sub selections
+//=========================================================
+
+typedef enum
+{
+	SUB_SELECTION_GRABBERS_OUT,
+	SUB_SELECTION_GRABBERS_IN
+} auto_sub_selection;
+
+auto_sub_selection auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 
 //=========================================================
 // auto movements
@@ -207,6 +220,13 @@ string sensor_list [] = {
 	"accel   ",
 	"tilt    "};
 
+	string basic_word_list [] = {
+	"unknown ",
+	"in      ",
+	"out     ",
+	"yes     ",
+	"no      "};
+
 //=============================================================
 // Define screen related variables
 //=============================================================
@@ -272,6 +292,8 @@ string sensor_list [] = {
 #define s_misc_show 16
 #define s_starting_point 17
 #define s_ending_point 18
+#define s_selection_sub_grabbers 19
+#define s_angle_show 20
 
 int screen_state = 1;
 
@@ -309,9 +331,9 @@ int error = 0;
 string StartingNames1 [] = {
 	"        ",
 	"S1      ",
-	"Test 2  ",
-	"Test 3  ",
-	"Test 4  ",
+	"S2      ",
+	"S3      ",
+	"S4  ",
 	"Test 5  ",
 	"Test 6  ",
 	"Test 7  ",
@@ -425,7 +447,7 @@ string MissionNames1 [] = {
 	"crate 3 ",
 	"crate 2 ",
 	"crate 1 ",
-	"ramp    ",
+	"defence ",
 	"Test 7  ",
 	"Test 8  ",
 	"Test 9  ",

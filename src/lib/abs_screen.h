@@ -1,16 +1,16 @@
 /**
- *
- *  @file abs_screen.h
- *
- *  @brief adds a way to put things on the screen
- *
- *  @param None n/a
- *
- *  @return Returns nothing
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file abs_screen.h
+*
+*  @brief adds a way to put things on the screen
+*
+*  @param None n/a
+*
+*  @return Returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 //========================================
 // Screen State
 //========================================
@@ -34,8 +34,8 @@ task screen ()
 			nxtDisplayBigTextLine(5, MissionNames2[mission_number]);
 			break;
 		case s_delay:
-		if(auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
-		else nxtDisplayBigTextLine(1, "Mission ");
+			if(auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
+			else nxtDisplayBigTextLine(1, "Mission ");
 			nxtDisplayBigTextLine(3, "Delay");
 			nxtDisplayBigTextLine(5, "%2d", delay);
 			break;
@@ -102,6 +102,10 @@ task screen ()
 		case s_misc_show:
 			nxtDisplayBigTextLine(1, "misc Value");
 			nxtDisplayBigTextLine(3, "%2d", misc);
+		nxtDisplayBigTextLine(5, MissionNames1[0]);
+		case s_angle_show:
+			nxtDisplayBigTextLine(1, "angle Value");
+			nxtDisplayBigTextLine(3, "%2d", HTANGreadAccumulatedAngle(angle_sensor));
 			nxtDisplayBigTextLine(5, MissionNames1[0]);
 			break;
 		case s_starting_point:
@@ -109,10 +113,15 @@ task screen ()
 			nxtDisplayBigTextLine(3, StartingNames1[start_point]);
 			nxtDisplayBigTextLine(5, StartingNames2[start_point]);
 			break;
-			case s_ending_point:
+		case s_ending_point:
 			nxtDisplayBigTextLine(1, "endPoint");
 			nxtDisplayBigTextLine(3, EndingNames1[end_point]);
 			nxtDisplayBigTextLine(5, EndingNames2[end_point]);
+			break;
+		case s_selection_sub_grabbers:
+			nxtDisplayBigTextLine(1, "Grabbers");
+			nxtDisplayBigTextLine(3, "inOrOut?");
+			nxtDisplayBigTextLine(5, basic_word_list [misc]);
 			break;
 		}
 	}

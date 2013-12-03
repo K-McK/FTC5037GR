@@ -107,7 +107,7 @@ void selection_program()
 	while(nNxtButtonPressed == kEnterButton){}
 	eraseDisplay();
 
-		//---------------------------------------
+	//---------------------------------------
 	// Start of time selection
 	//---------------------------------------
 
@@ -163,6 +163,54 @@ void selection_program()
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
 	eraseDisplay();
+
+	//---------------------------------------
+	// Start of optional sub selection for grabbers on the ram
+	//---------------------------------------
+
+	if(end_point == 2 || end_point == 3)
+	{
+		misc = 1;
+		auto_selection_point = SELECTION_SUB_GRABBERS;
+		screen_state = s_selection_sub_grabbers;
+
+		while(nNxtButtonPressed != kEnterButton)
+		{
+			if(nNxtButtonPressed == kRightButton)
+			{
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed == kRightButton){}
+				if(misc < 2)
+				{
+					misc++;
+					auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
+				}
+				else
+				{
+					end_delay = 2;
+					auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
+				}
+			}
+			if(nNxtButtonPressed == kLeftButton)
+			{
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed == kLeftButton){}
+				if(misc > 1)
+				{
+					misc--;
+					auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+				}
+				else
+				{
+					misc = 1;
+					auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+				}
+			}
+		}
+
+		PlaySoundFile("! Click.rso");
+		while(nNxtButtonPressed == kEnterButton){}
+	}
 
 	//---------------------------------------
 	// Start of gyro cal selection

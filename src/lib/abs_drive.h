@@ -37,18 +37,18 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	// Determines direction
 	//------------------------
-	if(dir == FORWARD)
-	{
-		drive_heading = FORWARD_HEADING;
-		//motor(right_motor)=speed;
-		//motor(left_motor)=speed;
-	}
-	else
-	{
-		drive_heading = REVERSE_HEADING;
-		//motor(right_motor)=-speed;
-		//motor(left_motor)=-speed;
-	}
+	//if(dir == FORWARD)
+	//{
+	//	drive_heading = FORWARD_HEADING;
+	//	//motor(right_motor)=speed;
+	//	//motor(left_motor)=speed;
+	//}
+	//else
+	//{
+	//	drive_heading = REVERSE_HEADING;
+	//	//motor(right_motor)=-speed;
+	//	//motor(left_motor)=-speed;
+	//}
 	//------------------------
 	// Light stopping method
 	//------------------------
