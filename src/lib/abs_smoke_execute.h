@@ -2,7 +2,7 @@
 *
 *  @file abs_smoke_execute.h
 *
-*  @brief exucutes cammands sent in smoke test
+*  @brief executes commands sent in smoke test
 *
 *  @param None n/a
 *
