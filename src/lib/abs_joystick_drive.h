@@ -23,9 +23,15 @@ void abs_joystick_drive(e_joystick_method joy_type)
 	//-----------------------------
 	// robot lift
 	//-----------------------------
-	if(joy1Btn(4)) motor[sky_hook]=g_robot_lift_up;
+	if(joy1Btn(4) || joy2Btn(4)) motor[sky_hook]=g_robot_lift_up;
 	else if(joy1Btn(2))motor[sky_hook]=g_robot_lift_down;
 	else motor[sky_hook] = 0;
+
+		//-----------------------------
+		// sky hook
+		//-----------------------------
+
+		if(joy2Btn(4)) motor[sky_hook]=ROBOT_LIFT_UP;
 
 	//-----------------------------
 	// drive motor controls

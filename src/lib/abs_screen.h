@@ -37,8 +37,8 @@ task screen ()
 			nxtDisplayBigTextLine(5, g_mission_names2[g_mission_number]);
 			break;
 		case S_DELAY:
-		if(auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
-		else nxtDisplayBigTextLine(1, "Mission ");
+			if(auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
+			else nxtDisplayBigTextLine(1, "Mission ");
 			nxtDisplayBigTextLine(3, "Delay");
 			nxtDisplayBigTextLine(5, "%2d", delay);
 			break;
@@ -106,6 +106,10 @@ task screen ()
 			nxtDisplayBigTextLine(1, "misc Value");
 			nxtDisplayBigTextLine(3, "%2d", misc);
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+		case s_angle_show:
+			nxtDisplayBigTextLine(1, "angle Value");
+			nxtDisplayBigTextLine(3, "%2d", HTANGreadAccumulatedAngle(angle_sensor));
+			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 			break;
 		case S_STARTING_POINT:
 			nxtDisplayBigTextLine(1, "startPnt");
@@ -116,6 +120,11 @@ task screen ()
 			nxtDisplayBigTextLine(1, "endPoint");
 			nxtDisplayBigTextLine(3, g_ending_names1[g_end_point]);
 			nxtDisplayBigTextLine(5, g_ending_names2[g_end_point]);
+			break;
+		case s_selection_sub_grabbers:
+			nxtDisplayBigTextLine(1, "Grabbers");
+			nxtDisplayBigTextLine(3, "inOrOut?");
+			nxtDisplayBigTextLine(5, basic_word_list [misc]);
 			break;
 		}
 	}

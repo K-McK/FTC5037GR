@@ -21,13 +21,16 @@ void abs_S1_mission_exicute()
 	switch(g_mission_number)
 	{
 	case 0:
-		abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
-		wait10Msec(300);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-		wait10Msec(300);
-		abs_turn(CLOCKWISE, POINT, TURN, 45, 60);
-		wait10Msec(300);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 0, 60);
+		screen_state = s_angle_show;
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/200, 50, true);
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/200, 50, true);
+		//abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
+		//wait10Msec(300);
+		//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+		//wait10Msec(300);
+		//abs_turn(CLOCKWISE, POINT, TURN, 45, 60);
+		//wait10Msec(300);
+		//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 0, 60);
 		break;
 
 	case 1:
@@ -140,25 +143,29 @@ void abs_S1_mission_exicute()
 		abs_drive(FORWARD, E_ANGLE, 85, 50, true);
 		motor[block_lift_motor] = 40;
 		motor[block_lift_motor2] = 40;
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+		if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+		else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+		if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+		else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
 		break;
 	case 3:
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
 		abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true);
 		wait1Msec(200);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 98, 60);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
 		wait1Msec(200);
 		abs_drive(FORWARD, E_ANGLE, 87, 50, true);
 		motor[block_lift_motor] = 40;
 		motor[block_lift_motor2] = 40;
-		abs_turn(CLOCKWISE, POINT, TURN, 103, 60);
+		if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
+		else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+		if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+		else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
 		break;
 	}
 }

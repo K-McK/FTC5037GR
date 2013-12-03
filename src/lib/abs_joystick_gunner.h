@@ -46,12 +46,6 @@ task abs_joystick_gunner()
 		}
 
 		//-----------------------------
-		// sky hook
-		//-----------------------------
-
-		if(joy2Btn(4)) motor[sky_hook]=g_robot_lift_up;
-
-		//-----------------------------
 		// roger slide
 		//-----------------------------
 		if(joystick.joy2_y2>10) servo[roger_slide] = 255;
