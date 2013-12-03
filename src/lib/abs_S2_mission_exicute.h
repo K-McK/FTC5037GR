@@ -1,6 +1,6 @@
 /*
 *
-*  @file abs_S2_mission_exicute.h
+*  @file abs_s2_mission_exicute.h
 *
 *  @brief runs the missions from the starting point S2
 *
