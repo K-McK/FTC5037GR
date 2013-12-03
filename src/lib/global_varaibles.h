@@ -49,7 +49,8 @@ bool gyroTrue = false;
 *     tells the robot where the left block grabber needs to be to be closed
 *
 */
-#define ANGLE_SENSOR_CIRCUMFERENCE 17.6
+#define INT_ANGLE_SENSOR_CIRCUMFERENCE 18
+#define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE 17.6
 #define DRIVE_WHEELS_CIRCUMFERENCE 26
 
 #define GRABBER_LEFT_OPEN 3

@@ -98,7 +98,7 @@ void abs_S1_mission_exicute()
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
 		abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-		break
+		break;
 
 	case 140:
 		int dist = 30;

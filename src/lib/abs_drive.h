@@ -136,7 +136,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		else
 		{
 			HTANGresetAccumulatedAngle(angle_sensor);
-			while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (dist*18))
+			while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (dist*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 			{
 				abs_gyro_drive(speed,dir);
 			}
