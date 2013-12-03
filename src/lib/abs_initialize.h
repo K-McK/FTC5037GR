@@ -29,7 +29,7 @@ void initialize()
 	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
 	selection_program();
 	PlaySoundFile("! Click.rso");
-	g_drift = abS_GYRO_CAL(g_gyro_cal_time);
+	g_drift = abs_gyro_cal(g_gyro_cal_time);
 
 	if (!HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis)) error = ERR_ACCELERMOETER;
 	if (g_gyro_noise>10) error = ERR_GYRO_CAL;

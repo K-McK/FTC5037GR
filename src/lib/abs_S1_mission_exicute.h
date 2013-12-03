@@ -40,8 +40,8 @@ void abs_S1_mission_exicute()
 		break;
 
 	case 2:
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate4_g_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate4_g_to_turn_dist;
+		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate4_to_turn_dist;
+		else g_to_turn_dist = g_forward_crate4_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true);
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_up;
@@ -50,8 +50,8 @@ void abs_S1_mission_exicute()
 		break;
 
 	case 3:
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate3_g_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate3_g_to_turn_dist;
+		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate3_to_turn_dist;
+		else g_to_turn_dist = g_forward_crate3_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
@@ -59,8 +59,8 @@ void abs_S1_mission_exicute()
 		break;
 
 	case 4:
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate2_g_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate2_g_to_turn_dist;
+		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate2_to_turn_dist;
+		else g_to_turn_dist = g_forward_crate2_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
@@ -68,8 +68,8 @@ void abs_S1_mission_exicute()
 		break;
 
 	case 5:
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate1_g_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate1_g_to_turn_dist;
+		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate1_to_turn_dist;
+		else g_to_turn_dist = g_forward_crate1_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
