@@ -106,7 +106,7 @@ task screen ()
 			nxtDisplayBigTextLine(1, "misc Value");
 			nxtDisplayBigTextLine(3, "%2d", g_misc);
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
-		case s_angle_show:
+		case S_ANGLE_SHOW:
 			nxtDisplayBigTextLine(1, "angle Value");
 			nxtDisplayBigTextLine(3, "%2d", HTANGreadAccumulatedAngle(angle_sensor));
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
@@ -121,7 +121,7 @@ task screen ()
 			nxtDisplayBigTextLine(3, g_ending_names1[g_end_point]);
 			nxtDisplayBigTextLine(5, g_ending_names2[g_end_point]);
 			break;
-		case s_selection_sub_grabbers:
+		case S_SELECTION_SUB_GRABBERS:
 			nxtDisplayBigTextLine(1, "Grabbers");
 			nxtDisplayBigTextLine(3, "inOrOut?");
 			nxtDisplayBigTextLine(5, basic_word_list [g_misc]);

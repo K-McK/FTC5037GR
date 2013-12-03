@@ -172,7 +172,7 @@ void selection_program()
 	{
 		g_misc = 1;
 		auto_selection_point = SELECTION_SUB_GRABBERS;
-		g_screen_state = s_selection_sub_grabbers;
+		g_screen_state = S_SELECTION_SUB_GRABBERS;
 
 		while(nNxtButtonPressed != kEnterButton)
 		{
