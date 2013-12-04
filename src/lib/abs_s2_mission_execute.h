@@ -11,19 +11,19 @@
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
-#ifndef ABS_S2_MISSION_EXICUTE_H
-#define ABS_S2_MISSION_EXICUTE_H
+#ifndef ABS_S2_MISSION_EXECUTE_H
+#define ABS_S2_MISSION_EXECUTE_H
 
 /** macros */
 //=========================
 // the missions for S2
 //=========================
-void abs_S2_mission_exicute()
+void abs_s2_mission_execute()
 {
 	switch(g_mission_number)
 	{
 	case 0:
-		g_screen_state = s_angle_show;
+		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true);
 		//abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/200, 50, true);
 		//abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
@@ -179,12 +179,12 @@ void abs_S2_mission_exicute()
 		abs_drive(FORWARD, E_ANGLE, 85, 50, true);
 		motor[block_lift_motor] = 40;
 		motor[block_lift_motor2] = 40;
-		if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-		else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
+		if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-		else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
 		break;
 	}
 }
