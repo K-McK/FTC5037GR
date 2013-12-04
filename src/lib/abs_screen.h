@@ -79,8 +79,8 @@ task screen ()
 			break;
 		case S_ERROR:
 			nxtDisplayBigTextLine(1, "ERROR");
-			nxtDisplayBigTextLine(3, error_list1[g_error]);
-			nxtDisplayBigTextLine(5, error_list2[g_error]);
+			nxtDisplayBigTextLine(3, g_error_list1[g_error]);
+			nxtDisplayBigTextLine(5, g_error_list2[g_error]);
 			break;
 		case S_SMOKE_TEST:
 			nxtDisplayBigTextLine(1, "%2d", g_smoke_test_num);
@@ -124,7 +124,7 @@ task screen ()
 		case S_SELECTION_SUB_GRABBERS:
 			nxtDisplayBigTextLine(1, "Grabbers");
 			nxtDisplayBigTextLine(3, "inOrOut?");
-			nxtDisplayBigTextLine(5, basic_word_list [g_misc]);
+			nxtDisplayBigTextLine(5, g_basic_word_list [g_misc]);
 			break;
 		}
 	}

@@ -31,8 +31,10 @@ bool g_gyro_true = false;
 
 /**
 *
-*  @def ANGLE_SENSOR_CIRCUMFERENCE
+*  @def INT_ANGLE_SENSOR_CIRCUMFERENCE
 *     Tells the robot the circumference of the angle sensors wheel
+*  @def FLOAT_ANGLE_SENSOR_CIRCUMFERENCE
+*     Tells the robot the exact circumference of the angle sensors wheel
 *  @def DRIVE_WHEELS_CIRCUMFERENCE
 *     Tells the robot the cercumference of the drive wheels
 *  @def GRABBER_LEFT_OPEN
@@ -228,7 +230,7 @@ string g_sensor_list [] = {
 	"accel   ",
 	"tilt    "};
 
-	string basic_word_list [] = {
+	string g_basic_word_list [] = {
 	"unknown ",
 	"in      ",
 	"out     ",
@@ -277,6 +279,10 @@ string g_sensor_list [] = {
 *  @def S_STARTING_POINT
 *     Tells the robot the screen state number for this screen statestate
 *  @def S_ENDING_POINT
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_SELECTION_SUB_GRABBERS
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_ANGLE_SHOW
 *     Tells the robot the screen state number for this screen statestate
 *
 */
@@ -504,7 +510,7 @@ string g_mission_names2 [] = {
 //==============================================================================
 // Define the text to be displayed for the errors
 //==============================================================================
-string error_list1 [] = {
+string g_error_list1 [] = {
 	"Unknown ",
 	"GyroCal ",
 	"Gyro    ",
@@ -529,7 +535,7 @@ string error_list1 [] = {
 	"Test 21 ",
 	"Test 22 "};
 
-string error_list2 [] = {
+string g_error_list2 [] = {
 	"error   ",
 	"Failure ",
 	"Mux     ",
