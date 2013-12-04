@@ -81,6 +81,24 @@ const int g_gyro_adjust = 10;
 //=========================================================
 // auto selection points
 //=========================================================
+/**
+ *  @enum e_auto_selection_points Tells the robot what part it is in the selection program
+ *  @var e_auto_selection_points::SELECTION_START_POINT
+ *     Tells the robot to go to this part in the selection program
+ *  @var e_auto_selection_points::SELECTION_START_DELAY
+ *     Tells the robot to go to this part in the selection program
+ *  @var e_auto_selection_points::SELECTION_MISSION_POINT
+ *     Tells the robot to go to this part in the selection program
+ *  @var e_auto_selection_points::SELECTION_MISSION_DELAY
+ *     Tells the robot to go to this part in the selection program
+ *  @var e_auto_selection_points::SELECTION_END_POINT
+ *     Tells the robot to go to this part in the selection program
+ *  @var e_auto_selection_points::SELECTION_SUB_GRABBERS
+ *     Tells the robot to go to this part in the selection program
+ *  @var e_auto_selection_points::SELECTION_GYRO_CAL
+ *     Tells the robot to go to this part in the selection program
+ *
+ */
 
 typedef enum
 {
@@ -98,6 +116,13 @@ e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
 //=========================================================
 // auto sub selections
 //=========================================================
+/**
+ *  @enum e_direction Tells the robot to drive backwords or forwards onto the ramp
+ *  @var e_direction::SUB_SELECTION_GRABBERS_OUT
+ *     turn clockwise drive with the grabbers out
+ *  @var e_direction::SUB_SELECTION_GRABBERS_IN
+ *     turn counterclockwise drive with the grabbers in
+ */
 
 typedef enum
 {
