@@ -1,16 +1,16 @@
 /**
- *
- *  @file abs_screen.h
- *
- *  @brief adds a way to put things on the screen
- *
- *  @param None n/a
- *
- *  @return Returns nothing
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file abs_screen.h
+*
+*  @brief adds a way to put things on the screen
+*
+*  @param None n/a
+*
+*  @return Returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 
 #ifndef ABS_SCREEN_H
 #define ABS_SCREEN_H
@@ -124,7 +124,8 @@ task screen ()
 		case s_selection_sub_grabbers:
 			nxtDisplayBigTextLine(1, "Grabbers");
 			nxtDisplayBigTextLine(3, "inOrOut?");
-			nxtDisplayBigTextLine(5, basic_word_list [misc]);
+			if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) nxtDisplayBigTextLine(5, basic_word_list [1]);
+			else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) nxtDisplayBigTextLine(5, basic_word_list [2]);
 			break;
 		}
 	}

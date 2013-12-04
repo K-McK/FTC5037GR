@@ -110,6 +110,8 @@ auto_sub_selection auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 //=========================================================
 int g_to_turn_dist = 0;
 
+bool g_IR_angle_dist_complete = false;
+
 const int g_forward_crate1_to_turn_dist = 135;
 const int g_forward_crate2_to_turn_dist = 110;
 const int g_forward_crate3_to_turn_dist = 60;
@@ -177,6 +179,7 @@ int g_light_sensor;
 const int g_ac_time_limit = 200;
 int g_bearing_ac1 = 0;
 int g_bearing_ac2 = 0;
+int g_basic_ir_brearing1 = 0;
 float g_ir_bearing1 = 0.0;
 float g_ir_bearing2 = 0.0;
 int g_acs1[5];
