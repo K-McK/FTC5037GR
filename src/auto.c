@@ -69,6 +69,7 @@
 task main()
 {
 	initialize();
+	g_rel_heading = 0;
 	switch(g_start_point)
 	{
 	case 1:

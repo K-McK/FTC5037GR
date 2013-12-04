@@ -53,7 +53,7 @@
 task main()
 {
 	StartTask(screen);
-	StartTask(abs_sensors_read);
+	StartTask(abs_sensors);
 	g_test_value = 1;
 	while(true)
 	{

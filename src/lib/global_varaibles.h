@@ -112,6 +112,8 @@ e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 //=========================================================
 int g_to_turn_dist = 0;
 
+bool g_IR_angle_dist_complete = false;
+
 const int g_forward_crate1_to_turn_dist = 135;
 const int g_forward_crate2_to_turn_dist = 110;
 const int g_forward_crate3_to_turn_dist = 60;
@@ -134,6 +136,9 @@ int g_test_value = 0;
 //=========================================================
 // Misc
 //=========================================================
+
+int g_debug_time_1 = 0;
+int g_debug_time_2 = 0;
 
 int g_auto_ending_points = 4;
 int g_travel_dist = 0;
@@ -179,6 +184,7 @@ int g_light_sensor;
 const int g_ac_time_limit = 200;
 int g_bearing_ac1 = 0;
 int g_bearing_ac2 = 0;
+int g_basic_ir_brearing1 = 0;
 float g_ir_bearing1 = 0.0;
 float g_ir_bearing2 = 0.0;
 int g_acs1[5];
@@ -204,6 +210,7 @@ int g_accelermoeter_average = 0;
 int g_sensor_num = 1;
 int g_sensor_max = 4;
 int g_sensor_value = 0;
+int g_sensor_value2 = 0;
 /**
 *
 *  @def ST_GYRO
@@ -226,7 +233,7 @@ bool g_sensor_reference_drive = false;
 string g_sensor_list [] = {
 	"unknown ",
 	"gyro    ",
-	"IR      ",
+	"IR   IR2",
 	"accel   ",
 	"tilt    "};
 
@@ -308,6 +315,7 @@ string g_sensor_list [] = {
 #define S_ENDING_POINT 18
 #define S_SELECTION_SUB_GRABBERS 19
 #define S_ANGLE_SHOW 20
+#define S_TIME_SHOW 21
 
 int g_screen_state = 1;
 

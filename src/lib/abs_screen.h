@@ -1,16 +1,16 @@
 /**
- *
- *  @file abs_screen.h
- *
- *  @brief adds a way to put things on the screen
- *
- *  @param None n/a
- *
- *  @return Returns nothing
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file abs_screen.h
+*
+*  @brief adds a way to put things on the screen
+*
+*  @param None n/a
+*
+*  @return Returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 
 #ifndef ABS_SCREEN_H
 #define ABS_SCREEN_H
@@ -69,7 +69,7 @@ task screen ()
 			break;
 		case S_IR_SHOW:
 			nxtDisplayBigTextLine(1, "IR Value");
-			nxtDisplayBigTextLine(3, "%2d", HTANGreadAccumulatedAngle(angle_sensor));
+			nxtDisplayBigTextLine(3, "%2d  %2d", g_bearing_ac1, g_bearing_ac2);
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 			break;
 		case S_AC_SHOW:
@@ -94,7 +94,7 @@ task screen ()
 			break;
 		case S_SMOKE_RUN2:
 			nxtDisplayBigTextLine(1, g_smoke_test1[g_smoke_test_num]);
-			nxtDisplayBigTextLine(3, "%2d", g_sensor_value);
+			nxtDisplayBigTextLine(3, "%2d  %2d", g_sensor_value, g_sensor_value2);
 			nxtDisplayBigTextLine(5, g_sensor_list[g_sensor_num]);
 			break;
 		case S_SCREEN_CALL:
@@ -124,8 +124,13 @@ task screen ()
 		case S_SELECTION_SUB_GRABBERS:
 			nxtDisplayBigTextLine(1, "Grabbers");
 			nxtDisplayBigTextLine(3, "inOrOut?");
-			nxtDisplayBigTextLine(5, g_basic_word_list [g_misc]);
+			if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) nxtDisplayBigTextLine(5, g_basic_word_list [1]);
+			else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) nxtDisplayBigTextLine(5, g_basic_word_list [2]);
 			break;
+		case S_TIME_SHOW:
+			nxtDisplayBigTextLine(1, "T1    T2");
+			nxtDisplayBigTextLine(3, "%2d", g_debug_time_1);
+			nxtDisplayBigTextLine(5, "%2d", g_debug_time_2);
 		}
 	}
 }

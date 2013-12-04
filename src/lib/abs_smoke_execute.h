@@ -87,7 +87,8 @@ void abs_smoke_execute ()
 				g_sensor_value = g_rel_heading;
 				break;
 			case ST_IR:
-				g_sensor_value = g_ir_bearing1;
+				g_sensor_value = g_bearing_ac1;
+				g_sensor_value2 = g_bearing_ac2;
 				break;
 			case ST_TILT:
 				g_sensor_value = HTANGreadAccumulatedAngle(angle_sensor);
