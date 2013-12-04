@@ -170,19 +170,19 @@ void selection_program()
 
 	if(g_end_point == 2 || g_end_point == 3)
 	{
-		g_misc = 1;
 		g_auto_selection_point = SELECTION_SUB_GRABBERS;
 		g_screen_state = S_SELECTION_SUB_GRABBERS;
 
+		int i = 1;
 		while(nNxtButtonPressed != kEnterButton)
 		{
 			if(nNxtButtonPressed == kRightButton)
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
-				if(g_misc < 2)
+				if(i < 2)
 				{
-					g_misc++;
+					i++;
 					g_auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
 				}
 				else
@@ -195,14 +195,14 @@ void selection_program()
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kLeftButton){}
-				if(g_misc > 1)
+				if(i > 1)
 				{
-					g_misc--;
+					i--;
 					g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 				}
 				else
 				{
-					g_misc = 1;
+					i = 1;
 					g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 				}
 			}
