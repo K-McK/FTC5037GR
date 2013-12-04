@@ -35,11 +35,11 @@ void abs_S1_mission_exicute()
 
 	case 1:
 	g_screen_state = S_IR_SHOW;
-		abs_drive(FORWARD, E_IR_DETECT, 0, 40, true);
+		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true);
 		PlayTone(200,20);
 		wait1Msec(1000);
 		if(g_IR_angle_dist_complete == true) g_end_point = 12;
-		else abs_drive(FORWARD, E_ANGLE, /*distance in cm*/30, 50, true);
+		//else abs_drive(FORWARD, E_ANGLE, /*distance in cm*/30, 50, true);
 		wait1Msec(500);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);

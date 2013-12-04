@@ -135,6 +135,9 @@ int g_test_value = 0;
 // Misc
 //=========================================================
 
+int g_debug_time_1 = 0;
+int g_debug_time_2 = 0;
+
 int g_auto_ending_points = 4;
 int g_travel_dist = 0;
 int g_auto_starting_points = 4;
@@ -228,7 +231,7 @@ bool g_sensor_reference_drive = false;
 string g_sensor_list [] = {
 	"unknown ",
 	"gyro    ",
-	"IR      ",
+	"IR   IR2",
 	"accel   ",
 	"tilt    "};
 
@@ -306,6 +309,7 @@ string g_sensor_list [] = {
 #define S_ENDING_POINT 18
 #define s_selection_sub_grabbers 19
 #define s_angle_show 20
+#define S_TIME_SHOW 21
 
 int g_screen_state = 1;
 
