@@ -94,7 +94,7 @@ task screen ()
 			break;
 		case S_SMOKE_RUN2:
 			nxtDisplayBigTextLine(1, g_smoke_test1[g_smoke_test_num]);
-			nxtDisplayBigTextLine(3, "%2d", g_sensor_value);
+			nxtDisplayBigTextLine(3, "%2d  %2d", g_sensor_value, g_sensor_value2);
 			nxtDisplayBigTextLine(5, g_sensor_list[g_sensor_num]);
 			break;
 		case S_SCREEN_CALL:

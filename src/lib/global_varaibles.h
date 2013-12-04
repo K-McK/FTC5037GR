@@ -205,6 +205,7 @@ int g_accelermoeter_average = 0;
 int g_sensor_num = 1;
 int g_sensor_max = 4;
 int g_sensor_value = 0;
+int g_sensor_value2 = 0;
 /**
 *
 *  @def ST_GYRO
