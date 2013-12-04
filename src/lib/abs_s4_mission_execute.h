@@ -1,20 +1,19 @@
-/*
-*
-*  @file abs_s4_mission_execute.h
-*
-*  @brief runs the missions from the starting point S3
-*
-*  @param None n/a
-*
-*  @return returns nothing
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
+/**
+ *
+ *  @file abs_s4_mission_execute.h
+ *
+ *  @brief runs the missions from the starting point S3
+ *
+ *  @param None n/a
+ *
+ *  @return returns nothing
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
 #ifndef ABS_S4_MISSION_EXECUTE_H
 #define ABS_S4_MISSION_EXECUTE_H
 
-/** macros */
 //=========================
 // the missions for S1
 //=========================
@@ -139,4 +138,4 @@ void abs_s4_mission_execute()
 	}
 }
 
-#endif /* !ABS_S3_MISSION_EXICUTE_H */
+#endif /* !ABS_S4_MISSION_EXECUTE_H */

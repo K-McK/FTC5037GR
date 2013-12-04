@@ -1,21 +1,22 @@
 #pragma systemFile // treat as system file to eliminate warnings for unused variables
 /**
-*
-*  @file global_varaibles.h
-*
-*  @brief varaibles that are global
-*
-*  @param None n/a
-*
-*  @return Returns nothing
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
+ *
+ *  @file global_varaibles.h
+ *
+ *  @brief varaibles that are global
+ *
+ *  @param None n/a
+ *
+ *  @return Returns nothing
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
 //
 //============================================================
 // Define sensor multiplexor connectivity and port allocations
 //============================================================
+
 const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S3_2;
 const tMUXSensor HTGYRO = msensor_S2_1;	   // HiTechnic GYRO sensor
@@ -30,27 +31,27 @@ bool g_gyro_true = false;
 //=========================================================
 
 /**
-*
-*  @def INT_ANGLE_SENSOR_CIRCUMFERENCE
-*     Tells the robot the circumference of the angle sensors wheel
-*  @def FLOAT_ANGLE_SENSOR_CIRCUMFERENCE
-*     Tells the robot the exact circumference of the angle sensors wheel
-*  @def DRIVE_WHEELS_CIRCUMFERENCE
-*     Tells the robot the cercumference of the drive wheels
-*  @def GRABBER_LEFT_OPEN
-*     tells the robot where the left block grabber needs to be to be open
-*  @def GRABBER_RIGHT_OPEN
-*     tells the robot where the right block grabber needs to be to be open
-*  @def GRABBER_LEFT_MID
-*     tells the robot where the left block grabber needs to be to be in the middle
-*  @def GRABBER_RIGHT_MID
-*     tells the robot where the right block grabber needs to be to be in the middle
-*  @def GRABBER_LEFT_CLOSE
-*     tells the robot where the left block grabber needs to be to be closed
-*  @def GRABBER_RIGHT_CLOSE
-*     tells the robot where the left block grabber needs to be to be closed
-*
-*/
+ *
+ *  @def INT_ANGLE_SENSOR_CIRCUMFERENCE
+ *     Tells the robot the circumference of the angle sensors wheel
+ *  @def FLOAT_ANGLE_SENSOR_CIRCUMFERENCE
+ *     Tells the robot the exact circumference of the angle sensors wheel
+ *  @def DRIVE_WHEELS_CIRCUMFERENCE
+ *     Tells the robot the cercumference of the drive wheels
+ *  @def GRABBER_LEFT_OPEN
+ *     tells the robot where the left block grabber needs to be to be open
+ *  @def GRABBER_RIGHT_OPEN
+ *     tells the robot where the right block grabber needs to be to be open
+ *  @def GRABBER_LEFT_MID
+ *     tells the robot where the left block grabber needs to be to be in the middle
+ *  @def GRABBER_RIGHT_MID
+ *     tells the robot where the right block grabber needs to be to be in the middle
+ *  @def GRABBER_LEFT_CLOSE
+ *     tells the robot where the left block grabber needs to be to be closed
+ *  @def GRABBER_RIGHT_CLOSE
+ *     tells the robot where the left block grabber needs to be to be closed
+ *
+ */
 #define INT_ANGLE_SENSOR_CIRCUMFERENCE 18
 #define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE 17.6
 #define DRIVE_WHEELS_CIRCUMFERENCE 26
@@ -212,16 +213,16 @@ int g_sensor_max = 4;
 int g_sensor_value = 0;
 int g_sensor_value2 = 0;
 /**
-*
-*  @def ST_GYRO
-*     The reference value for the sensor in smoke test
-*  @def ST_IR
-*     The reference value for the sensor in smoke test
-*  @def ST_ACCELEROMETER
-*     The reference value for the sensor in smoke test
-*  @def ST_TILT
-*     The reference value for the sensor in smoke test
-*/
+ *
+ *  @def ST_GYRO
+ *     The reference value for the sensor in smoke test
+ *  @def ST_IR
+ *     The reference value for the sensor in smoke test
+ *  @def ST_ACCELEROMETER
+ *     The reference value for the sensor in smoke test
+ *  @def ST_TILT
+ *     The reference value for the sensor in smoke test
+ */
 
 #define ST_GYRO 1
 #define ST_IR 2
@@ -248,51 +249,51 @@ string g_sensor_list [] = {
 // Define screen related variables
 //=============================================================
 /**
-*
-*  @def S_CLEAR
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_MISSION
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_DELAY
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_CAL_TIME
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_GYRO_CAL
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_READY
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_DELAY_WAIT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_GYRO_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ERROR
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_TEST
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN1
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN2
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN3
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SCREEN_CALL
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_IR_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_AC_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_MISC_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_STARTING_POINT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ENDING_POINT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SELECTION_SUB_GRABBERS
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ANGLE_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*
-*/
+ *
+ *  @def S_CLEAR
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_MISSION
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_DELAY
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_CAL_TIME
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_GYRO_CAL
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_READY
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_DELAY_WAIT
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_GYRO_SHOW
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_ERROR
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_SMOKE_TEST
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_SMOKE_RUN1
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_SMOKE_RUN2
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_SMOKE_RUN3
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_SCREEN_CALL
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_IR_SHOW
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_AC_SHOW
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_MISC_SHOW
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_STARTING_POINT
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_ENDING_POINT
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_SELECTION_SUB_GRABBERS
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_ANGLE_SHOW
+ *     Tells the robot the screen state number for this screen statestate
+ *
+ */
 
 #define S_CLEAR 0
 #define S_MISSION 1
