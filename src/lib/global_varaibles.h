@@ -291,6 +291,8 @@ string g_sensor_list [] = {
 *     Tells the robot the screen state number for this screen statestate
 *  @def S_ANGLE_SHOW
 *     Tells the robot the screen state number for this screen statestate
+*  @def S_TIME_SHOW
+*     Tells the robot the screen state number for this screen statestate
 *
 */
 
