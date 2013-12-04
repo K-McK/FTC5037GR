@@ -11,14 +11,14 @@
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
-#ifndef ABS_S3_MISSION_EXICUTE_H
-#define ABS_S3_MISSION_EXICUTE_H
+#ifndef ABS_S3_MISSION_EXECUTE_H
+#define ABS_S3_MISSION_EXECUTE_H
 
 /** macros */
 //=========================
 // the missions for S1
 //=========================
-void abs_S3_mission_exicute()
+void abs_s3_mission_execute()
 {
 	switch(g_mission_number)
 	{
