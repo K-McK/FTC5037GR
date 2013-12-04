@@ -34,6 +34,7 @@ void abs_S1_mission_exicute()
 		break;
 
 	case 1:
+	g_screen_state = S_IR_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, 0, 40, true);
 		PlayTone(200,20);
 		wait1Msec(1000);

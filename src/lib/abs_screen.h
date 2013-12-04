@@ -69,7 +69,7 @@ task screen ()
 			break;
 		case S_IR_SHOW:
 			nxtDisplayBigTextLine(1, "IR Value");
-			nxtDisplayBigTextLine(3, "%2d", HTANGreadAccumulatedAngle(angle_sensor));
+			nxtDisplayBigTextLine(3, "%2d  %2d", g_bearing_ac1, g_bearing_ac2);
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 			break;
 		case S_AC_SHOW:
