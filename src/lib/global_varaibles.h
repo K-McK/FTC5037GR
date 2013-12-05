@@ -178,14 +178,27 @@ long g_prev_time = 0;
 int g_raw_gyro = 0;
 int g_recont_heading = 0; //this is the recalculated const gyro heading
 
-//=============================================================
-// Sensor variables
-//=============================================================
+/**
+ * Sensor variables
+ *
+ * @var g_light_sensor
+ *	holds the value of the light sensor
+ *
+ * @var g_bearing_ac1
+ *	the raw value from the first IR sensor
+ *	
+ * @var g_bearing_ac2
+ *	the raw value from the second IR sensor
+ *	
+ * @var g_ir_bearing1
+ *	the calibrated value from the first IR sensor
+ *	
+ * @var g_ir_bearing2
+ *	the calibrated value from the second IR sensor
+ */
 int g_light_sensor;
-const int g_ac_time_limit = 200;
 int g_bearing_ac1 = 0;
 int g_bearing_ac2 = 0;
-int g_basic_ir_brearing1 = 0;
 float g_ir_bearing1 = 0.0;
 float g_ir_bearing2 = 0.0;
 int g_acs1[5];
