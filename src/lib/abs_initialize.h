@@ -27,6 +27,7 @@ void initialize()
 	servo[abdd] = g_abdd_down;
 	servo[grabber_left] = GRABBER_LEFT_CLOSE;
 	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
+	memset(g_intput_array,0,6);
 	selection_program();
 	PlaySoundFile("! Click.rso");
 	g_drift = abs_gyro_cal(g_gyro_cal_time);

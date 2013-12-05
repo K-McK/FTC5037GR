@@ -255,53 +255,6 @@ void selection_program()
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kEnterButton){}
 		}
-		//---------------------------------------
-		// Start of optional sub selection for ram position
-		//---------------------------------------
-
-		if(g_end_point == 2 || g_end_point == 3)
-		{
-			auto_selection_point = SELECTION_SUB_RAMP;
-			g_screen_state = S_SELECTION_SUB_RAMP;
-
-			int i = 1;
-			while(nNxtButtonPressed != kEnterButton)
-			{
-				if(nNxtButtonPressed == kRightButton)
-				{
-					PlaySoundFile("! Click.rso");
-					while(nNxtButtonPressed == kRightButton){}
-					if(i < 2)
-					{
-						i++;
-						auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-					}
-					else
-					{
-						g_end_delay = 2;
-						auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-					}
-				}
-				if(nNxtButtonPressed == kLeftButton)
-				{
-					PlaySoundFile("! Click.rso");
-					while(nNxtButtonPressed == kLeftButton){}
-					if(i > 1)
-					{
-						i--;
-						auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
-					}
-					else
-					{
-						i = 1;
-						auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
-					}
-				}
-			}
-
-			PlaySoundFile("! Click.rso");
-			while(nNxtButtonPressed == kEnterButton){}
-		}
 	}
 	else if(selection_type == SELECTION_TYPE_NUMBER)
 	{
@@ -312,7 +265,6 @@ void selection_program()
 		auto_selection_point = SELECTION_GRAPH_NUMBER_INPUT;
 		g_screen_state = S_NUMBER_SELECTION;
 
-		int k = 10000;
 		while(g_graph_selection_tab<5)
 		{
 			g_graph_selection_tab++;
@@ -322,28 +274,93 @@ void selection_program()
 				{
 					PlaySoundFile("! Click.rso");
 					while(nNxtButtonPressed == kRightButton){}
-					//if(g_graph_selection_number < 9*k)
-					g_graph_selection_number = g_graph_selection_number + k;
-					//else g_graph_selection_number = 9*k;
+					g_intput_array[g_graph_selection_tab] ++;
 				}
 				if(nNxtButtonPressed == kLeftButton)
 				{
 					PlaySoundFile("! Click.rso");
 					while(nNxtButtonPressed == kLeftButton){}
-					//if(g_graph_selection_number > 1*k)
-					g_graph_selection_number = g_graph_selection_number - k;
-					//else g_graph_selection_number = 1*k;
+					g_intput_array[g_graph_selection_tab] --;
 				}
 			}
 			while(nNxtButtonPressed == kEnterButton){}
-			k = k / 10;
 			PlaySoundFile("! Click.rso");
-			//g_graph_selection_number = g_graph_selection_parts[1] + g_graph_selection_parts[2] + g_graph_selection_parts[3] + g_graph_selection_parts[4];
 		}
 		PlaySoundFile("! Click.rso");
 		while(nNxtButtonPressed == kEnterButton){}
 		eraseDisplay();
+
+		//---------------------------------
+		// interpritation of number from the number selection
+		//---------------------------------
+		//int num = g_graph_selection_number;
+		//g_start_point = (int)(num/10000);
+		//num = (int)(num - (g_start_point*10000));
+		//g_start_time = (int)(num/1000);
+		//num = (int)(num - (g_start_time*1000));
+		//g_mission_number = (int)(num/100);
+		//num = (int)(num - (g_mission_number/100));
+		//g_end_delay = (int)(num/10);
+		//num = (int)(num - (g_end_delay/10));
+		//g_end_point = num;
+
+		g_start_point = g_intput_array[1];
+		g_start_delay = g_intput_array[2];
+		g_mission_number = g_intput_array[3];
+		g_end_delay = g_intput_array[4];
+		g_end_point = g_intput_array[5];
+
+		g_screen_state = S_MISSION_SHOW;
 	}
+
+	//---------------------------------------
+	// Start of optional sub selection for ramp position
+	//---------------------------------------
+
+	if(g_end_point == 2 || g_end_point == 3)
+	{
+		auto_selection_point = SELECTION_SUB_RAMP;
+		g_screen_state = S_SELECTION_SUB_RAMP;
+
+		int i = 1;
+		while(nNxtButtonPressed != kEnterButton)
+		{
+			if(nNxtButtonPressed == kRightButton)
+			{
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed == kRightButton){}
+				if(i < 2)
+				{
+					i++;
+					auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+				}
+				else
+				{
+					g_end_delay = 2;
+					auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+				}
+			}
+			if(nNxtButtonPressed == kLeftButton)
+			{
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed == kLeftButton){}
+				if(i > 1)
+				{
+					i--;
+					auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
+				}
+				else
+				{
+					i = 1;
+					auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
+				}
+			}
+		}
+
+		PlaySoundFile("! Click.rso");
+		while(nNxtButtonPressed == kEnterButton){}
+	}
+
 	//---------------------------------------
 	// Start of gyro cal selection
 	//---------------------------------------

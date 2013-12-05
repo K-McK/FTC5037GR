@@ -34,49 +34,63 @@ void abs_S2_mission_exicute()
 		break;
 
 	case 1:
-		abs_drive(FORWARD, E_IR_DETECT, 5, 40, true);
+		abs_drive(BACKWARD, E_IR_DETECT, 3, 40, true);
 		PlayTone(200,20);
+		//if(g_IR_angle_dist_complete == true) g_end_point = 12;
+		if(g_end_point == 2)
+		{
+			if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(62*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate4_to_turn_dist;
+			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(100*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate3_to_turn_dist;
+			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(137*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate2_to_turn_dist;
+			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(162*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate1_to_turn_dist;
+		}
+		else if(g_end_point == 3)
+		{
+			if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(62*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate4_to_turn_dist;
+			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(100*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate3_to_turn_dist;
+			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(137*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate2_to_turn_dist;
+			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(162*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate1_to_turn_dist;
+		}
 		wait1Msec(1000);
-		if(g_IR_angle_dist_complete == true) g_end_point = 12;
-		else abs_drive(FORWARD, E_ANGLE, /*distance in cm*/30, 50, true);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/6, 50, true);
 		wait1Msec(500);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
 		break;
 
-	case 5:
+	case 2:
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate4_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate4_to_turn_dist;
-		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/140, 50, true);
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_up;
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
-		break;
-
-	case 4:
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate3_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate3_to_turn_dist;
-		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/115, 50, true);
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/40, 50, true);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
 		break;
 
 	case 3:
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate2_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate2_to_turn_dist;
+		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate3_to_turn_dist;
+		else g_to_turn_dist = g_forward_crate3_to_turn_dist;
 		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/65, 50, true);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
 		break;
 
-	case 2:
+	case 4:
+		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate2_to_turn_dist;
+		else g_to_turn_dist = g_forward_crate2_to_turn_dist;
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/115, 50, true);
+		servo[abdd] = g_abdd_up;
+		wait1Msec(2000);
+		servo[abdd] = g_abdd_down;
+		break;
+
+	case 5:
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate1_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate1_to_turn_dist;
-		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/40, 50, true);
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/140, 50, true);
+		wait1Msec(2000);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
@@ -151,7 +165,7 @@ void abs_S2_mission_exicute()
 			if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
 			else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
 		}
-		else abs_drive(FORWARD, E_ANGLE, 135, 50, true);
+		else abs_drive(FORWARD, E_ANGLE, 130, 50, true);
 		break;
 	case 3:
 		wait1Msec(2000);
@@ -173,7 +187,7 @@ void abs_S2_mission_exicute()
 			if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
 			else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
 		}
-		else abs_drive(FORWARD, E_ANGLE, 135, 50, true);
+		else abs_drive(FORWARD, E_ANGLE, 130, 50, true);
 		break;
 	case 12:
 		wait1Msec(2000);

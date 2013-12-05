@@ -156,6 +156,12 @@ int g_smoke_run = false;
 int g_test_value = 0;
 
 //=========================================================
+// auto number input variable
+//=========================================================
+
+int g_intput_array[6];
+
+//=========================================================
 // Misc
 //=========================================================
 
@@ -264,7 +270,7 @@ string g_sensor_list [] = {
 	"in      ",
 	"out     ",
 	"yes     ",
-	"no      ",};
+	"no      "};
 
 //=============================================================
 // Define screen related variables
@@ -337,6 +343,7 @@ string g_sensor_list [] = {
 #define S_SELECTION_TYPE 22
 #define S_NUMBER_SELECTION 23
 #define S_SELECTION_SUB_RAMP 24
+#define S_MISSION_SHOW 25
 
 int g_screen_state = 1;
 
