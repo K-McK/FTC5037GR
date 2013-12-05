@@ -74,8 +74,23 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			//g_screen_state = S_TIME_SHOW;
 			g_debug_time_1 = nPgmTime;
 		}
-
-		if(abs(HTANGreadAccumulatedAngle(angle_sensor)) > (148*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_IR_angle_dist_complete = true;
+		else if(dir == BACKWARD)
+		{
+			while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (150*INT_ANGLE_SENSOR_CIRCUMFERENCE))
+			{
+				if(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (100*INT_ANGLE_SENSOR_CIRCUMFERENCE))
+				{
+					if(!((g_bearing_ac1 <= dist + 1) || (g_bearing_ac1 == 0))) break;
+				}
+				else
+				{
+					if(!((g_bearing_ac1 <= dist) || (g_bearing_ac1 == 0))) break;
+				}
+				abs_gyro_drive(speed,dir);
+			}
+			//g_screen_state = S_TIME_SHOW;
+			g_debug_time_1 = nPgmTime;
+		}
 	}
 	//------------------------
 	// IR stopping method 2
