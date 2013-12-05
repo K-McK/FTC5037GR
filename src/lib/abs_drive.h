@@ -1,31 +1,27 @@
 /**
-*
-*  @file abs_drive.h
-*
-*  @brief it allows the robot to drive forword and backwords
-*
-*  @param dir Tells the robot what direction to go
-*
-*  @param dist_method tells the robot how it should know when to stop
-*
-*  @param dist tells the robot how far to go
-*
-*  @param speed tells the robot how fast to go
-*
-*  @param stop_at_end tells the robot if it should stop when it gets to were it needs to go or not
-*
-*  @return returns nothing
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
+ *
+ *  @file abs_drive.h
+ *
+ *  @brief it allows the robot to drive forword and backward
+ *
+ *  @param dir Tells the robot what direction to go
+ *
+ *  @param dist_method tells the robot how it should know when to stop
+ *
+ *  @param dist tells the robot how far to go
+ *
+ *  @param speed tells the robot how fast to go
+ *
+ *  @param stop_at_end tells the robot if it should stop when it gets to were it needs to go or not
+ *
+ *  @return returns nothing
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
 #ifndef ABS_DRIVE_H
 #define ABS_DRIVE_H
 
-/** macros */
-//=========================
-//Drive
-//=========================
 void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end)
 {
 	HTANGresetAccumulatedAngle(angle_sensor);

@@ -14,21 +14,11 @@
 #ifndef ABS_S3_MISSION_EXECUTE_H
 #define ABS_S3_MISSION_EXECUTE_H
 
-/** macros */
-//=========================
-// the missions for S1
-//=========================
 void abs_s3_mission_execute()
 {
 	switch(g_mission_number)
 	{
 	case 1:
-		//abs_drive(FORWARD, E_IR_DETECT, 0, 40, true);
-		//abs_drive(FORWARD, E_ANGLE, /*distance in cm*/15, 50, true);
-		//wait1Msec(500);
-		//servo[abdd] = ABDD_UP;
-		//wait1Msec(2000);
-		//servo[abdd] = ABDD_DOWN;
 		break;
 
 	case 2:

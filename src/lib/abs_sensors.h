@@ -14,9 +14,6 @@
 
 #ifndef ABS_SENSOR_H
 #define ABS_SENSOR_H
-//========================================
-// Sensors not including gyro
-//========================================
 
 task abs_sensors()
 {
@@ -118,10 +115,6 @@ task abs_sensors()
 		g_raw_gyro = HTGYROreadRot(HTGYRO);
 		g_const_heading += (g_raw_gyro - g_drift) * (float)(g_curr_time-g_prev_time)/1000;
 		g_rel_heading += (g_raw_gyro - g_drift) * (float)(g_curr_time-g_prev_time)/1000;
-		//g_const_heading += (g_raw_gyro - (g_drift * (float)(g_curr_time-g_prev_time)/1000));
-		//g_rel_heading += (g_raw_gyro - (g_drift * (float)(g_curr_time-g_prev_time)/1000));
-		//g_const_heading = (g_raw_gyro - (g_drift * (float)(g_curr_time-g_prev_time)/1000));
-		//g_rel_heading = (g_raw_gyro - (g_drift * (float)(g_curr_time-g_prev_time)/1000));
 		g_prev_time = g_curr_time;
 
 		g_recont_heading = g_const_heading % 360;

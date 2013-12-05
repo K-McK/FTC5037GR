@@ -1,22 +1,18 @@
 /**
-*
-*  @file abs_initialize.h
-*
-*  @brief A header file that handles the initialization when we start the game
-*
-*  @param None n/a
-*
-*  @return Returns nothing
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
+ *
+ *  @file abs_initialize.h
+ *
+ *  @brief A header file that handles the initialization when we start the game
+ *
+ *  @param None n/a
+ *
+ *  @return Returns nothing
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
 #ifndef ABS_INITIALIZE_H
 #define ABS_INITIALIZE_H
-
-//========================================
-// starting function
-//========================================
 
 void initialize()
 {

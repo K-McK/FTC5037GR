@@ -14,9 +14,6 @@
 
 #ifndef ABS_SCREEN_H
 #define ABS_SCREEN_H
-//========================================
-// Screen State
-//========================================
 
 task screen ()
 {

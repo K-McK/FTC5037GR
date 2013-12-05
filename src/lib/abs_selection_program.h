@@ -14,10 +14,6 @@
 #ifndef ABS_SELECTION_PROGRAM_H
 #define ABS_SELECTION_PROGRAM_H
 
-//========================================
-// Selection Program
-//========================================
-
 void selection_program()
 {
 	while(nNxtButtonPressed == kEnterButton){}
