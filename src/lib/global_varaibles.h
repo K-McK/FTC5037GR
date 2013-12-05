@@ -187,13 +187,21 @@ typedef enum
 
 e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 
+/**
+ *  @enum e_auto_sub_selection_ramp Tells the robot to drive onto the ramp and continue or stop
+ *  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_STOP
+ *     Stop on the ramp
+ *  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_CONTINUED
+ *     Continue on the ramp
+ */
+
 typedef enum
 {
 	SUB_SELECTION_RAMP_STOP,
 	SUB_SELECTION_RAMP_CONTINUED
-} auto_sub_selection_ramp;
+} e_auto_sub_selection_ramp;
 
-auto_sub_selection_ramp auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
+e_auto_sub_selection_ramp g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
 
 //=========================================================
 // auto movements

@@ -257,7 +257,7 @@ void selection_program()
 
 		if(g_end_point == 2 || g_end_point == 3)
 		{
-			auto_selection_point = SELECTION_SUB_RAMP;
+			g_auto_selection_point = SELECTION_SUB_RAMP;
 			g_screen_state = S_SELECTION_SUB_RAMP;
 
 			int i = 1;
@@ -270,12 +270,12 @@ void selection_program()
 					if(i < 2)
 					{
 						i++;
-						auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+						g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 					}
 					else
 					{
 						g_end_delay = 2;
-						auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+						g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 					}
 				}
 				if(nNxtButtonPressed == kLeftButton)
@@ -285,12 +285,12 @@ void selection_program()
 					if(i > 1)
 					{
 						i--;
-						auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
+						g_auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
 					}
 					else
 					{
 						i = 1;
-						auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
+						g_auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
 					}
 				}
 			}

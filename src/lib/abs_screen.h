@@ -127,8 +127,8 @@ task screen ()
 		case S_SELECTION_SUB_RAMP:
 			nxtDisplayBigTextLine(1, "Ramp    ");
 			nxtDisplayBigTextLine(3, "continu?");
-			if(auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_CONTINUED) nxtDisplayBigTextLine(5, basic_word_list [3]);
-			else if(auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) nxtDisplayBigTextLine(5, basic_word_list [4]);
+			if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_CONTINUED) nxtDisplayBigTextLine(5, g_basic_word_list [3]);
+			else if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) nxtDisplayBigTextLine(5, g_basic_word_list [4]);
 			break;
 		case S_TIME_SHOW:
 			nxtDisplayBigTextLine(1, "T1    T2");
