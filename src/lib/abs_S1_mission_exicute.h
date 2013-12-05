@@ -160,8 +160,12 @@ void abs_S1_mission_exicute()
 		else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-		else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		if(auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
+		{
+			if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+			else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		}
+		else abs_drive(FORWARD, E_ANGLE, 135, 50, true);
 		break;
 	case 3:
 		wait1Msec(2000);
@@ -178,8 +182,12 @@ void abs_S1_mission_exicute()
 		else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(COUNTERCLOCKWISE, POINT, TURN, 85, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-		else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		if(auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
+		{
+			if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+			else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		}
+		else abs_drive(FORWARD, E_ANGLE, 135, 50, true);
 		break;
 	case 12:
 		wait1Msec(2000);

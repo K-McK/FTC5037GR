@@ -212,7 +212,7 @@ void selection_program()
 		// Start of optional sub selection for grabbers on the ram
 		//---------------------------------------
 
-		if(g_end_point == 2 || g_end_point == 3)
+		if(false)//g_end_point == 2 || g_end_point == 3)
 		{
 			auto_selection_point = SELECTION_SUB_GRABBERS;
 			g_screen_state = S_SELECTION_SUB_GRABBERS;
@@ -248,6 +248,53 @@ void selection_program()
 					{
 						i = 1;
 						auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+					}
+				}
+			}
+
+			PlaySoundFile("! Click.rso");
+			while(nNxtButtonPressed == kEnterButton){}
+		}
+		//---------------------------------------
+		// Start of optional sub selection for ram position
+		//---------------------------------------
+
+		if(g_end_point == 2 || g_end_point == 3)
+		{
+			auto_selection_point = SELECTION_SUB_RAMP;
+			g_screen_state = S_SELECTION_SUB_RAMP;
+
+			int i = 1;
+			while(nNxtButtonPressed != kEnterButton)
+			{
+				if(nNxtButtonPressed == kRightButton)
+				{
+					PlaySoundFile("! Click.rso");
+					while(nNxtButtonPressed == kRightButton){}
+					if(i < 2)
+					{
+						i++;
+						auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+					}
+					else
+					{
+						g_end_delay = 2;
+						auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+					}
+				}
+				if(nNxtButtonPressed == kLeftButton)
+				{
+					PlaySoundFile("! Click.rso");
+					while(nNxtButtonPressed == kLeftButton){}
+					if(i > 1)
+					{
+						i--;
+						auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
+					}
+					else
+					{
+						i = 1;
+						auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
 					}
 				}
 			}

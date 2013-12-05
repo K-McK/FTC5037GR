@@ -90,7 +90,8 @@ typedef enum
 	SELECTION_SUB_GRABBERS,
 	SELECTION_GYRO_CAL,
 	SELECTION_SELECTION_TYPE,
-	SELECTION_GRAPH_NUMBER_INPUT
+	SELECTION_GRAPH_NUMBER_INPUT,
+	SELECTION_SUB_RAMP
 } e_auto_selection_points;
 
 e_auto_selection_points auto_selection_point = SELECTION_START_POINT;
@@ -119,6 +120,14 @@ typedef enum
 } auto_sub_selection;
 
 auto_sub_selection auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+
+typedef enum
+{
+	SUB_SELECTION_RAMP_STOP,
+	SUB_SELECTION_RAMP_CONTINUED
+} auto_sub_selection_ramp;
+
+auto_sub_selection_ramp auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
 
 //=========================================================
 // auto movements
@@ -255,7 +264,7 @@ string g_sensor_list [] = {
 	"in      ",
 	"out     ",
 	"yes     ",
-	"no      "};
+	"no      ",};
 
 //=============================================================
 // Define screen related variables
@@ -327,6 +336,7 @@ string g_sensor_list [] = {
 #define S_TIME_SHOW 21
 #define S_SELECTION_TYPE 22
 #define S_NUMBER_SELECTION 23
+#define S_SELECTION_SUB_RAMP 24
 
 int g_screen_state = 1;
 
