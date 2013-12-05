@@ -410,8 +410,6 @@ int g_screen_state = 1;
 int g_graph_selection_tab = 0;
 long g_graph_selection_number = 10000;
 
-int g_graph_selection_parts [5];
-
 //==============================================================
 // Define error numbers
 //==============================================================
