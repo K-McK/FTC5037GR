@@ -62,6 +62,32 @@ bool g_gyro_true = false;
 #define GRABBER_LEFT_CLOSE 120
 #define GRABBER_RIGHT_CLOSE 131
 
+/**
+ *
+ * @var g_block_speed_down Tells the robot how fast to move the lift
+ *
+ * @var g_block_speed_up Tells the robot how fast to move the lift
+ *
+ * @var g_robot_lift_down Tells the robot how fast to move the sky hook
+ *
+ * @var g_robot_lift_up Tells the robot how fast to move the sky hook
+ *
+ * @var g_flag_speed_down Tells the robot how fast to move the flag lifter
+ *
+ * @var g_flag_speed_right Tells the robot how fast to move the flag lifter
+ *
+ * @var g_flag_speed_up Tells the robot how fast to move the flag lifter
+ *
+ * @var g_flag_speed_left Tells the robot how fast to move the flag lifter
+ *
+ * @var g_abdd_up Tells the robot how fast to move the abdd
+ *
+ * @var g_abdd_down Tells the robot how fast to move the abdd
+ *
+ * @var g_gyro_adjust Multiplyer for gyro adjust
+ *
+ */
+
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
 
@@ -201,6 +227,8 @@ long g_curr_time = 0;
 long g_prev_time = 0;
 int g_raw_gyro = 0;
 int g_recont_heading = 0; //this is the recalculated const gyro heading
+
+//==========================================================================================================
 
 //=============================================================
 // Sensor variables
