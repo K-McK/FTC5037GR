@@ -111,7 +111,7 @@ void abs_s3_mission_execute()
 			if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
 			else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
 		}
-		else abs_drive(FORWARD, E_ANGLE, 135, 50, true);
+		else abs_drive(FORWARD, E_ANGLE, 130, 50, true);
 		break;
 	case 3:
 		wait1Msec(2000);
@@ -132,7 +132,7 @@ void abs_s3_mission_execute()
 			if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
 			else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
 		}
-		else abs_drive(FORWARD, E_ANGLE, 135, 50, true);
+		else abs_drive(FORWARD, E_ANGLE, 130, 50, true);
 		break;
 	}
 }

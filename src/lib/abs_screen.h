@@ -52,7 +52,7 @@ task screen ()
 		case S_READY:
 			nxtDisplayBigTextLine(1, "Program");
 			nxtDisplayBigTextLine(3, "Ready");
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+			nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d", g_start_point, g_start_delay, g_mission_number, g_end_delay, g_end_point);
 			break;
 		case S_DELAY_WAIT:
 			nxtDisplayBigTextLine(1, "Delay");
@@ -135,6 +135,11 @@ task screen ()
 			nxtDisplayBigTextLine(3, "%2d", g_debug_time_1);
 			nxtDisplayBigTextLine(5, "%2d", g_debug_time_2);
 			break;
+		case S_MISSION_SHOW:
+			nxtDisplayBigTextLine(1, "numbers");
+			nxtDisplayBigTextLine(3, " %1d%1d%1d%1d%1d", g_intput_array[1],g_intput_array[2],g_intput_array[3],g_intput_array[4],g_intput_array[5]);
+			nxtDisplayTextLine(5, "%1d-%1d-%1d-%1d-%1d", g_start_point, g_start_delay, g_mission_number, g_end_delay, g_end_point);
+			break;
 		case S_SELECTION_TYPE:
 			nxtDisplayBigTextLine(1, "Selecton");
 			nxtDisplayBigTextLine(3, "Type:   ");
@@ -144,10 +149,7 @@ task screen ()
 			break;
 		case S_NUMBER_SELECTION:
 			nxtDisplayBigTextLine(1, "Mission");
-			nxtDisplayBigTextLine(3, " %5d", g_graph_selection_number);
-			//if(g_graph_selection_number<9) nxtDisplayBigTextLine(3, "  000%1d", g_graph_selection_number);
-			//else if(g_graph_selection_number<99) nxtDisplayBigTextLine(3, "  00%2d", g_graph_selection_number);
-			//else if(g_graph_selection_number<999) nxtDisplayBigTextLine(3, "  0%3d", g_graph_selection_number);
+			nxtDisplayBigTextLine(3, " %1d%1d%1d%1d%1d", g_intput_array[1],g_intput_array[2],g_intput_array[3],g_intput_array[4],g_intput_array[5]);
 			switch(g_graph_selection_tab)
 			{
 				case 1: nxtDisplayBigTextLine(5, " ^      "); break;
