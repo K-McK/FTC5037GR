@@ -131,6 +131,29 @@ task screen ()
 			nxtDisplayBigTextLine(1, "T1    T2");
 			nxtDisplayBigTextLine(3, "%2d", g_debug_time_1);
 			nxtDisplayBigTextLine(5, "%2d", g_debug_time_2);
+			break;
+		case S_SELECTION_TYPE:
+			nxtDisplayBigTextLine(1, "Selecton");
+			nxtDisplayBigTextLine(3, "Type:   ");
+			if(selection_type == SELECTION_TYPE_CUSTOM) nxtDisplayBigTextLine(5, "custom  ");
+			else if(selection_type == SELECTION_TYPE_NUMBER) nxtDisplayBigTextLine(5, "number  ");
+			else if(selection_type == SELECTION_TYPE_QUICK) nxtDisplayBigTextLine(5, "quick    ");
+			break;
+		case S_NUMBER_SELECTION:
+			nxtDisplayBigTextLine(1, "Mission");
+			nxtDisplayBigTextLine(3, " %5d", g_graph_selection_number);
+			//if(g_graph_selection_number<9) nxtDisplayBigTextLine(3, "  000%1d", g_graph_selection_number);
+			//else if(g_graph_selection_number<99) nxtDisplayBigTextLine(3, "  00%2d", g_graph_selection_number);
+			//else if(g_graph_selection_number<999) nxtDisplayBigTextLine(3, "  0%3d", g_graph_selection_number);
+			switch(g_graph_selection_tab)
+			{
+				case 1: nxtDisplayBigTextLine(5, " ^      "); break;
+				case 2: nxtDisplayBigTextLine(5, "  ^     "); break;
+				case 3: nxtDisplayBigTextLine(5, "   ^    "); break;
+				case 4: nxtDisplayBigTextLine(5, "    ^   "); break;
+				case 5: nxtDisplayBigTextLine(5, "     ^  "); break;
+			}
+			break;
 		}
 	}
 }

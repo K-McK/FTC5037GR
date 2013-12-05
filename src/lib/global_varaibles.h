@@ -135,10 +135,25 @@ typedef enum
 	SELECTION_MISSION_DELAY,
 	SELECTION_END_POINT,
 	SELECTION_SUB_GRABBERS,
-	SELECTION_GYRO_CAL
+	SELECTION_GYRO_CAL,
+	SELECTION_SELECTION_TYPE,
+	SELECTION_GRAPH_NUMBER_INPUT
 } e_auto_selection_points;
 
 e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
+
+//=========================================================
+// auto selection type options
+//=========================================================
+
+typedef enum
+{
+	SELECTION_TYPE_NUMBER,
+	SELECTION_TYPE_CUSTOM,
+	SELECTION_TYPE_QUICK
+} e_selection_types;
+
+e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
 
 //=========================================================
 // auto sub selections
@@ -383,8 +398,19 @@ string g_sensor_list [] = {
 #define S_SELECTION_SUB_GRABBERS 19
 #define S_ANGLE_SHOW 20
 #define S_TIME_SHOW 21
+#define S_SELECTION_TYPE 22
+#define S_NUMBER_SELECTION 23
 
 int g_screen_state = 1;
+
+//==============================================================
+// Define graph selection variables
+//==============================================================
+
+int g_graph_selection_tab = 0;
+long g_graph_selection_number = 10000;
+
+int g_graph_selection_parts [5];
 
 //==============================================================
 // Define error numbers
