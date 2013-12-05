@@ -124,6 +124,10 @@ const int g_gyro_adjust = 10;
  *     Tells the robot to go to this part in the selection program
  *  @var e_auto_selection_points::SELECTION_GYRO_CAL
  *     Tells the robot to go to this part in the selection program
+  *  @var e_auto_selection_points::SELECTION_SELECTION_TYPE
+ *     Tells the robot to go to this part in the selection program
+ *  @var e_auto_selection_points::SELECTION_GRAPH_NUMBER_INPUT
+ *     Tells the robot to go to this part in the selection program
  *
  */
 
@@ -145,7 +149,15 @@ e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
 //=========================================================
 // auto selection type options
 //=========================================================
-
+/**
+ *  @enum e_selection_types Lets the robot know how you wan to imploment the auto program
+ *  @var e_auto_selection_points::SELECTION_TYPE_NUMBER
+ *     Select a program by id
+ *  @var e_auto_selection_points::SELECTION_TYPE_CUSTOM
+ *     Select one of the custom programs
+ *  @var e_auto_selection_points::SELECTION_TYPE_QUICK
+ *     Select one of the most commenly used progams
+ */
 typedef enum
 {
 	SELECTION_TYPE_NUMBER,
@@ -252,13 +264,13 @@ int g_recont_heading = 0; //this is the recalculated const gyro heading
  *
  * @var g_bearing_ac1
  *	the raw value from the first IR sensor
- *	
+ *
  * @var g_bearing_ac2
  *	the raw value from the second IR sensor
- *	
+ *
  * @var g_ir_bearing1
  *	the calibrated value from the first IR sensor
- *	
+ *
  * @var g_ir_bearing2
  *	the calibrated value from the second IR sensor
  */
@@ -372,6 +384,10 @@ string g_sensor_list [] = {
  *  @def S_ANGLE_SHOW
  *     Tells the robot the screen state number for this screen statestate
  *  @def S_TIME_SHOW
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_SELECTION_TYPE
+ *     Tells the robot the screen state number for this screen statestate
+ *  @def S_NUMBER_SELECTION
  *     Tells the robot the screen state number for this screen statestate
  *
  */
