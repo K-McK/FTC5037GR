@@ -103,7 +103,7 @@ void selection_program()
 
 		while(nNxtButtonPressed != kEnterButton)
 		{
-			delay = g_start_delay;
+			g_delay = g_start_delay;
 			if(nNxtButtonPressed == kRightButton)
 			{
 				PlaySoundFile("! Click.rso");
@@ -160,7 +160,7 @@ void selection_program()
 
 		while(nNxtButtonPressed != kEnterButton)
 		{
-			delay = g_end_delay;
+			g_delay = g_end_delay;
 			if(nNxtButtonPressed == kRightButton)
 			{
 				PlaySoundFile("! Click.rso");
@@ -185,7 +185,7 @@ void selection_program()
 		//---------------------------------------
 
 		g_screen_state = S_ENDING_POINT;
-		auto_selection_point = SELECTION_END_POINT;
+		g_auto_selection_point = SELECTION_END_POINT;
 
 		while(nNxtButtonPressed != kEnterButton)
 		{
@@ -214,7 +214,7 @@ void selection_program()
 
 		if(g_end_point == 2 || g_end_point == 3)
 		{
-			auto_selection_point = SELECTION_SUB_GRABBERS;
+			g_auto_selection_point = SELECTION_SUB_GRABBERS;
 			g_screen_state = S_SELECTION_SUB_GRABBERS;
 
 			int i = 1;
@@ -262,7 +262,7 @@ void selection_program()
 		// number selection
 		//---------------------------------------
 
-		auto_selection_point = SELECTION_GRAPH_NUMBER_INPUT;
+		g_auto_selection_point = SELECTION_GRAPH_NUMBER_INPUT;
 		g_screen_state = S_NUMBER_SELECTION;
 
 		int k = 10000;
