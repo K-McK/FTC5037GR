@@ -14,20 +14,11 @@
 #ifndef ABS_S4_MISSION_EXECUTE_H
 #define ABS_S4_MISSION_EXECUTE_H
 
-//=========================
-// the missions for S1
-//=========================
 void abs_s4_mission_execute()
 {
 	switch(g_mission_number)
 	{
 	case 1:
-		//abs_drive(FORWARD, E_IR_DETECT, 0, 40, true);
-		//abs_drive(FORWARD, E_ANGLE, /*distance in cm*/15, 50, true);
-		//wait1Msec(500);
-		//servo[abdd] = ABDD_UP;
-		//wait1Msec(2000);
-		//servo[abdd] = ABDD_DOWN;
 		break;
 
 	case 2:
@@ -115,8 +106,12 @@ void abs_s4_mission_execute()
 		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
+		{
+			if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+			else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		}
+		else abs_drive(FORWARD, E_ANGLE, 135, 50, true);
 		break;
 	case 3:
 		wait1Msec(2000);
@@ -132,8 +127,12 @@ void abs_s4_mission_execute()
 		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(COUNTERCLOCKWISE, POINT, TURN, 85, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
+		{
+			if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+			else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		}
+		else abs_drive(FORWARD, E_ANGLE, 135, 50, true);
 		break;
 	}
 }

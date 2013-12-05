@@ -14,10 +14,6 @@
 #ifndef ABS_GYRO_CAL_H
 #define ABS_GYRO_CAL_H
 
-/** macros */
-//====================================
-// Gyro Calibration helper function
-//====================================
 float abs_gyro_cal(long caltime)
 {
 	long highest = -1000, lowest = 10000;
@@ -25,17 +21,17 @@ float abs_gyro_cal(long caltime)
 	g_start_time = nPgmTime;
 	long samples=0;
 	long data;
-	while (nPgmTime < g_start_time+(caltime*1000))			// loop for the requested number of seconds
+	while (nPgmTime < g_start_time+(caltime*1000))		// loop for the requested number of seconds
 	{
-		samples +=1;														// count the number of iterations for averaging
-		data = HTGYROreadRot(HTGYRO);						// get a new reading from the GYRO
-		average += (float)data;									// add in the new value to the average
-		if (highest < data) highest = data;			// adjust the highest value if necessary
-			if (lowest> data) lowest = data;				// likewise for the lowest value
+		samples +=1;					// count the number of iterations for averaging
+		data = HTGYROreadRot(HTGYRO);			// get a new reading from the GYRO
+		average += (float)data;				// add in the new value to the average
+		if (highest < data) highest = data;		// adjust the highest value if necessary
+			if (lowest> data) lowest = data;	// likewise for the lowest value
 	}
-	//g_gyro_noise=abs(highest-lowest);						// save the spread in the data for diagnostic display
+	//g_gyro_noise=abs(highest-lowest);			// save the spread in the data for diagnostic display
 	g_gyro_noise=abs(highest-lowest);
-	return average/samples;										// and return the average drift
+	return average/samples;					// and return the average drift
 }
 
 #endif /* !ABS_GYRO_CAL_H */

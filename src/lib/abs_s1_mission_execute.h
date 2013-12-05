@@ -14,10 +14,6 @@
 #ifndef ABS_S1_MISSION_EXECUTE_H
 #define ABS_S1_MISSION_EXECUTE_H
 
-/** macros */
-//=========================
-// the missions for S1
-//=========================
 void abs_s1_mission_execute()
 {
 	switch(g_mission_number)
@@ -25,14 +21,6 @@ void abs_s1_mission_execute()
 	case 0:
 		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true);
-		//abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/200, 50, true);
-		//abs_turn(CLOCKWISE, POINT, TURN, 180, 60);
-		//wait10Msec(300);
-		//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-		//wait10Msec(300);
-		//abs_turn(CLOCKWISE, POINT, TURN, 45, 60);
-		//wait10Msec(300);
-		//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 0, 60);
 		break;
 
 	case 1:
@@ -162,8 +150,12 @@ void abs_s1_mission_execute()
 		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
+		{
+			if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+			else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		}
+		else abs_drive(FORWARD, E_ANGLE, 135, 50, true);
 		break;
 	case 3:
 		wait1Msec(2000);
@@ -180,8 +172,12 @@ void abs_s1_mission_execute()
 		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(COUNTERCLOCKWISE, POINT, TURN, 85, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
+		{
+			if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+			else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		}
+		else abs_drive(FORWARD, E_ANGLE, 135, 50, true);
 		break;
 	case 12:
 		wait1Msec(2000);
