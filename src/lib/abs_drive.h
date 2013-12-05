@@ -28,35 +28,12 @@
 //=========================
 void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end)
 {
-	//HTANGresetAccumulatedAngle(ANGLE_SENSOR);
+	HTANGresetAccumulatedAngle(angle_sensor);
 	int i = 0;
 
 	nMotorEncoder(right_motor)= 0;
 	g_rel_heading = 0;
 
-	//------------------------
-	// Determines direction
-	//------------------------
-	//if(dir == FORWARD)
-	//{
-	//	g_drive_heading = FORWARD_HEADING;
-	//	//motor(right_motor)=speed;
-	//	//motor(left_motor)=speed;
-	//}
-	//else
-	//{
-	//	g_drive_heading = REVERSE_HEADING;
-	//	//motor(right_motor)=-speed;
-	//	//motor(left_motor)=-speed;
-	//}
-	//------------------------
-	// Light stopping method
-	//------------------------
-
-	//if(dist_method == E_LIGHT
-	//{
-
-	//}
 	//------------------------
 	// time stopping method
 	//------------------------
@@ -84,35 +61,24 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else if(dist_method == E_IR_DETECT)
 	{
-		HTANGresetAccumulatedAngle(angle_sensor);
-		//while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (150*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 		if(dir == FORWARD)
 		{
-			//			while((g_ir_bearing1 >= dist) && (g_ir_bearing2 >= dist) || ((g_ir_bearing1 == 0) && (g_ir_bearing2 == 0)))// && (abs(HTANGreadAccumulatedAngle(angle_sensor)) > (150*INT_ANGLE_SENSOR_CIRCUMFERENCE)))
-//			while(((g_ir_bearing1 >= dist) || ((g_ir_bearing1 == 0))) && ((g_ir_bearing2 >= dist) || ((g_ir_bearing2 == 0))) )// && (abs(HTANGreadAccumulatedAngle(angle_sensor)) > (150*INT_ANGLE_SENSOR_CIRCUMFERENCE)))
 			while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (150*INT_ANGLE_SENSOR_CIRCUMFERENCE))
-//				while(g_ir_bearing2 == 0)
 			{
 				if(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (100*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 				{
 					if(!((g_bearing_ac2 >= dist - 1) || (g_bearing_ac2 == 0))) break;
 				}
-        else
-        {
+				else
+				{
 					if(!((g_bearing_ac2 >= dist) || (g_bearing_ac2 == 0))) break;
-        }
+				}
 				abs_gyro_drive(speed,dir);
 			}
-			g_screen_state = S_TIME_SHOW;
+			//g_screen_state = S_TIME_SHOW;
 			g_debug_time_1 = nPgmTime;
 		}
-		//else
-	//	{
-//			while((g_ir_bearing1 > dist) && (abs(HTANGreadAccumulatedAngle(angle_sensor)) > (150*INT_ANGLE_SENSOR_CIRCUMFERENCE)))
-			//{
-		//		abs_gyro_drive(speed,dir);
-	//		}
-//		}
+
 		if(abs(HTANGreadAccumulatedAngle(angle_sensor)) > (148*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_IR_angle_dist_complete = true;
 	}
 	//------------------------
