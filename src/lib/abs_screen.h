@@ -52,7 +52,8 @@ task screen ()
 		case S_READY:
 			nxtDisplayBigTextLine(1, "Program");
 			nxtDisplayBigTextLine(3, "Ready");
-			nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d", g_start_point, g_start_delay, g_mission_number, g_end_delay, g_end_point);
+			if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d N", g_start_point, g_start_delay, g_mission_number, g_end_delay, g_end_point);
+			else nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d Y", g_start_point, g_start_delay, g_mission_number, g_end_delay, g_end_point);
 			break;
 		case S_DELAY_WAIT:
 			nxtDisplayBigTextLine(1, "Delay");
