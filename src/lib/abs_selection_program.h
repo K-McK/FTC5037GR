@@ -333,7 +333,7 @@ void selection_program()
 				else
 				{
 					i = 2;
-					auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+				g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 				}
 			}
 			if(nNxtButtonPressed == kLeftButton)
