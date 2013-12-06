@@ -330,11 +330,6 @@ void selection_program()
 					i++;
 					g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 				}
-				else
-				{
-					i = 2;
-					auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-				}
 			}
 			if(nNxtButtonPressed == kLeftButton)
 			{
@@ -343,11 +338,6 @@ void selection_program()
 				if(i > 1)
 				{
 					i--;
-					g_auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
-				}
-				else
-				{
-					i = 1;
 					g_auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
 				}
 			}
