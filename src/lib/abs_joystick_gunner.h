@@ -21,7 +21,7 @@ task abs_joystick_gunner()
 		//-----------------------------
 		// flag motor control
 		//-----------------------------
-		misc = joystick.joy2_TopHat;
+		g_misc = joystick.joy2_TopHat;
 		switch(joystick.joy2_TopHat)
 		{
 		case -1:
