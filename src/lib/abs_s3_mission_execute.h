@@ -1,32 +1,24 @@
-/*
-*
-*  @file abs_S1_mission_exicute.h
-*
-*  @brief runs the missions from the starting point S3
-*
-*  @return returns nothing
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
-#ifndef ABS_S3_MISSION_EXICUTE_H
-#define ABS_S3_MISSION_EXICUTE_H
+/**
+ *
+ *  @file abs_s3_mission_execute.h
+ *
+ *  @brief runs the missions from the starting point S3
+ *
+ *  @param None n/a
+ *
+ *  @return returns nothing
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
+#ifndef ABS_S3_MISSION_EXECUTE_H
+#define ABS_S3_MISSION_EXECUTE_H
 
-/** macros */
-//=========================
-// the missions for S1
-//=========================
-void abs_S3_mission_exicute()
+void abs_s3_mission_execute()
 {
 	switch(g_mission_number)
 	{
 	case 1:
-		//abs_drive(FORWARD, E_IR_DETECT, 0, 40, true);
-		//abs_drive(FORWARD, E_ANGLE, /*distance in cm*/15, 50, true);
-		//wait1Msec(500);
-		//servo[abdd] = ABDD_UP;
-		//wait1Msec(2000);
-		//servo[abdd] = ABDD_DOWN;
 		break;
 
 	case 2:
@@ -110,14 +102,14 @@ void abs_S3_mission_exicute()
 		abs_drive(FORWARD, E_ANGLE, 85, 50, true);
 		motor[block_lift_motor] = 40;
 		motor[block_lift_motor2] = 40;
-		if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-		else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
+		if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		if(auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
+		if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
 		{
-			if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-			else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+			if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+			else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
 		}
 		else abs_drive(FORWARD, E_ANGLE, 130, 50, true);
 		break;
@@ -136,7 +128,7 @@ void abs_S3_mission_exicute()
 		//else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(COUNTERCLOCKWISE, POINT, TURN, 85, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		if(auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
+		if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
 		{
 			//if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN)
 				abs_drive(FORWARD, E_ANGLE, 80, 50, true);
@@ -147,4 +139,4 @@ void abs_S3_mission_exicute()
 	}
 }
 
-#endif /* !ABS_S3_MISSION_EXICUTE_H */
+#endif /* !ABS_S3_MISSION_EXECUTE_H */

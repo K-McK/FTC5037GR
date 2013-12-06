@@ -14,15 +14,6 @@
 #ifndef ABS_MOVE_UTILS_H
 #define ABS_MOVE_UTILS_H
 
-/** macros */
-
-/**
- * @def FORWARD_HEADING
- *      helps the robot calculate the gyro drive
- * @def REVERSE_HEADING
- *      helps the robot calculate the gyro drive
- */
-
 /**
  *  @enum e_direction This enum is used to let the robot know to turn clockwise or counterclickwise
  *  @var e_direction::CLOCKWISE
@@ -124,14 +115,17 @@ typedef enum
 	GRABBER,
 	ROGGER_SLIDE
 } e_motor_move;
+
 /**
-*  @def distance_to_angle_derees(X)
-*  converts @a X to degrees
-*/
+ *  @def distance_to_angle_derees(X)
+ *  converts @a X to degrees
+ */
 #define distance_to_angle_derees(X) ((float)(X*360/ANGLE_SENSOR_CIRCUMFERENCE))
+
 /**
-*  @def distance_to_encoder_derees(X)
-*  converts @a X to degrees
-*/
+ *  @def distance_to_encoder_derees(X)
+ *  converts @a X to degrees
+ */
 #define distance_to_encoder_derees(X) (X*360/DRIVE_WHEELS_CIRCUMFERENCE)
+
 #endif /* !ABS_TURN_UTILS */

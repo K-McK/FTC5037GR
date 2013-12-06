@@ -1,23 +1,19 @@
 /**
-*
-*  @file abs_joystick_gunner.h
-*
-*  @brief The header file that handles the joystick motor control
-*
-*  @param None n/a
-*
-*  @return Returns nothing
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
+ *
+ *  @file abs_joystick_gunner.h
+ *
+ *  @brief The header file that handles the joystick motor control
+ *
+ *  @param None n/a
+ *
+ *  @return Returns nothing
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
 #ifndef ABS_JOYSTICK_GUNNER_H
 #define ABS_JOYSTICK_GUNNER_H
 
-/** macros */
-//=======================================
-// joystick drive
-//=======================================
 task abs_joystick_gunner()
 {
 	while(true)
@@ -109,34 +105,6 @@ task abs_joystick_gunner()
 		else if(joy2Btn(7)) servo[grabber_left] = GRABBER_LEFT_CLOSE;
 		if(joy2Btn(6)) servo[grabber_right] = GRABBER_RIGHT_OPEN;
 		else if(joy2Btn(8)) servo[grabber_right] = GRABBER_RIGHT_CLOSE;
-
-		//switch(grabber_position)
-		//{
-		//case GRABBER_OPEN:
-		//	servo[grabber_left] = GRABBER_LEFT_OPEN;
-		//	servo[grabber_right] = GRABBER_RIGHT_OPEN;
-		//	break;
-		//case GRABBER_MID:
-		//	servo[grabber_left] = GRABBER_LEFT_MID;
-		//	servo[grabber_right] = GRABBER_RIGHT_MID;
-		//	break;
-		//case GRABBER_CLOSE:
-		//	servo[grabber_left] = GRABBER_LEFT_CLOSE;
-		//	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
-		//	break;
-		//case GRABBER_POS_LEFT_CLOSE:
-		//	servo[grabber_left] = GRABBER_LEFT_CLOSE;
-		//	break;
-		//case GRABBER_POS_LEFT_OPEN:
-		//	servo[grabber_left] = GRABBER_LEFT_OPEN;
-		//	break;
-		//case GRABBER_POS_RIGHT_CLOSE:
-		//	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
-		//	break;
-		//case GRABBER_POS_RIGHT_OPEN:
-		//	servo[grabber_right] = GRABBER_RIGHT_OPEN;
-		//	break;
-		//}
 	}
 }
 

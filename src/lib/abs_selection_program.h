@@ -14,10 +14,6 @@
 #ifndef ABS_SELECTION_PROGRAM_H
 #define ABS_SELECTION_PROGRAM_H
 
-//========================================
-// Selection Program
-//========================================
-
 void selection_program()
 {
 	while(nNxtButtonPressed == kEnterButton){}
@@ -26,7 +22,7 @@ void selection_program()
 	// number selection or custom selection
 	//---------------------------------------
 
-	auto_selection_point = SELECTION_SELECTION_TYPE;
+	g_auto_selection_point = SELECTION_SELECTION_TYPE;
 	g_screen_state = S_SELECTION_TYPE;
 
 	int j = 1;
@@ -70,7 +66,7 @@ void selection_program()
 		// Start point selection
 		//---------------------------------------
 
-		auto_selection_point = SELECTION_START_POINT;
+		g_auto_selection_point = SELECTION_START_POINT;
 		g_screen_state = S_STARTING_POINT;
 
 		while(nNxtButtonPressed != kEnterButton)
@@ -98,12 +94,12 @@ void selection_program()
 		// Start of start time selection
 		//---------------------------------------
 
-		auto_selection_point = SELECTION_START_DELAY;
+		g_auto_selection_point = SELECTION_START_DELAY;
 		g_screen_state = S_DELAY;
 
 		while(nNxtButtonPressed != kEnterButton)
 		{
-			delay = g_start_delay;
+			g_delay = g_start_delay;
 			if(nNxtButtonPressed == kRightButton)
 			{
 				PlaySoundFile("! Click.rso");
@@ -127,7 +123,7 @@ void selection_program()
 		// Start of mission selection
 		//---------------------------------------
 
-		auto_selection_point = SELECTION_MISSION_POINT;
+		g_auto_selection_point = SELECTION_MISSION_POINT;
 		g_screen_state = S_MISSION;
 
 		while(nNxtButtonPressed != kEnterButton)
@@ -155,12 +151,12 @@ void selection_program()
 		// Start of time selection
 		//---------------------------------------
 
-		auto_selection_point = SELECTION_MISSION_DELAY;
+		g_auto_selection_point = SELECTION_MISSION_DELAY;
 		g_screen_state = S_DELAY;
 
 		while(nNxtButtonPressed != kEnterButton)
 		{
-			delay = g_end_delay;
+			g_delay = g_end_delay;
 			if(nNxtButtonPressed == kRightButton)
 			{
 				PlaySoundFile("! Click.rso");
@@ -185,7 +181,7 @@ void selection_program()
 		//---------------------------------------
 
 		g_screen_state = S_ENDING_POINT;
-		auto_selection_point = SELECTION_END_POINT;
+		g_auto_selection_point = SELECTION_END_POINT;
 
 		while(nNxtButtonPressed != kEnterButton)
 		{
@@ -214,7 +210,7 @@ void selection_program()
 
 		if(false)//g_end_point == 2 || g_end_point == 3)
 		{
-			auto_selection_point = SELECTION_SUB_GRABBERS;
+			g_auto_selection_point = SELECTION_SUB_GRABBERS;
 			g_screen_state = S_SELECTION_SUB_GRABBERS;
 
 			int i = 1;
@@ -227,12 +223,12 @@ void selection_program()
 					if(i < 2)
 					{
 						i++;
-						auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
+						g_auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
 					}
 					else
 					{
 						g_end_delay = 2;
-						auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
+						g_auto_grabber_selections = SUB_SELECTION_GRABBERS_OUT;
 					}
 				}
 				if(nNxtButtonPressed == kLeftButton)
@@ -242,12 +238,12 @@ void selection_program()
 					if(i > 1)
 					{
 						i--;
-						auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+						g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 					}
 					else
 					{
 						i = 1;
-						auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+						g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 					}
 				}
 			}
@@ -262,7 +258,7 @@ void selection_program()
 		// number selection
 		//---------------------------------------
 
-		auto_selection_point = SELECTION_GRAPH_NUMBER_INPUT;
+		g_auto_selection_point = SELECTION_GRAPH_NUMBER_INPUT;
 		g_screen_state = S_NUMBER_SELECTION;
 
 		while(g_graph_selection_tab<5)
@@ -319,7 +315,7 @@ void selection_program()
 
 	if(g_end_point == 2 || g_end_point == 3)
 	{
-		auto_selection_point = SELECTION_SUB_RAMP;
+		g_auto_selection_point = SELECTION_SUB_RAMP;
 		g_screen_state = S_SELECTION_SUB_RAMP;
 
 		int i = 1;
@@ -332,7 +328,7 @@ void selection_program()
 				if(i < 2)
 				{
 					i++;
-					auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+					g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 				}
 				else
 				{
@@ -347,12 +343,12 @@ void selection_program()
 				if(i > 1)
 				{
 					i--;
-					auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
+					g_auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
 				}
 				else
 				{
 					i = 1;
-					auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
+					g_auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
 				}
 			}
 		}

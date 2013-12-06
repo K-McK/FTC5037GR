@@ -1,23 +1,19 @@
 /**
-*
-*  @file abs_joystick_drive.h
-*
-*  @brief The header file that handles the joystick motor control
-*
-*  @param joy_type Tells the robot if it should drive on a linear scale or a parabolic scale
-*
-*  @return Returns nothing
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
+ *
+ *  @file abs_joystick_drive.h
+ *
+ *  @brief The header file that handles the joystick motor control
+ *
+ *  @param joy_type Tells the robot if it should drive on a linear scale or a parabolic scale
+ *
+ *  @return Returns nothing
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
 #ifndef ABS_JOYSTICK_DRIVE_H
 #define ABS_JOYSTICK_DRIVE_H
 
-/** macros */
-//=======================================
-// joystick drive
-//=======================================
 void abs_joystick_drive(e_joystick_method joy_type)
 {
 	//-----------------------------

@@ -14,9 +14,6 @@
 
 #ifndef ABS_SCREEN_H
 #define ABS_SCREEN_H
-//========================================
-// Screen State
-//========================================
 
 task screen ()
 {
@@ -37,10 +34,10 @@ task screen ()
 			nxtDisplayBigTextLine(5, g_mission_names2[g_mission_number]);
 			break;
 		case S_DELAY:
-			if(auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
+			if(g_auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
 			else nxtDisplayBigTextLine(1, "Mission ");
 			nxtDisplayBigTextLine(3, "Delay");
-			nxtDisplayBigTextLine(5, "%2d", delay);
+			nxtDisplayBigTextLine(5, "%2d", g_delay);
 			break;
 		case S_CAL_TIME:
 			nxtDisplayBigTextLine(1, "CalTime");
@@ -74,13 +71,13 @@ task screen ()
 			break;
 		case S_AC_SHOW:
 			nxtDisplayBigTextLine(1, "ac Value");
-			nxtDisplayBigTextLine(3, "%2d  %2d", g_accelermoeter_sensor, misc);
+			nxtDisplayBigTextLine(3, "%2d  %2d", g_accelermoeter_sensor, g_misc);
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 			break;
 		case S_ERROR:
 			nxtDisplayBigTextLine(1, "ERROR");
-			nxtDisplayBigTextLine(3, error_list1[error]);
-			nxtDisplayBigTextLine(5, error_list2[error]);
+			nxtDisplayBigTextLine(3, g_error_list1[g_error]);
+			nxtDisplayBigTextLine(5, g_error_list2[g_error]);
 			break;
 		case S_SMOKE_TEST:
 			nxtDisplayBigTextLine(1, "%2d", g_smoke_test_num);
@@ -104,7 +101,7 @@ task screen ()
 			break;
 		case S_MISC_SHOW:
 			nxtDisplayBigTextLine(1, "misc Value");
-			nxtDisplayBigTextLine(3, "%2d", misc);
+			nxtDisplayBigTextLine(3, "%2d", g_misc);
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 		case S_ANGLE_SHOW:
 			nxtDisplayBigTextLine(1, "angle Value");
@@ -124,14 +121,14 @@ task screen ()
 		case S_SELECTION_SUB_GRABBERS:
 			nxtDisplayBigTextLine(1, "Grabbers");
 			nxtDisplayBigTextLine(3, "inOrOut?");
-			if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) nxtDisplayBigTextLine(5, basic_word_list [1]);
-			else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) nxtDisplayBigTextLine(5, basic_word_list [2]);
+			if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) nxtDisplayBigTextLine(5, g_basic_word_list [1]);
+			else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) nxtDisplayBigTextLine(5, g_basic_word_list [2]);
 			break;
 		case S_SELECTION_SUB_RAMP:
 			nxtDisplayBigTextLine(1, "Ramp    ");
 			nxtDisplayBigTextLine(3, "continu?");
-			if(auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_CONTINUED) nxtDisplayBigTextLine(5, basic_word_list [3]);
-			else if(auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) nxtDisplayBigTextLine(5, basic_word_list [4]);
+			if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_CONTINUED) nxtDisplayBigTextLine(5, g_basic_word_list [3]);
+			else if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) nxtDisplayBigTextLine(5, g_basic_word_list [4]);
 			break;
 		case S_TIME_SHOW:
 			nxtDisplayBigTextLine(1, "T1    T2");
