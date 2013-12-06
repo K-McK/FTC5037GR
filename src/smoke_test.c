@@ -69,15 +69,16 @@ task main()
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
-				if(g_smoke_test_num < g_smoke_test_total) g_smoke_test_num++;
-				else g_smoke_test_num = g_smoke_test_total;
+				g_smoke_test_num++;
+				if(g_smoke_test_num > g_smoke_test_total) g_smoke_test_num = 1;
 			}
 			if(nNxtButtonPressed == kLeftButton)
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kLeftButton){}
-				if(g_smoke_test_num > 1) g_smoke_test_num--;
-				else g_smoke_test_num = 1;
+				g_smoke_test_num--;
+				if(g_smoke_test_num < 1)
+				else g_smoke_test_num = g_smoke_test_total;
 			}
 		}
 		PlaySoundFile("! Click.rso");
