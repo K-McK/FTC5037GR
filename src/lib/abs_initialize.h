@@ -16,7 +16,7 @@
 
 void initialize()
 {
-	StartTask(screen);
+	StartTask(abs_screen);
 	disableDiagnosticsDisplay();
 	servoChangeRate[abdd] = 3;
 	servo[roger_slide] = 127;

@@ -15,7 +15,7 @@
 #ifndef ABS_SCREEN_H
 #define ABS_SCREEN_H
 
-task screen ()
+task abs_screen ()
 {
 	while(true)
 	{
