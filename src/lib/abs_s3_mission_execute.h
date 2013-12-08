@@ -86,55 +86,13 @@ void abs_s3_mission_execute()
 	case 1:
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
-		motor[right_motor] = 0;
-		motor[left_motor] = 0;
-		motor[sky_hook] = 0;
-		motor[block_lift_motor] = 0;
-		motor[block_lift_motor2] = 0;
+		abs_stop_robot();
 		break;
 	case 2:
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
-		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true);
-		wait1Msec(200);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
-		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 85, 50, true);
-		motor[block_lift_motor] = 40;
-		motor[block_lift_motor2] = 40;
-		if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
-		motor[block_lift_motor] = 0;
-		motor[block_lift_motor2] = 0;
-		if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
-		{
-			if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-			else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
-		}
-		else abs_drive(FORWARD, E_ANGLE, 130, 50, true);
+		abs_end_r1(2000,40);
 		break;
 	case 3:
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
-		abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true);
-		wait1Msec(200);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 90, 50, true);
-		motor[block_lift_motor] = 40;
-		motor[block_lift_motor2] = 40;
-		//if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN)
-			abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
-		//else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(COUNTERCLOCKWISE, POINT, TURN, 85, 60);
-		motor[block_lift_motor] = 0;
-		motor[block_lift_motor2] = 0;
-		if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
-		{
-			//if(auto_grabber_selections == SUB_SELECTION_GRABBERS_IN)
-				abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-			//else if(auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
-		}
-		else abs_drive(FORWARD, E_ANGLE, 130, 50, true);
+		abs_end_r2(2000,40);
 		break;
 	}
 }

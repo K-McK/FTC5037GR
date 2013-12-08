@@ -153,12 +153,17 @@ task screen ()
 			nxtDisplayBigTextLine(3, " %1d%1d%1d%1d%1d", g_intput_array[1],g_intput_array[2],g_intput_array[3],g_intput_array[4],g_intput_array[5]);
 			switch(g_graph_selection_tab)
 			{
-				case 1: nxtDisplayBigTextLine(5, " ^      "); break;
-				case 2: nxtDisplayBigTextLine(5, "  ^     "); break;
-				case 3: nxtDisplayBigTextLine(5, "   ^    "); break;
-				case 4: nxtDisplayBigTextLine(5, "    ^   "); break;
-				case 5: nxtDisplayBigTextLine(5, "     ^  "); break;
+			case 1: nxtDisplayBigTextLine(5, " ^      "); break;
+			case 2: nxtDisplayBigTextLine(5, "  ^     "); break;
+			case 3: nxtDisplayBigTextLine(5, "   ^    "); break;
+			case 4: nxtDisplayBigTextLine(5, "    ^   "); break;
+			case 5: nxtDisplayBigTextLine(5, "     ^  "); break;
 			}
+			break;
+		case S_QUICK_SELECTION:
+			nxtDisplayBigTextLine(1, "Mission");
+			nxtDisplayBigTextLine(3, g_quick_names1[g_quick_mission]);
+			nxtDisplayBigTextLine(5, g_quick_names2[g_quick_mission]);
 			break;
 		}
 	}
