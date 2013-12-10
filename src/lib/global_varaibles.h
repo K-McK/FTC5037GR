@@ -1,17 +1,17 @@
 #pragma systemFile // treat as system file to eliminate warnings for unused variables
 /**
- *
- *  @file global_varaibles.h
- *
- *  @brief varaibles that are global
- *
- *  @param None n/a
- *
- *  @return Returns nothing
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file global_varaibles.h
+*
+*  @brief varaibles that are global
+*
+*  @param None n/a
+*
+*  @return Returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 //
 //============================================================
 // Define sensor multiplexor connectivity and port allocations
@@ -31,27 +31,27 @@ bool g_gyro_true = false;
 //=========================================================
 
 /**
- *
- *  @def INT_ANGLE_SENSOR_CIRCUMFERENCE
- *     Tells the robot the circumference of the angle sensors wheel
- *  @def FLOAT_ANGLE_SENSOR_CIRCUMFERENCE
- *     Tells the robot the exact circumference of the angle sensors wheel
- *  @def DRIVE_WHEELS_CIRCUMFERENCE
- *     Tells the robot the cercumference of the drive wheels
- *  @def GRABBER_LEFT_OPEN
- *     tells the robot where the left block grabber needs to be to be open
- *  @def GRABBER_RIGHT_OPEN
- *     tells the robot where the right block grabber needs to be to be open
- *  @def GRABBER_LEFT_MID
- *     tells the robot where the left block grabber needs to be to be in the middle
- *  @def GRABBER_RIGHT_MID
- *     tells the robot where the right block grabber needs to be to be in the middle
- *  @def GRABBER_LEFT_CLOSE
- *     tells the robot where the left block grabber needs to be to be closed
- *  @def GRABBER_RIGHT_CLOSE
- *     tells the robot where the left block grabber needs to be to be closed
- *
- */
+*
+*  @def INT_ANGLE_SENSOR_CIRCUMFERENCE
+*     Tells the robot the circumference of the angle sensors wheel
+*  @def FLOAT_ANGLE_SENSOR_CIRCUMFERENCE
+*     Tells the robot the exact circumference of the angle sensors wheel
+*  @def DRIVE_WHEELS_CIRCUMFERENCE
+*     Tells the robot the cercumference of the drive wheels
+*  @def GRABBER_LEFT_OPEN
+*     tells the robot where the left block grabber needs to be to be open
+*  @def GRABBER_RIGHT_OPEN
+*     tells the robot where the right block grabber needs to be to be open
+*  @def GRABBER_LEFT_MID
+*     tells the robot where the left block grabber needs to be to be in the middle
+*  @def GRABBER_RIGHT_MID
+*     tells the robot where the right block grabber needs to be to be in the middle
+*  @def GRABBER_LEFT_CLOSE
+*     tells the robot where the left block grabber needs to be to be closed
+*  @def GRABBER_RIGHT_CLOSE
+*     tells the robot where the left block grabber needs to be to be closed
+*
+*/
 #define INT_ANGLE_SENSOR_CIRCUMFERENCE 18
 #define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE 17.6
 #define DRIVE_WHEELS_CIRCUMFERENCE 26
@@ -64,30 +64,30 @@ bool g_gyro_true = false;
 #define GRABBER_RIGHT_CLOSE 131
 
 /**
- *
- * @var g_block_speed_down Tells the robot how fast to move the lift
- *
- * @var g_block_speed_up Tells the robot how fast to move the lift
- *
- * @var g_robot_lift_down Tells the robot how fast to move the sky hook
- *
- * @var g_robot_lift_up Tells the robot how fast to move the sky hook
- *
- * @var g_flag_speed_down Tells the robot how fast to move the flag lifter
- *
- * @var g_flag_speed_right Tells the robot how fast to move the flag lifter
- *
- * @var g_flag_speed_up Tells the robot how fast to move the flag lifter
- *
- * @var g_flag_speed_left Tells the robot how fast to move the flag lifter
- *
- * @var g_abdd_up Tells the robot how fast to move the abdd
- *
- * @var g_abdd_down Tells the robot how fast to move the abdd
- *
- * @var g_gyro_adjust Multiplyer for gyro adjust
- *
- */
+*
+* @var g_block_speed_down Tells the robot how fast to move the lift
+*
+* @var g_block_speed_up Tells the robot how fast to move the lift
+*
+* @var g_robot_lift_down Tells the robot how fast to move the sky hook
+*
+* @var g_robot_lift_up Tells the robot how fast to move the sky hook
+*
+* @var g_flag_speed_down Tells the robot how fast to move the flag lifter
+*
+* @var g_flag_speed_right Tells the robot how fast to move the flag lifter
+*
+* @var g_flag_speed_up Tells the robot how fast to move the flag lifter
+*
+* @var g_flag_speed_left Tells the robot how fast to move the flag lifter
+*
+* @var g_abdd_up Tells the robot how fast to move the abdd
+*
+* @var g_abdd_down Tells the robot how fast to move the abdd
+*
+* @var g_gyro_adjust Multiplyer for gyro adjust
+*
+*/
 
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
@@ -109,27 +109,27 @@ const int g_gyro_adjust = 10;
 // auto selection points
 //=========================================================
 /**
- *  @enum e_auto_selection_points Tells the robot what part it is in the selection program
- *  @var e_auto_selection_points::SELECTION_START_POINT
- *     Tells the robot to go to this part in the selection program
- *  @var e_auto_selection_points::SELECTION_START_DELAY
- *     Tells the robot to go to this part in the selection program
- *  @var e_auto_selection_points::SELECTION_MISSION_POINT
- *     Tells the robot to go to this part in the selection program
- *  @var e_auto_selection_points::SELECTION_MISSION_DELAY
- *     Tells the robot to go to this part in the selection program
- *  @var e_auto_selection_points::SELECTION_END_POINT
- *     Tells the robot to go to this part in the selection program
- *  @var e_auto_selection_points::SELECTION_SUB_GRABBERS
- *     Tells the robot to go to this part in the selection program
- *  @var e_auto_selection_points::SELECTION_GYRO_CAL
- *     Tells the robot to go to this part in the selection program
-  *  @var e_auto_selection_points::SELECTION_SELECTION_TYPE
- *     Tells the robot to go to this part in the selection program
- *  @var e_auto_selection_points::SELECTION_GRAPH_NUMBER_INPUT
- *     Tells the robot to go to this part in the selection program
- *
- */
+*  @enum e_auto_selection_points Tells the robot what part it is in the selection program
+*  @var e_auto_selection_points::SELECTION_START_POINT
+*     Tells the robot to go to this part in the selection program
+*  @var e_auto_selection_points::SELECTION_START_DELAY
+*     Tells the robot to go to this part in the selection program
+*  @var e_auto_selection_points::SELECTION_MISSION_POINT
+*     Tells the robot to go to this part in the selection program
+*  @var e_auto_selection_points::SELECTION_MISSION_DELAY
+*     Tells the robot to go to this part in the selection program
+*  @var e_auto_selection_points::SELECTION_END_POINT
+*     Tells the robot to go to this part in the selection program
+*  @var e_auto_selection_points::SELECTION_SUB_GRABBERS
+*     Tells the robot to go to this part in the selection program
+*  @var e_auto_selection_points::SELECTION_GYRO_CAL
+*     Tells the robot to go to this part in the selection program
+*  @var e_auto_selection_points::SELECTION_SELECTION_TYPE
+*     Tells the robot to go to this part in the selection program
+*  @var e_auto_selection_points::SELECTION_GRAPH_NUMBER_INPUT
+*     Tells the robot to go to this part in the selection program
+*
+*/
 
 typedef enum
 {
@@ -142,6 +142,7 @@ typedef enum
 	SELECTION_GYRO_CAL,
 	SELECTION_SELECTION_TYPE,
 	SELECTION_GRAPH_NUMBER_INPUT,
+	SELECTION_QUICK_INPUT,
 	SELECTION_SUB_RAMP
 } e_auto_selection_points;
 
@@ -151,14 +152,14 @@ e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
 // auto selection type options
 //=========================================================
 /**
- *  @enum e_selection_types Lets the robot know how you wan to imploment the auto program
- *  @var e_auto_selection_points::SELECTION_TYPE_NUMBER
- *     Select a program by id
- *  @var e_auto_selection_points::SELECTION_TYPE_CUSTOM
- *     Select one of the custom programs
- *  @var e_auto_selection_points::SELECTION_TYPE_QUICK
- *     Select one of the most commenly used progams
- */
+*  @enum e_selection_types Lets the robot know how you wan to imploment the auto program
+*  @var e_auto_selection_points::SELECTION_TYPE_NUMBER
+*     Select a program by id
+*  @var e_auto_selection_points::SELECTION_TYPE_CUSTOM
+*     Select one of the custom programs
+*  @var e_auto_selection_points::SELECTION_TYPE_QUICK
+*     Select one of the most commenly used progams
+*/
 typedef enum
 {
 	SELECTION_TYPE_NUMBER,
@@ -172,12 +173,12 @@ e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
 // auto sub selections
 //=========================================================
 /**
- *  @enum e_direction Tells the robot to drive backwords or forwards onto the ramp
- *  @var e_direction::SUB_SELECTION_GRABBERS_OUT
- *     turn clockwise drive with the grabbers out
- *  @var e_direction::SUB_SELECTION_GRABBERS_IN
- *     turn counterclockwise drive with the grabbers in
- */
+*  @enum e_direction Tells the robot to drive backwords or forwards onto the ramp
+*  @var e_direction::SUB_SELECTION_GRABBERS_OUT
+*     turn clockwise drive with the grabbers out
+*  @var e_direction::SUB_SELECTION_GRABBERS_IN
+*     turn counterclockwise drive with the grabbers in
+*/
 
 typedef enum
 {
@@ -188,12 +189,12 @@ typedef enum
 e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 
 /**
- *  @enum e_auto_sub_selection_ramp Tells the robot to drive onto the ramp and continue or stop
- *  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_STOP
- *     Stop on the ramp
- *  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_CONTINUED
- *     Continue on the ramp
- */
+*  @enum e_auto_sub_selection_ramp Tells the robot to drive onto the ramp and continue or stop
+*  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_STOP
+*     Stop on the ramp
+*  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_CONTINUED
+*     Continue on the ramp
+*/
 
 typedef enum
 {
@@ -280,23 +281,23 @@ int g_raw_gyro = 0;
 int g_recont_heading = 0; //this is the recalculated const gyro heading
 
 /**
- * Sensor variables
- *
- * @var g_light_sensor
- *	holds the value of the light sensor
- *
- * @var g_bearing_ac1
- *	the raw value from the first IR sensor
- *
- * @var g_bearing_ac2
- *	the raw value from the second IR sensor
- *
- * @var g_ir_bearing1
- *	the calibrated value from the first IR sensor
- *
- * @var g_ir_bearing2
- *	the calibrated value from the second IR sensor
- */
+* Sensor variables
+*
+* @var g_light_sensor
+*	holds the value of the light sensor
+*
+* @var g_bearing_ac1
+*	the raw value from the first IR sensor
+*
+* @var g_bearing_ac2
+*	the raw value from the second IR sensor
+*
+* @var g_ir_bearing1
+*	the calibrated value from the first IR sensor
+*
+* @var g_ir_bearing2
+*	the calibrated value from the second IR sensor
+*/
 int g_light_sensor;
 int g_bearing_ac1 = 0;
 int g_bearing_ac2 = 0;
@@ -327,16 +328,16 @@ int g_sensor_max = 4;
 int g_sensor_value = 0;
 int g_sensor_value2 = 0;
 /**
- *
- *  @def ST_GYRO
- *     The reference value for the sensor in smoke test
- *  @def ST_IR
- *     The reference value for the sensor in smoke test
- *  @def ST_ACCELEROMETER
- *     The reference value for the sensor in smoke test
- *  @def ST_TILT
- *     The reference value for the sensor in smoke test
- */
+*
+*  @def ST_GYRO
+*     The reference value for the sensor in smoke test
+*  @def ST_IR
+*     The reference value for the sensor in smoke test
+*  @def ST_ACCELEROMETER
+*     The reference value for the sensor in smoke test
+*  @def ST_TILT
+*     The reference value for the sensor in smoke test
+*/
 
 #define ST_GYRO 1
 #define ST_IR 2
@@ -352,7 +353,7 @@ string g_sensor_list [] = {
 	"accel   ",
 	"tilt    "};
 
-	string g_basic_word_list [] = {
+string g_basic_word_list [] = {
 	"unknown ",
 	"in      ",
 	"out     ",
@@ -363,57 +364,57 @@ string g_sensor_list [] = {
 // Define screen related variables
 //=============================================================
 /**
- *
- *  @def S_CLEAR
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_MISSION
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_DELAY
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_CAL_TIME
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_GYRO_CAL
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_READY
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_DELAY_WAIT
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_GYRO_SHOW
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_ERROR
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_SMOKE_TEST
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_SMOKE_RUN1
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_SMOKE_RUN2
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_SMOKE_RUN3
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_SCREEN_CALL
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_IR_SHOW
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_AC_SHOW
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_MISC_SHOW
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_STARTING_POINT
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_ENDING_POINT
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_SELECTION_SUB_GRABBERS
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_ANGLE_SHOW
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_TIME_SHOW
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_SELECTION_TYPE
- *     Tells the robot the screen state number for this screen statestate
- *  @def S_NUMBER_SELECTION
- *     Tells the robot the screen state number for this screen statestate
- *
- */
+*
+*  @def S_CLEAR
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_MISSION
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_DELAY
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_CAL_TIME
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_GYRO_CAL
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_READY
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_DELAY_WAIT
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_GYRO_SHOW
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_ERROR
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_SMOKE_TEST
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_SMOKE_RUN1
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_SMOKE_RUN2
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_SMOKE_RUN3
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_SCREEN_CALL
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_IR_SHOW
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_AC_SHOW
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_MISC_SHOW
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_STARTING_POINT
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_ENDING_POINT
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_SELECTION_SUB_GRABBERS
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_ANGLE_SHOW
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_TIME_SHOW
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_SELECTION_TYPE
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_NUMBER_SELECTION
+*     Tells the robot the screen state number for this screen statestate
+*
+*/
 
 #define S_CLEAR 0
 #define S_MISSION 1
@@ -441,6 +442,7 @@ string g_sensor_list [] = {
 #define S_NUMBER_SELECTION 23
 #define S_SELECTION_SUB_RAMP 24
 #define S_MISSION_SHOW 25
+#define S_QUICK_SELECTION 26
 
 int g_screen_state = 1;
 
@@ -646,6 +648,30 @@ string g_mission_names2 [] = {
 	"Test 20 ",
 	"Test 21 ",
 	"Test 22 "};
+
+//==============================================================================
+// Define the text to be displayed for quick selection
+//==============================================================================
+string g_quick_names1 [] = {
+	"Unknown ",
+	"S1 IR E1",
+	"S1 IR E2",
+	"Test 3  ",
+	"Test 4  ",
+	"Test 5  ",
+	"Test 6  "};
+
+string g_quick_names2 [] = {
+	"Unknown ",
+	"Test 1  ",
+	"Test 2  ",
+	"Test 3  ",
+	"Test 4  ",
+	"Test 5  ",
+	"Test 6  "};
+
+int g_quick_mission = 1;
+int g_max_quick_missions = 6;
 
 //==============================================================================
 // Define the text to be displayed for the errors

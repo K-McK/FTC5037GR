@@ -7,7 +7,7 @@
 #pragma config(Motor,  mtr_S1_C1_2,     sky_hook,      tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C2_1,     jolly_roger,   tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C2_2,     block_lift_motor2, tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_1,     right_motor,   tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C3_1,     right_motor,   tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     left_motor,    tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S1_C4_1,    grabber_right,        tServoStandard)
 #pragma config(Servo,  srvo_S1_C4_2,    grabber_left,         tServoStandard)
@@ -45,8 +45,10 @@
 //-----------------------
 
 #include "lib/global_varaibles.h"
+#include "lib/abs_selection_number.h"
+#include "lib/abs_selection_custom.h"
+#include "lib/abs_selection_quick.h"
 #include "lib/abs_selection_program.h"
-//#include "lib/abs_selection_call.h"
 #include "lib/abs_screen.h"
 #include "lib/abs_gyro_cal.h"
 #include "lib/math_utils.h"
@@ -57,6 +59,15 @@
 #include "lib/abs_drive.h"
 #include "lib/abs_initialize.h"
 #include "lib/abs_motor.h"
+#include "lib/abs_stop_robot.h"
+
+//-----------------------
+// auto mission includes
+//-----------------------
+
+#include "lib/abs_end_r1.h"
+#include "lib/abs_end_r2.h"
+
 #include "lib/abs_s1_mission_execute.h"
 #include "lib/abs_s2_mission_execute.h"
 #include "lib/abs_s3_mission_execute.h"
@@ -69,20 +80,23 @@
 task main()
 {
 	initialize();
-	g_rel_heading = 0;
-	switch(g_start_point)
+	while(true)
 	{
-	case 1:
-		abs_s1_mission_execute();
-		break;
-	case 2:
-		abs_s2_mission_execute();
-		break;
-	case 3:
-		abs_s3_mission_execute();
-		break;
-	case 4:
-		abs_s4_mission_execute();
-		break;
+		g_rel_heading = 0;
+		switch(g_start_point)
+		{
+		case 1:
+			abs_s1_mission_execute();
+			break;
+		case 2:
+			abs_s2_mission_execute();
+			break;
+		case 3:
+			abs_s3_mission_execute();
+			break;
+		case 4:
+			abs_s4_mission_execute();
+			break;
+		}
 	}
 }
