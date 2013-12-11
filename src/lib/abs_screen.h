@@ -15,7 +15,7 @@
 #ifndef ABS_SCREEN_H
 #define ABS_SCREEN_H
 
-task screen ()
+task abs_screen ()
 {
 	while(true)
 	{
@@ -29,7 +29,6 @@ task screen ()
 			break;
 		case S_MISSION:
 			nxtDisplayBigTextLine(1, "Misson ","2%d", g_mission_number);
-			//nxtDisplayBigTextLine(3, "%2d", g_mission_number);
 			nxtDisplayBigTextLine(3, g_mission_names1[g_mission_number]);
 			nxtDisplayBigTextLine(5, g_mission_names2[g_mission_number]);
 			break;
@@ -52,7 +51,8 @@ task screen ()
 		case S_READY:
 			nxtDisplayBigTextLine(1, "Program");
 			nxtDisplayBigTextLine(3, "Ready");
-			nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d", g_start_point, g_start_delay, g_mission_number, g_end_delay, g_end_point);
+			if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d N", g_start_point, g_start_delay, g_mission_number, g_end_delay, g_end_point);
+			else nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d Y", g_start_point, g_start_delay, g_mission_number, g_end_delay, g_end_point);
 			break;
 		case S_DELAY_WAIT:
 			nxtDisplayBigTextLine(1, "Delay");
@@ -152,12 +152,17 @@ task screen ()
 			nxtDisplayBigTextLine(3, " %1d%1d%1d%1d%1d", g_intput_array[1],g_intput_array[2],g_intput_array[3],g_intput_array[4],g_intput_array[5]);
 			switch(g_graph_selection_tab)
 			{
-				case 1: nxtDisplayBigTextLine(5, " ^      "); break;
-				case 2: nxtDisplayBigTextLine(5, "  ^     "); break;
-				case 3: nxtDisplayBigTextLine(5, "   ^    "); break;
-				case 4: nxtDisplayBigTextLine(5, "    ^   "); break;
-				case 5: nxtDisplayBigTextLine(5, "     ^  "); break;
+			case 1: nxtDisplayBigTextLine(5, " ^      "); break;
+			case 2: nxtDisplayBigTextLine(5, "  ^     "); break;
+			case 3: nxtDisplayBigTextLine(5, "   ^    "); break;
+			case 4: nxtDisplayBigTextLine(5, "    ^   "); break;
+			case 5: nxtDisplayBigTextLine(5, "     ^  "); break;
 			}
+			break;
+		case S_QUICK_SELECTION:
+			nxtDisplayBigTextLine(1, "Mission");
+			nxtDisplayBigTextLine(3, g_quick_names1[g_quick_mission]);
+			nxtDisplayBigTextLine(5, g_quick_names2[g_quick_mission]);
 			break;
 		}
 	}

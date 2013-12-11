@@ -1,16 +1,16 @@
 /**
- *
- *  @file abs_s1_mission_execute.h
- *
- *  @brief runs the missions from the starting point S1
- *
- *  @param None n/a
- *
- *  @return Returns nothing
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file abs_s1_mission_execute.h
+*
+*  @brief runs the missions from the starting point S1
+*
+*  @param None n/a
+*
+*  @return Returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 #ifndef ABS_S1_MISSION_EXECUTE_H
 #define ABS_S1_MISSION_EXECUTE_H
 
@@ -26,6 +26,8 @@ void abs_s1_mission_execute()
 	case 1:
 		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true);
+		if(HTANGreadAccumulatedAngle(angle_sensor)<(38*INT_ANGLE_SENSOR_CIRCUMFERENCE))
+		abs_drive(FORWARD, E_IR_DETECT, 7, ((50*INT_ANGLE_SENSOR_CIRCUMFERENCE)-HTANGreadAccumulatedAngle(angle_sensor)), true);
 		PlayTone(200,20);
 		wait1Msec(1000);
 		//if(g_IR_angle_dist_complete == true) g_end_point = 12;
@@ -130,75 +132,13 @@ void abs_s1_mission_execute()
 	case 1:
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
-		motor[right_motor] = 0;
-		motor[left_motor] = 0;
-		motor[sky_hook] = 0;
-		motor[block_lift_motor] = 0;
-		motor[block_lift_motor2] = 0;
+		abs_stop_robot();
 		break;
 	case 2:
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
-		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true);
-		wait1Msec(200);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
-		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 85, 50, true);
-		motor[block_lift_motor] = 40;
-		motor[block_lift_motor2] = 40;
-		//if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN)
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-		//else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
-		motor[block_lift_motor] = 0;
-		motor[block_lift_motor2] = 0;
-		if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
-		{
-			//if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN)
-				abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-			//else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
-		}
-		else abs_drive(FORWARD, E_ANGLE, 130, 50, true);
+		abs_end_r1(2000,40);
 		break;
 	case 3:
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
-		abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true);
-		wait1Msec(200);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 87, 50, true);
-		wait1Msec(500);
-		motor[block_lift_motor] = 40;
-		motor[block_lift_motor2] = 40;
-		//if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN)
-			abs_turn(CLOCKWISE, POINT, TURN, 84, 50);
-		//else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_turn(COUNTERCLOCKWISE, POINT, TURN, 85, 60);
-		motor[block_lift_motor] = 0;
-		motor[block_lift_motor2] = 0;
-		if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP)
-		{
-			//if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN)
-				abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-			//else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT)abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
-		}
-		else abs_drive(FORWARD, E_ANGLE, 130, 50, true);
-		break;
-	case 12:
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
-		abs_drive(FORWARD, E_ANGLE, g_forward_crate4_to_turn_dist, 50, true);
-		wait1Msec(200);
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
-		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 85, 50, true);
-		motor[block_lift_motor] = 40;
-		motor[block_lift_motor2] = 40;
-		if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
-		motor[block_lift_motor] = 0;
-		motor[block_lift_motor2] = 0;
-		if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_IN) abs_drive(FORWARD, E_ANGLE, 80, 50, true);
-		else if(g_auto_grabber_selections == SUB_SELECTION_GRABBERS_OUT) abs_drive(BACKWARD, E_ANGLE, 80, 50, true);
+		abs_end_r2(2000,40);
 		break;
 	}
 }
