@@ -240,6 +240,9 @@ int g_intput_array[6];
 // Misc
 //=========================================================
 
+bool LogData = false;
+int step = 0;
+
 int g_debug_time_1 = 0;
 int g_debug_time_2 = 0;
 

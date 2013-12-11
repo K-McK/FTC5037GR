@@ -45,9 +45,10 @@ void initialize()
 			if(nNxtButtonPressed == kEnterButton && g_error == ERR_ACCELERMOETER)break;
 		}
 	}
-
+	LogData=true;
 	g_screen_state = S_READY;
 	StartTask(abs_sensors);
+	StartTask(abs_datalog);
 	HTANGresetAccumulatedAngle(angle_sensor);
 
 	waitForStart();

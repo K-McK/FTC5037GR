@@ -57,6 +57,7 @@
 #include "lib/abs_turn.h"
 #include "abs_gyro_drive.h"
 #include "lib/abs_drive.h"
+#include "lib/abs_datalog.h"
 #include "lib/abs_initialize.h"
 #include "lib/abs_motor.h"
 #include "lib/abs_stop_robot.h"
@@ -80,23 +81,21 @@
 task main()
 {
 	initialize();
-	while(true)
+	g_rel_heading = 0;
+	switch(g_start_point)
 	{
-		g_rel_heading = 0;
-		switch(g_start_point)
-		{
-		case 1:
-			abs_s1_mission_execute();
-			break;
-		case 2:
-			abs_s2_mission_execute();
-			break;
-		case 3:
-			abs_s3_mission_execute();
-			break;
-		case 4:
-			abs_s4_mission_execute();
-			break;
-		}
+	case 1:
+		abs_s1_mission_execute();
+		break;
+	case 2:
+		abs_s2_mission_execute();
+		break;
+	case 3:
+		abs_s3_mission_execute();
+		break;
+	case 4:
+		abs_s4_mission_execute();
+		break;
 	}
+	LogData=false;
 }
