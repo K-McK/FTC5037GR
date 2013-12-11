@@ -1,16 +1,16 @@
 /**
- *
- *  @file abs_s1_mission_execute.h
- *
- *  @brief runs the missions from the starting point S1
- *
- *  @param None n/a
- *
- *  @return Returns nothing
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file abs_s1_mission_execute.h
+*
+*  @brief runs the missions from the starting point S1
+*
+*  @param None n/a
+*
+*  @return Returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 #ifndef ABS_S1_MISSION_EXECUTE_H
 #define ABS_S1_MISSION_EXECUTE_H
 
@@ -26,6 +26,8 @@ void abs_s1_mission_execute()
 	case 1:
 		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true);
+		if(HTANGreadAccumulatedAngle(angle_sensor)<(38*INT_ANGLE_SENSOR_CIRCUMFERENCE))
+		abs_drive(FORWARD, E_IR_DETECT, 7, ((50*INT_ANGLE_SENSOR_CIRCUMFERENCE)-HTANGreadAccumulatedAngle(angle_sensor)), true);
 		PlayTone(200,20);
 		wait1Msec(1000);
 		//if(g_IR_angle_dist_complete == true) g_end_point = 12;

@@ -29,7 +29,6 @@ task abs_screen ()
 			break;
 		case S_MISSION:
 			nxtDisplayBigTextLine(1, "Misson ","2%d", g_mission_number);
-			//nxtDisplayBigTextLine(3, "%2d", g_mission_number);
 			nxtDisplayBigTextLine(3, g_mission_names1[g_mission_number]);
 			nxtDisplayBigTextLine(5, g_mission_names2[g_mission_number]);
 			break;
