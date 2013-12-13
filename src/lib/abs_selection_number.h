@@ -48,7 +48,21 @@ void abs_selection_number()
 	g_start_delay = g_intput_array[2];
 	g_mission_number = g_intput_array[3];
 	g_end_delay = g_intput_array[4];
-	g_end_point = g_intput_array[5];
+	if(g_intput_array[4] < 4 && g_intput_array > 0)
+	{
+		g_end_point = g_intput_array[5];
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
+	}
+	else if(g_intput_array[4] == 4)
+	{
+		g_end_point = 2;
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+	}
+	else if(g_intput_array[4] == 5) g_end_point = 3;
+	{
+		g_end_point = 3;
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+	}
 
 	g_screen_state = S_MISSION_SHOW;
 }
