@@ -71,7 +71,7 @@ void selection_program()
 	// Start of optional sub selection for ramp position
 	//---------------------------------------
 
-	if(g_end_point == 2 || g_end_point == 3)
+	if(g_end_point == 2 || g_end_point == 3 && selection_type != SELECTION_TYPE_NUMBER)
 	{
 		g_auto_selection_point = SELECTION_SUB_RAMP;
 		g_screen_state = S_SELECTION_SUB_RAMP;
