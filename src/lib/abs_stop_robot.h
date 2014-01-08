@@ -11,7 +11,7 @@
  *  @copyright Copyright 2013, Got Robot! FTC Team 5037
  */
 #ifndef ABS_STOP_ROBOT_H
-#define ABS_STOP_ROBOT_H
+#defineSt ABS_STOP_ROBOT_H
 
 void abs_stop_robot()
 {

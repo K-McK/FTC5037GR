@@ -103,6 +103,8 @@ bool g_gyro_true = false;
  * @def g_flag_speed_right Tells the robot how fast to spin the robot flag lift right
  *
  * @def g_flag_speed_up Tells the robot how fast to spin the robot flag to make the flag go up
+ *
+ * @def
  */
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
