@@ -484,6 +484,14 @@ long g_graph_selection_number = 10000;
 
 int g_error = 0;
 
+typedef enum
+{
+	ERROR_NONLETHAL,
+	ERROR_LETHAL
+} e_error_types;
+
+e_error_types g_error_type = ERROR_LETHAL;
+
 //==============================================================================
 // Define the text to be displayed for each starting point line 1
 //==============================================================================

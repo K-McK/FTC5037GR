@@ -28,9 +28,17 @@ void initialize()
 	PlaySoundFile("! Click.rso");
 	g_drift = abs_gyro_cal(g_gyro_cal_time);
 
-	if(!HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis)) g_error = ERR_ACCELERMOETER;
+	if(!HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis))
+	{
+		g_error = ERR_ACCELERMOETER;
+		g_error_type = ERROR_NONLETHAL;
+	}
 	if(g_gyro_noise>10) g_error = ERR_GYRO_CAL;
-	if(HTSMUXreadPowerStatus(SENSOR_MUX)) g_error = ERR_SENSOR_MUX;
+	if(HTSMUXreadPowerStatus(SENSOR_MUX))
+	{
+		g_error = ERR_SENSOR_MUX;
+		g_error_type = ERROR_NONLETHAL;
+	}
 	if(HTSMUXreadPowerStatus(GYRO_MUX)) g_error = ERR_GYRO_MUX;
 
 	if(g_error != 0)
@@ -41,8 +49,7 @@ void initialize()
 			g_gyro_true = true;
 			PlayTone (250,25);
 			wait1Msec(500);
-			if(nNxtButtonPressed == kEnterButton && g_error == ERR_SENSOR_MUX)break;
-			if(nNxtButtonPressed == kEnterButton && g_error == ERR_ACCELERMOETER)break;
+			if(nNxtButtonPressed == kEnterButton && g_error_type == ERROR_NONLETHAL)break;
 		}
 	}
 	LogData=true;
