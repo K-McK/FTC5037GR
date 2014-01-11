@@ -11,10 +11,11 @@
  *  @copyright Copyright 2013, Got Robot! FTC Team 5037
  */
 #ifndef ABS_STOP_ROBOT_H
-#defineSt ABS_STOP_ROBOT_H
+#define ABS_STOP_ROBOT_H
 
 void abs_stop_robot()
 {
+	dl_step = dl_step+1;
 	motor[left_motor] = 0;
 	motor[right_motor] = 0;
 	motor[block_lift_motor] = 0;

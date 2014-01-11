@@ -17,6 +17,7 @@
 
 void abs_motor(e_motor_move move_type)
 {
+	dl_step = dl_step+1;
 	//-----------------------------
 	// roger slide
 	//-----------------------------

@@ -254,11 +254,58 @@ int g_test_value = 0;
 int g_intput_array[6];
 
 //=========================================================
-// Misc
+// Datalogging variables
 //=========================================================
 
 bool LogData = false;
-int step = 0;
+int dl_step = 0;
+int dl_robot_action_state = 0;
+int dl_robot_action_detail = 0;
+int dl_mission_number = 0;
+string sString;
+
+//---------------
+// robot action numbers
+//---------------
+
+#define dl_robot_stop 0
+#define dl_gyro_move_forward 1
+#define dl_gyro_move_backward 2
+#define dl_gyro_point_turn 3
+#define dl_gyro_swing_turn 4
+#define dl_run_abdd 5
+
+//---------------
+// robot action names
+//---------------
+
+string g_datalog_action_names [] = {
+	"robot_stop",
+	"gyro_move_forward",
+	"gyro_move_backward",
+	"gyro_point_turn",
+	"gyro_swing_turn",
+	"run_abdd"};
+
+//---------------
+// robot action details
+//---------------
+
+#define dl_move_stop 1
+#define dl_move_no_stop 2
+#define dl_turn_clockwise 3
+#define dl_turn_counterclockwise 4
+
+string g_datalog_details_names [] = {
+	"        ",
+	"stop at end",
+	"dont stop",
+	"clockwise",
+	"counterclockwise"};
+
+//=========================================================
+// Misc
+//=========================================================
 
 int g_debug_time_1 = 0;
 int g_debug_time_2 = 0;
