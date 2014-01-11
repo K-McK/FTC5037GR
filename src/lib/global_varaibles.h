@@ -296,7 +296,7 @@ string g_datalog_action_names [] = {
 #define dl_turn_clockwise 3
 #define dl_turn_counterclockwise 4
 
-string g_datalog_action_names [] = {
+string g_datalog_details_names [] = {
 	"        ",
 	"stop at end",
 	"dont stop",

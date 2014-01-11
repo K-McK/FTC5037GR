@@ -38,9 +38,9 @@ string CRLF = (char)13+(char)10;
 	WriteText(LogFileHandle, LogIoResult, sString);
 	while(LogData)
 	{
-		StringFormat(sString, "%4d", step);							//	autonomous program step number
+		StringFormat(sString, "%4d", dl_step);							//	autonomous program step number
 		WriteText(LogFileHandle, LogIoResult, sString);
-		StringFormat(sString, "%7d", IR_Bearing);					//our calculated bearing IR one
+		//StringFormat(sString, "%7d", IR_Bearing);					//our calculated bearing IR one
 		//WriteText(IRFileHandle, IRIoResult, sString);
 		//StringFormat(sString, "%7d", bearingAC);		//			IR calculated bearing IR one
 		//WriteText(IRFileHandle, IRIoResult, sString);
