@@ -75,9 +75,18 @@ task abs_screen ()
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 			break;
 		case S_ERROR:
-			nxtDisplayBigTextLine(1, "ERROR");
-			nxtDisplayBigTextLine(3, g_error_list1[g_error]);
-			nxtDisplayBigTextLine(5, g_error_list2[g_error]);
+			if(g_error_type == ERROR_LETHAL)
+			{
+				nxtDisplayBigTextLine(1, "L ERROR");
+				nxtDisplayBigTextLine(3, g_error_list1[g_error]);
+				nxtDisplayBigTextLine(5, g_error_list2[g_error]);
+			}
+			else if(g_error_type == ERROR_NONLETHAL)
+			{
+				nxtDisplayBigTextLine(1, "N ERROR");
+				nxtDisplayBigTextLine(3, g_error_list1[g_error]);
+				nxtDisplayTextLine(5, "presEnter2skip");
+			}
 			break;
 		case S_SMOKE_TEST:
 			nxtDisplayBigTextLine(1, "%2d", g_smoke_test_num);
