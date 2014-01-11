@@ -89,6 +89,23 @@ bool g_gyro_true = false;
 *
 */
 
+/**
+ * @def g_block_speed_down Tells the robot how fast to move the block grabber down
+ *
+ * @def g_block_speed_up Tells the robot how fast to move the block grabber up
+ *
+ * @def g_robot_lift_down Tells the robot how fast to move the robot lft down
+ *
+ * @def g_robot_lift_up Tells the robot how fast to move the robot lift up
+ *
+ * @def g_flag_speed_down Tells the robot how fast to spin the flag lift to make the flag go down
+ *
+ * @def g_flag_speed_right Tells the robot how fast to spin the robot flag lift right
+ *
+ * @def g_flag_speed_up Tells the robot how fast to spin the robot flag to make the flag go up
+ *
+ * @def
+ */
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
 
