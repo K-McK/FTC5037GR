@@ -47,14 +47,14 @@ void abs_selection_quick()
 		g_start_point = 1;
 		g_start_delay = 0;
 		g_mission_number = 1;
-		g_end_delay = 0;
+		g_end_delay = 4;
 		g_end_point = 2;
 		break;
 	case 2:
-		g_start_point = 2;
+		g_start_point = 1;
 		g_start_delay = 0;
 		g_mission_number = 1;
-		g_end_delay = 0;
+		g_end_delay = 4;
 		g_end_point = 3;
 		break;
 	}
