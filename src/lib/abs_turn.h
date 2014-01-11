@@ -28,6 +28,7 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 	int i = 0;
 	g_rel_heading = 0;
 	int target = 0;
+	dl_step = dl_step+1;
 
 	if(e_stop == TURN_TO)
 	{

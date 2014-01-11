@@ -64,7 +64,11 @@ void selection_program()
 	// selection executes
 	//---------------------------------------
 	if(selection_type == SELECTION_TYPE_CUSTOM) abs_selection_custom();
-	else if(selection_type == SELECTION_TYPE_NUMBER) abs_selection_number();
+	else if(selection_type == SELECTION_TYPE_NUMBER)
+	{
+		abs_selection_number();
+		dl_mission_number = (g_intput_array[1]*10000)+(g_intput_array[2]*1000)+(g_intput_array[3]*100)+(g_intput_array[4]*10)+(g_intput_array[5]*1);
+	}
 	else if(selection_type == SELECTION_TYPE_QUICK) abs_selection_quick();
 
 	//---------------------------------------
