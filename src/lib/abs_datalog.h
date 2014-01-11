@@ -32,13 +32,15 @@ string CRLF = (char)13+(char)10;
 	//StringFormat(sString, "%7d", bearingAC2);
 
 	Delete(LogFileName, LogIoResult);
-	OpenWrite(  LogFileHandle, LogIoResult, LogFileName, LogFileSize);
+	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
 	while(!LogData){EndTimeSlice();}
+	StringFormat(sString,"%5d", dl_mission_number);
+	WriteText(LogFileHandle, LogIoResult, sString);
 	while(LogData)
 	{
-		//StringFormat(sString, "%4d", step);							//	autonomous program step number
-		//WriteText(IRFileHandle, IRIoResult, sString);
-		//StringFormat(sString, "%7d", IR_Bearing);					//our calculated bearing IR one
+		StringFormat(sString, "%4d", step);							//	autonomous program step number
+		WriteText(LogFileHandle, LogIoResult, sString);
+		StringFormat(sString, "%7d", IR_Bearing);					//our calculated bearing IR one
 		//WriteText(IRFileHandle, IRIoResult, sString);
 		//StringFormat(sString, "%7d", bearingAC);		//			IR calculated bearing IR one
 		//WriteText(IRFileHandle, IRIoResult, sString);

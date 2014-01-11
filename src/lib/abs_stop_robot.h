@@ -15,6 +15,7 @@
 
 void abs_stop_robot()
 {
+	dl_step = dl_step+1;
 	motor[left_motor] = 0;
 	motor[right_motor] = 0;
 	motor[block_lift_motor] = 0;

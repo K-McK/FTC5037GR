@@ -26,6 +26,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 {
 	HTANGresetAccumulatedAngle(angle_sensor);
 	int i = 0;
+	dl_step = dl_step+1;
 
 	nMotorEncoder(right_motor)= 0;
 	g_rel_heading = 0;
