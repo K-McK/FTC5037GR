@@ -23,7 +23,7 @@ void initialize()
 	servo[abdd] = g_abdd_down;
 	servo[grabber_left] = GRABBER_LEFT_CLOSE;
 	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
-	memset(g_intput_array,0,6);
+	memset(g_input_array,0,6);
 	selection_program();
 	PlaySoundFile("! Click.rso");
 	g_drift = abs_gyro_cal(g_gyro_cal_time);
@@ -33,13 +33,21 @@ void initialize()
 		g_error = ERR_ACCELERMOETER;
 		g_error_type = ERROR_NONLETHAL;
 	}
-	if(g_gyro_noise>10) g_error = ERR_GYRO_CAL;
+	if(g_gyro_noise>10)
+	{
+		g_error = ERR_GYRO_CAL;
+		g_error = ERROR_LETHAL;
+	}
 	if(HTSMUXreadPowerStatus(SENSOR_MUX))
 	{
 		g_error = ERR_SENSOR_MUX;
 		g_error_type = ERROR_NONLETHAL;
 	}
-	if(HTSMUXreadPowerStatus(GYRO_MUX)) g_error = ERR_GYRO_MUX;
+	if(HTSMUXreadPowerStatus(GYRO_MUX))
+	{
+		g_error = ERR_GYRO_MUX;
+		g_error = ERROR_LETHAL;
+	}
 
 	if(g_error != 0)
 	{

@@ -251,7 +251,7 @@ int g_test_value = 0;
 // auto number input variable
 //=========================================================
 
-int g_intput_array[6];
+int g_input_array[6];
 
 //=========================================================
 // Datalogging variables
