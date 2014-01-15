@@ -334,6 +334,8 @@ int g_end_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
 
+#define START_POINT_MAX_VAL = 0
+#define START_POINT_MIN_VAL = 0
 //=============================================================
 // Gyro variables
 //=============================================================

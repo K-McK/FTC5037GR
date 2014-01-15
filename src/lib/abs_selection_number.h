@@ -30,6 +30,7 @@ void abs_selection_number()
 		{
 			if(nNxtButtonPressed == kRightButton)
 			{
+				//if(START_POINT_MAX_VAL <
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
 				g_intput_array[g_graph_selection_tab] ++;
