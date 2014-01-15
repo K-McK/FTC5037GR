@@ -28,18 +28,25 @@ void abs_selection_number()
 		g_graph_selection_tab++;
 		while(nNxtButtonPressed != kEnterButton)
 		{
-			if(nNxtButtonPressed == kRightButton)
+			if(nNxtButtonPressed == kRightButton && g_intput_array[g_graph_selection_tab] < g_number_max_limit[g_graph_selection_tab])
 			{
-				//if(START_POINT_MAX_VAL <
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
 				g_intput_array[g_graph_selection_tab] ++;
 			}
-			if(nNxtButtonPressed == kLeftButton)
+			else
+			{
+				PlayTone(200,20);
+			}
+			if(nNxtButtonPressed == kLeftButton && g_intput_array[g_graph_selection_tab] > g_number_min_limit[g_graph_selection_tab])
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kLeftButton){}
 				g_intput_array[g_graph_selection_tab] --;
+			}
+			else
+			{
+				PlayTone(200,20);
 			}
 		}
 		while(nNxtButtonPressed == kEnterButton){}
