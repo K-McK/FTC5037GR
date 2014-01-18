@@ -20,14 +20,14 @@ void abs_s1_mission_execute()
 	{
 	case 0:
 		g_screen_state = S_ANGLE_SHOW;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true, true);
 		break;
 
 	case 1:
 		g_screen_state = S_ANGLE_SHOW;
-		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true);
+		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, true);
 		if(HTANGreadAccumulatedAngle(angle_sensor)<(38*INT_ANGLE_SENSOR_CIRCUMFERENCE))
-		abs_drive(FORWARD, E_IR_DETECT, 7, ((50*INT_ANGLE_SENSOR_CIRCUMFERENCE)-HTANGreadAccumulatedAngle(angle_sensor)), true);
+		abs_drive(FORWARD, E_IR_DETECT, 7, ((50*INT_ANGLE_SENSOR_CIRCUMFERENCE)-HTANGreadAccumulatedAngle(angle_sensor)), true, true);
 		PlayTone(200,20);
 		wait1Msec(1000);
 		//if(g_IR_angle_dist_complete == true) g_end_point = 12;
@@ -54,7 +54,7 @@ void abs_s1_mission_execute()
 	case 2:
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate4_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate4_to_turn_dist;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true, true);
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
@@ -64,7 +64,7 @@ void abs_s1_mission_execute()
 	case 3:
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate3_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate3_to_turn_dist;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true, true);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
@@ -73,7 +73,7 @@ void abs_s1_mission_execute()
 	case 4:
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate2_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate2_to_turn_dist;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true, true);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
@@ -82,7 +82,7 @@ void abs_s1_mission_execute()
 	case 5:
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate1_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate1_to_turn_dist;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true, true);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
@@ -91,21 +91,21 @@ void abs_s1_mission_execute()
 	case 6:
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
 		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 190, 50, true);
+		abs_drive(FORWARD, E_ANGLE, 190, 50, true, true);
 		abs_turn(CLOCKWISE, POINT, TURN, 75, 60);
-		abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+		abs_drive(FORWARD, E_ANGLE, 80, 50, true, true);
 		break;
 
 	case 7:
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 98, 60);
 		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 87, 50, true);
+		abs_drive(FORWARD, E_ANGLE, 87, 50, true, true);
 		motor[block_lift_motor] = 40;
 		motor[block_lift_motor2] = 40;
 		abs_turn(CLOCKWISE, POINT, TURN, 103, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		abs_drive(FORWARD, E_ANGLE, 80, 50, true);
+		abs_drive(FORWARD, E_ANGLE, 80, 50, true, true);
 		break;
 
 	case 140:
