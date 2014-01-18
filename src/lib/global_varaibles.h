@@ -190,6 +190,16 @@ typedef enum
 
 e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
 
+typedef enum
+{
+	SELECTION_VALUE_EMPTY,
+  STARTING_POINT,
+	STARTING_DELAY,
+	SCOREING_POINT,
+	END_DELAY,
+	END_POINT
+} e_selection_values;
+
 //=========================================================
 // auto sub selections
 //=========================================================
@@ -255,7 +265,9 @@ int g_test_value = 0;
 // auto number input variable
 //=========================================================
 
-int g_input_array[6];
+#define INPUT_ARRAY_SIZE 6
+
+int g_input_array[INPUT_ARRAY_SIZE];
 
 //=========================================================
 // Datalogging variables
@@ -568,7 +580,7 @@ string g_starting_names1 [] = {
 	"S1      ",
 	"S2      ",
 	"S3      ",
-	"S4  ",
+	"S4      ",
 	"Test 5  ",
 	"Test 6  ",
 	"Test 7  ",

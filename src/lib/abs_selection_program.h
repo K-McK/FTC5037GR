@@ -66,17 +66,18 @@ void selection_program()
 	if(selection_type == SELECTION_TYPE_NUMBER)abs_selection_number();
 	if(selection_type == SELECTION_TYPE_QUICK) abs_selection_quick();
 
-	g_start_point=g_input_array[1];
-	g_start_delay=g_input_array[2];
-	g_mission_number=g_input_array[3];
-	g_end_delay=g_input_array[4];
-	if(g_input_array[5] < 4 && g_input_array[5] > 0)g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
-	if(g_input_array[5] == 4)
+	g_start_point=g_input_array[STARTING_POINT];
+	g_start_delay=g_input_array[STARTING_DELAY];
+	g_mission_number=g_input_array[SCOREING_POINT];
+	g_end_delay=g_input_array[END_DELAY];
+	//mainly a check to make sure it works fine
+	if(g_input_array[END_POINT] < 4 && g_input_array[END_POINT] > 0)g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
+	if(g_input_array[END_POINT] == 4)
 	{
 		g_end_point=2;
 		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 	}
-	if(g_input_array[5] == 5)
+	if(g_input_array[END_POINT] == 5)
 	{
 		g_end_point=3;
 		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;

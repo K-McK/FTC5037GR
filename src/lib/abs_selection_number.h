@@ -44,24 +44,29 @@ void abs_selection_number()
 		while(nNxtButtonPressed == kEnterButton){}
 		PlaySoundFile("! Click.rso");
 	}
-	g_start_point = g_input_array[1];
-	g_start_delay = g_input_array[2];
-	g_mission_number = g_input_array[3];
-	g_end_delay = g_input_array[4];
-	if(g_input_array[5] < 4 && g_input_array > 0)
+	g_start_point = g_input_array[STARTING_POINT];
+	g_start_delay = g_input_array[STARTING_DELAY];
+	g_mission_number = g_input_array[SCOREING_POINT];
+	g_end_delay = g_input_array[END_DELAY];
+	if(g_input_array[END_POINT] < 4 && g_input_array[END_POINT] > 0)
 	{
-		g_end_point = g_input_array[5];
+		g_end_point = g_input_array[END_POINT];
 		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
 	}
-	else if(g_input_array[5] == 4)
+	else if(g_input_array[END_POINT] == 4)
 	{
 		g_end_point = 2;
 		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 	}
-	else if(g_input_array[4] == 5)
+	else if(g_input_array[END_POINT] == 5)
 	{
 		g_end_point = 3;
 		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+	}
+	else
+	{
+		g_end_point = 1; //error for if an invaid value is inputed
+		PlayTone(400,60);
 	}
 
 	g_screen_state = S_MISSION_SHOW;
