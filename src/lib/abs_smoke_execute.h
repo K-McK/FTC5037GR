@@ -191,6 +191,21 @@ void abs_smoke_execute ()
 			g_test_value = 127;
 		}
 		break;
+		//---------------------------------
+		// ground arm
+		//---------------------------------
+	case 8:
+		if(nNxtButtonPressed == kLeftButton)
+		{
+			servo[ground_arm] = g_ground_arm_down;
+			g_test_value = g_ground_arm_down;
+		}
+		else if(nNxtButtonPressed == kRightButton)
+		{
+			servo[ground_arm] = g_ground_arm_up;
+			g_test_value = g_ground_arm_up;
+		}
+		break;
 	}
 }
 PlaySoundFile("! Click.rso");

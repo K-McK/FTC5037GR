@@ -122,6 +122,10 @@ const int g_abdd_down = 235;
 
 const int g_gyro_adjust = 10;
 
+const int g_ground_arm_up = 0;
+
+const int g_ground_arm_down = 120;
+
 //=========================================================
 // auto selection points
 //=========================================================
@@ -813,7 +817,7 @@ string g_smoke_test1 [] = {
 	"Grabbers",
 	"sky hook",
 	"roger   ",
-	"Test 8  ",
+	"ground  ",
 	"Test 9  ",
 	"Test 10 ",
 	"Test 11 ",
@@ -841,7 +845,7 @@ string g_smoke_test2 [] = {
 	"        ",
 	"        ",
 	"slide   ",
-	"Test 8  ",
+	"arm     ",
 	"Test 9  ",
 	"Test 10 ",
 	"Test 11 ",

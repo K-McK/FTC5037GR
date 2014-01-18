@@ -20,7 +20,7 @@ void abs_tele_op_initialize()
 
 	servo[abdd] = g_abdd_down;
 
-	StartTask(screen);
+	StartTask(abs_screen);
 	g_screen_state = S_MISC_SHOW;
 	getJoystickSettings(joystick);
 }
