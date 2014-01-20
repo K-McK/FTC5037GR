@@ -745,8 +745,8 @@ string g_mission_names2 [] = {
 //==============================================================================
 string g_quick_names1 [] = {
 	"Unknown ",
-	"S1 IR E1",
-	"S1 IR E2",
+	"Standerd",
+	"S Ramp 2",
 	"Test 3  ",
 	"Test 4  ",
 	"Test 5  ",
@@ -754,8 +754,8 @@ string g_quick_names1 [] = {
 
 string g_quick_names2 [] = {
 	"Unknown ",
-	"Test 1  ",
-	"Test 2  ",
+	"10142   ",
+	"10143   ",
 	"Test 3  ",
 	"Test 4  ",
 	"Test 5  ",
