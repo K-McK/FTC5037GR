@@ -1,21 +1,27 @@
 /**
- *
- *  @file abs_joystick_drive.h
- *
- *  @brief The header file that handles the joystick motor control
- *
- *  @param joy_type Tells the robot if it should drive on a linear scale or a parabolic scale
- *
- *  @return Returns nothing
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file abs_joystick_drive.h
+*
+*  @brief The header file that handles the joystick motor control
+*
+*  @param joy_type Tells the robot if it should drive on a linear scale or a parabolic scale
+*
+*  @return Returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 #ifndef ABS_JOYSTICK_DRIVE_H
 #define ABS_JOYSTICK_DRIVE_H
 
 void abs_joystick_drive(e_joystick_method joy_type)
 {
+	//-----------------------------
+	// ground arm
+	//-----------------------------
+	if(joy1Btn(6))servo[ground_arm]=g_ground_arm_up;
+	else if(joy1Btn(8))servo[ground_arm]=g_ground_arm_down;
+
 	//-----------------------------
 	// robot lift
 	//-----------------------------
@@ -44,12 +50,12 @@ void abs_joystick_drive(e_joystick_method joy_type)
 		speed2 = ((j2*j2) * 100/(128*128));
 	}
 
-	if(joy1Btn(7) || joy1Btn(8))
+	if(joy1Btn(7))
 	{
 		speed1 = speed1/6;
 		speed2 = speed2/6;
 	}
-	else if(joy1Btn(5) || joy1Btn(6)){}
+	else if(joy1Btn(5)){}
 	else
 	{
 		speed1 = speed1/3;

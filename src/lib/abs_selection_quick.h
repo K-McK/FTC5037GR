@@ -44,18 +44,18 @@ void abs_selection_quick()
 	switch(g_quick_mission)
 	{
 	case 1:
-		g_start_point = 1;
-		g_start_delay = 0;
-		g_mission_number = 1;
-		g_end_delay = 4;
-		g_end_point = 2;
+		g_input_array[1] = 1;
+		g_input_array[2] = 0;
+		g_input_array[3] = 1;
+		g_input_array[4] = 0;
+		g_input_array[5] = 2;
 		break;
 	case 2:
-		g_start_point = 1;
-		g_start_delay = 0;
-		g_mission_number = 1;
-		g_end_delay = 4;
-		g_end_point = 3;
+		g_input_array[1] = 2;
+		g_input_array[2] = 0;
+		g_input_array[3] = 1;
+		g_input_array[4] = 0;
+		g_input_array[5] = 3;
 		break;
 	}
 }

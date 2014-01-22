@@ -90,22 +90,22 @@ bool g_gyro_true = false;
 */
 
 /**
- * @def g_block_speed_down Tells the robot how fast to move the block grabber down
- *
- * @def g_block_speed_up Tells the robot how fast to move the block grabber up
- *
- * @def g_robot_lift_down Tells the robot how fast to move the robot lft down
- *
- * @def g_robot_lift_up Tells the robot how fast to move the robot lift up
- *
- * @def g_flag_speed_down Tells the robot how fast to spin the flag lift to make the flag go down
- *
- * @def g_flag_speed_right Tells the robot how fast to spin the robot flag lift right
- *
- * @def g_flag_speed_up Tells the robot how fast to spin the robot flag to make the flag go up
- *
- * @def
- */
+* @def g_block_speed_down Tells the robot how fast to move the block grabber down
+*
+* @def g_block_speed_up Tells the robot how fast to move the block grabber up
+*
+* @def g_robot_lift_down Tells the robot how fast to move the robot lft down
+*
+* @def g_robot_lift_up Tells the robot how fast to move the robot lift up
+*
+* @def g_flag_speed_down Tells the robot how fast to spin the flag lift to make the flag go down
+*
+* @def g_flag_speed_right Tells the robot how fast to spin the robot flag lift right
+*
+* @def g_flag_speed_up Tells the robot how fast to spin the robot flag to make the flag go up
+*
+* @def
+*/
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
 
@@ -121,6 +121,10 @@ const int g_abdd_up = 10;
 const int g_abdd_down = 235;
 
 const int g_gyro_adjust = 10;
+
+const int g_ground_arm_up = 0;
+
+const int g_ground_arm_down = 120;
 
 //=========================================================
 // auto selection points
@@ -185,6 +189,16 @@ typedef enum
 } e_selection_types;
 
 e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
+
+typedef enum
+{
+	SELECTION_VALUE_EMPTY,
+  STARTING_POINT,
+	STARTING_DELAY,
+	SCOREING_POINT,
+	END_DELAY,
+	END_POINT
+} e_selection_values;
 
 //=========================================================
 // auto sub selections
@@ -251,7 +265,9 @@ int g_test_value = 0;
 // auto number input variable
 //=========================================================
 
-int g_intput_array[6];
+#define INPUT_ARRAY_SIZE 6
+
+int g_input_array[INPUT_ARRAY_SIZE];
 
 //=========================================================
 // Datalogging variables
@@ -334,6 +350,11 @@ int g_end_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
 
+int START_POINT_MAX_VAL = 4;
+int START_POINT_MIN_VAL = 0;
+
+int g_number_min_limit [] = {0,0,0,0,0,0,0};
+int g_number_max_limit [] = {0,4,30,7,30,5};
 //=============================================================
 // Gyro variables
 //=============================================================
@@ -386,7 +407,7 @@ int g_y_axis = 0;
 int g_z_axis = 0;
 const int g_target_angle = 110;
 ubyte g_accelermoeter_reads = 0;
-int g_accelermoeter_array [] = {0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30};
+int g_accelermoeter_array [] = {0,30};
 ubyte g_accelermoeter_total_value = 0;
 int g_accelermoeter_average = 0;
 
@@ -564,7 +585,7 @@ string g_starting_names1 [] = {
 	"S1      ",
 	"S2      ",
 	"S3      ",
-	"S4  ",
+	"S4      ",
 	"Test 5  ",
 	"Test 6  ",
 	"Test 7  ",
@@ -813,7 +834,7 @@ string g_smoke_test1 [] = {
 	"Grabbers",
 	"sky hook",
 	"roger   ",
-	"Test 8  ",
+	"ground  ",
 	"Test 9  ",
 	"Test 10 ",
 	"Test 11 ",
@@ -841,7 +862,7 @@ string g_smoke_test2 [] = {
 	"        ",
 	"        ",
 	"slide   ",
-	"Test 8  ",
+	"arm     ",
 	"Test 9  ",
 	"Test 10 ",
 	"Test 11 ",
