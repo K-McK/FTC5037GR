@@ -50,7 +50,6 @@ void selection_program()
 		case 2:
 			selection_type = SELECTION_TYPE_NUMBER;
 			break;
-			// in for future use
 		case 3:
 			selection_type = SELECTION_TYPE_QUICK;
 			break;
@@ -64,49 +63,24 @@ void selection_program()
 	// selection executes
 	//---------------------------------------
 	if(selection_type == SELECTION_TYPE_CUSTOM) abs_selection_custom();
-	else if(selection_type == SELECTION_TYPE_NUMBER)
+	if(selection_type == SELECTION_TYPE_NUMBER)abs_selection_number();
+	if(selection_type == SELECTION_TYPE_QUICK) abs_selection_quick();
+
+	g_start_point=g_input_array[STARTING_POINT];
+	g_start_delay=g_input_array[STARTING_DELAY];
+	g_mission_number=g_input_array[SCOREING_POINT];
+	g_end_delay=g_input_array[END_DELAY];
+	//mainly a check to make sure it works fine
+	if(g_input_array[END_POINT] < 4 && g_input_array[END_POINT] > 0)g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
+	if(g_input_array[END_POINT] == 4)
 	{
-		abs_selection_number();
-		dl_mission_number = (g_intput_array[1]*10000)+(g_intput_array[2]*1000)+(g_intput_array[3]*100)+(g_intput_array[4]*10)+(g_intput_array[5]*1);
+		g_end_point=2;
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 	}
-	else if(selection_type == SELECTION_TYPE_QUICK) abs_selection_quick();
-
-	//---------------------------------------
-	// Start of optional sub selection for ramp position
-	//---------------------------------------
-
-	if(g_end_point == 2 || g_end_point == 3 && selection_type != SELECTION_TYPE_NUMBER)
+	if(g_input_array[END_POINT] == 5)
 	{
-		g_auto_selection_point = SELECTION_SUB_RAMP;
-		g_screen_state = S_SELECTION_SUB_RAMP;
-
-		int i = 1;
-		while(nNxtButtonPressed != kEnterButton)
-		{
-			if(nNxtButtonPressed == kRightButton)
-			{
-				PlaySoundFile("! Click.rso");
-				while(nNxtButtonPressed == kRightButton){}
-				if(i < 2)
-				{
-					i++;
-					g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-				}
-			}
-			if(nNxtButtonPressed == kLeftButton)
-			{
-				PlaySoundFile("! Click.rso");
-				while(nNxtButtonPressed == kLeftButton){}
-				if(i > 1)
-				{
-					i--;
-					g_auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
-				}
-			}
-		}
-
-		PlaySoundFile("! Click.rso");
-		while(nNxtButtonPressed == kEnterButton){}
+		g_end_point=3;
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 	}
 
 	//---------------------------------------
@@ -122,14 +96,12 @@ void selection_program()
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kRightButton){}
 			if(g_gyro_cal_time < 30) g_gyro_cal_time++;
-			else g_gyro_cal_time = 30;
 		}
 		if(nNxtButtonPressed == kLeftButton)
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kLeftButton){}
 			if(g_gyro_cal_time > 0) g_gyro_cal_time--;
-			else g_gyro_cal_time = 0;
 		}
 	}
 	PlaySoundFile("! Click.rso");

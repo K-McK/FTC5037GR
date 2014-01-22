@@ -122,6 +122,10 @@ const int g_abdd_down = 235;
 
 const int g_gyro_adjust = 10;
 
+const int g_ground_arm_up = 0;
+
+const int g_ground_arm_down = 120;
+
 //=========================================================
 // auto selection points
 //=========================================================
@@ -185,6 +189,16 @@ typedef enum
 } e_selection_types;
 
 e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
+
+typedef enum
+{
+	SELECTION_VALUE_EMPTY,
+  STARTING_POINT,
+	STARTING_DELAY,
+	SCOREING_POINT,
+	END_DELAY,
+	END_POINT
+} e_selection_values;
 
 //=========================================================
 // auto sub selections
@@ -251,7 +265,9 @@ int g_test_value = 0;
 // auto number input variable
 //=========================================================
 
-int g_intput_array[6];
+#define INPUT_ARRAY_SIZE 6
+
+int g_input_array[INPUT_ARRAY_SIZE];
 
 //=========================================================
 // Datalogging variables
@@ -569,7 +585,7 @@ string g_starting_names1 [] = {
 	"S1      ",
 	"S2      ",
 	"S3      ",
-	"S4  ",
+	"S4      ",
 	"Test 5  ",
 	"Test 6  ",
 	"Test 7  ",
@@ -734,8 +750,8 @@ string g_mission_names2 [] = {
 //==============================================================================
 string g_quick_names1 [] = {
 	"Unknown ",
-	"S1 IR E1",
-	"S1 IR E2",
+	"Standerd",
+	"S Ramp 2",
 	"Test 3  ",
 	"Test 4  ",
 	"Test 5  ",
@@ -743,8 +759,8 @@ string g_quick_names1 [] = {
 
 string g_quick_names2 [] = {
 	"Unknown ",
-	"Test 1  ",
-	"Test 2  ",
+	"10142   ",
+	"10143   ",
 	"Test 3  ",
 	"Test 4  ",
 	"Test 5  ",
@@ -818,7 +834,7 @@ string g_smoke_test1 [] = {
 	"Grabbers",
 	"sky hook",
 	"roger   ",
-	"Test 8  ",
+	"ground  ",
 	"Test 9  ",
 	"Test 10 ",
 	"Test 11 ",
@@ -846,7 +862,7 @@ string g_smoke_test2 [] = {
 	"        ",
 	"        ",
 	"slide   ",
-	"Test 8  ",
+	"arm     ",
 	"Test 9  ",
 	"Test 10 ",
 	"Test 11 ",
