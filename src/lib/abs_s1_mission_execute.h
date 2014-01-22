@@ -25,7 +25,7 @@ void abs_s1_mission_execute()
 
 	case 1:
 		g_screen_state = S_ANGLE_SHOW;
-		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, true);
+		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, false);
 		if(HTANGreadAccumulatedAngle(angle_sensor)<(38*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 		abs_drive(FORWARD, E_IR_DETECT, 7, ((50*INT_ANGLE_SENSOR_CIRCUMFERENCE)-HTANGreadAccumulatedAngle(angle_sensor)), true, true);
 		PlayTone(200,20);
