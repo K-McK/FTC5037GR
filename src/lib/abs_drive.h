@@ -22,7 +22,7 @@
 #ifndef ABS_DRIVE_H
 #define ABS_DRIVE_H
 
-void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end, bool gyro_drive)
+void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end, e_drive_type drive_type)
 {
 	HTANGresetAccumulatedAngle(angle_sensor);
 	int i = 0;
@@ -39,7 +39,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		ClearTimer(T1);
 		while(time1[T1] < dist)
 		{
-			if(gyro_drive == true)
+			if(drive_type == GYRO)
 			{
 				abs_gyro_drive(speed,dir);
 			}
@@ -69,7 +69,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		while(i<5)
 		{
 			if(abs(nMotorEncoder(right_motor)) > distance_to_encoder_derees(dist)) i++;
-			if(gyro_drive == true)
+			if(drive_type == GYRO)
 			{
 				abs_gyro_drive(speed,dir);
 			}
@@ -107,7 +107,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				{
 					if(!((g_bearing_ac2 >= dist) || (g_bearing_ac2 == 0))) break;
 				}
-				if(gyro_drive == true)
+				if(drive_type == GYRO)
 				{
 					abs_gyro_drive(speed,dir);
 				}
@@ -136,7 +136,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				}
 
 				/** No gyro correction*/
-				if(gyro_drive == true)
+				if(drive_type == GYRO)
 				{
 					abs_gyro_drive(speed,dir);
 				}
@@ -157,7 +157,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		{
 			while(g_ir_bearing2 > dist)
 			{
-				if(gyro_drive == true)
+				if(drive_type == GYRO)
 				{
 					abs_gyro_drive(speed,dir);
 				}
@@ -173,7 +173,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		{
 			while(g_ir_bearing2 < dist)
 			{
-				if(gyro_drive == true)
+				if(drive_type == GYRO)
 				{
 					abs_gyro_drive(speed,dir);
 				}
@@ -197,7 +197,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		g_sensor_reference_drive = true;
 		while(j<30)
 		{
-			if(gyro_drive == true)
+			if(drive_type == GYRO)
 			{
 				abs_gyro_drive(speed,dir);
 			}
@@ -228,7 +228,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		HTANGresetAccumulatedAngle(angle_sensor);
 		while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (dist*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 		{
-			if(gyro_drive == true)
+			if(drive_type == GYRO)
 			{
 				abs_gyro_drive(speed,dir);
 			}

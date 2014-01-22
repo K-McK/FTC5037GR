@@ -226,6 +226,12 @@ e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 *  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_CONTINUED
 *     Continue on the ramp
 */
+typedef enum
+{
+	ENCODER,
+	GYRO,
+	NON_SENSOR
+} e_drive_type;
 
 typedef enum
 {

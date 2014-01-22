@@ -82,7 +82,6 @@ task main()
 {
 	initialize();
 	g_rel_heading = 0;
-	bool valid_input = false;
 		switch(g_start_point)
 		{
 		case 1:
@@ -97,5 +96,6 @@ task main()
 		case 4:
 			abs_s4_mission_execute();
 			break;
+		}
 	LogData=false;
 }
