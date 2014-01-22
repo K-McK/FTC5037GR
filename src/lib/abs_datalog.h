@@ -28,20 +28,26 @@ int LogFileSize= 12000;
 string sString;
 string CRLF = (char)13+(char)10;
 
-	WriteText(LogFileHandle, LogIoResult, sString);
-	//StringFormat(sString, "%7d", bearingAC2);
-
 	Delete(LogFileName, LogIoResult);
 	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
+
+	for(int i=1;i<5;i++)
+	{
+		StringFormat(sString, "%2d", g_input_array[i]);
+		WriteText(LogFileHandle, LogIoResult, sString);
+	}
+	strcat(sString,CRLF);
+
 	while(!LogData){EndTimeSlice();}
-	StringFormat(sString,"%5d", dl_mission_number);
-	WriteText(LogFileHandle, LogIoResult, sString);
 	while(LogData)
 	{
 		StringFormat(sString, "%4d", dl_step);							//	autonomous program step number
 		WriteText(LogFileHandle, LogIoResult, sString);
-		//StringFormat(sString, "%7d", IR_Bearing);					//our calculated bearing IR one
-		//WriteText(IRFileHandle, IRIoResult, sString);
+
+		StringFormat(sString, "%4d", dl_step);
+		WriteText(LogFileHandle, LogIoResult, sString);
+		//StringFormat(sString, g_smoke_test2[0]);					//our calculated bearing IR one
+		//WriteText(LogFileHandle, LogIoResult, sString);
 		//StringFormat(sString, "%7d", bearingAC);		//			IR calculated bearing IR one
 		//WriteText(IRFileHandle, IRIoResult, sString);
 		////StringFormat(sString, "%7d", IR_Bearing2);		//		our calculated bearing IR two

@@ -193,7 +193,7 @@ e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
 typedef enum
 {
 	SELECTION_VALUE_EMPTY,
-  STARTING_POINT,
+	STARTING_POINT,
 	STARTING_DELAY,
 	SCOREING_POINT,
 	END_DELAY,
@@ -278,18 +278,23 @@ int dl_step = 0;
 int dl_robot_action_state = 0;
 int dl_robot_action_detail = 0;
 int dl_mission_number = 0;
+int dl_speed = 0;
+int dl_dist = 0;
 string sString;
+
+#define DL_MOVE_SPEED
+#define DL_MOVE_DIST
+
+int dl_drive_details [] = {0,4};
 
 //---------------
 // robot action numbers
 //---------------
 
 #define dl_robot_stop 0
-#define dl_gyro_move_forward 1
-#define dl_gyro_move_backward 2
-#define dl_gyro_point_turn 3
-#define dl_gyro_swing_turn 4
-#define dl_run_abdd 5
+#define dl_gyro_move 1
+#define dl_gyro_turn 2
+#define dl_run_abdd 3
 
 //---------------
 // robot action names

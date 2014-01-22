@@ -28,6 +28,8 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	int i = 0;
 	dl_step = dl_step+1;
 
+	dl_robot_action_state = dl_gyro_move;
+	dl_speed = speed;
 	nMotorEncoder(right_motor)= 0;
 	g_rel_heading = 0;
 
