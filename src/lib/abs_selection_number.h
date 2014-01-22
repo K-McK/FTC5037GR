@@ -28,7 +28,7 @@ void abs_selection_number()
 		g_graph_selection_tab++;
 		while(nNxtButtonPressed != kEnterButton)
 		{
-			if(nNxtButtonPressed == kRightButton && g_intput_array[g_graph_selection_tab] < g_number_max_limit[g_graph_selection_tab])
+			if(nNxtButtonPressed == kRightButton && g_input_array[g_graph_selection_tab] < g_number_max_limit[g_graph_selection_tab])
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
@@ -38,7 +38,7 @@ void abs_selection_number()
 			{
 				PlayTone(200,20);
 			}
-			if(nNxtButtonPressed == kLeftButton && g_intput_array[g_graph_selection_tab] > g_number_min_limit[g_graph_selection_tab])
+			if(nNxtButtonPressed == kLeftButton && g_input_array[g_graph_selection_tab] > g_number_min_limit[g_graph_selection_tab])
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kLeftButton){}
