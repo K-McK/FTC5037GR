@@ -63,13 +63,17 @@ void initialize()
 	LogData=true;
 	g_screen_state = S_READY;
 	StartTask(abs_sensors);
-	StartTask(abs_datalog);
 	HTANGresetAccumulatedAngle(angle_sensor);
 
 	waitForStart();
+
+	StartTask(abs_datalog);
 	eraseDisplay();
 	g_start_time = nPgmTime;
 	g_screen_state = S_DELAY_WAIT;
+	dl_step++;
+	dl_robot_action_state = dl_wait;
+	dl_speed = g_start_delay*1000;
 	wait1Msec(g_start_delay*1000);
 	eraseDisplay();
 	g_screen_state = S_GYRO_SHOW;

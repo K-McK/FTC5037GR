@@ -81,6 +81,10 @@
 task main()
 {
 	initialize();
+
+	dl_robot_action_state = dl_change_event;
+	dl_robot_action_detail = dl_ce_program_start;
+
 	g_rel_heading = 0;
 	switch(g_start_point)
 	{

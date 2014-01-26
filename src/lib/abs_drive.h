@@ -1,30 +1,31 @@
 /**
- *
- *  @file abs_drive.h
- *
- *  @brief it allows the robot to drive forword and backward
- *
- *  @param dir Tells the robot what direction to go
- *
- *  @param dist_method tells the robot how it should know when to stop
- *
- *  @param dist tells the robot how far to go
- *
- *  @param speed tells the robot how fast to go
- *
- *  @param stop_at_end tells the robot if it should stop when it gets to were it needs to go or not
- *
- *  @return returns nothing
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file abs_drive.h
+*
+*  @brief it allows the robot to drive forword and backward
+*
+*  @param dir Tells the robot what direction to go
+*
+*  @param dist_method tells the robot how it should know when to stop
+*
+*  @param dist tells the robot how far to go
+*
+*  @param speed tells the robot how fast to go
+*
+*  @param stop_at_end tells the robot if it should stop when it gets to were it needs to go or not
+*
+*  @return returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 #ifndef ABS_DRIVE_H
 #define ABS_DRIVE_H
 
 void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end)
 {
-	HTANGresetAccumulatedAngle(angle_sensor);
+	if(dist_method == E_IR_DETECT || dist_method == E_IR_DETECT2) dl_IR = true;
+	else dl_IR = false;
 	int i = 0;
 	dl_step = dl_step+1;
 
@@ -32,6 +33,11 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	dl_speed = speed;
 	nMotorEncoder(right_motor)= 0;
 	g_rel_heading = 0;
+	dl_speed = speed;
+	dl_dist = dist;
+
+	if(stop_at_end == true)	dl_robot_action_detail = dl_move_stop;
+	else dl_robot_action_detail = dl_move_no_stop;
 
 	//------------------------
 	// time stopping method
@@ -60,6 +66,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else if(dist_method == E_IR_DETECT)
 	{
+		dl_cur_dist = g_bearing_ac2;
 		if(dir == FORWARD)
 		{
 			while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (150*INT_ANGLE_SENSOR_CIRCUMFERENCE))
@@ -120,6 +127,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else if(dist_method == E_TILT)
 	{
+		dl_cur_dist = HTANGresetAccumulatedAngle(angle_sensor);
 		int j = 0;
 		g_sensor_reference_drive = true;
 		while(j<30)
