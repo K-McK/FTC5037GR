@@ -193,7 +193,7 @@ void abs_selection_custom()
 		while(nNxtButtonPressed == kEnterButton){}
 	}
 	if(g_auto_grabber_selections == SUB_SELECTION_RAMP_STOP&&g_input_array[5]==2)g_input_array=4;
-	if(g_auto_grabber_selections == SUB_SELECTION_RAMP_STOP&&g_input_array[5]==3)g_input_array=5;
+	if(g_auto_grabber_selections == SUB_SELECTION_RAMP_CONTINUED&&g_input_array[5]==3)g_input_array=5;
 }
 
 #endif /* !ABS_SELECTION_CUSTOM_H */
