@@ -36,7 +36,8 @@ task abs_screen ()
 			if(g_auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
 			else nxtDisplayBigTextLine(1, "Mission ");
 			nxtDisplayBigTextLine(3, "Delay");
-			nxtDisplayBigTextLine(5, "%2d", g_input_array[STARTING_DELAY]);
+			if(g_auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(5, "%2d", g_input_array[STARTING_DELAY]);
+			else nxtDisplayBigTextLine(5, "%2d", g_input_array[END_DELAY]);
 			break;
 		case S_CAL_TIME:
 			nxtDisplayBigTextLine(1, "CalTime");
@@ -51,7 +52,7 @@ task abs_screen ()
 		case S_READY:
 			nxtDisplayBigTextLine(1, "Program");
 			nxtDisplayBigTextLine(3, "Ready");
-			if(g_input_array[END_POINT]>0&&g_input_array[END_POINT]) nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d N", g_input_array[STARTING_POINT], g_input_array[STARTING_DELAY], g_input_array[SCOREING_POINT], g_input_array[END_DELAY], g_input_array[END_POINT]);
+			if(g_input_array[END_POINT]>0&&g_input_array[END_POINT]<4) nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d N", g_input_array[STARTING_POINT], g_input_array[STARTING_DELAY], g_input_array[SCOREING_POINT], g_input_array[END_DELAY], g_input_array[END_POINT]);
 			else nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d Y", g_input_array[STARTING_POINT], g_input_array[STARTING_DELAY], g_input_array[SCOREING_POINT], g_input_array[END_DELAY], g_input_array[END_POINT]);
 			break;
 		case S_DELAY_WAIT:

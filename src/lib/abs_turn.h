@@ -25,20 +25,25 @@
 //=======================================
 void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method e_stop, int degree, int speed)
 {
+	dl_robot_action_state = dl_gyro_turn;
 	int i = 0;
 	g_rel_heading = 0;
 	int target = 0;
 	dl_step = dl_step+1;
+	dl_speed = speed;
+	dl_dist = degree;
 
 	if(e_stop == TURN_TO)
 	{
 		if(dir == COUNTERCLOCKWISE)
 		{
+			dl_robot_action_detail = dl_turn_counterclockwise;
 			if(degree<g_recont_heading) target = -(g_recont_heading-degree);
 			else target = -(360-(degree-g_recont_heading));
 		}
 		else
 		{
+			dl_robot_action_detail = dl_turn_clockwise;
 			if(degree<g_recont_heading) target = 360-(g_recont_heading-degree);
 			else target = degree-g_recont_heading;
 		}

@@ -28,7 +28,7 @@ void abs_selection_number()
 		g_graph_selection_tab++;
 		while(nNxtButtonPressed != kEnterButton)
 		{
-			if(nNxtButtonPressed == kRightButton && g_intput_array[g_graph_selection_tab] < g_number_max_limit[g_graph_selection_tab])
+			if(nNxtButtonPressed == kRightButton && g_input_array[g_graph_selection_tab] < g_number_max_limit[g_graph_selection_tab])
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
@@ -36,9 +36,9 @@ void abs_selection_number()
 			}
 			else
 			{
-				PlayTone(200,20);
+				//PlayTone(200,20);
 			}
-			if(nNxtButtonPressed == kLeftButton && g_intput_array[g_graph_selection_tab] > g_number_min_limit[g_graph_selection_tab])
+			if(nNxtButtonPressed == kLeftButton && g_input_array[g_graph_selection_tab] > g_number_min_limit[g_graph_selection_tab])
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kLeftButton){}
@@ -46,7 +46,7 @@ void abs_selection_number()
 			}
 			else
 			{
-				PlayTone(200,20);
+				//PlayTone(200,20);
 			}
 		}
 		while(nNxtButtonPressed == kEnterButton){}
@@ -74,7 +74,7 @@ void abs_selection_number()
 	else
 	{
 		g_end_point = 1; //error for if an invaid value is inputed
-		PlayTone(400,60);
+		//PlayTone(400,60);
 	}
 
 	g_screen_state = S_MISSION_SHOW;
