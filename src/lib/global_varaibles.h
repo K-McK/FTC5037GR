@@ -273,6 +273,15 @@ int g_input_array[INPUT_ARRAY_SIZE];
 // Datalogging variables
 //=========================================================
 
+const string LogFileName = "DATALOG.txt";
+TFileIOResult LogIoResult;
+TFileHandle LogFileHandle;
+long LogFileSize = 36000;
+string sString;
+string CRLF = (char)13+(char)10;
+
+
+bool g_auto_program = true;
 bool LogData = false;
 int dl_step = 0;
 int dl_robot_action_state = 0;
@@ -283,12 +292,53 @@ int dl_dist = 0;
 int dl_gyro_heading = 0;
 bool dl_IR = false;
 int dl_cur_dist = 0;
-string sString;
 
 #define DL_MOVE_SPEED
 #define DL_MOVE_DIST
 
 int dl_drive_details [] = {0,4};
+
+//---------------
+// tele-op varibles
+//---------------
+
+int dl_teleop_btn_press = false;
+
+int dl_joy1_btn_array [] = {0,12};
+int dl_joy1_dpad = -1;
+int dl_joy1_sticks_array [] = {0,2};
+
+int dl_joy2_btn_array [] = {0,12};
+int dl_joy2_dpad = -1;
+int dl_joy2_sticks_array [] = {0,2};
+
+string g_dl_joy1_brn_names [] = {
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP"};
+
+	string g_dl_joy2_brn_names [] = {
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP",
+	"WIP"};
 
 //---------------
 // robot action numbers
@@ -551,6 +601,7 @@ string g_basic_word_list [] = {
 #define S_SELECTION_SUB_RAMP 24
 #define S_MISSION_SHOW 25
 #define S_QUICK_SELECTION 26
+#define S_TEST_MOTOR 27
 
 int g_screen_state = 1;
 
