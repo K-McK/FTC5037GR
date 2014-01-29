@@ -22,7 +22,7 @@
 #ifndef ABS_DRIVE_H
 #define ABS_DRIVE_H
 
-void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end)
+void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end, e_drive_type drive_type)
 {
 	if(dist_method == E_IR_DETECT || dist_method == E_IR_DETECT2) dl_IR = true;
 	else dl_IR = false;
@@ -47,7 +47,26 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		ClearTimer(T1);
 		while(time1[T1] < dist)
 		{
-			abs_gyro_drive(speed,dir);
+			if(drive_type == GYRO)
+			{
+				abs_gyro_drive(speed,dir);
+			}
+
+			/** No gyro correction*/
+			else
+			{
+				if(dir == FORWARD)
+				{
+					motor[left_motor] = speed;
+					motor[right_motor] = speed;
+				}
+				else
+				{
+					motor[left_motor] = -speed;
+					motor[right_motor] = -speed;
+				}
+
+			}
 		}
 	}
 	//------------------------
@@ -58,7 +77,25 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		while(i<5)
 		{
 			if(abs(nMotorEncoder(right_motor)) > distance_to_encoder_derees(dist)) i++;
-			abs_gyro_drive(speed,dir);
+			if(drive_type == GYRO)
+			{
+				abs_gyro_drive(speed,dir);
+			}
+
+			/** No gyro correction*/
+			else
+			{
+				if(dir == FORWARD)
+				{
+					motor[left_motor] = speed;
+					motor[right_motor] = speed;
+				}
+				else
+				{
+					motor[left_motor] = -speed;
+					motor[right_motor] = -speed;
+				}
+			}
 		}
 	}
 	//------------------------
@@ -79,7 +116,17 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				{
 					if(!((g_bearing_ac2 >= dist) || (g_bearing_ac2 == 0))) break;
 				}
-				abs_gyro_drive(speed,dir);
+				if(drive_type == GYRO)
+				{
+					abs_gyro_drive(speed,dir);
+				}
+
+				/** No gyro correction*/
+				else
+				{
+					motor[left_motor] = speed;
+					motor[right_motor] = speed;
+				}
 			}
 			//g_screen_state = S_TIME_SHOW;
 			g_debug_time_1 = nPgmTime;
@@ -96,10 +143,18 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				{
 					if(!((g_bearing_ac1 <= dist) || (g_bearing_ac1 == 0))) break;
 				}
-				abs_gyro_drive(speed,dir);
+
+				/** No gyro correction*/
+				if(drive_type == GYRO)
+				{
+					abs_gyro_drive(speed,dir);
+				}
+				else
+				{
+					motor[left_motor] = -speed;
+					motor[right_motor] = -speed;
+				}
 			}
-			//g_screen_state = S_TIME_SHOW;
-			g_debug_time_1 = nPgmTime;
 		}
 	}
 	//------------------------
@@ -111,17 +166,37 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		{
 			while(g_ir_bearing2 > dist)
 			{
-				abs_gyro_drive(speed,dir);
+				if(drive_type == GYRO)
+				{
+					abs_gyro_drive(speed,dir);
+				}
+				/** No gyro correction*/
+				else
+				{
+					motor[left_motor] = speed;
+					motor[right_motor] = speed;
+				}
 			}
 		}
 		else
 		{
 			while(g_ir_bearing2 < dist)
 			{
-				abs_gyro_drive(speed,dir);
+				if(drive_type == GYRO)
+				{
+					abs_gyro_drive(speed,dir);
+				}
+				/** No gyro correction*/
+				else
+				{
+					motor[left_motor] = -speed;
+					motor[right_motor] = -speed;
+				}
 			}
 		}
 	}
+
+
 	//------------------------
 	// accelermeoter sensor stopping method
 	//------------------------
@@ -132,7 +207,25 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		g_sensor_reference_drive = true;
 		while(j<30)
 		{
-			abs_gyro_drive(speed,dir);
+			if(drive_type == GYRO)
+			{
+				abs_gyro_drive(speed,dir);
+			}
+
+			/** No gyro correction*/
+			else
+			{
+				if(dir == FORWARD)
+				{
+					motor[left_motor] = speed;
+					motor[right_motor] = speed;
+				}
+				else
+				{
+					motor[left_motor] = -speed;
+					motor[right_motor] = -speed;
+				}
+			}
 			if(g_accelermoeter_average > dist) j++;
 		}
 		g_sensor_reference_drive = false;
@@ -145,9 +238,30 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		HTANGresetAccumulatedAngle(angle_sensor);
 		while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (dist*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 		{
-			abs_gyro_drive(speed,dir);
+			if(drive_type == GYRO)
+			{
+				abs_gyro_drive(speed,dir);
+			}
+
+			/** No gyro correction*/
+			else
+			{
+				if(dir == FORWARD)
+				{
+					motor[left_motor] = speed;
+					motor[right_motor] = speed;
+				}
+				else
+				{
+					motor[left_motor] = -speed;
+					motor[right_motor] = -speed;
+				}
+			}
 		}
 	}
+	//------------------------
+	// Stop
+	//------------------------
 	if(stop_at_end)
 	{
 		motor[left_motor] = 0;

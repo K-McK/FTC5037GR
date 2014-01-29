@@ -23,7 +23,7 @@ void abs_s4_mission_execute()
 
 	case 2:
 		abs_turn(CLOCKWISE, SWING, TURN_TO, 60, 60);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/30, 50, true);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/30, 50, true, GYRO);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 128, 60);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
@@ -34,9 +34,9 @@ void abs_s4_mission_execute()
 
 	case 3:
 		abs_turn(CLOCKWISE, SWING, TURN_TO, 60, 60);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/29, 50, true);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/29, 50, true, GYRO);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 135, 60);
-		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/23, 50, true);
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/23, 50, true, GYRO);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
@@ -46,9 +46,9 @@ void abs_s4_mission_execute()
 
 	case 4:
 		abs_turn(CLOCKWISE, SWING, TURN_TO, 60, 60);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/29, 50, true);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/29, 50, true, GYRO);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 135, 60);
-		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/75, 50, true);
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/75, 50, true, GYRO);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
@@ -58,9 +58,9 @@ void abs_s4_mission_execute()
 
 	case 5:
 		abs_turn(CLOCKWISE, SWING, TURN_TO, 60, 60);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/29, 50, true);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/29, 50, true, GYRO);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 135, 60);
-		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/100, 50, true);
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/100, 50, true, GYRO);
 		servo[abdd] = g_abdd_up;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
@@ -70,11 +70,11 @@ void abs_s4_mission_execute()
 
 	case 6:
 		abs_turn(CLOCKWISE, SWING, TURN_TO, 60, 60);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/30, 50, true);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/30, 50, true, GYRO);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 120, 60);
-		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true);
+		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
 		abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
-		abs_drive(FORWARD, E_ANGLE, 180, 50, true);
+		abs_drive(FORWARD, E_ANGLE, 180, 50, true, GYRO);
 		break;
 
 	case 7:

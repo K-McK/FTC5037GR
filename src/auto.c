@@ -101,4 +101,5 @@ task main()
 		abs_s4_mission_execute();
 		break;
 	}
+	LogData=false;
 }

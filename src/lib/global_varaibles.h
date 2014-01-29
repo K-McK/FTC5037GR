@@ -31,27 +31,27 @@ bool g_gyro_true = false;
 //=========================================================
 
 /**
-*
-*  @def INT_ANGLE_SENSOR_CIRCUMFERENCE
-*     Tells the robot the circumference of the angle sensors wheel
-*  @def FLOAT_ANGLE_SENSOR_CIRCUMFERENCE
-*     Tells the robot the exact circumference of the angle sensors wheel
-*  @def DRIVE_WHEELS_CIRCUMFERENCE
-*     Tells the robot the cercumference of the drive wheels
-*  @def GRABBER_LEFT_OPEN
-*     tells the robot where the left block grabber needs to be to be open
-*  @def GRABBER_RIGHT_OPEN
-*     tells the robot where the right block grabber needs to be to be open
-*  @def GRABBER_LEFT_MID
-*     tells the robot where the left block grabber needs to be to be in the middle
-*  @def GRABBER_RIGHT_MID
-*     tells the robot where the right block grabber needs to be to be in the middle
-*  @def GRABBER_LEFT_CLOSE
-*     tells the robot where the left block grabber needs to be to be closed
-*  @def GRABBER_RIGHT_CLOSE
-*     tells the robot where the left block grabber needs to be to be closed
-*
-*/
+ *
+ *  @def INT_ANGLE_SENSOR_CIRCUMFERENCE
+ *     Tells the robot the circumference of the angle sensors wheel
+ *  @def FLOAT_ANGLE_SENSOR_CIRCUMFERENCE
+ *     Tells the robot the exact circumference of the angle sensors wheel
+ *  @def DRIVE_WHEELS_CIRCUMFERENCE
+ *     Tells the robot the cercumference of the drive wheels
+ *  @def GRABBER_LEFT_OPEN
+ *     tells the robot where the left block grabber needs to be to be open
+ *  @def GRABBER_RIGHT_OPEN
+ *     tells the robot where the right block grabber needs to be to be open
+ *  @def GRABBER_LEFT_MID
+ *     tells the robot where the left block grabber needs to be to be in the middle
+ *  @def GRABBER_RIGHT_MID
+ *     tells the robot where the right block grabber needs to be to be in the middle
+ *  @def GRABBER_LEFT_CLOSE
+ *     tells the robot where the left block grabber needs to be to be closed
+ *  @def GRABBER_RIGHT_CLOSE
+ *     tells the robot where the left block grabber needs to be to be closed
+ *
+ */
 #define INT_ANGLE_SENSOR_CIRCUMFERENCE 18
 #define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE 17.6
 #define DRIVE_WHEELS_CIRCUMFERENCE 26
@@ -64,48 +64,47 @@ bool g_gyro_true = false;
 #define GRABBER_RIGHT_CLOSE 131
 
 /**
-*
-* @var g_block_speed_down Tells the robot how fast to move the lift
-*
-* @var g_block_speed_up Tells the robot how fast to move the lift
-*
-* @var g_robot_lift_down Tells the robot how fast to move the sky hook
-*
-* @var g_robot_lift_up Tells the robot how fast to move the sky hook
-*
-* @var g_flag_speed_down Tells the robot how fast to move the flag lifter
-*
-* @var g_flag_speed_right Tells the robot how fast to move the flag lifter
-*
-* @var g_flag_speed_up Tells the robot how fast to move the flag lifter
-*
-* @var g_flag_speed_left Tells the robot how fast to move the flag lifter
-*
-* @var g_abdd_up Tells the robot how fast to move the abdd
-*
-* @var g_abdd_down Tells the robot how fast to move the abdd
-*
-* @var g_gyro_adjust Multiplyer for gyro adjust
-*
-*/
-
-/**
-* @def g_block_speed_down Tells the robot how fast to move the block grabber down
-*
-* @def g_block_speed_up Tells the robot how fast to move the block grabber up
-*
-* @def g_robot_lift_down Tells the robot how fast to move the robot lft down
-*
-* @def g_robot_lift_up Tells the robot how fast to move the robot lift up
-*
-* @def g_flag_speed_down Tells the robot how fast to spin the flag lift to make the flag go down
-*
-* @def g_flag_speed_right Tells the robot how fast to spin the robot flag lift right
-*
-* @def g_flag_speed_up Tells the robot how fast to spin the robot flag to make the flag go up
-*
-* @def
-*/
+ *
+ * @var g_block_speed_down Tells the robot how fast to move the lift
+ *
+ * @var g_block_speed_up Tells the robot how fast to move the lift
+ *
+ * @var g_robot_lift_down Tells the robot how fast to move the sky hook
+ *
+ * @var g_robot_lift_up Tells the robot how fast to move the sky hook
+ *
+ * @var g_flag_speed_down Tells the robot how fast to move the flag lifter
+ *
+ * @var g_flag_speed_right Tells the robot how fast to move the flag lifter
+ *
+ * @var g_flag_speed_up Tells the robot how fast to move the flag lifter
+ *
+ * @var g_flag_speed_left Tells the robot how fast to move the flag lifter
+ *
+ * @var g_abdd_up Tells the robot how fast to move the abdd
+ *
+ * @var g_abdd_down Tells the robot how fast to move the abdd
+ *
+ * @var g_gyro_adjust Multiplyer for gyro adjust
+ *
+ * @var g_block_speed_down Tells the robot how fast to move the block grabber down
+ *
+ * @var g_block_speed_up Tells the robot how fast to move the block grabber up
+ *
+ * @var g_robot_lift_down Tells the robot how fast to move the robot lft down
+ *
+ * @var g_robot_lift_up Tells the robot how fast to move the robot lift up
+ *
+ * @var g_flag_speed_down Tells the robot how fast to spin the flag lift to make the flag go down
+ *
+ * @var g_flag_speed_right Tells the robot how fast to spin the robot flag lift right
+ *
+ * @var g_flag_speed_up Tells the robot how fast to spin the robot flag to make the flag go up
+ *
+ * @var g_flag_speed_left Tells the robot how fast to spin the robot flag lift left
+ *
+ *
+ */
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
 
@@ -226,6 +225,12 @@ e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 *  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_CONTINUED
 *     Continue on the ramp
 */
+typedef enum
+{
+	ENCODER,
+	GYRO,
+	NON_SENSOR
+} e_drive_type;
 
 typedef enum
 {
