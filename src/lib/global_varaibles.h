@@ -360,7 +360,19 @@ int g_input_array[INPUT_ARRAY_SIZE];
 /**
  * @var LogData Tells the robot is if should log data or not
  *
- * @var dl_step
+ * @var dl_step Tells the robot what data login step its on
+ *
+ * @var dl_robot_action_state Tells the robot what the action state is
+ *
+ * @var dl_robot_action_detail Tells the robot what its action detail is
+ *
+ * @var dl_mission_number Tells the robot the data loging mission number
+ *
+ * @var dl_speed Tells the robot the speed of the data loging
+ *
+ * @var dl_dist Tells the robot the distence of something it should data log
+ *
+ * @var dl_gyro_heading Tells the data loging the gyro_heading
  */
 bool LogData = false;
 int dl_step = 0;
