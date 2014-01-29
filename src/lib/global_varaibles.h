@@ -103,7 +103,15 @@ bool g_gyro_true = false;
  *
  * @var g_flag_speed_left Tells the robot how fast to spin the robot flag lift left
  *
+ * @var g_abdd_up Tells the robot what position to put the servo when puting it up
  *
+ * @var g_abdd_down Tells the robot what position to put the servo when puting it down
+ *
+ * @var g_gyro_adjust The Multiplyer for gyro calabration
+ *
+ * @var g_ground_arm_up Tells the robot where to put the ground arm when going up
+ *
+ * @var g_ground_arm_down Tells the robot where to put the ground arm when going down
  */
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
@@ -129,26 +137,29 @@ const int g_ground_arm_down = 120;
 // auto selection points
 //=========================================================
 /**
-*  @enum e_auto_selection_points Tells the robot what part it is in the selection program
-*  @var e_auto_selection_points::SELECTION_START_POINT
+* @enum e_auto_selection_points Tells the robot what part it is in the selection program
+* @var e_auto_selection_points::SELECTION_START_POINT
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_START_DELAY
+* @var e_auto_selection_points::SELECTION_START_DELAY
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_MISSION_POINT
+* @var e_auto_selection_points::SELECTION_MISSION_POINT
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_MISSION_DELAY
+* @var e_auto_selection_points::SELECTION_MISSION_DELAY
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_END_POINT
+* @var e_auto_selection_points::SELECTION_END_POINT
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_SUB_GRABBERS
+* @var e_auto_selection_points::SELECTION_SUB_GRABBERS
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_GYRO_CAL
+* @var e_auto_selection_points::SELECTION_GYRO_CAL
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_SELECTION_TYPE
+* @var e_auto_selection_points::SELECTION_SELECTION_TYPE
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_GRAPH_NUMBER_INPUT
+* @var e_auto_selection_points::SELECTION_GRAPH_NUMBER_INPUT
 *     Tells the robot to go to this part in the selection program
-*
+* @var e_auto_selection_points::SELECTION_QUICK_INPUT
+*			Tells the robot to go to this part in the selection program
+*	@var e_auto_selection_points::SELECTION_SUB_RAMP
+*			Tells the robot to go to this part in the selection program
 */
 
 typedef enum
@@ -188,6 +199,16 @@ typedef enum
 } e_selection_types;
 
 e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
+
+/**
+*  @enum e_selection_values Lets the robot know how you wan to imploment the auto program
+*  @var e_auto_selection_points::SELECTION_VALUE_EMPTY
+*     Select a program by id
+*  @var e_auto_selection_points::SELECTION_TYPE_CUSTOM
+*     Select one of the custom programs
+*  @var e_auto_selection_points::SELECTION_TYPE_QUICK
+*     Select one of the most commenly used progams
+*/
 
 typedef enum
 {
@@ -374,6 +395,8 @@ int g_delay = 0;
 int g_end_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
+
+int g_dist_backwards = 0;
 
 int START_POINT_MAX_VAL = 4;
 int START_POINT_MIN_VAL = 0;

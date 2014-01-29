@@ -18,7 +18,7 @@ void abs_end_r2(int delay, int lift_speed)
 {
 	wait1Msec(delay);
 	servo[abdd] = g_abdd_down;
-	abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
+	abs_drive(BACKWARD, E_ANGLE, g_dist_backwards, 50, true, GYRO);
 	wait1Msec(200);
 	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
 	wait1Msec(200);
