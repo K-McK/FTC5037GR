@@ -183,7 +183,7 @@ e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
 // auto selection type options
 //=========================================================
 /**
-*  @enum e_selection_types Lets the robot know how you wan to imploment the auto program
+*  @enum e_selection_types Lets the robot know how you want to imploment the auto program
 *  @var e_auto_selection_points::SELECTION_TYPE_NUMBER
 *     Select a program by id
 *  @var e_auto_selection_points::SELECTION_TYPE_CUSTOM
@@ -201,13 +201,19 @@ typedef enum
 e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
 
 /**
-*  @enum e_selection_values Lets the robot know how you wan to imploment the auto program
+*  @enum e_selection_values Tells the robot what number you are editing
 *  @var e_auto_selection_points::SELECTION_VALUE_EMPTY
-*     Select a program by id
-*  @var e_auto_selection_points::SELECTION_TYPE_CUSTOM
-*     Select one of the custom programs
-*  @var e_auto_selection_points::SELECTION_TYPE_QUICK
-*     Select one of the most commenly used progams
+*     Tells the robot what number you are editing nothing
+*  @var e_auto_selection_points::STARTING_POINT
+*     Tells the robot what number you are editing the starting point
+*  @var e_auto_selection_points::STARTING_DELAY
+*     Tells the robot what number you are editing the starting delay
+*  @var e_auto_selection_points::SCOREING_POINT
+*     Tells the robot what number you are editing the scoring point
+*  @var e_auto_selection_points::END_DELAY
+*     Tells the robot what number you are editing the delay at the end
+*  @var e_auto_selection_points::END_POINT
+*     Tells the robot what number you are editing where you end the program
 */
 
 typedef enum
@@ -246,6 +252,16 @@ e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 *  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_CONTINUED
 *     Continue on the ramp
 */
+
+/**
+*  @enum e_drive_type Tells the robot its corection type
+*  @var e_auto_sub_selection_ramp::ENCODER
+*     Tells the robot to correct useing a encoder
+*  @var e_auto_sub_selection_ramp::GYRO
+*     Tells the robot to correct useing a gyro sensor
+*  @var e_auto_sub_selection_ramp::NON_SENSOR
+*     Tells the robot not to correct
+*/
 typedef enum
 {
 	ENCODER,
@@ -253,6 +269,13 @@ typedef enum
 	NON_SENSOR
 } e_drive_type;
 
+/**
+*  @enum e_drive_type Tells the robot if i should stop on the ramp or not
+*  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_STOP
+*     Tells the robot it should stop on the ramp
+*  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_CONTINUED
+*     Tells the robot it should not stop on the ramp
+*/
 typedef enum
 {
 	SUB_SELECTION_RAMP_STOP,
@@ -264,6 +287,28 @@ e_auto_sub_selection_ramp g_auto_grabber_selection_ramp_options = SUB_SELECTION_
 //=========================================================
 // auto movements
 //=========================================================
+/**
+* @var g_to_turn_dist Tells the robot how far it has gone when doing ir detection
+*
+* @var g_IR_angle_dist_complete Tells the robot when it has reached a the first crate
+*
+* @var g_forward_crate1_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_forward_crate2_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_forward_crate3_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_forward_crate4_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_backwards_crate1_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_backwards_crate2_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_backwards_crate3_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_backwards_crate4_to_turn_dist Tells the robot how far it need to go to get to the turn
+*/
+
 int g_to_turn_dist = 0;
 
 bool g_IR_angle_dist_complete = false;
@@ -281,15 +326,29 @@ const int g_backwards_crate4_to_turn_dist = 145;
 //=========================================================
 // Smoke test varaibles
 //=========================================================
+/**
+* @var g_smoke_test_num Tells the robot what the number is for what its useing smoke test on
+*
+* @var g_smoke_test_total Tells the robot the total number of of smoke test types
+*
+* @var g_smoke_run Tells the robot if its running smoke test or not
+*
+* @var g_test_value Tells the robot what to desply on the screen
+*/
 
 int g_smoke_test_num = 1;
 int g_smoke_test_total = 12;
-int g_smoke_run = false;
+bool g_smoke_run = false;
 int g_test_value = 0;
 
 //=========================================================
 // auto number input variable
 //=========================================================
+/**
+ * @def INPUT_ARRAY_SIZE Tells the robot the size of the number of selection types
+ *
+ * @var g_input_array Tells the robot all of the different options for automus
+ */
 
 #define INPUT_ARRAY_SIZE 6
 
@@ -298,7 +357,11 @@ int g_input_array[INPUT_ARRAY_SIZE];
 //=========================================================
 // Datalogging variables
 //=========================================================
-
+/**
+ * @var LogData Tells the robot is if should log data or not
+ *
+ * @var dl_step
+ */
 bool LogData = false;
 int dl_step = 0;
 int dl_robot_action_state = 0;
