@@ -3,7 +3,6 @@
 #pragma config(Sensor, S2,     GYRO_MUX,       sensorI2CCustom)
 #pragma config(Sensor, S3,     SENSOR_MUX,     sensorI2CCustom)
 #pragma config(Sensor, S4,     angle_sensor,   sensorI2CCustom)
-#pragma config(Motor,  motorA,          test_motor,    tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  mtr_S1_C1_1,     block_lift_motor, tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     sky_hook,      tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S1_C2_1,     jolly_roger,   tmotorTetrix, openLoop, reversed)
@@ -58,12 +57,10 @@
 #include "lib/abs_turn.h"
 #include "lib/abs_gyro_drive.h"
 #include "lib/abs_drive.h"
-#include "lib/abs_motor.h"
-#include "lib/abs_stop_robot.h"
-#include "lib/abs_auto_datalog_write.h"
-#include "lib/abs_teleop_datalog_write.h"
 #include "lib/abs_datalog.h"
 #include "lib/abs_initialize.h"
+#include "lib/abs_motor.h"
+#include "lib/abs_stop_robot.h"
 
 //-----------------------
 // auto mission includes

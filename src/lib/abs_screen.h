@@ -174,11 +174,6 @@ task abs_screen ()
 			nxtDisplayBigTextLine(3, g_quick_names1[g_quick_mission]);
 			nxtDisplayBigTextLine(5, g_quick_names2[g_quick_mission]);
 			break;
-		case S_TEST_MOTOR:
-			nxtDisplayBigTextLine(1, "Field   ");
-			nxtDisplayBigTextLine(3, "Test    ");
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
-			break;
 		}
 	}
 }

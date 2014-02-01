@@ -17,20 +17,6 @@
 void abs_joystick_drive(e_joystick_method joy_type)
 {
 	//-----------------------------
-	// test motor
-	//-----------------------------
-	if(joystick.joy1_TopHat == 0)
-	{
-		g_screen_state = S_TEST_MOTOR;
-		motor[test_motor] = 60;
-	}
-	else
-	{
-		g_screen_state = S_MISC_SHOW;
-		motor[test_motor] = 0;
-	}
-
-	//-----------------------------
 	// ground arm
 	//-----------------------------
 	if(joy1Btn(6))servo[ground_arm]=g_ground_arm_up;
