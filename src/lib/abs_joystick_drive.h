@@ -23,6 +23,23 @@ void abs_joystick_drive(e_joystick_method joy_type)
 	else if(joy1Btn(8))servo[ground_arm]=g_ground_arm_down;
 
 	//-----------------------------
+	// abdd
+	//-----------------------------
+	switch(joystick.joy1_TopHat)
+		{
+		case -1:
+			servo[abdd] = g_abdd_down;
+			motor[test] = 0;
+			break;
+		case 0:
+			servo[abdd] = g_abdd_up;
+			break;
+		case 4:
+			motor[test] = 60;
+			break;
+		}
+
+	//-----------------------------
 	// robot lift
 	//-----------------------------
 	if(joy1Btn(4) || joy2Btn(4)) motor[sky_hook]=g_robot_lift_up;

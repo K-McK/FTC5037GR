@@ -48,6 +48,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		while(time1[T1] < dist)
 		{
 			abs_gyro_drive(speed,dir);
+			dl_cur_dist = time1[T1];
 		}
 	}
 	//------------------------
@@ -59,6 +60,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		{
 			if(abs(nMotorEncoder(right_motor)) > distance_to_encoder_derees(dist)) i++;
 			abs_gyro_drive(speed,dir);
+			dl_cur_dist = nMotorEncoder(right_motor);
 		}
 	}
 	//------------------------
@@ -66,11 +68,11 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else if(dist_method == E_IR_DETECT)
 	{
-		dl_cur_dist = g_bearing_ac2;
 		if(dir == FORWARD)
 		{
 			while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (150*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 			{
+				dl_cur_dist = g_bearing_ac2;
 				if(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (100*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 				{
 					if(!((g_bearing_ac2 >= dist - 1) || (g_bearing_ac2 == 0))) break;
@@ -127,7 +129,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else if(dist_method == E_TILT)
 	{
-		dl_cur_dist = HTANGresetAccumulatedAngle(angle_sensor);
+		dl_cur_dist = g_accelermoeter_average;
 		int j = 0;
 		g_sensor_reference_drive = true;
 		while(j<30)
@@ -145,6 +147,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		HTANGresetAccumulatedAngle(angle_sensor);
 		while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (dist*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 		{
+			dl_cur_dist = HTANGreadAccumulatedAngle(angle_sensor);
 			abs_gyro_drive(speed,dir);
 		}
 	}

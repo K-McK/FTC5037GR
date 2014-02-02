@@ -16,8 +16,6 @@
 
 void abs_s1_mission_execute()
 {
-	dl_robot_action_state = dl_change_event;
-	dl_robot_action_detail = dl_ce_score_start;
 	switch(g_mission_number)
 	{
 	case 0:
@@ -120,18 +118,23 @@ void abs_s1_mission_execute()
 	dl_dist = g_abdd_up;
 	servo[abdd] = g_abdd_up;
 	wait1Msec(2000);
-	dl_robot_action_detail = dl_abdd_close;
-	dl_dist = g_abdd_down;
 	servo[abdd] = g_abdd_down;
 
-	dl_step++;
-	dl_robot_action_state = dl_wait;
-	dl_robot_action_detail = 0;
+	dl_change_event = true;
+	dl_ce_detail = dl_ce_end_delay;
+
 	dl_speed = g_end_delay*1000;
 	wait1Msec(g_end_delay*1000);
 
-	dl_robot_action_state = dl_change_event;
-	dl_robot_action_detail = dl_ce_end_point;
+	dl_step++;
+	dl_robot_action_detail = dl_abdd_close;
+	dl_dist = g_abdd_down;
+
+	dl_change_event = true;
+	dl_ce_detail = dl_ce_end_point;
+
+	wait1Msec(100);
+
 	switch(g_end_point)
 	{
 	case 1:

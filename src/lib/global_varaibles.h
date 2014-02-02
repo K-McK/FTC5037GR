@@ -276,6 +276,8 @@ int g_input_array[INPUT_ARRAY_SIZE];
 bool LogData = false;
 int dl_step = 0;
 int dl_robot_action_state = 0;
+bool dl_change_event = false;
+int dl_ce_detail = 0;
 int dl_robot_action_detail = 0;
 int dl_mission_number = 0;
 int dl_speed = 0;
@@ -299,7 +301,6 @@ int dl_drive_details [] = {0,4};
 #define dl_gyro_turn 2
 #define dl_run_abdd 3
 #define dl_wait 4
-#define dl_change_event 5
 
 //---------------
 // change event details
@@ -332,8 +333,8 @@ string g_datalog_change_event_names [] = {
 
 string g_datalog_details_names [] = {
 	"none",
-	"stop at end",
-	"dont stop",
+	"stop",
+	"no stop",
 	"clockwise",
 	"counterclockwise",
 	"abdd open",
@@ -346,7 +347,7 @@ string g_datalog_details_names [] = {
 int g_debug_time_1 = 0;
 int g_debug_time_2 = 0;
 
-int g_auto_ending_points = 4;
+int g_auto_ending_points = 5;
 int g_travel_dist = 0;
 int g_auto_starting_points = 4;
 int g_auto_missions = 10;
@@ -661,8 +662,8 @@ string g_ending_names1 [] = {
 	"Stop    ",
 	"Ramp 1  ",
 	"Ramp 2  ",
-	"Test 4  ",
-	"Test 5  ",
+	"Ramp 1  ",
+	"Ramp 2  ",
 	"Test 6  ",
 	"Test 7  ",
 	"Test 8  ",
@@ -687,10 +688,10 @@ string g_ending_names1 [] = {
 string g_ending_names2 [] = {
 	"        ",
 	"        ",
-	"        ",
-	"Test 3  ",
-	"Test 4  ",
-	"Test 5  ",
+	"Stop    ",
+	"Stop    ",
+	"Continue",
+	"Continue",
 	"Test 6  ",
 	"Test 7  ",
 	"Test 8  ",

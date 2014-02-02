@@ -71,8 +71,8 @@ void initialize()
 	eraseDisplay();
 	g_start_time = nPgmTime;
 	g_screen_state = S_DELAY_WAIT;
-	dl_step++;
-	dl_robot_action_state = dl_wait;
+	dl_change_event = true;
+	dl_ce_detail = dl_ce_start_delay;
 	dl_speed = g_start_delay*1000;
 	wait1Msec(g_start_delay*1000);
 	eraseDisplay();
