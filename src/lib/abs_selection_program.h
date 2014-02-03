@@ -75,7 +75,7 @@ void selection_program()
 	if(g_input_array[END_POINT] == 4)
 	{
 		g_end_point=2;
-		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 	}
 	if(g_input_array[END_POINT] == 5)
 	{

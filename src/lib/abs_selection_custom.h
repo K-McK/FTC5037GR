@@ -159,41 +159,72 @@ void abs_selection_custom()
 	// Start of optional sub selection for ramp position
 	//---------------------------------------
 
-	if(g_input_array[END_POINT] == 2 || g_input_array[END_POINT] == 3)
+	//if(g_input_array[END_POINT] == 2 || g_input_array[END_POINT] == 3)
+	//{
+	//	g_auto_selection_point = SELECTION_SUB_RAMP;
+	//	g_screen_state = S_SELECTION_SUB_RAMP;
+
+	//	int i = 1;
+	//	while(nNxtButtonPressed != kEnterButton)
+	//	{
+	//		if(nNxtButtonPressed == kRightButton)
+	//		{
+	//			PlaySoundFile("! Click.rso");
+	//			while(nNxtButtonPressed == kRightButton){}
+	//			if(i < 2)
+	//			{
+	//				i++;
+	//				g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+	//			}
+	//		}
+	//		if(nNxtButtonPressed == kLeftButton)
+	//		{
+	//			PlaySoundFile("! Click.rso");
+	//			while(nNxtButtonPressed == kLeftButton){}
+	//			if(i > 1)
+	//			{
+	//				i--;
+	//				g_auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
+	//			}
+	//		}
+	//	}
+
+		//PlaySoundFile("! Click.rso");
+		//while(nNxtButtonPressed == kEnterButton){}
+	//}
+	//if(g_auto_grabber_selections == SUB_SELECTION_RAMP_STOP&&g_input_array[5]==2)g_input_array=4;
+	//if(g_auto_grabber_selections == SUB_SELECTION_RAMP_CONTINUED&&g_input_array[5]==3)g_input_array=5;
+
+
+
+
+
+	g_start_point = g_input_array[STARTING_POINT];
+	g_start_delay = g_input_array[STARTING_DELAY];
+	g_mission_number = g_input_array[SCOREING_POINT];
+	g_end_delay = g_input_array[END_DELAY];
+	if(g_input_array[END_POINT] < 4 && g_input_array[END_POINT] > 0)
 	{
-		g_auto_selection_point = SELECTION_SUB_RAMP;
-		g_screen_state = S_SELECTION_SUB_RAMP;
-
-		int i = 1;
-		while(nNxtButtonPressed != kEnterButton)
-		{
-			if(nNxtButtonPressed == kRightButton)
-			{
-				PlaySoundFile("! Click.rso");
-				while(nNxtButtonPressed == kRightButton){}
-				if(i < 2)
-				{
-					i++;
-					g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-				}
-			}
-			if(nNxtButtonPressed == kLeftButton)
-			{
-				PlaySoundFile("! Click.rso");
-				while(nNxtButtonPressed == kLeftButton){}
-				if(i > 1)
-				{
-					i--;
-					g_auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
-				}
-			}
-		}
-
-		PlaySoundFile("! Click.rso");
-		while(nNxtButtonPressed == kEnterButton){}
+		g_end_point = g_input_array[END_POINT];
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
 	}
-	if(g_auto_grabber_selections == SUB_SELECTION_RAMP_STOP&&g_input_array[5]==2)g_input_array=4;
-	if(g_auto_grabber_selections == SUB_SELECTION_RAMP_CONTINUED&&g_input_array[5]==3)g_input_array=5;
+	else if(g_input_array[END_POINT] == 4)
+	{
+		g_end_point = 2;
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+	}
+	else if(g_input_array[END_POINT] == 5)
+	{
+		g_end_point = 3;
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+	}
+	else
+	{
+		g_end_point = 1; //error for if an invaid value is inputed
+		//PlayTone(400,60);
+	}
+
+	g_screen_state = S_MISSION_SHOW;
 }
 
 #endif /* !ABS_SELECTION_CUSTOM_H */
