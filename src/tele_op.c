@@ -50,6 +50,8 @@
 #include "lib/global_varaibles.h"
 #include "lib/abs_screen.h"
 #include "lib/abs_teleop_utils.h"
+#include "lib/abs_btn_press.h"
+#include "lib/abs_teleop_datalog.h"
 #include "lib/abs_joystick_drive.h"
 #include "lib/abs_joystick_gunner.h"
 #include "lib/abs_tele_op_initialize.h"
@@ -65,4 +67,5 @@ task main ()
 	{
 		abs_joystick_drive(LINEAR);
 	}
+	LogData = false;
 }
