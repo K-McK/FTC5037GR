@@ -103,7 +103,15 @@ bool g_gyro_true = false;
  *
  * @var g_flag_speed_left Tells the robot how fast to spin the robot flag lift left
  *
+ * @var g_abdd_up Tells the robot what position to put the servo when puting it up
  *
+ * @var g_abdd_down Tells the robot what position to put the servo when puting it down
+ *
+ * @var g_gyro_adjust The Multiplyer for gyro calabration
+ *
+ * @var g_ground_arm_up Tells the robot where to put the ground arm when going up
+ *
+ * @var g_ground_arm_down Tells the robot where to put the ground arm when going down
  */
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
@@ -129,26 +137,29 @@ const int g_ground_arm_down = 120;
 // auto selection points
 //=========================================================
 /**
-*  @enum e_auto_selection_points Tells the robot what part it is in the selection program
-*  @var e_auto_selection_points::SELECTION_START_POINT
+* @enum e_auto_selection_points Tells the robot what part it is in the selection program
+* @var e_auto_selection_points::SELECTION_START_POINT
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_START_DELAY
+* @var e_auto_selection_points::SELECTION_START_DELAY
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_MISSION_POINT
+* @var e_auto_selection_points::SELECTION_MISSION_POINT
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_MISSION_DELAY
+* @var e_auto_selection_points::SELECTION_MISSION_DELAY
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_END_POINT
+* @var e_auto_selection_points::SELECTION_END_POINT
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_SUB_GRABBERS
+* @var e_auto_selection_points::SELECTION_SUB_GRABBERS
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_GYRO_CAL
+* @var e_auto_selection_points::SELECTION_GYRO_CAL
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_SELECTION_TYPE
+* @var e_auto_selection_points::SELECTION_SELECTION_TYPE
 *     Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_GRAPH_NUMBER_INPUT
+* @var e_auto_selection_points::SELECTION_GRAPH_NUMBER_INPUT
 *     Tells the robot to go to this part in the selection program
-*
+* @var e_auto_selection_points::SELECTION_QUICK_INPUT
+*			Tells the robot to go to this part in the selection program
+*	@var e_auto_selection_points::SELECTION_SUB_RAMP
+*			Tells the robot to go to this part in the selection program
 */
 
 typedef enum
@@ -172,7 +183,7 @@ e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
 // auto selection type options
 //=========================================================
 /**
-*  @enum e_selection_types Lets the robot know how you wan to imploment the auto program
+*  @enum e_selection_types Lets the robot know how you want to imploment the auto program
 *  @var e_auto_selection_points::SELECTION_TYPE_NUMBER
 *     Select a program by id
 *  @var e_auto_selection_points::SELECTION_TYPE_CUSTOM
@@ -188,6 +199,22 @@ typedef enum
 } e_selection_types;
 
 e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
+
+/**
+*  @enum e_selection_values Tells the robot what number you are editing
+*  @var e_auto_selection_points::SELECTION_VALUE_EMPTY
+*     Tells the robot what number you are editing nothing
+*  @var e_auto_selection_points::STARTING_POINT
+*     Tells the robot what number you are editing the starting point
+*  @var e_auto_selection_points::STARTING_DELAY
+*     Tells the robot what number you are editing the starting delay
+*  @var e_auto_selection_points::SCOREING_POINT
+*     Tells the robot what number you are editing the scoring point
+*  @var e_auto_selection_points::END_DELAY
+*     Tells the robot what number you are editing the delay at the end
+*  @var e_auto_selection_points::END_POINT
+*     Tells the robot what number you are editing where you end the program
+*/
 
 typedef enum
 {
@@ -225,6 +252,16 @@ e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 *  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_CONTINUED
 *     Continue on the ramp
 */
+
+/**
+*  @enum e_drive_type Tells the robot its corection type
+*  @var e_auto_sub_selection_ramp::ENCODER
+*     Tells the robot to correct useing a encoder
+*  @var e_auto_sub_selection_ramp::GYRO
+*     Tells the robot to correct useing a gyro sensor
+*  @var e_auto_sub_selection_ramp::NON_SENSOR
+*     Tells the robot not to correct
+*/
 typedef enum
 {
 	ENCODER,
@@ -232,6 +269,13 @@ typedef enum
 	NON_SENSOR
 } e_drive_type;
 
+/**
+*  @enum e_drive_type Tells the robot if i should stop on the ramp or not
+*  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_STOP
+*     Tells the robot it should stop on the ramp
+*  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_CONTINUED
+*     Tells the robot it should not stop on the ramp
+*/
 typedef enum
 {
 	SUB_SELECTION_RAMP_STOP,
@@ -243,6 +287,28 @@ e_auto_sub_selection_ramp g_auto_grabber_selection_ramp_options = SUB_SELECTION_
 //=========================================================
 // auto movements
 //=========================================================
+/**
+* @var g_to_turn_dist Tells the robot how far it has gone when doing ir detection
+*
+* @var g_IR_angle_dist_complete Tells the robot when it has reached a the first crate
+*
+* @var g_forward_crate1_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_forward_crate2_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_forward_crate3_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_forward_crate4_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_backwards_crate1_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_backwards_crate2_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_backwards_crate3_to_turn_dist Tells the robot how far it need to go to get to the turn
+*
+* @var g_backwards_crate4_to_turn_dist Tells the robot how far it need to go to get to the turn
+*/
+
 int g_to_turn_dist = 0;
 
 bool g_IR_angle_dist_complete = false;
@@ -260,15 +326,29 @@ const int g_backwards_crate4_to_turn_dist = 145;
 //=========================================================
 // Smoke test varaibles
 //=========================================================
+/**
+* @var g_smoke_test_num Tells the robot what the number is for what its useing smoke test on
+*
+* @var g_smoke_test_total Tells the robot the total number of of smoke test types
+*
+* @var g_smoke_run Tells the robot if its running smoke test or not
+*
+* @var g_test_value Tells the robot what to desply on the screen
+*/
 
 int g_smoke_test_num = 1;
 int g_smoke_test_total = 12;
-int g_smoke_run = false;
+bool g_smoke_run = false;
 int g_test_value = 0;
 
 //=========================================================
 // auto number input variable
 //=========================================================
+/**
+ * @def INPUT_ARRAY_SIZE Tells the robot the size of the number of selection types
+ *
+ * @var g_input_array Tells the robot all of the different options for automus
+ */
 
 #define INPUT_ARRAY_SIZE 6
 
@@ -277,7 +357,27 @@ int g_input_array[INPUT_ARRAY_SIZE];
 //=========================================================
 // Datalogging variables
 //=========================================================
-
+/**
+ * @var LogData Tells the robot is if should log data or not
+ *
+ * @var dl_step Tells the robot what data login step its on
+ *
+ * @var dl_robot_action_state Tells the robot what the action state is
+ *
+ * @var dl_robot_action_detail Tells the robot what its action detail is
+ *
+ * @var dl_mission_number Tells the robot the data loging mission number
+ *
+ * @var dl_speed Tells the robot the speed of the data loging
+ *
+ * @var dl_dist Tells the robot the distence of something it should data log
+ *
+ * @var dl_gyro_heading Tells the data loging the gyro_heading
+ *
+ * @var dl_IR Tells the robot if it should data log IR or not
+ *
+ * dl_cur_dist Tells the data loging the robots current distence
+ */
 bool LogData = false;
 int dl_step = 0;
 int dl_robot_action_state = 0;
@@ -300,7 +400,14 @@ int dl_drive_details [] = {0,4};
 //---------------
 // robot action numbers
 //---------------
-
+/**
+ * @def dl_robot_stop tells the robot to put in this cammand in the data loging files
+ * @def dl_gyro_move tells the robot to put in this cammand in the data loging files
+ * @def dl_gyro_turn tells the robot to put in this cammand in the data loging files
+ * @def dl_run_abdd tells the robot to put in this cammand in the data loging files
+ * @def dl_wait tells the robot to put in this cammand in the data loging files
+ * @def dl_change_event tells the robot to put in this cammand in the data loging files
+ */
 #define dl_robot_stop 0
 #define dl_gyro_move 1
 #define dl_gyro_turn 2
@@ -311,12 +418,21 @@ int dl_drive_details [] = {0,4};
 // change event details
 //---------------
 
+/**
+ * @def dl_ce_program_start tell the robot when the robot dose this
+ * @def dl_ce_start_delay tell the robot when the robot dose this
+ * @def dl_ce_score_start tell the robot when the robot dose this
+ * @def dl_ce_end_delay tell the robot when the robot dose this
+ * @def dl_ce_end_point tell the robot when the robot dose this
+ */
 #define dl_ce_program_start 1
 #define dl_ce_start_delay 2
 #define dl_ce_score_start 3
 #define dl_ce_end_delay 4
 #define dl_ce_end_point 5
-
+/**
+ * @var g_datalog_change_event_names The even names that get put into data loging
+ */
 string g_datalog_change_event_names [] = {
 	"none",
 	"start",
@@ -329,6 +445,14 @@ string g_datalog_change_event_names [] = {
 // robot action details
 //---------------
 
+/**
+ * @def dl_move_stop Put in a details in data loging for this action
+ * @def dl_move_no_stop Put in a details in data loging for this action
+ * @def dl_turn_clockwise Put in a details in data loging for this action
+ * @def dl_turn_counterclockwise Put in a details in data loging for this action
+ * @def dl_abdd_open Put in a details in data loging for this action
+ * @def dl_abdd_close Put in a details in data loging for this action
+ */
 #define dl_move_stop 1
 #define dl_move_no_stop 2
 #define dl_turn_clockwise 3
@@ -336,6 +460,9 @@ string g_datalog_change_event_names [] = {
 #define dl_abdd_open 5
 #define dl_abdd_close 6
 
+/**
+ * @var g_datalog_details_names Tells the robot the dataloging name in detail
+ */
 string g_datalog_details_names [] = {
 	"none",
 	"stop",
@@ -348,6 +475,24 @@ string g_datalog_details_names [] = {
 //=========================================================
 // Misc
 //=========================================================
+
+/**
+ * @var g_debug_time_1 degbug varales fir IR
+ * @var g_debug_time_2 degbug varales fir IR
+ *
+ * @var g_auto_ending_points degbuging var for this
+ * @var g_travel_dist degbuging var for this
+ * @var g_auto_starting_points degbuging var for this
+ * @var g_auto_missions degbuging var for this
+ * @var g_drive_heading degbuging var for this
+ * @var g_ir_heading degbuging var for this
+ * @var g_program_done degbuging var for this
+ *
+ * @var g_joy1_enabled degbuging var for this
+ * @var g_joy2_enabled degbuging var for this
+ *
+ * @var g_selection_value degbuging var for this
+ */
 
 int g_debug_time_1 = 0;
 int g_debug_time_2 = 0;
@@ -368,6 +513,24 @@ int g_selection_value = 0;
 //=============================================================
 // Define user configurable parameters
 //=============================================================
+
+/**
+ * @var g_end_point
+ * @var g_start_point
+ * @var g_mission_number
+ * @var g_delay
+ * @var g_end_delay
+ * @var g_start_delay
+ * @var g_gyro_cal_time
+ *
+ * @var g_dist_backwards
+ *
+ * @var START_POINT_MAX_VAL
+ * @var START_POINT_MIN_VAL
+ *
+ * @var g_number_min_limit
+ * @var g_number_max_limit
+ */
 int g_end_point = 1;
 int g_start_point = 1;
 int g_mission_number = 1;
@@ -375,6 +538,8 @@ int g_delay = 0;
 int g_end_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
+
+int g_dist_backwards = 0;
 
 int START_POINT_MAX_VAL = 4;
 int START_POINT_MIN_VAL = 0;
@@ -384,6 +549,18 @@ int g_number_max_limit [] = {0,4,30,7,30,5};
 //=============================================================
 // Gyro variables
 //=============================================================
+
+/**
+ * @var g_gyro_noise Tells the robot how much gyro noise there is
+ * @var g_start_time Tells the robot the start time
+ * @var g_drift Tells the robot the gyro drift
+ * @var g_const_heading Tell the robot the const heading
+ * @var g_rel_heading Tell the robot the relitive heading
+ * @var g_curr_time Tell the robot the current time
+ * @var g_prev_time Tell the robot the current time
+ * @var g_raw_gyro Tells the robt the raw gyro value
+ * @var g_recont_heading This is the recalculated const gyro heading
+ */
 int g_gyro_noise = 0;
 long g_start_time = 0;
 int g_drift = 0;
@@ -397,20 +574,19 @@ int g_recont_heading = 0; //this is the recalculated const gyro heading
 /**
 * Sensor variables
 *
-* @var g_light_sensor
-*	holds the value of the light sensor
+* @var g_light_sensor holds the value of the light sensor
 *
-* @var g_bearing_ac1
-*	the raw value from the first IR sensor
+* @var g_bearing_ac1 the raw value from the first IR sensor
 *
-* @var g_bearing_ac2
-*	the raw value from the second IR sensor
+* @var g_bearing_ac2 the raw value from the second IR sensor
 *
-* @var g_ir_bearing1
-*	the calibrated value from the first IR sensor
+* @var g_ir_bearing1 the calibrated value from the first IR sensor
 *
-* @var g_ir_bearing2
-*	the calibrated value from the second IR sensor
+* @var g_ir_bearing2 the calibrated value from the second IR sensor
+*
+* @var g_misc Tell the robot something to desply on the screen
+*
+* @var g_reset_angle a varable that tells the robot to reset the angle sensor value
 */
 int g_light_sensor;
 int g_bearing_ac1 = 0;
@@ -427,6 +603,23 @@ bool g_reset_angle = false;
 //-----------------------------
 // accelermoeter variables
 //-----------------------------
+
+/**
+ * @var g_accelermoeter_sensor Tells the robot the volosity its self
+ * @var g_x_axis Tells the robot its x axis
+ * @var g_y_axis Tells the robot its y axis
+ * @var g_z_axis Tells the robot its z axis
+ * @var g_target_angle Tells the robot the tegeted posion
+ * @var g_accelermoeter_reads Tells the robot the the amount of times it read the accelermoeter
+ * @var g_accelermoeter_array Tells the robot the accelermoeter array
+ * @var g_accelermoeter_total_value Tells the robot the value of the accelermoeter
+ * @var g_accelermoeter_average Tells the robot the avage number for the accelermoeter
+ *
+ * @var g_sensor_num Tells the robot the sensor we are reading
+ * @var g_sensor_max Tells the robot he max amoun of sensors
+ * @var g_sensor_value Tells the robot the value of the sensor its reading
+ * @var g_sensor_value2 Tells the robot the second line of the senser its reading
+ */
 int g_accelermoeter_sensor = 0;
 int g_x_axis = 0;
 int g_y_axis = 0;
@@ -457,6 +650,13 @@ int g_sensor_value2 = 0;
 #define ST_IR 2
 #define ST_ACCELEROMETER 3
 #define ST_TILT 4
+
+/**
+ * @var g_sensor_reference_drive Tells the robot if it should run with sensors enabled
+ * @var g_sensor_list Tells the robot the sensors that are on it
+ * @var g_basic_word_list Tells the robot the basic word list
+ *
+ */
 
 bool g_sensor_reference_drive = false;
 
@@ -527,6 +727,13 @@ string g_basic_word_list [] = {
 *     Tells the robot the screen state number for this screen statestate
 *  @def S_NUMBER_SELECTION
 *     Tells the robot the screen state number for this screen statestate
+*  @def S_SELECTION_SUB_RAMP
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_MISSION_SHOW
+*     Tells the robot the screen state number for this screen statestate
+*  @def S_QUICK_SELECTION
+*     Tells the robot the screen state number for this screen statestate
+*  @var g_screen_state
 *
 */
 
@@ -563,7 +770,10 @@ int g_screen_state = 1;
 //==============================================================
 // Define graph selection variables
 //==============================================================
-
+/**
+ * @var g_graph_selection_tab
+ * @var g_graph_selection_number
+ */
 int g_graph_selection_tab = 0;
 long g_graph_selection_number = 10000;
 
@@ -584,6 +794,7 @@ long g_graph_selection_number = 10000;
 *     Tells the robot that theres a error with the joysticks
 *  @def ERR_ACCELERMOETER
 *     Tells the robot that theres a error with the accelermoeter
+*  @var g_error
 *
 */
 #define ERR_NONE 0
@@ -594,6 +805,16 @@ long g_graph_selection_number = 10000;
 #define ERR_ACCELERMOETER 5
 
 int g_error = 0;
+
+/**
+*  @enum e_error_types Tells the robot if a error is leathal or not
+*  @var e_auto_sub_selection_ramp::ERROR_NONLETHAL
+*     Tells the robot that the error is not leathal
+*  @var e_auto_sub_selection_ramp::ERROR_LETHAL
+*     Tells the robot that thbe error ios leathal
+*
+*  @var g_error_type Tells the robot is an error is lethal or not
+*/
 
 typedef enum
 {
@@ -606,6 +827,10 @@ e_error_types g_error_type = ERROR_LETHAL;
 //==============================================================================
 // Define the text to be displayed for each starting point line 1
 //==============================================================================
+/**
+ * @var g_starting_names1 Tell the robot the names of the starting points
+ */
+
 string g_starting_names1 [] = {
 	"        ",
 	"S1      ",
@@ -634,6 +859,10 @@ string g_starting_names1 [] = {
 //==============================================================================
 // Define the text to be displayed for each starting point line 2
 //==============================================================================
+/**
+ * @var g_starting_names2 Tell the robot the names of the second line of the screen when selectimg a starting posion
+ */
+
 string g_starting_names2 [] = {
 	"        ",
 	"        ",
@@ -662,6 +891,10 @@ string g_starting_names2 [] = {
 //==============================================================================
 // Define the text to be displayed for each ending point line 1
 //==============================================================================
+/**
+ * @var g_ending_names1 Tells the robot the names of the end points
+ */
+
 string g_ending_names1 [] = {
 	"        ",
 	"Stop    ",
@@ -690,6 +923,9 @@ string g_ending_names1 [] = {
 //==============================================================================
 // Define the text to be displayed for each ending point line 2
 //==============================================================================
+/**
+ * @var g_ending_names2 Tells the robot the names of the second line of the end points
+ */
 string g_ending_names2 [] = {
 	"        ",
 	"        ",
@@ -718,6 +954,9 @@ string g_ending_names2 [] = {
 //==============================================================================
 // Define the text to be displayed for each mission
 //==============================================================================
+/**
+ * @var g_mission_names1 Tells the robot the names of the missions
+ */
 string g_mission_names1 [] = {
 	"        ",
 	"IR crate",
@@ -746,6 +985,9 @@ string g_mission_names1 [] = {
 //==============================================================================
 // Define the text to be displayed on the second line for each mission
 //==============================================================================
+/**
+ * @var g_mission_names2  Tells the robot the second line of the mission
+ */
 string g_mission_names2 [] = {
 	"        ",
 	"Test 1  ",
@@ -774,15 +1016,22 @@ string g_mission_names2 [] = {
 //==============================================================================
 // Define the text to be displayed for quick selection
 //==============================================================================
+/**
+ * @var g_quick_names1  Tells the robot the quick select program names
+ */
+
 string g_quick_names1 [] = {
 	"Unknown ",
-	"Standerd",
+	"Standard",
 	"S Ramp 2",
 	"Test 3  ",
 	"Test 4  ",
 	"Test 5  ",
 	"Test 6  "};
 
+/**
+ * @var g_quick_names2  Tells the robot the quick select program second line names
+ */
 string g_quick_names2 [] = {
 	"Unknown ",
 	"10142   ",
@@ -798,6 +1047,9 @@ int g_max_quick_missions = 6;
 //==============================================================================
 // Define the text to be displayed for the errors
 //==============================================================================
+/**
+ * @var g_error_list1 Tells the robot the names of the errors
+ */
 string g_error_list1 [] = {
 	"Unknown ",
 	"GyroCal ",
@@ -822,6 +1074,9 @@ string g_error_list1 [] = {
 	"Test 20 ",
 	"Test 21 ",
 	"Test 22 "};
+/**
+ * @var g_error_list2 Tells the robot the names of the errors for the second line
+ */
 
 string g_error_list2 [] = {
 	"error   ",
@@ -851,6 +1106,9 @@ string g_error_list2 [] = {
 //==============================================================================
 // Define the text to be displayed for smoke test line 1
 //==============================================================================
+/**
+ * @var g_smoke_test1 Tells the robot the names of the smake test options
+ */
 string g_smoke_test1 [] = {
 	"Unknown ",
 	"Jolly   ",
@@ -879,6 +1137,9 @@ string g_smoke_test1 [] = {
 //==============================================================================
 // Define the text to be displayed for smoke test line 2
 //==============================================================================
+/**
+ * @var g_smoke_test2 Tells the robot the names of the smake test options for the second line
+ */
 string g_smoke_test2 [] = {
 	"Unknown ",
 	"Roger   ",

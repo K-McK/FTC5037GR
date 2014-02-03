@@ -262,6 +262,9 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			}
 		}
 	}
+
+	g_dist_backwards = (HTANGreadAccumulatedAngle(angle_sensor)/18)*5;
+
 	//------------------------
 	// Stop
 	//------------------------
