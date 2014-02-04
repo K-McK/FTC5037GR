@@ -81,23 +81,11 @@
 
 task main()
 {
-	initialize();
-
-	g_rel_heading = 0;
-	switch(g_start_point)
+	disableDiagnosticsDisplay();
+	servo[light_sensor] = LIGHT_SERVO_DOWN;
+	LSsetActive(LEGOLS);
+	while(true)
 	{
-	case 1:
-		abs_s1_mission_execute();
-		break;
-	case 2:
-		abs_s2_mission_execute();
-		break;
-	case 3:
-		abs_s3_mission_execute();
-		break;
-	case 4:
-		abs_s4_mission_execute();
-		break;
+		nxtDisplayBigTextLine(1, "%4d", LSvalNorm(LEGOLS));
 	}
-	LogData=false;
 }

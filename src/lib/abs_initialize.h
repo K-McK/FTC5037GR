@@ -23,6 +23,8 @@ void initialize()
 	servo[abdd] = g_abdd_down;
 	servo[grabber_left] = GRABBER_LEFT_CLOSE;
 	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
+	servo[light_sensor] = LIGHT_SERVO_UP;
+	LSsetInactive(LEGOLS);
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);
 	selection_program();
 	PlaySoundFile("! Click.rso");

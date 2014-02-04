@@ -51,6 +51,10 @@ bool g_gyro_true = false;
  *  @def GRABBER_RIGHT_CLOSE
  *     tells the robot where the left block grabber needs to be to be closed
  *
+ * 	@def LIGHT_SERVO_DOWN
+ * 		Tells the robot the poision of the light senser servo when its down
+ * 	@def LIGHT_SERVO_UP
+ * 		Tells the robot the poision of the light senser servo when its up
  */
 #define INT_ANGLE_SENSOR_CIRCUMFERENCE 18
 #define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE 17.6
@@ -62,6 +66,9 @@ bool g_gyro_true = false;
 #define GRABBER_RIGHT_MID 180
 #define GRABBER_LEFT_CLOSE 120
 #define GRABBER_RIGHT_CLOSE 131
+
+#define LIGHT_SERVO_DOWN 255
+#define LIGHT_SERVO_UP 127
 
 /**
  *

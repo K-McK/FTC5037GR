@@ -22,7 +22,7 @@ void abs_end_r1(int delay, int lift_speed)
 	wait1Msec(200);
 	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
 	wait1Msec(200);
-	abs_drive(FORWARD, E_ANGLE, 85, 50, true, GYRO);
+	abs_drive(FORWARD, E_LIGHT, 85, 50, true, GYRO);
 	motor[block_lift_motor] = lift_speed;
 	motor[block_lift_motor2] = lift_speed;
 	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
