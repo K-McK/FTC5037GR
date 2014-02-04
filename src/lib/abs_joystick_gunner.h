@@ -28,7 +28,7 @@ task abs_joystick_gunner()
 			motor[jolly_roger]= 0;
 			break;
 		case 0:
-			motor[jolly_roger] = g_flag_speed_up;
+			motor[jolly_roger] = g_flag_speed_down;
 			break;
 		case 2:
 			motor[jolly_roger] = g_flag_speed_right;
@@ -37,7 +37,7 @@ task abs_joystick_gunner()
 			motor[jolly_roger] = g_flag_speed_left;
 			break;
 		case 4:
-			motor[jolly_roger] = g_flag_speed_down;
+			motor[jolly_roger] = g_flag_speed_up;
 			break;
 		}
 

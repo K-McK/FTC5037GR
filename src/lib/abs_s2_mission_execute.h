@@ -1,16 +1,16 @@
 /**
- *
- *  @file abs_s2_mission_execute.h
- *
- *  @brief runs the missions from the starting point S2
- *
- *  @param None n/a
- *
- *  @return returns nothing
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file abs_s2_mission_execute.h
+*
+*  @brief runs the missions from the starting point S2
+*
+*  @param None n/a
+*
+*  @return returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 #ifndef ABS_S2_MISSION_EXECUTE_H
 #define ABS_S2_MISSION_EXECUTE_H
 
@@ -44,36 +44,24 @@ void abs_s2_mission_execute()
 		wait1Msec(1000);
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/6, 50, true, GYRO);
 		wait1Msec(500);
-		servo[abdd] = g_abdd_up;
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
 		break;
 
 	case 2:
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate4_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate4_to_turn_dist;
 		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/40, 50, true, GYRO);
-		servo[abdd] = g_abdd_up;
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
 		break;
 
 	case 3:
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate3_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate3_to_turn_dist;
 		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/65, 50, true, GYRO);
-		servo[abdd] = g_abdd_up;
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
 		break;
 
 	case 4:
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate2_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate2_to_turn_dist;
 		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/115, 50, true, GYRO);
-		servo[abdd] = g_abdd_up;
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
 		break;
 
 	case 5:
@@ -81,9 +69,6 @@ void abs_s2_mission_execute()
 		else g_to_turn_dist = g_forward_crate1_to_turn_dist;
 		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/140, 50, true, GYRO);
 		wait1Msec(2000);
-		servo[abdd] = g_abdd_up;
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
 		break;
 
 	case 6:
@@ -124,7 +109,30 @@ void abs_s2_mission_execute()
 		}
 		break;
 	}
+	dl_step++;
+	dl_robot_action_state = dl_run_abdd;
+	dl_robot_action_detail = dl_abdd_open;
+	dl_speed = servoChangeRate[abdd];
+	dl_dist = g_abdd_up;
+	servo[abdd] = g_abdd_up;
+	wait1Msec(2000);
+	servo[abdd] = g_abdd_down;
+
+	dl_change_event = true;
+	dl_ce_detail = dl_ce_end_delay;
+
+	dl_speed = g_end_delay*1000;
 	wait1Msec(g_end_delay*1000);
+
+	dl_step++;
+	dl_robot_action_detail = dl_abdd_close;
+	dl_dist = g_abdd_down;
+
+	dl_change_event = true;
+	dl_ce_detail = dl_ce_end_point;
+
+	wait1Msec(100);
+
 	switch(g_end_point)
 	{
 	case 1:
