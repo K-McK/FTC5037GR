@@ -23,7 +23,7 @@ void abs_s4_mission_execute()
 
 	case 2:
 		abs_turn(CLOCKWISE, SWING, TURN_TO, 60, 60);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/30, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/20, 50, true, GYRO);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 128, 60);
 		if(g_end_point == 3) g_to_turn_dist = g_forward_crate1_to_turn_dist+5;
 		else if(g_end_point == 2) g_to_turn_dist = 45;
@@ -31,7 +31,7 @@ void abs_s4_mission_execute()
 
 	case 3:
 		abs_turn(CLOCKWISE, SWING, TURN_TO, 60, 60);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/29, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/20, 50, true, GYRO);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 135, 60);
 		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/23, 50, true, GYRO);
 		if(g_end_point == 3)g_to_turn_dist = g_forward_crate2_to_turn_dist;
@@ -40,7 +40,7 @@ void abs_s4_mission_execute()
 
 	case 4:
 		abs_turn(CLOCKWISE, SWING, TURN_TO, 60, 60);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/29, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/20, 50, true, GYRO);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 135, 60);
 		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/75, 50, true, GYRO);
 		if(g_end_point == 3)g_to_turn_dist = g_forward_crate3_to_turn_dist;
@@ -49,9 +49,9 @@ void abs_s4_mission_execute()
 
 	case 5:
 		abs_turn(CLOCKWISE, SWING, TURN_TO, 60, 60);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/29, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/20, 50, true, GYRO);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 135, 60);
-		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/100, 50, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/95, 50, true, GYRO);
 		if(g_end_point == 3)g_to_turn_dist = g_forward_crate4_to_turn_dist;
 		else g_to_turn_dist = 145;
 		break;
@@ -100,10 +100,10 @@ void abs_s4_mission_execute()
 		abs_stop_robot();
 		break;
 	case 2:
-		abs_end_r1(2000,40);
+		abs_end_r1(2000,40);;
 		break;
 	case 3:
-		abs_end_r2(2000,40);
+		abs_end_r2(2000,40);;
 		break;
 	}
 }

@@ -41,8 +41,14 @@ void abs_s2_mission_execute()
 			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(137*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate2_to_turn_dist;
 			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(162*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate1_to_turn_dist;
 		}
+		dl_step = dl_step+1;
+		dl_robot_action_state = dl_wait;
+		dl_speed = 1000;
 		wait1Msec(1000);
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/6, 50, true, GYRO);
+		dl_step = dl_step+1;
+		dl_robot_action_state = dl_wait;
+		dl_speed = 500;
 		wait1Msec(500);
 		break;
 
@@ -68,11 +74,17 @@ void abs_s2_mission_execute()
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate1_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate1_to_turn_dist;
 		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/140, 50, true, GYRO);
+		dl_step = dl_step+1;
+		dl_robot_action_state = dl_wait;
+		dl_speed = 2000;
 		wait1Msec(2000);
 		break;
 
 	case 6:
 		abs_turn(CLOCKWISE, POINT, TURN, 75, 60);
+		dl_step = dl_step+1;
+		dl_robot_action_state = dl_wait;
+		dl_speed = 200;
 		wait1Msec(200);
 		abs_drive(FORWARD, E_ANGLE, 190, 50, true, GYRO);
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
@@ -81,6 +93,9 @@ void abs_s2_mission_execute()
 
 	case 7:
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 98, 60);
+		dl_step = dl_step+1;
+		dl_robot_action_state = dl_wait;
+		dl_speed = 200;
 		wait1Msec(200);
 		abs_drive(FORWARD, E_ANGLE, 87, 50, true, GYRO);
 		motor[block_lift_motor] = 40;
@@ -89,24 +104,6 @@ void abs_s2_mission_execute()
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
 		abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
-		break;
-
-	case 140:
-		int dist = 30;
-		bool done = false;
-		while(done == false)
-		{
-			int ac_start_time = nPgmTime;
-			int i = 0;
-			while((g_accelermoeter_sensor < dist+5) && (g_accelermoeter_sensor > dist-5) && ((ac_start_time - nPgmTime)<500))
-			{
-				i++;
-				PlayTone(20,20);
-				wait1Msec(1);
-			}
-			if(i > 490) done = true;
-			PlayTone(20,20);
-		}
 		break;
 	}
 	dl_step++;
@@ -137,6 +134,9 @@ void abs_s2_mission_execute()
 	{
 	case 1:
 		wait1Msec(2000);
+		dl_step = dl_step+1;
+		dl_robot_action_state = dl_wait;
+		dl_speed = 2000;
 		servo[abdd] = g_abdd_down;
 		abs_stop_robot();
 		break;

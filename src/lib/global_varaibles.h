@@ -63,6 +63,9 @@ bool g_gyro_true = false;
 #define GRABBER_LEFT_CLOSE 120
 #define GRABBER_RIGHT_CLOSE 131
 
+#define LIGHT_SERVO_UP 127
+#define LIGHT_SERVO_DOWN 255
+
 /**
  *
  * @var g_block_speed_down Tells the robot how fast to move the lift
@@ -132,6 +135,10 @@ const int g_gyro_adjust = 10;
 const int g_ground_arm_up = 0;
 
 const int g_ground_arm_down = 120;
+
+const int g_light_threshold = 30;
+
+const int g_light_move_min_dist = 70;
 
 //=========================================================
 // auto selection points
@@ -313,15 +320,15 @@ int g_to_turn_dist = 0;
 
 bool g_IR_angle_dist_complete = false;
 
-const int g_forward_crate1_to_turn_dist = 135;
-const int g_forward_crate2_to_turn_dist = 110;
-const int g_forward_crate3_to_turn_dist = 60;
-const int g_forward_crate4_to_turn_dist = 35;
+const int g_forward_crate1_to_turn_dist = 130;
+const int g_forward_crate2_to_turn_dist = 105;
+const int g_forward_crate3_to_turn_dist = 55;
+const int g_forward_crate4_to_turn_dist = 30;
 
-const int g_backwards_crate1_to_turn_dist = 45;
-const int g_backwards_crate2_to_turn_dist = 70;
-const int g_backwards_crate3_to_turn_dist = 120;
-const int g_backwards_crate4_to_turn_dist = 145;
+const int g_backwards_crate1_to_turn_dist = 40;
+const int g_backwards_crate2_to_turn_dist = 65;
+const int g_backwards_crate3_to_turn_dist = 115;
+const int g_backwards_crate4_to_turn_dist = 140;
 
 //=========================================================
 // Smoke test varaibles
@@ -392,8 +399,22 @@ bool dl_IR = false;
 int dl_cur_dist = 0;
 string sString;
 
-#define DL_MOVE_SPEED
-#define DL_MOVE_DIST
+int dl_dist_method = 0;
+
+#define DL_ANGLE 0
+#define DL_LIGHT 1
+#define DL_TIME 2
+#define DL_IR 3
+
+int dl_move_break = 0;
+
+#define DL_ANGLE_BREAK 0
+#define DL_LIGHT_BREAK 1
+#define DL_TIME_BREAK 2
+#define DL_IR_BREAK 3
+
+#define DL_MOVE_SPEED 0
+#define DL_MOVE_DIST 1
 
 int dl_drive_details [] = {0,4};
 
@@ -430,6 +451,7 @@ int dl_drive_details [] = {0,4};
 #define dl_ce_score_start 3
 #define dl_ce_end_delay 4
 #define dl_ce_end_point 5
+#define dl_ce_drive_end 6
 /**
  * @var g_datalog_change_event_names The even names that get put into data loging
  */
@@ -439,7 +461,8 @@ string g_datalog_change_event_names [] = {
 	"start delay",
 	"score",
 	"end delay",
-	"end"};
+	"end",
+	""};
 
 //---------------
 // robot action details

@@ -16,13 +16,29 @@
 
 void abs_end_r2(int delay, int lift_speed)
 {
+	if(g_mission_number == 1)g_to_turn_dist = g_dist_backwards;
+	dl_step = dl_step+1;
+	dl_robot_action_state = dl_wait;
+	dl_speed = delay;
 	wait1Msec(delay);
 	servo[abdd] = g_abdd_down;
-	abs_drive(BACKWARD, E_ANGLE, g_dist_backwards, 50, true, GYRO);
+	abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
+
+	dl_step = dl_step+1;
+	dl_robot_action_state = dl_wait;
+	dl_speed = 200;
 	wait1Msec(200);
+	servo[light_sensor] = LIGHT_SERVO_DOWN;
 	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+
+	dl_step = dl_step+1;
+	dl_robot_action_state = dl_wait;
+	dl_speed = 200;
 	wait1Msec(200);
-	abs_drive(FORWARD, E_ANGLE, 87, 50, true, GYRO);
+	abs_drive(FORWARD, E_LIGHT, 110, 50, true, GYRO);
+	dl_step = dl_step+1;
+	dl_robot_action_state = dl_wait;
+	dl_speed = 500;
 	wait1Msec(500);
 	motor[block_lift_motor] = lift_speed;
 	motor[block_lift_motor2] = lift_speed;
