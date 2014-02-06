@@ -23,11 +23,19 @@ void abs_end_r1(int delay, int lift_speed)
 	wait1Msec(delay);
 	servo[abdd] = g_abdd_down;
 	abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
+	if((abs(HTANGreadAccumulatedAngle(angle_sensor))/18)<15)
+	{
+		motor[left_motor] = 0;
+		motor[right_motor] = 0;
+		PlayTone(300,200);
+		return;
+	}
 
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;
 	dl_speed = 200;
 	wait1Msec(200);
+	//LSsetActive(LEGOLS);
 	servo[light_sensor] = LIGHT_SERVO_DOWN;
 	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
 

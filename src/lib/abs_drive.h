@@ -30,20 +30,26 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	case E_IR_DETECT2: dl_dist_method = DL_IR; break;
 	case E_ANGLE: dl_dist_method = DL_ANGLE; break;
 	case E_TIME: dl_dist_method = DL_TIME; break;
-	case E_LIGHT: dl_dist_method = DL_LIGHT; break;
+	case E_LIGHT:
+		LSsetActive(LEGOLS);
+		dl_dist_method = DL_LIGHT;
+		break;
 	}
 	int i = 0;
 	dl_step = dl_step+1;
 
 	dl_robot_action_state = dl_gyro_move;
-	dl_speed = speed;
 	nMotorEncoder(right_motor)= 0;
 	g_rel_heading = 0;
-	dl_speed = speed;
+	if(dir==BACKWARD)dl_speed = -speed;
+	else dl_speed = speed;
 	dl_dist = dist;
 
 	if(stop_at_end == true)	dl_robot_action_detail = dl_move_stop;
 	else dl_robot_action_detail = dl_move_no_stop;
+
+	dl_change_event = true;
+	dl_ce_detail = dl_ce_drive_start;
 
 	//------------------------
 	// time stopping method
@@ -288,7 +294,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	else if(dist_method == E_LIGHT)
 	{
 		bool light_fail = false;
-		LSsetActive(LEGOLS);
 		HTANGresetAccumulatedAngle(angle_sensor);
 		while(true)
 		{
@@ -299,7 +304,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				dl_move_break = DL_LIGHT_BREAK;
 				break;
 			}
-			if(abs(HTANGreadAccumulatedAngle(angle_sensor)) > (dist*INT_ANGLE_SENSOR_CIRCUMFERENCE))
+			else if(abs(HTANGreadAccumulatedAngle(angle_sensor)) > (dist*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 			{
 				dl_move_break = DL_ANGLE_BREAK;
 				break;
@@ -353,7 +358,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	dl_ce_detail = dl_ce_drive_end;
 	servo[light_sensor] = LIGHT_SERVO_UP;
 
-	LSsetInactive(LEGOLS);
+	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
 	if(g_start_point==1||g_start_point==2)
 	{
 		if(g_end_point == 3) g_dist_backwards = (abs(HTANGreadAccumulatedAngle(angle_sensor))/18)-10;

@@ -90,6 +90,7 @@ task abs_datalog()
 				if (dl_move_break == DL_LIGHT_BREAK) StringFormat(sString," Move: light break\t");
 				else StringFormat(sString," Move: angle break\t");
 				break;
+			case dl_ce_drive_start: StringFormat(sString," Move start\t"); break;
 			}
 			WriteText(LogFileHandle, LogIoResult, sString);
 			StringFormat(sString, g_datalog_change_event_names[dl_ce_detail]);	//extra detail
@@ -126,7 +127,7 @@ task abs_datalog()
 				break;
 
 			case dl_gyro_move:
-				if(dl_dist_method == DL_IR) StringFormat(sString, "gyro_move_IR\t");							//robot state name
+				if(dl_dist_method == DL_IR) StringFormat(sString, "gyro_move_IR\t");		//robot state name
 				else if(dl_dist_method == DL_ANGLE) StringFormat(sString, "g_move_angle\t");
 				else if(dl_dist_method == DL_LIGHT) StringFormat(sString, "g_move_light\t");
 				WriteText(LogFileHandle, LogIoResult, sString);
@@ -147,7 +148,7 @@ task abs_datalog()
 				WriteText(LogFileHandle, LogIoResult, sString);
 				if(dl_dist_method == DL_ANGLE || dl_dist_method == DL_LIGHT)
 				{
-					StringFormat(sString, "%4d\t", (dl_cur_dist/INT_ANGLE_SENSOR_CIRCUMFERENCE));	//current distance value interpreted for end triger, could be angle/IR
+					StringFormat(sString, "%4d\t", (HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));	//current distance value interpreted for end triger, could be angle/IR
 					WriteText(LogFileHandle, LogIoResult, sString);
 				}
 				break;

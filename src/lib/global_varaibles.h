@@ -452,6 +452,7 @@ int dl_drive_details [] = {0,4};
 #define dl_ce_end_delay 4
 #define dl_ce_end_point 5
 #define dl_ce_drive_end 6
+#define dl_ce_drive_start 7
 /**
  * @var g_datalog_change_event_names The even names that get put into data loging
  */
@@ -462,6 +463,7 @@ string g_datalog_change_event_names [] = {
 	"score",
 	"end delay",
 	"end",
+	"",
 	""};
 
 //---------------
