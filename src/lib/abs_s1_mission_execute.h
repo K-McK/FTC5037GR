@@ -27,7 +27,7 @@ void abs_s1_mission_execute()
 		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, GYRO);
 		if(HTANGreadAccumulatedAngle(angle_sensor)<(38*INT_ANGLE_SENSOR_CIRCUMFERENCE))
-		abs_drive(FORWARD, E_IR_DETECT, 7, ((50*INT_ANGLE_SENSOR_CIRCUMFERENCE)-HTANGreadAccumulatedAngle(angle_sensor)), true, GYRO);
+			abs_drive(FORWARD, E_IR_DETECT, 7, ((50*INT_ANGLE_SENSOR_CIRCUMFERENCE)-HTANGreadAccumulatedAngle(angle_sensor)), true, GYRO);
 		PlayTone(200,20);
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;
@@ -132,9 +132,11 @@ void abs_s1_mission_execute()
 	dl_robot_action_detail = dl_abdd_open;
 	dl_speed = servoChangeRate[abdd];
 	dl_dist = g_abdd_up;
+	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);
 	servo[abdd] = g_abdd_up;
 	wait1Msec(2000);
 	servo[abdd] = g_abdd_down;
+	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
 
 	dl_change_event = true;
 	dl_ce_detail = dl_ce_end_delay;
@@ -151,6 +153,8 @@ void abs_s1_mission_execute()
 
 	wait1Msec(100);
 
+	abs_log(__FILE__,"start of end",g_end_point,0,0,0);
+
 	switch(g_end_point)
 	{
 	case 1:
@@ -162,10 +166,10 @@ void abs_s1_mission_execute()
 		abs_stop_robot();
 		break;
 	case 2:
-		abs_end_r1(2000,40);
+		abs_end_r1(2000,0);//40);
 		break;
 	case 3:
-		abs_end_r2(2000,40);
+		abs_end_r2(2000,0);//40);
 		break;
 	}
 }

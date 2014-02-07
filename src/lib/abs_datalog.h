@@ -21,15 +21,16 @@
 //=======================================
 task abs_datalog()
 {
-	const string LogFileName = "DATALOG.txt";
-	TFileIOResult LogIoResult;
-	TFileHandle LogFileHandle;
-	long LogFileSize = 36000;
-	string sString;
-	string CRLF = (char)13+(char)10;
+	//const string LogFileName = "DATALOG.txt";
+	//TFileIOResult LogIoResult;
+	//TFileHandle LogFileHandle;
+	//long LogFileSize = 36000;
+	//string sString;
+	//string CRLF = (char)13+(char)10;
 
-	Delete(LogFileName, LogIoResult);
-	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
+	//Delete(LogFileName, LogIoResult);
+	//OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
+
 
 	if(selection_type == SELECTION_TYPE_CUSTOM) StringFormat(sString, "Custom");
 	else if(selection_type == SELECTION_TYPE_NUMBER) StringFormat(sString, "Number");
@@ -75,7 +76,7 @@ task abs_datalog()
 	WriteText(LogFileHandle, LogIoResult, sString);
 
 	while(!LogData){EndTimeSlice();}
-	while(LogData)
+	while(false)//LogData)
 	{
 		if(dl_change_event == true)
 		{
@@ -87,10 +88,59 @@ task abs_datalog()
 			case dl_ce_score_start: StringFormat(sString, "score %4d\t",g_mission_number); break;
 			case dl_ce_end_point: StringFormat(sString, "end point %4d\t",g_end_point); break;
 			case dl_ce_drive_end:
-				if (dl_move_break == DL_LIGHT_BREAK) StringFormat(sString," Move: light break\t");
+				if (dl_move_break == DL_LIGHT_BREAK) StringFormat(sString,"Move: light break\t");
 				else StringFormat(sString," Move: angle break\t");
+				WriteText(LogFileHandle, LogIoResult, sString);
+
+				StringFormat(sString,"speed %4d\t",dl_speed);
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"dist %4d\t",dl_dist);
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"cur-angle raw %4d\t", HTANGreadAccumulatedAngle(angle_sensor));
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"cur-angle btu %4d\t", HTANGreadAccumulatedAngle(angle_sensor)/18);
 				break;
-			case dl_ce_drive_start: StringFormat(sString," Move start\t"); break;
+			case dl_ce_drive_start:
+				StringFormat(sString,"Move start\t");
+				WriteText(LogFileHandle, LogIoResult, sString);
+
+				StringFormat(sString,"speed %4d\t",dl_speed);
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"dist %4d\t",dl_dist);
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"cur-angle raw %4d\t", HTANGreadAccumulatedAngle(angle_sensor));
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"cur-angle btu %4d\t", HTANGreadAccumulatedAngle(angle_sensor)/18);
+				break;
+			case dl_ce_angle_reset:
+				StringFormat(sString,"Angle reset\t");
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"(raw value) %4d\t",HTANGreadAccumulatedAngle(angle_sensor));
+				break;
+			case dl_ce_turn_start:
+				StringFormat(sString,"Turn start\t");
+				WriteText(LogFileHandle, LogIoResult, sString);
+
+				StringFormat(sString,"speed %4d\t",dl_speed);
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"dist %4d\t",dl_dist);
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"rel-gyro %4d\t",g_rel_heading);
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"const-gyro %4d\t",g_const_heading);
+				break;
+			case dl_ce_turn_end:
+				StringFormat(sString,"Turn end\t");
+				WriteText(LogFileHandle, LogIoResult, sString);
+
+				StringFormat(sString,"speed %4d\t",dl_speed);
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"dist %4d\t",dl_dist);
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"rel-gyro %4d\t",g_rel_heading);
+				WriteText(LogFileHandle, LogIoResult, sString);
+				StringFormat(sString,"const-gyro %4d\t",g_const_heading);
+				break;
 			}
 			WriteText(LogFileHandle, LogIoResult, sString);
 			StringFormat(sString, g_datalog_change_event_names[dl_ce_detail]);	//extra detail
@@ -145,7 +195,7 @@ task abs_datalog()
 				WriteText(LogFileHandle, LogIoResult, sString);
 				if(dl_dist_method == DL_LIGHT)StringFormat(sString, "%4d\t", g_light_sensor);
 				else StringFormat(sString, "%4d\t", dl_cur_dist);	//current distance value for end triger, could be angle/IR
-				WriteText(LogFileHandle, LogIoResult, sString);
+					WriteText(LogFileHandle, LogIoResult, sString);
 				if(dl_dist_method == DL_ANGLE || dl_dist_method == DL_LIGHT)
 				{
 					StringFormat(sString, "%4d\t", (HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));	//current distance value interpreted for end triger, could be angle/IR
@@ -210,7 +260,7 @@ task abs_datalog()
 			//wait1Msec(50);									// sample frequency
 		}
 	}
-	Close(LogFileHandle, LogIoResult);		// close the file once we are told to stop
+	//Close(LogFileHandle, LogIoResult);		// close the file once we are told to stop
 	wait10Msec(20);
 }
 

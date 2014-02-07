@@ -55,13 +55,14 @@
 #include "lib/math_utils.h"
 #include "lib/abs_sensors.h"
 #include "lib/abs_move_utils.h"
-#include "lib/abs_turn.h"
 #include "lib/abs_gyro_drive.h"
-#include "lib/abs_drive.h"
 #include "lib/abs_datalog.h"
+#include "lib/abs_log.h"
+#include "lib/abs_turn.h"
 #include "lib/abs_initialize.h"
 #include "lib/abs_motor.h"
 #include "lib/abs_stop_robot.h"
+#include "lib/abs_drive.h"
 
 //-----------------------
 // auto mission includes
@@ -81,6 +82,9 @@
 
 task main()
 {
+	Delete(LogFileName, LogIoResult);
+	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
+
 	initialize();
 
 	g_rel_heading = 0;
@@ -99,5 +103,6 @@ task main()
 		abs_s4_mission_execute();
 		break;
 	}
+	Close(LogFileHandle, LogIoResult);
 	LogData=false;
 }
