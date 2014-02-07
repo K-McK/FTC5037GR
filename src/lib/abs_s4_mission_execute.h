@@ -106,10 +106,10 @@ void abs_s4_mission_execute()
 		abs_stop_robot();
 		break;
 	case 2:
-		abs_end_r1(2000,0);
+		abs_end_r1(2000,40);
 		break;
 	case 3:
-		abs_end_r2(2000,0);
+		abs_end_r2(2000,40);
 		break;
 	}
 }
