@@ -641,10 +641,12 @@ int g_recont_heading = 0; //this is the recalculated const gyro heading
 *
 * @var g_ir_bearing2 the calibrated value from the second IR sensor
 *
-* @var g_misc Tell the robot something to desply on the screen
+* @var g_misc Tell the robot something to desplay on the screen
 *
 * @var g_reset_angle a varable that tells the robot to reset the angle sensor value
 */
+
+bool dist_record = true;
 int g_light_sensor;
 int g_bearing_ac1 = 0;
 int g_bearing_ac2 = 0;

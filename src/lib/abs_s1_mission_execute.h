@@ -24,6 +24,7 @@ void abs_s1_mission_execute()
 		break;
 
 	case 1:
+		dist_record=true;
 		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, GYRO);
 		if(HTANGreadAccumulatedAngle(angle_sensor)<(38*INT_ANGLE_SENSOR_CIRCUMFERENCE))

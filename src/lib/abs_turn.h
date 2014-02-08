@@ -25,7 +25,8 @@
 //=======================================
 void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method e_stop, int degree, int speed)
 {
-	abs_log(__FILE__ ,"enter",speed,degree,g_rel_heading,g_const_heading);
+	if(dir == COUNTERCLOCKWISE)abs_log(__FILE__ ,"enter CC",speed,degree,g_rel_heading,g_const_heading);
+	else abs_log(__FILE__ ,"enter C",speed,degree,g_rel_heading,g_const_heading);
 
 	dl_robot_action_state = dl_gyro_turn;
 	int i = 0;

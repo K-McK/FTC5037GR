@@ -25,6 +25,7 @@ void abs_end_r1(int delay, int lift_speed)
 	abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
 	if((abs(HTANGreadAccumulatedAngle(angle_sensor))/18)<15)
 	{
+		abs_log(__FILE__,"dist fail",abs(HTANGreadAccumulatedAngle(angle_sensor))/18,0,0,0);
 		motor[left_motor] = 0;
 		motor[right_motor] = 0;
 		PlayTone(300,200);
@@ -35,7 +36,7 @@ void abs_end_r1(int delay, int lift_speed)
 	dl_robot_action_state = dl_wait;
 	dl_speed = 200;
 	wait1Msec(200);
-	//LSsetActive(LEGOLS);
+	LSsetActive(LEGOLS);
 	servo[light_sensor] = LIGHT_SERVO_DOWN;
 	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
 

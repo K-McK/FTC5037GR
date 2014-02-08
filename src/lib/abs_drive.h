@@ -156,7 +156,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 					if(!((g_bearing_ac2 >= dist - 1) || (g_bearing_ac2 == 0)))
 					{
 						abs_log(__FILE__ ,"IR break",speed,dist,g_bearing_ac2,HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE);
-
 						break;
 					}
 				}
@@ -377,14 +376,14 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			if(g_light_sensor>g_light_threshold&&light_fail==false)
 			{
 				dl_move_break = DL_LIGHT_BREAK;
-				abs_log(__FILE__ ,"light break",speed,dist,HTANGreadAccumulatedAngle(angle_sensor),(HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));
+				abs_log(__FILE__ ,"light break",speed,dist,g_light_sensor,(HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));
 				break;
 			}
 			else if(abs(HTANGreadAccumulatedAngle(angle_sensor)) > (dist*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 			{
 				dl_move_break = DL_ANGLE_BREAK;
 
-				abs_log(__FILE__ ,"angle break",speed,dist,HTANGreadAccumulatedAngle(angle_sensor),(HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));
+				abs_log(__FILE__ ,"angle break",speed,dist,g_light_sensor,(HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));
 
 				break;
 			}
@@ -438,15 +437,24 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	servo[light_sensor] = LIGHT_SERVO_UP;
 
 	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
-	if(g_start_point==1||g_start_point==2)
+	if(dist_record==true)
 	{
-		if(g_end_point == 3) g_dist_backwards = (abs(HTANGreadAccumulatedAngle(angle_sensor))/18)-10;
-		else if(g_end_point == 2) g_dist_backwards = 190-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
-	}
-	else if(g_start_point==3)
-	{
-		if(g_end_point==2)	g_dist_backwards = 170-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
-		else if(g_end_point==3) g_dist_backwards = 75+(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
+		if(g_start_point==1)
+		{
+			if(g_end_point == 3) g_dist_backwards = (abs(HTANGreadAccumulatedAngle(angle_sensor))/18)-10;
+			else if(g_end_point == 2) g_dist_backwards = 190-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
+		}
+		else if(g_start_point==2)
+		{
+			if(g_end_point == 2) g_dist_backwards = (abs(HTANGreadAccumulatedAngle(angle_sensor))/18)-7;
+			else if(g_end_point == 3) g_dist_backwards = 196-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
+		}
+		else if(g_start_point==3)
+		{
+			if(g_end_point==2)	g_dist_backwards = 170-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
+			else if(g_end_point==3) g_dist_backwards = 75+(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
+		}
+		dist_record=false;
 	}
 	abs_log(__FILE__ ,"exit",speed,dist,HTANGreadAccumulatedAngle(angle_sensor),HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE);
 }
