@@ -19,9 +19,9 @@
 
 /**
 *
-*  @file auto.c
+*  @file diagnostic_light.c
 *
-*  @brief The automatic program for the robot.
+*  @brief Controls a light on the robot to allow us to know whats going on with us
 *
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
@@ -81,23 +81,11 @@
 
 task main()
 {
-	initialize();
-
-	g_rel_heading = 0;
-	switch(g_start_point)
+	disableDiagnosticsDisplay();
+	servo[light_sensor] = LIGHT_SERVO_DOWN;
+	LSsetActive(LEGOLS);
+	while(true)
 	{
-	case 1:
-		abs_s1_mission_execute();
-		break;
-	case 2:
-		abs_s2_mission_execute();
-		break;
-	case 3:
-		abs_s3_mission_execute();
-		break;
-	case 4:
-		abs_s4_mission_execute();
-		break;
+		nxtDisplayBigTextLine(1, "%4d", LSvalNorm(LEGOLS));
 	}
-	LogData=false;
 }

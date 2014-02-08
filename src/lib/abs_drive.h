@@ -50,7 +50,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			if(drive_type == GYRO)
 			{
 				abs_gyro_drive(speed,dir);
-			        dl_cur_dist = time1[T1];
+				dl_cur_dist = time1[T1];
 			}
 
 			/** No gyro correction*/
@@ -81,7 +81,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			if(drive_type == GYRO)
 			{
 				abs_gyro_drive(speed,dir);
-			        dl_cur_dist = nMotorEncoder(right_motor);
+				dl_cur_dist = nMotorEncoder(right_motor);
 			}
 
 			/** No gyro correction*/
@@ -198,7 +198,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		}
 	}
 
-
 	//------------------------
 	// accelermeoter sensor stopping method
 	//------------------------
@@ -235,14 +234,14 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	// angle sensor stopping method
 	//------------------------
-	else
+	else if(dist_method == E_ANGLE)
 	{
 		HTANGresetAccumulatedAngle(angle_sensor);
 		while(abs(HTANGreadAccumulatedAngle(angle_sensor)) < (dist*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 		{
 			if(drive_type == GYRO)
 			{
-			        dl_cur_dist = HTANGreadAccumulatedAngle(angle_sensor);
+				dl_cur_dist = HTANGreadAccumulatedAngle(angle_sensor);
 				abs_gyro_drive(speed,dir);
 			}
 
@@ -262,8 +261,42 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			}
 		}
 	}
+	//--------------
+	//   Light
+	//--------------
+	else
+	{
+		LSsetActive(LEGOLS);
+		servo[light_sensor] = LIGHT_SERVO_DOWN;
+		while(g_light_sensor <= 30)
+		{
+			dl_cur_dist= g_light_sensor;
+			if(drive_type == GYRO)
+			{
+				abs_gyro_drive(speed,dir);
+			}
 
-	g_dist_backwards = (HTANGreadAccumulatedAngle(angle_sensor)/18)*5;
+			/** No gyro correction*/
+			else
+			{
+				if(dir == FORWARD)
+				{
+					motor[left_motor] = speed;
+					motor[right_motor] = speed;
+				}
+				else
+				{
+					motor[left_motor] = -speed;
+					motor[right_motor] = -speed;
+				}
+			}
+		}
+	}
+	if(g_end_point == 3) g_dist_backwards = (abs(HTANGreadAccumulatedAngle(angle_sensor))/18)-(5);
+	else if(g_end_point == 2) g_dist_backwards = 190-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
+
+	servo[light_sensor] = LIGHT_SERVO_UP;
+	LSsetInactive(LEGOLS);
 
 	//------------------------
 	// Stop

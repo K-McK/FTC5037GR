@@ -24,7 +24,7 @@ task abs_sensors()
 		//-------------------------
 		// Light Sensor
 		//-------------------------
-//	g_light_sensor = SensorValue(lightSensor);
+		g_light_sensor = LSvalNorm(LEGOLS);
 		//-------------------------
 		// HiTechnic IR Sensor
 		//-------------------------
