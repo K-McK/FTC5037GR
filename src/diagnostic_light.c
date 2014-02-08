@@ -19,9 +19,9 @@
 
 /**
 *
-*  @file auto.c
+*  @file diagnostic_light.c
 *
-*  @brief The automatic program for the robot.
+*  @brief Controls a light on the robot to allow us to know whats going on with us
 *
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
