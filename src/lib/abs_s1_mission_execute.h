@@ -1,18 +1,25 @@
 /**
-*
-*  @file abs_s1_mission_execute.h
-*
-*  @brief runs the missions from the starting point S1
-*
-*  @param None n/a
-*
-*  @return Returns nothing
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
+ *
+ *  @file abs_s1_mission_execute.h
+ *
+ *  @brief runs the missions from the starting point S1
+ *
+ *  @param None n/a
+ *
+ *  @return Returns nothing
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
+
 #ifndef ABS_S1_MISSION_EXECUTE_H
 #define ABS_S1_MISSION_EXECUTE_H
+
+#include "abs_drive.h"
+#include "abs_turn.h"
+#include "abs_stop_robot.h"
+#include "abs_end_r1.h"
+#include "abs_end_r2.h"
 
 void abs_s1_mission_execute()
 {

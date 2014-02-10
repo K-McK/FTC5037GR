@@ -19,8 +19,11 @@
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
+
 #ifndef ABS_DRIVE_H
 #define ABS_DRIVE_H
+
+#include "abs_gyro_drive.h"
 
 void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end, e_drive_type drive_type)
 {

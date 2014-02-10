@@ -11,8 +11,14 @@
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
+
 #ifndef ABS_INITIALIZE_H
 #define ABS_INITIALIZE_H
+
+#include "abs_screen.h"
+#include "abs_gyro_cal.h"
+#include "abs_sensors.h"
+#include "abs_datalog.h"
 
 void initialize()
 {

@@ -12,11 +12,11 @@
 *
 */
 
-#include "lib/abs_drive.h"
-#include "lib/abs_turn.h"
-
 #ifndef ABS_END_R2_H
 #define ABS_END_R2_H
+
+#include "abs_drive.h"
+#include "abs_turn.h"
 
 void abs_end_r2(int delay, int lift_speed)
 {

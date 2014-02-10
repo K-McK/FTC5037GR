@@ -41,35 +41,8 @@
 #include "lib/xander/hitechnic-accelerometer.h"
 #include "lib/xander/lego-light.h"
 
-//-----------------------
-// custom functions includes
-//-----------------------
-
-#include "lib/global_varaibles.h"
-#include "lib/abs_selection_number.h"
-#include "lib/abs_selection_custom.h"
-#include "lib/abs_selection_quick.h"
-#include "lib/abs_selection_program.h"
-#include "lib/abs_screen.h"
-#include "lib/abs_gyro_cal.h"
-#include "lib/math_utils.h"
-#include "lib/abs_sensors.h"
-#include "lib/abs_move_utils.h"
-#include "lib/abs_turn.h"
-#include "lib/abs_gyro_drive.h"
-#include "lib/abs_drive.h"
-#include "lib/abs_datalog.h"
+#include "lib/global_variables.h"
 #include "lib/abs_initialize.h"
-#include "lib/abs_motor.h"
-#include "lib/abs_stop_robot.h"
-
-//-----------------------
-// auto mission includes
-//-----------------------
-
-#include "lib/abs_end_r1.h"
-#include "lib/abs_end_r2.h"
-
 #include "lib/abs_s1_mission_execute.h"
 #include "lib/abs_s2_mission_execute.h"
 #include "lib/abs_s3_mission_execute.h"
