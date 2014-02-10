@@ -11,6 +11,10 @@
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
+
+#include "lib/abs_drive.h"
+#include "lib/abs_turn.h"
+
 #ifndef ABS_END_R1_H
 #define ABS_END_R1_H
 
