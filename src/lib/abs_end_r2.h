@@ -24,7 +24,7 @@ void abs_end_r2(int delay, int lift_speed)
 	servo[abdd] = g_abdd_down;
 	abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
 
-	if((abs(HTANGreadAccumulatedAngle(angle_sensor))/18)<15)
+	if((abs(HTANGreadAccumulatedAngle(angle_sensor))/18)<5)//15)
 	{
 		abs_log(__FILE__,"dist fail",abs(HTANGreadAccumulatedAngle(angle_sensor))/18,0,0,0);
 		motor[left_motor] = 0;

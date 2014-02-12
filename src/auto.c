@@ -79,11 +79,12 @@
 //========================================
 // Main program
 //========================================
-
 task main()
 {
 	Delete(LogFileName, LogIoResult);
 	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
+
+	abs_log(__FILE__ ,"program start",nPgmTime,0,0,0);
 
 	initialize();
 
@@ -103,6 +104,7 @@ task main()
 		abs_s4_mission_execute();
 		break;
 	}
+	abs_log(__FILE__ ,"end auto",nPgmTime,0,0,0);
 	Close(LogFileHandle, LogIoResult);
 	LogData=false;
 }

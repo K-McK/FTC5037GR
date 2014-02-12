@@ -28,7 +28,7 @@ void abs_s1_mission_execute()
 		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, GYRO);
 		if(HTANGreadAccumulatedAngle(angle_sensor)<(38*INT_ANGLE_SENSOR_CIRCUMFERENCE))
-			abs_drive(FORWARD, E_IR_DETECT, 7, ((50*INT_ANGLE_SENSOR_CIRCUMFERENCE)-HTANGreadAccumulatedAngle(angle_sensor)), true, GYRO);
+			abs_drive(FORWARD, E_ANGLE, 40 ,50-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18), true, GYRO);
 		PlayTone(200,20);
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;

@@ -31,7 +31,6 @@ task abs_datalog()
 	//Delete(LogFileName, LogIoResult);
 	//OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
 
-
 	if(selection_type == SELECTION_TYPE_CUSTOM) StringFormat(sString, "Custom");
 	else if(selection_type == SELECTION_TYPE_NUMBER) StringFormat(sString, "Number");
 	else if(selection_type == SELECTION_TYPE_QUICK) StringFormat(sString, "Quick");
@@ -50,7 +49,6 @@ task abs_datalog()
 	StringFormat(sString, "");
 	strcat(sString,CRLF);
 	WriteText(LogFileHandle, LogIoResult, sString);
-
 
 	StringFormat(sString, "%2d\t", g_start_point);
 	WriteText(LogFileHandle, LogIoResult, sString);
