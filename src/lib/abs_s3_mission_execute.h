@@ -20,6 +20,7 @@
 #include "abs_stop_robot.h"
 #include "abs_end_r1.h"
 #include "abs_end_r2.h"
+#include "abs_log.h"
 
 void abs_s3_mission_execute()
 {

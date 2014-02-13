@@ -19,6 +19,7 @@
 #include "abs_gyro_cal.h"
 #include "abs_sensors.h"
 #include "abs_datalog.h"
+#include "abs_log.h"
 
 void initialize()
 {

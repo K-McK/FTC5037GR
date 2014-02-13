@@ -17,6 +17,7 @@
 
 #include "abs_drive.h"
 #include "abs_turn.h"
+#include "abs_log.h"
 
 void abs_end_r2(int delay, int lift_speed)
 {
