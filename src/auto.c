@@ -35,6 +35,7 @@
 
 #include "joystickdriver.c"
 #include "lib/xander/hitechnic-sensormux.h"
+#include "drivers/lego-light.h"
 #include "lib/xander/hitechnic-irseeker-v2.h"
 #include "lib/xander/hitechnic-gyro.h"
 #include "lib/xander/hitechnic-angle.h"
@@ -47,13 +48,18 @@
 #include "lib/abs_s2_mission_execute.h"
 #include "lib/abs_s3_mission_execute.h"
 #include "lib/abs_s4_mission_execute.h"
+#include "lib/abs_log.h"
 
 //========================================
 // Main program
 //========================================
-
 task main()
 {
+	Delete(LogFileName, LogIoResult);
+	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
+
+	abs_log(__FILE__ ,"program start",nPgmTime,0,0,0);
+
 	initialize();
 
 	g_rel_heading = 0;
@@ -72,5 +78,7 @@ task main()
 		abs_s4_mission_execute();
 		break;
 	}
+	abs_log(__FILE__ ,"end auto",nPgmTime,0,0,0);
+	Close(LogFileHandle, LogIoResult);
 	LogData=false;
 }

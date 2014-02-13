@@ -20,13 +20,35 @@
 
 void abs_end_r1(int delay, int lift_speed)
 {
+	if(g_mission_number == 1)g_to_turn_dist = g_dist_backwards;
+	dl_step = dl_step+1;
+	dl_robot_action_state = dl_wait;
+	dl_speed = delay;
 	wait1Msec(delay);
 	servo[abdd] = g_abdd_down;
-	abs_drive(FORWARD, E_ANGLE, g_dist_backwards, 50, true, GYRO);
+	abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
+	if((abs(HTANGreadAccumulatedAngle(angle_sensor))/18)<5)//15)
+	{
+		abs_log(__FILE__,"dist fail",abs(HTANGreadAccumulatedAngle(angle_sensor))/18,0,0,0);
+		motor[left_motor] = 0;
+		motor[right_motor] = 0;
+		PlayTone(300,200);
+		return;
+	}
+
+	dl_step = dl_step+1;
+	dl_robot_action_state = dl_wait;
+	dl_speed = 200;
 	wait1Msec(200);
+	LSsetActive(LEGOLS);
+	servo[light_sensor] = LIGHT_SERVO_DOWN;
 	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
+
+	dl_step = dl_step+1;
+	dl_robot_action_state = dl_wait;
+	dl_speed = 200;
 	wait1Msec(200);
-	abs_drive(FORWARD, E_LIGHT, 85, 50, true, GYRO);
+	abs_drive(FORWARD, E_LIGHT, 110, 50, true, GYRO);
 	motor[block_lift_motor] = lift_speed;
 	motor[block_lift_motor2] = lift_speed;
 	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);

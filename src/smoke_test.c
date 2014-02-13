@@ -31,12 +31,13 @@
 // sensor/mux/joystick includes
 //-----------------------
 
-#include "JoystickDriver.c"
+#include "joystickdriver.c"
 #include "lib/xander/hitechnic-sensormux.h"
+#include "drivers/lego-light.h"
+#include "lib/xander/hitechnic-irseeker-v2.h"
 #include "lib/xander/hitechnic-gyro.h"
 #include "lib/xander/hitechnic-angle.h"
-#include "lib/xander/hitechnic-irseeker-v2.h"
-#include "drivers/hitechnic-accelerometer.h"
+#include "lib/xander/hitechnic-accelerometer.h"
 
 //-----------------------
 // custom functions includes

@@ -75,6 +75,8 @@ void initialize()
 
 	waitForStart();
 
+	abs_log(__FILE__ ,"auto start",nPgmTime,0,0,0);
+
 	StartTask(abs_datalog);
 	eraseDisplay();
 	g_start_time = nPgmTime;
