@@ -21,7 +21,7 @@ void abs_motor(e_motor_move move_type)
 	//-----------------------------
 	// roger slide
 	//-----------------------------
-	if(move_type == ROGGER_SLIDE) servo[roger_slide] = 0;
+	if(move_type == ROGER_SLIDE) servo[roger_slide] = 0;
 
 	//-----------------------------
 	// ABDD

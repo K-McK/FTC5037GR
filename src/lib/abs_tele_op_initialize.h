@@ -13,6 +13,10 @@
 #ifndef ABS_TELE_OP_INITIALIZE_H
 #define ABS_TELE_OP_INITIALIZE_H
 
+#include "abs_screen.h"
+#include "abs_btn_press.h"
+#include "abs_teleop_datalog.h"
+
 void abs_tele_op_initialize()
 {
 	if(joystick.joy1_TopHat == -1) g_joy1_enabled = true;
@@ -24,7 +28,7 @@ void abs_tele_op_initialize()
 	g_screen_state = S_MISC_SHOW;
 	getJoystickSettings(joystick);
 	memset(dl_joy1_btns,0,12);
-	StartTask(abs_btn_press);
-	StartTask(abs_teleop_datalog);
+	//StartTask(abs_btn_press);
+	//StartTask(abs_teleop_datalog);
 }
 #endif /* ABS_TELE_OP_INITIALIZE_H */

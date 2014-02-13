@@ -68,8 +68,7 @@ typedef enum
  	E_IR_DETECT,
  	E_IR_DETECT2,
  	E_ANGLE,
-  E_LIGHT
-} e_move_stopping_method; //will make a method with a tilt sensor(wheel in the middle of the robot
+  E_LIGHT} e_move_stopping_method; //will make a method with a tilt sensor(wheel in the middle of the robot
 
 /**
  *  @enum e_turn_method Tells the robot what type of turn it should do
@@ -105,7 +104,7 @@ typedef enum
  *     Move the block lifter
  *  @var e_motor_move::GRABBER
  *     close the block grabber
- *  @var e_motor_move::ROGGER_SLIDE
+ *  @var e_motor_move::ROGER_SLIDE
  *     Slide the flag liffter back
  */
 typedef enum
@@ -113,7 +112,7 @@ typedef enum
 	ABDD,
 	LIFT,
 	GRABBER,
-	ROGGER_SLIDE
+	ROGER_SLIDE
 } e_motor_move;
 
 /**

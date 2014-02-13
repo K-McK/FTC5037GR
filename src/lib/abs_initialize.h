@@ -11,8 +11,15 @@
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
+
 #ifndef ABS_INITIALIZE_H
 #define ABS_INITIALIZE_H
+
+#include "abs_screen.h"
+#include "abs_gyro_cal.h"
+#include "abs_sensors.h"
+#include "abs_datalog.h"
+#include "abs_log.h"
 
 void initialize()
 {
@@ -68,6 +75,8 @@ void initialize()
 	HTANGresetAccumulatedAngle(angle_sensor);
 
 	waitForStart();
+
+	abs_log(__FILE__ ,"auto start",nPgmTime,0,0,0);
 
 	StartTask(abs_datalog);
 	eraseDisplay();

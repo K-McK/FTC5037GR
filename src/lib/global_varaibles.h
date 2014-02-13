@@ -29,6 +29,8 @@ const tMUXSensor LEGOLS = msensor_S3_4;
  */
 bool g_gyro_true = false;
 
+//#define DL_LOCATION (strcat(strcat((char*)__FILE__, ":"),(char*)__LINE__))
+
 //=========================================================
 // Robot constants
 //=========================================================
@@ -166,6 +168,10 @@ const int g_gyro_adjust = 10;
 const int g_ground_arm_up = 0;
 
 const int g_ground_arm_down = 120;
+
+const int g_light_threshold = 30;
+
+const int g_light_move_min_dist = 70;
 
 //=========================================================
 // auto selection points
@@ -365,15 +371,15 @@ int g_to_turn_dist = 0;
 
 bool g_IR_angle_dist_complete = false;
 
-const int g_forward_crate1_to_turn_dist = 135;
-const int g_forward_crate2_to_turn_dist = 110;
-const int g_forward_crate3_to_turn_dist = 60;
-const int g_forward_crate4_to_turn_dist = 35;
+const int g_forward_crate1_to_turn_dist = 130;
+const int g_forward_crate2_to_turn_dist = 105;
+const int g_forward_crate3_to_turn_dist = 55;
+const int g_forward_crate4_to_turn_dist = 30;
 
-const int g_backwards_crate1_to_turn_dist = 45;
-const int g_backwards_crate2_to_turn_dist = 70;
-const int g_backwards_crate3_to_turn_dist = 120;
-const int g_backwards_crate4_to_turn_dist = 145;
+const int g_backwards_crate1_to_turn_dist = 40;
+const int g_backwards_crate2_to_turn_dist = 65;
+const int g_backwards_crate3_to_turn_dist = 115;
+const int g_backwards_crate4_to_turn_dist = 140;
 
 //=========================================================
 // Smoke test varaibles
@@ -463,6 +469,13 @@ int g_input_array[INPUT_ARRAY_SIZE];
  * @var dl_drive_details
  *		Tells the robot the drive details for data loging
  */
+const string LogFileName = "DATALOG.txt";
+TFileIOResult LogIoResult;
+TFileHandle LogFileHandle;
+long LogFileSize = 36000;
+string sString;
+string CRLF = (char)13+(char)10;
+
 bool LogData = false;
 int dl_step = 0;
 int dl_robot_action_state = 0;
@@ -475,10 +488,24 @@ int dl_dist = 0;
 int dl_gyro_heading = 0;
 bool dl_IR = false;
 int dl_cur_dist = 0;
-string sString;
+//string sString;
 
-#define DL_MOVE_SPEED
-#define DL_MOVE_DIST
+int dl_dist_method = 0;
+
+#define DL_ANGLE 0
+#define DL_LIGHT 1
+#define DL_TIME 2
+#define DL_IR 3
+
+int dl_move_break = 0;
+
+#define DL_ANGLE_BREAK 0
+#define DL_LIGHT_BREAK 1
+#define DL_TIME_BREAK 2
+#define DL_IR_BREAK 3
+
+#define DL_MOVE_SPEED 0
+#define DL_MOVE_DIST 1
 
 int dl_drive_details [] = {0,4};
 
@@ -526,6 +553,12 @@ int dl_drive_details [] = {0,4};
 #define dl_ce_score_start 3
 #define dl_ce_end_delay 4
 #define dl_ce_end_point 5
+#define dl_ce_drive_end 6
+#define dl_ce_drive_start 7
+#define dl_ce_angle_reset 8
+#define dl_ce_turn_end 9
+#define dl_ce_turn_start 10
+
 /**
  * @var g_datalog_change_event_names
  *		The even names that get put into data loging
@@ -536,7 +569,20 @@ string g_datalog_change_event_names [] = {
 	"start delay",
 	"score",
 	"end delay",
-	"end"};
+	"end",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	""};
 
 //---------------
 // robot action details
@@ -762,6 +808,8 @@ int g_recont_heading = 0; //this is the recalculated const gyro heading
  * @var g_reset_angle
  *		a varable that tells the robot to reset the angle sensor value
  */
+
+bool dist_record = true;
 int g_light_sensor;
 int g_bearing_ac1 = 0;
 int g_bearing_ac2 = 0;

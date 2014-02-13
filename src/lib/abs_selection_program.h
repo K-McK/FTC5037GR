@@ -14,6 +14,10 @@
 #ifndef ABS_SELECTION_PROGRAM_H
 #define ABS_SELECTION_PROGRAM_H
 
+#include "abs_selection_custom.h"
+#include "abs_selection_number.h"
+#include "abs_selection_quick.h"
+
 void selection_program()
 {
 	while(nNxtButtonPressed == kEnterButton){}
@@ -82,6 +86,7 @@ void selection_program()
 		g_end_point=3;
 		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 	}
+	if(g_input_array[END_POINT] == 1)g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
 
 	//---------------------------------------
 	// Start of gyro cal selection
