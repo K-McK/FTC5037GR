@@ -72,7 +72,7 @@ void initialize()
 	LogData=true;
 	g_screen_state = S_READY;
 	StartTask(abs_sensors);
-	HTANGresetAccumulatedAngle(angle_sensor);
+	abs_reset_angle_sensor_val();
 
 	waitForStart();
 

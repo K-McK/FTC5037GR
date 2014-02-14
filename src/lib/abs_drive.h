@@ -131,7 +131,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else if(dist_method == E_IR_DETECT)
 	{
-		HTANGresetAccumulatedAngle(angle_sensor);
+		abs_reset_angle_sensor_val();
 		abs_log(__FILE__ ,"reset angle",speed,dist,HTANGreadAccumulatedAngle(angle_sensor),(HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));
 
 		int total_dist = 0;
@@ -225,7 +225,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else if(dist_method == E_IR_DETECT2)
 	{
-		HTANGresetAccumulatedAngle(angle_sensor);
+		abs_reset_angle_sensor_val();
 		abs_log(__FILE__ ,"reset angle",speed,dist,HTANGreadAccumulatedAngle(angle_sensor),(HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));
 
 		dl_move_break = DL_IR_BREAK;
@@ -300,7 +300,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else if(dist_method == E_ANGLE)
 	{
-		HTANGresetAccumulatedAngle(angle_sensor);
+		abs_reset_angle_sensor_val();
 		abs_log(__FILE__ ,"reset angle",speed,dist,HTANGreadAccumulatedAngle(angle_sensor),(HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));
 		int temp_angle = HTANGreadAccumulatedAngle(angle_sensor);
 
@@ -366,28 +366,28 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	else if(dist_method == E_LIGHT)
 	{
 		bool light_fail = false;
-		HTANGresetAccumulatedAngle(angle_sensor);
+		abs_reset_angle_sensor_val();
 		abs_log(__FILE__ ,"reset angle",speed,dist,HTANGreadAccumulatedAngle(angle_sensor),(HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));
 
 		while(true)
 		{
-			if(g_light_sensor>g_light_threshold&&abs(HTANGreadAccumulatedAngle(angle_sensor))<g_light_move_min_dist)
+			if(g_light_sensor>g_light_threshold&&abs_get_angle_sensor_val(RELATIVE)<g_light_move_min_dist)
 			{
-				abs_log(__FILE__ ,"light fail",speed,dist,HTANGreadAccumulatedAngle(angle_sensor),(HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));
+				abs_log(__FILE__ ,"light fail",speed,dist,abs_get_angle_sensor_val(RELATIVE),abs_get_angle_sensor_val(RELATIVE_BPU));
 				light_fail = true;
 			}
 
 			if(g_light_sensor>g_light_threshold&&light_fail==false)
 			{
 				dl_move_break = DL_LIGHT_BREAK;
-				abs_log(__FILE__ ,"light break",speed,dist,g_light_sensor,(HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));
+				abs_log(__FILE__ ,"light break",speed,dist,g_light_sensor,(abs_get_angle_sensor_val(RELATIVE_BPU));
 				break;
 			}
-			else if(abs(HTANGreadAccumulatedAngle(angle_sensor)) > (dist*INT_ANGLE_SENSOR_CIRCUMFERENCE))
+			else if (abs_get_angle_sensor_val(RELATIVE) > (dist*INT_ANGLE_SENSOR_CIRCUMFERENCE))
 			{
 				dl_move_break = DL_ANGLE_BREAK;
 
-				abs_log(__FILE__ ,"angle break",speed,dist,g_light_sensor,(HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));
+				abs_log(__FILE__ ,"angle break",speed,dist,g_light_sensor,abs_get_angle_sensor_val(RELATIVE_BPU));
 
 				break;
 			}
@@ -395,7 +395,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 			if(drive_type == GYRO)
 			{
-				dl_cur_dist = HTANGreadAccumulatedAngle(angle_sensor);
+				dl_cur_dist = abs_get_angle_sensor_val(RELATIVE);
 				abs_gyro_drive(speed,dir);
 			}
 
@@ -445,22 +445,22 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	{
 		if(g_start_point==1)
 		{
-			if(g_end_point == 3) g_dist_backwards = (abs(HTANGreadAccumulatedAngle(angle_sensor))/18)-10;
-			else if(g_end_point == 2) g_dist_backwards = 190-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
+			if(g_end_point == 3) g_dist_backwards = abs_get_angle_sensor_val(RELATIVE_BPU)-10;
+			else if(g_end_point == 2) g_dist_backwards = 190-abs_get_angle_sensor_val(RELATIVE_BPU);
 		}
 		else if(g_start_point==2)
 		{
-			if(g_end_point == 2) g_dist_backwards = (abs(HTANGreadAccumulatedAngle(angle_sensor))/18)-7;
-			else if(g_end_point == 3) g_dist_backwards = 196-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
+			if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RELATIVE_BPU) -7;
+			else if(g_end_point == 3) g_dist_backwards = 196- abs_get_angle_sensor_val(RELATIVE_BPU);
 		}
 		else if(g_start_point==3)
 		{
-			if(g_end_point==2)	g_dist_backwards = 170-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
-			else if(g_end_point==3) g_dist_backwards = 75+(abs(HTANGreadAccumulatedAngle(angle_sensor))/18);
+			if(g_end_point==2)	g_dist_backwards = 170- abs_get_angle_sensor_val(RELATIVE_BPU);
+			else if(g_end_point==3) g_dist_backwards = 75+ abs_get_angle_sensor_val(RELATIVE_BPU);
 		}
 		dist_record=false;
 	}
-	abs_log(__FILE__ ,"exit",speed,dist,HTANGreadAccumulatedAngle(angle_sensor),HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE);
+	abs_log(__FILE__ ,"exit",speed,dist,abs_get_angle_sensor_val(RELATIVE),abs_get_angle_sensor_val(RELATIVE_BPU));
 }
 
 #endif /* !ABS_DRIVE_H */
