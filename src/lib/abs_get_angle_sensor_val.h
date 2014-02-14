@@ -10,19 +10,23 @@
 *
 *  @copyright Copyright 2013, Got Robot! FTC Team 5037
 */
-#ifndef TEMPLATE_H
-#define TEMPLATE_H
+#ifndef ABS_GET_ANGLE_SENSOR_VAL_H
+#define ABS_GET_ANGLE_SENSOR_VAL_H
 
-long get_angle_sensor_val(e_angle_val_type angle_val)
+long abs_get_angle_sensor_val(e_angle_val_type angle_val)
 {
-	if(angle_val = RELITIVE)
+	if(angle_val == RELATIVE)
 	{
-		return abs(HTANGreadAccumulatedAngle(angle_sensor) - angle_sensor_val);
+		return abs(HTANGreadAccumulatedAngle(angle_sensor) - g_angle_sensor_val);
 	}
-	else
+	else if(angle_val == RAW)
 	{
 		return abs(HTANGreadAccumulatedAngle(angle_sensor);
 	}
+	else
+	{
+		return abs(HTANGreadAccumulatedAngle(angle_sensor) - g_angle_sensor_val)/INT_ANGLE_SENSOR_CIRCUMFERENCE;
+}
 }
 
-#endif /* !TEMPLATE_H */
+#endif /* !ABS_GET_ANGLE_SENSOR_VAL_H */

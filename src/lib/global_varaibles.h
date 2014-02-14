@@ -75,7 +75,7 @@ bool g_gyro_true = false;
 #define LIGHT_SERVO_DOWN 255
 #define LIGHT_SERVO_UP 127
 
-long angle_sensor_val = 0
+long g_angle_sensor_val = 0
 
 /**
  *
@@ -336,8 +336,9 @@ e_auto_sub_selection_ramp g_auto_grabber_selection_ramp_options = SUB_SELECTION_
 
 typedef enum
 {
-	RELITIVE,
-	RAW
+	RELATIVE,
+	RAW,
+	RELATIVE_BPU
 } e_angle_val_type;
 //=========================================================
 // auto movements

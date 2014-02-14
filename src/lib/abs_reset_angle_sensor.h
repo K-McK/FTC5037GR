@@ -10,12 +10,12 @@
  *
  *  @copyright Copyright 2013, Got Robot! FTC Team 5037
  */
-#ifndef TEMPLATE_H
-#define TEMPLATE_H
+#ifndef ABS_RESET_ANGLE_SENSOR_H
+#define ABS_RESET_ANGLE_SENSOR_H
 
-long reset_angle_sensor_val()
+long abs_reset_angle_sensor_val()
 {
-	angle_sensor_val = HTANGreadAccumulatedAngle(angle_sensor)
+	g_angle_sensor_val = HTANGreadAccumulatedAngle(angle_sensor);
 }
 
-#endif /* !TEMPLATE_H */
+#endif /* !ABS_RESET_ANGLE_SENSOR_H */
