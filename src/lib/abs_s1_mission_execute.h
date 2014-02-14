@@ -21,6 +21,7 @@
 #include "abs_end_r1.h"
 #include "abs_end_r2.h"
 #include "abs_log.h"
+#include "abs_get_angle_sensor_val.h"
 
 void abs_s1_mission_execute()
 {
@@ -35,8 +36,8 @@ void abs_s1_mission_execute()
 		dist_record=true;
 		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, GYRO);
-		if(HTANGreadAccumulatedAngle(angle_sensor)<(38*INT_ANGLE_SENSOR_CIRCUMFERENCE))
-			abs_drive(FORWARD, E_ANGLE, 40 ,50-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18), true, GYRO);
+		if(abs_get_angle_sensor_val(RELATIVE) < (38*INT_ANGLE_SENSOR_CIRCUMFERENCE))
+			abs_drive(FORWARD, E_ANGLE, 40 ,50 - abs_get_angle_sensor_val(RELATIVE_BPU), true, GYRO);
 		PlayTone(200,20);
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;

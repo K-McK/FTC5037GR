@@ -1,6 +1,6 @@
 /**
  *
- *  @file template.h (this should be the name of the function)
+ *  @file abs_reset_angle_sensor.h
  *
  *  @brief  Enter a description of what this function does
  *
@@ -13,9 +13,11 @@
 #ifndef ABS_RESET_ANGLE_SENSOR_H
 #define ABS_RESET_ANGLE_SENSOR_H
 
-long abs_reset_angle_sensor_val()
+long abs_reset_angle_sensor_val(e_angle_reset_type reset_type)
 {
-	g_angle_sensor_val = HTANGreadAccumulatedAngle(angle_sensor);
+  if(reset_type == FULL_RESET) { HTANGresetAccumulatedAngle(angle_sensor); }
+
+  return (g_angle_sensor_val = HTANGreadAccumulatedAngle(angle_sensor));
 }
 
 #endif /* !ABS_RESET_ANGLE_SENSOR_H */

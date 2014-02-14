@@ -340,6 +340,13 @@ typedef enum
 	RAW,
 	RELATIVE_BPU
 } e_angle_val_type;
+
+typedef enum
+{
+	SOFT_RESET,
+	FULL_RESET
+} e_angle_reset_type;
+
 //=========================================================
 // auto movements
 //=========================================================
