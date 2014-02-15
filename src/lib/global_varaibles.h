@@ -336,10 +336,18 @@ e_auto_sub_selection_ramp g_auto_grabber_selection_ramp_options = SUB_SELECTION_
 
 typedef enum
 {
-	RELATIVE,
-	RAW,
-	RELATIVE_BPU
+	RELATIVE_ASU,
+	RELATIVE_BPU,
+	RAW_ASU,
+	RAW_BPU
 } e_angle_val_type;
+
+typedef enum
+{
+	SOFT_RESET,
+	HARD_RESET
+} e_angle_reset_type;
+
 //=========================================================
 // auto movements
 //=========================================================

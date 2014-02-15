@@ -18,6 +18,7 @@
 #include "abs_drive.h"
 #include "abs_turn.h"
 #include "abs_log.h"
+#include "abs_get_angle_sensor_val.h"
 
 void abs_end_r1(int delay, int lift_speed)
 {
@@ -28,9 +29,9 @@ void abs_end_r1(int delay, int lift_speed)
 	wait1Msec(delay);
 	servo[abdd] = g_abdd_down;
 	abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
-	if((abs(HTANGreadAccumulatedAngle(angle_sensor))/18)<5)//15)
+	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 5)//15)
 	{
-		abs_log(__FILE__,"dist fail",abs(HTANGreadAccumulatedAngle(angle_sensor))/18,0,0,0);
+		abs_log(__FILE__,"dist fail",abs_get_angle_sensor_val(RELATIVE_BPU),0,0,0);
 		motor[left_motor] = 0;
 		motor[right_motor] = 0;
 		PlayTone(300,200);

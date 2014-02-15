@@ -15,18 +15,22 @@
 
 long abs_get_angle_sensor_val(e_angle_val_type angle_val)
 {
-	if(angle_val == RELATIVE)
+	if(angle_val == RELATIVE_ASU)
 	{
 		return abs(HTANGreadAccumulatedAngle(angle_sensor) - g_angle_sensor_val);
 	}
-	else if(angle_val == RAW)
+	else if(angle_val == RAW_ASU)
 	{
 		return abs(HTANGreadAccumulatedAngle(angle_sensor);
 	}
-	else
+	else if(angle_val == RELATIVE_BPU)
 	{
 		return abs(HTANGreadAccumulatedAngle(angle_sensor) - g_angle_sensor_val)/INT_ANGLE_SENSOR_CIRCUMFERENCE;
-}
+	}
+	else
+	{
+		return abs(HTANGreadAccumulatedAngle(angle_sensor))/INT_ANGLE_SENSOR_CIRCUMFERENCE;
+	}
 }
 
 #endif /* !ABS_GET_ANGLE_SENSOR_VAL_H */

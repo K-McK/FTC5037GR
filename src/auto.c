@@ -60,7 +60,7 @@ task main()
 
 	abs_log(__FILE__ ,"program start",nPgmTime,0,0,0);
 
-	initialize();
+	abs_initialize();
 
 	g_rel_heading = 0;
 	switch(g_start_point)

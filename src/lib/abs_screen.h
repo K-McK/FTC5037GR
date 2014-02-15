@@ -115,7 +115,7 @@ task abs_screen ()
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 		case S_ANGLE_SHOW:
 			nxtDisplayBigTextLine(1, "angle Value");
-			nxtDisplayBigTextLine(3, "%2d", HTANGreadAccumulatedAngle(angle_sensor));
+			nxtDisplayBigTextLine(3, "%2d", abs_get_angle_sensor_val(RELATIVE));
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 			break;
 		case S_STARTING_POINT:

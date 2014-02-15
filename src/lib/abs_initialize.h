@@ -21,7 +21,7 @@
 #include "abs_datalog.h"
 #include "abs_log.h"
 
-void initialize()
+void abs_initialize()
 {
 	StartTask(abs_screen);
 	disableDiagnosticsDisplay();
@@ -72,7 +72,7 @@ void initialize()
 	LogData=true;
 	g_screen_state = S_READY;
 	StartTask(abs_sensors);
-	abs_reset_angle_sensor_val();
+	abs_reset_angle_sensor_val(HARD_RESET);
 
 	waitForStart();
 

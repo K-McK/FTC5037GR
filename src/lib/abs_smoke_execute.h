@@ -15,6 +15,8 @@
 #ifndef ABS_SMOKE_EXECUTE_H
 #define ABS_SMOKE_EXECUTE_H
 
+#include "abs_get_angle_sensor_val.h"
+
 void abs_smoke_execute ()
 {
 	g_screen_state = S_SMOKE_RUN1;
@@ -91,7 +93,7 @@ void abs_smoke_execute ()
 				g_sensor_value2 = g_bearing_ac2;
 				break;
 			case ST_TILT:
-				g_sensor_value = HTANGreadAccumulatedAngle(angle_sensor);
+				g_sensor_value = abs_get_angle_sensor_val(RELATIVE);
 				break;
 			case ST_ACCELEROMETER:
 				g_sensor_value = g_accelermoeter_sensor;

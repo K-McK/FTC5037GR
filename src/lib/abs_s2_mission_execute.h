@@ -21,6 +21,7 @@
 #include "abs_end_r1.h"
 #include "abs_end_r2.h"
 #include "abs_log.h"
+#include "abs_get_angle_sensor_val.h"
 
 void abs_s2_mission_execute()
 {
@@ -37,17 +38,17 @@ void abs_s2_mission_execute()
 		//if(g_IR_angle_dist_complete == true) g_end_point = 12;
 		if(g_end_point == 2)
 		{
-			if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(62*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate4_to_turn_dist;
-			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(100*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate3_to_turn_dist;
-			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(137*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate2_to_turn_dist;
-			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(162*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate1_to_turn_dist;
+			if(abs_get_angle_sensor_val(RELATIVE_BPU) < 62) g_to_turn_dist = g_forward_crate4_to_turn_dist;
+			else if(abs_get_angle_sensor_val(RELATIVE_BPU) < 100) g_to_turn_dist = g_forward_crate3_to_turn_dist;
+			else if(abs_get_angle_sensor_val(RELATIVE_BPU) < 137) g_to_turn_dist = g_forward_crate2_to_turn_dist;
+			else if(abs_get_angle_sensor_val(RELATIVE_BPU) < 162) g_to_turn_dist = g_forward_crate1_to_turn_dist;
 		}
 		else if(g_end_point == 3)
 		{
-			if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(62*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate4_to_turn_dist;
-			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(100*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate3_to_turn_dist;
-			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(137*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate2_to_turn_dist;
-			else if(abs(HTANGreadAccumulatedAngle(angle_sensor))<(162*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate1_to_turn_dist;
+			if(abs_get_angle_sensor_val(RELATIVE_BPU) < 62) g_to_turn_dist = g_backwards_crate4_to_turn_dist;
+			else if(abs_get_angle_sensor_val(RELATIVE_BPU) < 100) g_to_turn_dist = g_backwards_crate3_to_turn_dist;
+			else if(abs_get_angle_sensor_val(RELATIVE_BPU) < 137) g_to_turn_dist = g_backwards_crate2_to_turn_dist;
+			else if(abs_get_angle_sensor_val(RELATIVE_BPU) < 162) g_to_turn_dist = g_backwards_crate1_to_turn_dist;
 		}
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;
