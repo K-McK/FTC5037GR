@@ -129,8 +129,8 @@ void abs_s2_mission_execute()
 	dl_change_event = true;
 	dl_ce_detail = dl_ce_end_delay;
 
-	dl_speed = g_end_delay*1000;
-	wait1Msec(g_end_delay*1000);
+	dl_speed = g_end_delay * DELAY_MULTIPLICATION_FACTOR;
+	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR);
 
 	dl_step++;
 	dl_robot_action_detail = dl_abdd_close;
