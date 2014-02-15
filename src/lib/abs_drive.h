@@ -25,8 +25,9 @@
 
 #include "abs_gyro_drive.h"
 #include "abs_log.h"
-#include "abs_reset_angle_sensor_val"
+#include "abs_reset_angle_sensor.h"
 #include "abs_get_angle_sensor_val.h"
+#include "abs_move_utils.h"
 
 void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end, e_drive_type drive_type)
 {
@@ -46,7 +47,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		abs_log(__FILE__ ,"time enter",speed,dist,time1[T1],abs_get_angle_sensor_val(RELATIVE_BPU));
 		break;
 	case E_LIGHT:
-		abs_log(__FILE__ ,"light enter",speed,dist,g_light_sensor,abs_get_angle_sensor_val(RELATIVE_BPU));
+		abs_log(__FILE__ ,"light enter",speed,dist,g_calibrated_light_threshold_val,abs_get_angle_sensor_val(RELATIVE_BPU));
 		break;
 	}
 	int i = 0;
@@ -373,27 +374,27 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 		while(true)
 		{
-			if(g_light_sensor>g_light_threshold&&abs_get_angle_sensor_val(RELATIVE_ASU)<g_light_move_min_dist)
+			if(g_calibrated_light_threshold_val>g_light_threshold&&abs_get_angle_sensor_val(RELATIVE_ASU)<g_light_move_min_dist)
 			{
 				abs_log(__FILE__ ,"light fail",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
 				light_fail = true;
 			}
 
-			if(g_light_sensor>g_light_threshold&&light_fail==false)
+			if(g_calibrated_light_threshold_val>g_light_threshold&&light_fail==false)
 			{
 				dl_move_break = DL_LIGHT_BREAK;
-				abs_log(__FILE__ ,"light break",speed,dist,g_light_sensor,(abs_get_angle_sensor_val(RELATIVE_BPU));
+				abs_log(__FILE__ ,"light break",speed,dist,g_calibrated_light_threshold_val,(abs_get_angle_sensor_val(RELATIVE_BPU)));
 				break;
 			}
 			else if (abs_get_angle_sensor_val(RELATIVE_BPU) > dist)
 			{
 				dl_move_break = DL_ANGLE_BREAK;
 
-				abs_log(__FILE__ ,"angle break",speed,dist,g_light_sensor,abs_get_angle_sensor_val(RELATIVE_BPU));
+				abs_log(__FILE__ ,"angle break",speed,dist,g_calibrated_light_threshold_val,abs_get_angle_sensor_val(RELATIVE_BPU));
 
 				break;
 			}
-			dl_cur_dist = g_light_sensor;
+			dl_cur_dist = g_calibrated_light_threshold_val;
 
 			if(drive_type == GYRO)
 			{

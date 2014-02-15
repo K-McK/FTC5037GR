@@ -75,7 +75,7 @@ bool g_gyro_true = false;
 #define LIGHT_SERVO_DOWN 255
 #define LIGHT_SERVO_UP 127
 
-long g_angle_sensor_val = 0
+long g_angle_sensor_val = 0;
 
 /**
  *
@@ -705,6 +705,9 @@ bool g_joy1_enabled = false;
 bool g_joy2_enabled = false;
 
 int g_selection_value = 0;
+
+const int g_light_delta_value = 0;
+int g_calibrated_light_threshold_val = 0;
 
 //=============================================================
 // Define user configurable parameters

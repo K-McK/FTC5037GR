@@ -15,6 +15,8 @@
 #ifndef ABS_SENSOR_H
 #define ABS_SENSOR_H
 
+#include "math_utils.h"
+
 task abs_sensors()
 {
 	g_prev_time = nPgmTime;

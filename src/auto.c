@@ -35,12 +35,11 @@
 
 #include "joystickdriver.c"
 #include "lib/xander/hitechnic-sensormux.h"
-#include "drivers/lego-light.h"
+#include "lib/xander/lego-light.h"
 #include "lib/xander/hitechnic-irseeker-v2.h"
 #include "lib/xander/hitechnic-gyro.h"
 #include "lib/xander/hitechnic-angle.h"
 #include "lib/xander/hitechnic-accelerometer.h"
-#include "lib/xander/lego-light.h"
 
 #include "lib/global_variables.h"
 #include "lib/abs_initialize.h"

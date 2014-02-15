@@ -15,6 +15,8 @@
 #ifndef ABS_SCREEN_H
 #define ABS_SCREEN_H
 
+#include "abs_get_angle_sensor_val.h"
+
 task abs_screen ()
 {
 	while(true)
@@ -115,7 +117,7 @@ task abs_screen ()
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 		case S_ANGLE_SHOW:
 			nxtDisplayBigTextLine(1, "angle Value");
-			nxtDisplayBigTextLine(3, "%2d", abs_get_angle_sensor_val(RELATIVE));
+			nxtDisplayBigTextLine(3, "%2d", abs_get_angle_sensor_val(RELATIVE_ASU));
 			nxtDisplayBigTextLine(5, g_mission_names1[0]);
 			break;
 		case S_STARTING_POINT:

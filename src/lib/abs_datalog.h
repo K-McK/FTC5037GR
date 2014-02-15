@@ -96,7 +96,7 @@ task abs_datalog()
 				WriteText(LogFileHandle, LogIoResult, sString);
 				StringFormat(sString,"dist %4d\t",dl_dist);
 				WriteText(LogFileHandle, LogIoResult, sString);
-				StringFormat(sString,"cur-angle raw %4d\t", abs_get_angle_sensor_val(RELATIVE));
+				StringFormat(sString,"cur-angle raw %4d\t", abs_get_angle_sensor_val(RELATIVE_ASU));
 				WriteText(LogFileHandle, LogIoResult, sString);
 				StringFormat(sString,"cur-angle btu %4d\t", abs_get_angle_sensor_val(RELATIVE_BPU));
 				break;
@@ -108,14 +108,14 @@ task abs_datalog()
 				WriteText(LogFileHandle, LogIoResult, sString);
 				StringFormat(sString,"dist %4d\t",dl_dist);
 				WriteText(LogFileHandle, LogIoResult, sString);
-				StringFormat(sString,"cur-angle raw %4d\t", abs_get_angle_sensor_val(RELATIVE));
+				StringFormat(sString,"cur-angle raw %4d\t", abs_get_angle_sensor_val(RELATIVE_ASU));
 				WriteText(LogFileHandle, LogIoResult, sString);
 				StringFormat(sString,"cur-angle btu %4d\t", abs_get_angle_sensor_val(RELATIVE_BPU));
 				break;
 			case dl_ce_angle_reset:
 				StringFormat(sString,"Angle reset\t");
 				WriteText(LogFileHandle, LogIoResult, sString);
-				StringFormat(sString,"(raw value) %4d\t",abs_get_angle_sensor_val(RELATIVE));
+				StringFormat(sString,"(raw value) %4d\t",abs_get_angle_sensor_val(RELATIVE_ASU));
 				break;
 			case dl_ce_turn_start:
 				StringFormat(sString,"Turn start\t");
