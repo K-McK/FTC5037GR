@@ -20,6 +20,9 @@
 #include "abs_sensors.h"
 #include "abs_datalog.h"
 #include "abs_log.h"
+#include "abs_reset_angle_sensor.h"
+#include "abs_calibrate_light.h"
+#include "abs_selection_program.h"
 
 void abs_initialize()
 {
@@ -85,6 +88,7 @@ void abs_initialize()
 	dl_change_event = true;
 	dl_ce_detail = dl_ce_start_delay;
 	dl_speed = g_start_delay*1000;
+	StartTask (abs_calibrate_light);
 	wait1Msec(g_start_delay*1000);
 	eraseDisplay();
 	g_screen_state = S_GYRO_SHOW;

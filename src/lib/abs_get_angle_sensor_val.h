@@ -1,6 +1,6 @@
 /**
 *
-*  @file template.h (this should be the name of the function)
+*  @file abs_get_angle_sensor_val.h
 *
 *  @brief  Enter a description of what this function does
 *
@@ -21,7 +21,7 @@ long abs_get_angle_sensor_val(e_angle_val_type angle_val)
 	}
 	else if(angle_val == RAW_ASU)
 	{
-		return abs(HTANGreadAccumulatedAngle(angle_sensor);
+		return abs(HTANGreadAccumulatedAngle(angle_sensor));
 	}
 	else if(angle_val == RELATIVE_BPU)
 	{
