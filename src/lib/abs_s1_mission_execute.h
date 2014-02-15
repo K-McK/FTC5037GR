@@ -36,7 +36,7 @@ void abs_s1_mission_execute()
 		dist_record=true;
 		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, GYRO);
-		if(abs_get_angle_sensor_val(RELATIVE) < (38*INT_ANGLE_SENSOR_CIRCUMFERENCE))
+		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
 			abs_drive(FORWARD, E_ANGLE, 40 ,50 - abs_get_angle_sensor_val(RELATIVE_BPU), true, GYRO);
 		PlayTone(200,20);
 		dl_step = dl_step+1;

@@ -72,7 +72,7 @@ void abs_initialize()
 	LogData=true;
 	g_screen_state = S_READY;
 	StartTask(abs_sensors);
-	abs_reset_angle_sensor_val(FULL_RESET);
+	abs_reset_angle_sensor_val(HARD_RESET);
 
 	waitForStart();
 
