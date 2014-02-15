@@ -338,8 +338,10 @@ typedef enum
 {
 	RELATIVE_ASU,
 	RELATIVE_BPU,
+	RELATIVE_CENTIMETERS,
 	RAW_ASU,
-	RAW_BPU
+	RAW_BPU,
+	RAW_CENTIMETERS
 } e_angle_val_type;
 
 typedef enum
