@@ -64,6 +64,10 @@ void abs_end_r2(int delay, int lift_speed)
 	abs_turn(CLOCKWISE, POINT, TURN_TO, 0, 50);
 	motor[block_lift_motor] = 0;
 	motor[block_lift_motor2] = 0;
+
+        /** before entering the ramp, pause for the requested time */
+	wait1Msec(g_ramp_delay * DELAY_MULTIPLICATION_FACTOR);
+
 	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
 	else abs_drive(FORWARD, E_ANGLE, 130, 50, true, GYRO);
 }

@@ -338,8 +338,10 @@ typedef enum
 {
 	RELATIVE_ASU,
 	RELATIVE_BPU,
+	RELATIVE_CENTIMETERS,
 	RAW_ASU,
-	RAW_BPU
+	RAW_BPU,
+	RAW_CENTIMETERS
 } e_angle_val_type;
 
 typedef enum
@@ -709,7 +711,10 @@ int g_selection_value = 0;
 const int g_light_delta_value = 2;
 int g_calibrated_light_threshold_val = 0;
 
+#define LIGHT_SENSOR_CALIBRATION_TIME 2000
+#define LIGHT_CALIBRATION_SAMPLE_RATE 200
 #define DEFAULT_CALIBRATED_LIGHT_THRESHOLD 9999
+
 //=============================================================
 // Define user configurable parameters
 //=============================================================
@@ -725,8 +730,10 @@ int g_calibrated_light_threshold_val = 0;
  *		 Tells the robot how long it needs to delay
  * @var g_end_delay
  *		Tells the robot how long it needs to delay after it it delivers a block
+ * @var g_ramp_delay
+ *		Tells the robot how long it needs to delay before entering the ramp
  * @var g_start_delay
- *		Tells the robot how long it needs to delay before it dose anything
+ *		Tells the robot how long it needs to delay before it does anything
  * @var g_gyro_cal_time
  *		Tells the robot how long to calibrate
  *
@@ -743,11 +750,15 @@ int g_calibrated_light_threshold_val = 0;
  * @var g_number_max_limit
  *		Tells the robot the minunum amount of numbers
  */
+
+#define DELAY_MULTIPLICATION_FACTOR 1000
+
 int g_end_point = 1;
 int g_start_point = 1;
 int g_mission_number = 1;
 int g_delay = 0;
 int g_end_delay = 0;
+int g_ramp_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
 

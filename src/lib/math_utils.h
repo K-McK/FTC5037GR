@@ -41,6 +41,12 @@
 #define min(X, Y) ((X) < (Y) ? (X) : (Y))
 
 /**
+ * @def running_avg(X, Y, Z)
+ *      computes the new average based on current average @a X, new number of data points @a Y, and a new data point @a Z
+ */
+#define running_avg(X, Y, Z) (((X * (Y - 1)) + Z) / Y)
+
+/**
  * @def max(X, Y)
  *      computes the maximum of @a X and @a Y
  */
