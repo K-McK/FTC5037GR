@@ -711,7 +711,10 @@ int g_selection_value = 0;
 const int g_light_delta_value = 2;
 int g_calibrated_light_threshold_val = 0;
 
+#define LIGHT_SENSOR_CALIBRATION_TIME 2000
+#define LIGHT_CALIBRATION_SAMPLE_RATE 200
 #define DEFAULT_CALIBRATED_LIGHT_THRESHOLD 9999
+
 //=============================================================
 // Define user configurable parameters
 //=============================================================

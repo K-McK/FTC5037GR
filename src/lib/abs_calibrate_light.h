@@ -16,32 +16,57 @@
 #include "global_variables.h"
 #include "abs_log.h"
 #include "abs_control_light_sensor.h"
+#include "math_utils.h"
 
 task abs_calibrate_light()
 {
 	servo[light_sensor] = LIGHT_SERVO_DOWN;
-	abs_control_light_sensor(ACTIVE);
 	wait1Msec(1000);
+	abs_control_light_sensor(ACTIVE);
+
+	long calibration_start = nPgmTime;
+        int i;
+        float avg_light_reading = 0.0;
+        int avg_light_reading_int;
+        int min_light_reading = DEFAULT_CALIBRATED_LIGHT_THRESHOLD;
+        int max_light_reading = 0;
+
+	for(i=0; nPgmTime < LIGHT_SENSOR_CALIBRATION_TIME + calibration_start; i++)
+        {
+          int light_reading = g_light_sensor;
+
+          min_light_reading = min(min_light_reading, light_reading);
+          max_light_reading = max(min_light_reading, light_reading);
+          avg_light_reading = running_avg(avg_light_reading, i, light_reading);
+
+	  wait1Msec(LIGHT_CALIBRATION_SAMPLE_RATE);
+        }
+
+        avg_light_reading_int = (int)avg_light_reading;
+
+	abs_log(__FILE__ ,"Captured Data",i,avg_light_reading_int,min_light_reading,max_light_reading);
+
 	//Tells the robot how bright the white line should be based on how black black is
-	if(g_light_sensor == 0)
+	if(avg_light_reading == 0)
 	{
 		g_calibrated_light_threshold_val = DEFAULT_CALIBRATED_LIGHT_THRESHOLD;
-		abs_log(__FILE__ ,"Light calibration failed",g_calibrated_light_threshold_val,g_light_sensor,g_light_delta_value,0);
+		abs_log(__FILE__ ,"Light calibration failed",g_calibrated_light_threshold_val,avg_light_reading,g_light_delta_value,0);
 	}
 	else
 	{
-		if(g_light_sensor <= 30)
+		if(avg_light_reading <= 30)
 		{
 			g_calibrated_light_threshold_val = 32
 		}
 		else
 		{
-			g_calibrated_light_threshold_val = g_light_sensor + g_light_delta_value;
+			g_calibrated_light_threshold_val = avg_light_reading + g_light_delta_value;
 		}
-		abs_log(__FILE__ ,"Light calibration worked",g_calibrated_light_threshold_val,g_light_sensor,g_light_delta_value,0);
+		abs_log(__FILE__ ,"Light calibration worked",g_calibrated_light_threshold_val,avg_light_reading,g_light_delta_value,0);
 	}
-	wait1Msec(1000);
+
 	abs_control_light_sensor(INACTIVE);
+	wait1Msec(1000);
 	servo[light_sensor] = LIGHT_SERVO_UP;
 }
 
