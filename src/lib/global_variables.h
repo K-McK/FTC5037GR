@@ -706,9 +706,10 @@ bool g_joy2_enabled = false;
 
 int g_selection_value = 0;
 
-const int g_light_delta_value = 0;
+const int g_light_delta_value = 2;
 int g_calibrated_light_threshold_val = 0;
 
+#define DEFAULT_CALIBRATED_LIGHT_THRESHOLD 9999
 //=============================================================
 // Define user configurable parameters
 //=============================================================
@@ -930,6 +931,12 @@ string g_basic_word_list [] = {
 	"out     ",
 	"yes     ",
 	"no      "};
+
+typedef enum
+{
+	ACTIVE,
+	INACTIVE
+} e_light_sensor_status;
 
 //=============================================================
 // Define screen related variables

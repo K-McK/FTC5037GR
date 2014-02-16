@@ -19,9 +19,12 @@
 #include "abs_turn.h"
 #include "abs_log.h"
 #include "abs_get_angle_sensor_val.h"
+#include "abs_control_light_sensor.h"
+#include "abs_mission_to_turn_amount.h"
 
 void abs_end_r1(int delay, int lift_speed)
 {
+	abs_log(__FILE__,"Function Enter",delay,lift_speed,0,0);
 	if(g_mission_number == 1)g_to_turn_dist = g_dist_backwards;
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;
@@ -42,18 +45,18 @@ void abs_end_r1(int delay, int lift_speed)
 	dl_robot_action_state = dl_wait;
 	dl_speed = 200;
 	wait1Msec(200);
-	LSsetActive(LEGOLS);
+	abs_control_light_sensor(ACTIVE);
 	servo[light_sensor] = LIGHT_SERVO_DOWN;
-	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
+	abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point), 60);
 
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;
 	dl_speed = 200;
 	wait1Msec(200);
-	abs_drive(FORWARD, E_LIGHT, 110, 50, true, GYRO);
+	abs_drive(FORWARD, E_LIGHT, 110, 30, true, GYRO);
 	motor[block_lift_motor] = lift_speed;
 	motor[block_lift_motor2] = lift_speed;
-	abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+	abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, 60);
 	motor[block_lift_motor] = 0;
 	motor[block_lift_motor2] = 0;
 	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);

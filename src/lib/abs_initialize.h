@@ -23,6 +23,7 @@
 #include "abs_reset_angle_sensor.h"
 #include "abs_calibrate_light.h"
 #include "abs_selection_program.h"
+#include "abs_control_light_sensor.h"
 
 void abs_initialize()
 {
@@ -34,7 +35,7 @@ void abs_initialize()
 	servo[grabber_left] = GRABBER_LEFT_CLOSE;
 	servo[grabber_right] = GRABBER_RIGHT_CLOSE;
 	servo[light_sensor] = LIGHT_SERVO_UP;
-	LSsetInactive(LEGOLS);
+	abs_control_light_sensor(INACTIVE);
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);
 	selection_program();
 	PlaySoundFile("! Click.rso");

@@ -1,16 +1,16 @@
 /**
- *
- *  @file abs_s1_mission_execute.h
- *
- *  @brief runs the missions from the starting point S1
- *
- *  @param None n/a
- *
- *  @return Returns nothing
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file abs_s1_mission_execute.h
+*
+*  @brief runs the missions from the starting point S1
+*
+*  @param None n/a
+*
+*  @return Returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 
 #ifndef ABS_S1_MISSION_EXECUTE_H
 #define ABS_S1_MISSION_EXECUTE_H
@@ -37,7 +37,10 @@ void abs_s1_mission_execute()
 		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, GYRO);
 		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
+		{
+			dist_record = true;
 			abs_drive(FORWARD, E_ANGLE, 40 ,50 - abs_get_angle_sensor_val(RELATIVE_BPU), true, GYRO);
+		}
 		PlayTone(200,20);
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;
@@ -65,6 +68,7 @@ void abs_s1_mission_execute()
 		break;
 
 	case 2:
+		dist_record=true;
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate4_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate4_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true, GYRO);
@@ -76,18 +80,21 @@ void abs_s1_mission_execute()
 		break;
 
 	case 3:
+		dist_record=true;
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate3_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate3_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true, GYRO);
 		break;
 
 	case 4:
+		dist_record=true;
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate2_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate2_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true, GYRO);
 		break;
 
 	case 5:
+		dist_record=true;
 		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate1_to_turn_dist;
 		else g_to_turn_dist = g_forward_crate1_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true, GYRO);
