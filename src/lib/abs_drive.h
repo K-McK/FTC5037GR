@@ -372,25 +372,29 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		abs_reset_angle_sensor_val(SOFT_RESET);
 		abs_log(__FILE__ ,"reset angle",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
 
+		int max_light_detected = 0;
 		while(true)
 		{
-			if(g_calibrated_light_threshold_val>g_light_threshold&&abs_get_angle_sensor_val(RELATIVE_ASU)<g_light_move_min_dist)
+			//finds out what the highest value of the light sensor was
+			max_light_detected = max(max_light_detected, g_light_sensor);
+
+			if(g_light_sensor>g_calibrated_light_threshold_val&&abs_get_angle_sensor_val(RELATIVE_ASU)<g_light_move_min_dist)
 			{
-				abs_log(__FILE__ ,"light fail",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
+				abs_log(__FILE__ ,"light fail",g_light_move_min_dist,abs_get_angle_sensor_val(RELATIVE_ASU),g_calibrated_light_threshold_val,g_light_sensor);
 				light_fail = true;
 			}
 
-			if(g_calibrated_light_threshold_val>g_light_threshold&&light_fail==false)
+			if(g_light_sensor>g_calibrated_light_threshold_val&&light_fail==false)
 			{
 				dl_move_break = DL_LIGHT_BREAK;
-				abs_log(__FILE__ ,"light break",speed,dist,g_calibrated_light_threshold_val,(abs_get_angle_sensor_val(RELATIVE_BPU)));
+				abs_log(__FILE__ ,"light break",speed,dist,g_calibrated_light_threshold_val,g_light_sensor);
 				break;
 			}
 			else if (abs_get_angle_sensor_val(RELATIVE_BPU) > dist)
 			{
 				dl_move_break = DL_ANGLE_BREAK;
 
-				abs_log(__FILE__ ,"angle break",speed,dist,g_calibrated_light_threshold_val,abs_get_angle_sensor_val(RELATIVE_BPU));
+				abs_log(__FILE__ ,"angle break",speed,dist,g_calibrated_light_threshold_val,max_light_detected);
 
 				break;
 			}
@@ -448,7 +452,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	{
 		if(g_start_point==1)
 		{
-			if(g_end_point == 3) g_dist_backwards = abs_get_angle_sensor_val(RELATIVE_BPU) - 10;
+			if(g_end_point == 3) g_dist_backwards = abs_get_angle_sensor_val(RELATIVE_BPU) - 9;
 			else if(g_end_point == 2) g_dist_backwards = 190 - abs_get_angle_sensor_val(RELATIVE_BPU);
 		}
 		else if(g_start_point==2)

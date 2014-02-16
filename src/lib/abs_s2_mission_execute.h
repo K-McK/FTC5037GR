@@ -36,7 +36,7 @@ void abs_s2_mission_execute()
 		abs_drive(BACKWARD, E_IR_DETECT, 3, 40, true, GYRO);
 		PlayTone(200,20);
 		//if(g_IR_angle_dist_complete == true) g_end_point = 12;
-		if(g_end_point == 2)
+	if(g_end_point == 2)
 		{
 			if(abs_get_angle_sensor_val(RELATIVE_BPU) < 62) g_to_turn_dist = g_forward_crate4_to_turn_dist;
 			else if(abs_get_angle_sensor_val(RELATIVE_BPU) < 100) g_to_turn_dist = g_forward_crate3_to_turn_dist;
