@@ -366,6 +366,9 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 		abs_log(__FILE__ ,"angle break",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
 	}
+	//================
+	// Light
+	//================
 	else if(dist_method == E_LIGHT)
 	{
 		bool light_fail = false;
@@ -380,7 +383,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 			if(g_light_sensor>g_calibrated_light_threshold_val&&abs_get_angle_sensor_val(RELATIVE_ASU)<g_light_move_min_dist)
 			{
-				abs_log(__FILE__ ,"light fail",g_light_move_min_dist,abs_get_angle_sensor_val(RELATIVE_ASU),g_calibrated_light_threshold_val,g_light_sensor);
+				abs_log(__FILE__ ,"Premature light detection",g_light_move_min_dist,abs_get_angle_sensor_val(RELATIVE_ASU),g_calibrated_light_threshold_val,g_light_sensor);
 				light_fail = true;
 			}
 
@@ -457,15 +460,25 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		}
 		else if(g_start_point==2)
 		{
-			if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RELATIVE_BPU) - 7;
-			else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RELATIVE_BPU);
+			if(g_shift_due_to_ir)
+			{
+				//subtract 5 to account for drift of stop in ir
+				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 7 - 5;
+				else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
+			}
+			else
+			{
+				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 7;
+				else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
+			}
+			abs_log(__FILE__,"Raw values",abs_get_angle_sensor_val(RAW_ASU),abs_get_angle_sensor_val(RAW_BPU),0,0);
 		}
 		else if(g_start_point==3)
 		{
 			if(g_end_point==2)	g_dist_backwards = 170 - abs_get_angle_sensor_val(RELATIVE_BPU);
 			else if(g_end_point==3) g_dist_backwards = 75 + abs_get_angle_sensor_val(RELATIVE_BPU);
 		}
-		dist_record=false;
+		//dist_record=false;
 	}
 	abs_log(__FILE__ ,"exit",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
 }

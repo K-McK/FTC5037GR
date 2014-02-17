@@ -26,8 +26,7 @@ task abs_calibrate_light()
 
 	long calibration_start = nPgmTime;
         int i;
-        float avg_light_reading = 0.0;
-        int avg_light_reading_int;
+        int avg_light_reading = 0;
         int min_light_reading = DEFAULT_CALIBRATED_LIGHT_THRESHOLD;
         int max_light_reading = 0;
 
@@ -42,9 +41,9 @@ task abs_calibrate_light()
 	  wait1Msec(LIGHT_CALIBRATION_SAMPLE_RATE);
         }
 
-        avg_light_reading_int = (int)avg_light_reading;
+        //avg_light_reading_int = (int)avg_light_reading;
 
-	abs_log(__FILE__ ,"Captured Data",i,avg_light_reading_int,min_light_reading,max_light_reading);
+	abs_log(__FILE__ ,"Captured Data",i,avg_light_reading,min_light_reading,max_light_reading);
 
 	//Tells the robot how bright the white line should be based on how black black is
 	if(avg_light_reading == 0)
@@ -56,7 +55,7 @@ task abs_calibrate_light()
 	{
 		if(avg_light_reading <= 30)
 		{
-			g_calibrated_light_threshold_val = 32
+			g_calibrated_light_threshold_val = 32;
 		}
 		else
 		{

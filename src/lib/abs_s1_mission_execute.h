@@ -45,21 +45,6 @@ void abs_s1_mission_execute()
 		dl_robot_action_state = dl_wait;
 		dl_speed = 1000;
 		wait1Msec(1000);
-		//if(g_IR_angle_dist_complete == true) g_end_point = 12;
-		//if(g_end_point == 2)
-		//{
-		//	if(HTANGreadAccumulatedAngle(angle_sensor)<(62*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate1_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(100*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate2_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(137*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate3_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(162*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate4_to_turn_dist;
-		//}
-		//else if(g_end_point == 3)
-		//{
-		//	if(HTANGreadAccumulatedAngle(angle_sensor)<(62*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate1_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(100*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate2_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(137*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate3_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(162*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate4_to_turn_dist;
-		//}
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;
 		dl_speed = 500;
@@ -68,8 +53,6 @@ void abs_s1_mission_execute()
 
 	case 2:
 		dist_record=true;
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate4_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate4_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true, GYRO);
 
 		dl_step = dl_step+1;
@@ -80,22 +63,16 @@ void abs_s1_mission_execute()
 
 	case 3:
 		dist_record=true;
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate3_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate3_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true, GYRO);
 		break;
 
 	case 4:
 		dist_record=true;
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate2_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate2_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true, GYRO);
 		break;
 
 	case 5:
 		dist_record=true;
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate1_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate1_to_turn_dist;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true, GYRO);
 		break;
 
@@ -150,6 +127,7 @@ void abs_s1_mission_execute()
 	dl_dist = g_abdd_up;
 	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);
 	servo[abdd] = g_abdd_up;
+	StartTask (abs_calibrate_light);
 	wait1Msec(2000);
 	servo[abdd] = g_abdd_down;
 	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
