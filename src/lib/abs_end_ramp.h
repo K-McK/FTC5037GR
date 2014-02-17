@@ -21,32 +21,33 @@
 #include "abs_get_angle_sensor_val.h"
 #include "abs_control_light_sensor.h"
 #include "abs_mission_to_turn_amount.h"
+#include "abs_lift_block_lifter.h"
 
 void abs_end_ramp(int delay, int lift_speed)
 {
 	abs_log(__FILE__,"Function Enter",delay,lift_speed,0,0);
 
-        if(g_end_point != 2 && g_end_point !=3)
-        {
-	  abs_log(__FILE__,"Function called for incorrect ramp",0,0,0,0);
-          return;
-        }
+	if(g_end_point != 2 && g_end_point !=3)
+	{
+		abs_log(__FILE__,"Function called for incorrect ramp",0,0,0,0);
+		return;
+	}
 
-	if(g_mission_number == 1)g_to_turn_dist = g_dist_backwards;
+	if(g_start_point == 1 || g_start_point == 2) g_to_turn_dist = g_dist_backwards;
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;
 	dl_speed = delay;
 	wait1Msec(delay);
 	servo[abdd] = g_abdd_down;
 
-        if(g_end_point == 2)
-        {
-	  abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
-        }
-        else
-        {
-	  abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
-        }
+	if(g_end_point == 2)
+	{
+		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
+	}
+	else
+	{
+		abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
+	}
 
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 5)//15)
 	{
@@ -73,26 +74,26 @@ void abs_end_ramp(int delay, int lift_speed)
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;
 	dl_speed = 500;
-	wait1Msec(500); //***
-	motor[block_lift_motor] = lift_speed;
-	motor[block_lift_motor2] = lift_speed;
+	wait1Msec(500);
+	StartTask(abs_lift_block_lifter);
 
-        if(g_end_point == 2)
-        {
-	  abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, 60);
-        }
-        else
-        {
-	  abs_turn(CLOCKWISE, POINT, TURN_TO, 0, 50);
-        }
-	motor[block_lift_motor] = 0;
-	motor[block_lift_motor2] = 0;
+	if(g_end_point == 2)
+	{
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, 60);
+	}
+	else
+	{
+		abs_turn(CLOCKWISE, POINT, TURN_TO, 0, 50);
+	}
 
-        /** before entering the ramp, pause for the requested time */
+	/** before entering the ramp, pause for the requested time */
 	wait1Msec(g_ramp_delay * DELAY_MULTIPLICATION_FACTOR);
 
 	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
 	else abs_drive(FORWARD, E_ANGLE, 130, 50, true, GYRO);
+
+	//if the lift task is still running at this point then stop it
+	StopTask(abs_lift_block_lifter);
 }
 
 #endif /* !ABS_S1_END_RAMP_H */
