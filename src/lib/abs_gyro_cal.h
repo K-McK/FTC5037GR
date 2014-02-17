@@ -14,6 +14,8 @@
 #ifndef ABS_GYRO_CAL_H
 #define ABS_GYRO_CAL_H
 
+#include "abs_log.h"
+
 float abs_gyro_cal(long caltime)
 {
 	long highest = -1000, lowest = 10000;
@@ -23,6 +25,8 @@ float abs_gyro_cal(long caltime)
 	long data;
 
 	g_original_gyro_val = HTGYROreadRot(HTGYRO);		// get initial gyro reading
+        abs_log(__FILE__,"Original Gyro Reading",g_original_gyro_val,0,0,0);
+
 	while (nPgmTime < g_start_time+(caltime*1000))		// loop for the requested number of seconds
 	{
 		samples +=1;					// count the number of iterations for averaging

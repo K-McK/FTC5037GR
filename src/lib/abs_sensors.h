@@ -16,6 +16,7 @@
 #define ABS_SENSOR_H
 
 #include "math_utils.h"
+#include "abs_get_gyro_sensor_val.h"
 
 task abs_sensors()
 {
