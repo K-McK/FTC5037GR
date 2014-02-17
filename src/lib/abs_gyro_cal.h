@@ -37,6 +37,9 @@ float abs_gyro_cal(long caltime)
 	}
 	//g_gyro_noise=abs(highest-lowest);			// save the spread in the data for diagnostic display
 	g_gyro_noise=abs(highest-lowest);
+
+	g_original_gyro_val = (g_original_gyro_val - (average/samples)) * (float)(nPgmTime - g_start_time) / 1000;
+
 	return average/samples;					// and return the average drift
 }
 
