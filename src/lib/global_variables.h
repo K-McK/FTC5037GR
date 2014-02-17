@@ -166,6 +166,7 @@ const int g_abdd_up = 10;
 const int g_abdd_down = 235;
 
 const int g_gyro_adjust = 10;
+int g_original_gyro_val = 0;
 
 const int g_ground_arm_up = 0;
 
@@ -333,6 +334,12 @@ typedef enum
 } e_auto_sub_selection_ramp;
 
 e_auto_sub_selection_ramp g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
+
+typedef enum
+{
+	RAW,
+	CALIBRATED
+} e_gyro_val_type;
 
 typedef enum
 {

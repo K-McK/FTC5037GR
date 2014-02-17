@@ -21,6 +21,8 @@ float abs_gyro_cal(long caltime)
 	g_start_time = nPgmTime;
 	long samples=0;
 	long data;
+
+	g_original_gyro_val = HTGYROreadRot(HTGYRO);		// get initial gyro reading
 	while (nPgmTime < g_start_time+(caltime*1000))		// loop for the requested number of seconds
 	{
 		samples +=1;					// count the number of iterations for averaging
