@@ -710,6 +710,8 @@ int g_selection_value = 0;
 
 const int g_light_delta_value = 2;
 int g_calibrated_light_threshold_val = 0;
+int g_end_ramp_lift_speed = 40;
+bool g_shift_due_to_ir = false;
 
 #define LIGHT_SENSOR_CALIBRATION_TIME 2000
 #define LIGHT_CALIBRATION_SAMPLE_RATE 200
