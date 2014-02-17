@@ -18,8 +18,7 @@
 #include "abs_drive.h"
 #include "abs_turn.h"
 #include "abs_stop_robot.h"
-#include "abs_end_r1.h"
-#include "abs_end_r2.h"
+#include "abs_end_ramp.h"
 #include "abs_log.h"
 #include "abs_get_angle_sensor_val.h"
 
@@ -160,12 +159,13 @@ void abs_s1_mission_execute()
 		servo[abdd] = g_abdd_down;
 		abs_stop_robot();
 		break;
-	case 2:
-		abs_end_r1(2000,40);
-		break;
-	case 3:
-		abs_end_r2(2000,40);
-		break;
+        case 2:
+        case 3:
+                abs_end_ramp(2000,40);
+                break;
+        default:
+                abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
+                break;
 	}
 }
 
