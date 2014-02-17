@@ -25,7 +25,6 @@ float abs_gyro_cal(long caltime)
 	long data;
 
 	g_original_gyro_val = HTGYROreadRot(HTGYRO);		// get initial gyro reading
-        abs_log(__FILE__,"Original Gyro Reading",g_original_gyro_val,0,0,0);
 
 	while (nPgmTime < g_start_time+(caltime*1000))		// loop for the requested number of seconds
 	{
@@ -39,6 +38,7 @@ float abs_gyro_cal(long caltime)
 	g_gyro_noise=abs(highest-lowest);
 
 	g_original_gyro_val = (g_original_gyro_val - (average/samples)) * (float)(nPgmTime - g_start_time) / 1000;
+        abs_log(__FILE__,"Original Gyro Reading",g_original_gyro_val,0,0,0);
 
 	return average/samples;					// and return the average drift
 }
