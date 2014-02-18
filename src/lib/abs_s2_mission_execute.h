@@ -34,14 +34,23 @@ void abs_s2_mission_execute()
 	case 1:
 		dist_record=true;
 		abs_drive(BACKWARD, E_IR_DETECT, 3, 40, true, GYRO);
-		//Only use g_shift_due_to_ir when shifted due the the ir detecting
 		g_shift_due_to_ir = true;
+		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
+		{
+			dist_record = true;
+			//g_shift_due_to_ir = false;
+			abs_drive(BACKWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, GYRO);
+		}
+		//Only use g_shift_due_to_ir when shifted due the the ir detecting
 		PlayTone(200,20);
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;
 		dl_speed = 1000;
 		wait1Msec(1000);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/6, 50, true, GYRO);
+		if(g_shift_due_to_ir)
+		{
+			abs_drive(FORWARD, E_ANGLE, /*distance in cm*/6, 50, true, GYRO);
+		}
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;
 		dl_speed = 500;
@@ -135,13 +144,13 @@ void abs_s2_mission_execute()
 		servo[abdd] = g_abdd_down;
 		abs_stop_robot();
 		break;
-        case 2:
-        case 3:
-                abs_end_ramp(2000,40);
-                break;
-        default:
-                abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
-                break;
+	case 2:
+	case 3:
+		abs_end_ramp(2000,40);
+		break;
+	default:
+		abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
+		break;
 	}
 }
 

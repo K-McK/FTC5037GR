@@ -24,7 +24,13 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 	else StringFormat(sString, "");
 	WriteText(LogFileHandle, LogIoResult, input1);
 
+
 	StringFormat(sString, "\t");
+	WriteText(LogFileHandle, LogIoResult, sString);
+	//StartTask(TaskID, nTaskPriority);
+
+	StringFormat(sString, "\t");
+	StringFormat(sString, input2);
 	WriteText(LogFileHandle, LogIoResult, sString);
 
 	if(input3_str == NULL)

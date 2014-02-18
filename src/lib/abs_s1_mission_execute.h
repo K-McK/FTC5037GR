@@ -38,7 +38,7 @@ void abs_s1_mission_execute()
 		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
 		{
 			dist_record = true;
-			abs_drive(FORWARD, E_ANGLE, 40 ,50 - abs_get_angle_sensor_val(RELATIVE_BPU), true, GYRO);
+			abs_drive(FORWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, GYRO);
 		}
 		PlayTone(200,20);
 		dl_step = dl_step+1;

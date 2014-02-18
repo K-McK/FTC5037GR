@@ -71,6 +71,10 @@ void abs_end_ramp(int delay, int lift_speed)
 	dl_speed = 200;
 	wait1Msec(200);
 	abs_drive(FORWARD, E_LIGHT, 110, 30, true, GYRO);
+	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 20)
+		{
+			abs_drive(BACKWARD, E_ANGLE, 110 - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
+		}
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;
 	dl_speed = 500;
