@@ -720,6 +720,7 @@ int g_calibrated_light_threshold_val = 0;
 int g_end_ramp_lift_speed = 40;
 bool g_shift_due_to_ir = false;
 
+#define STAY_ON_RAMP_WAIT_TIME 100
 #define LIGHT_SENSOR_CALIBRATION_TIME 2000
 #define LIGHT_CALIBRATION_SAMPLE_RATE 100
 #define DEFAULT_CALIBRATED_LIGHT_THRESHOLD 9999
@@ -770,6 +771,7 @@ int g_end_delay = 0;
 int g_ramp_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
+bool g_stay_on_ramp = false;
 
 int g_dist_backwards = 0;
 

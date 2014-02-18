@@ -48,6 +48,7 @@
 #include "lib/abs_s3_mission_execute.h"
 #include "lib/abs_s4_mission_execute.h"
 #include "lib/abs_dlog.h"
+#include "lib/abs_stay_on_ramp.h"
 
 //========================================
 // Main program
@@ -77,7 +78,11 @@ task main()
 		abs_s4_mission_execute();
 		break;
 	}
+
 	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
 	Close(LogFileHandle, LogIoResult);
 	LogData=false;
+
+	if(g_stay_on_ramp)
+	abs_stay_on_ramp();
 }

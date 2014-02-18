@@ -53,5 +53,6 @@
 #define max(X, Y) ((X) > (Y) ? (X) : (Y))
 
 //#define range(X, Y) ((X) > (Y) ? (X) : (Y))
+#define safe_motor_speed(X) ((abs(X) > 10) ? (X) : 0)
 
-#endif /* !MATH_UTILS_H */
+#endif /* !MATH_UTILS_H */\
