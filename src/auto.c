@@ -47,7 +47,7 @@
 #include "lib/abs_s2_mission_execute.h"
 #include "lib/abs_s3_mission_execute.h"
 #include "lib/abs_s4_mission_execute.h"
-#include "lib/abs_log.h"
+#include "lib/abs_dlog.h"
 
 //========================================
 // Main program
@@ -57,7 +57,7 @@ task main()
 	Delete(LogFileName, LogIoResult);
 	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
 
-	abs_log(__FILE__ ,"program start",nPgmTime,0,0,0);
+	abs_dlog(__FILE__ ,"program start","Start time:", nPgmTime);
 
 	abs_initialize();
 
@@ -77,7 +77,7 @@ task main()
 		abs_s4_mission_execute();
 		break;
 	}
-	abs_log(__FILE__ ,"end auto",nPgmTime,0,0,0);
+	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
 	Close(LogFileHandle, LogIoResult);
 	LogData=false;
 }
