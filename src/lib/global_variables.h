@@ -721,7 +721,7 @@ int g_end_ramp_lift_speed = 40;
 bool g_shift_due_to_ir = false;
 
 #define LIGHT_SENSOR_CALIBRATION_TIME 2000
-#define LIGHT_CALIBRATION_SAMPLE_RATE 200
+#define LIGHT_CALIBRATION_SAMPLE_RATE 100
 #define DEFAULT_CALIBRATED_LIGHT_THRESHOLD 9999
 
 //=============================================================

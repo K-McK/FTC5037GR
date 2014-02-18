@@ -53,14 +53,7 @@ task abs_calibrate_light()
 	}
 	else
 	{
-		if(avg_light_reading <= 30)
-		{
-			g_calibrated_light_threshold_val = 32;
-		}
-		else
-		{
-			g_calibrated_light_threshold_val = avg_light_reading + g_light_delta_value;
-		}
+		g_calibrated_light_threshold_val = avg_light_reading + g_light_delta_value;
 		abs_log(__FILE__ ,"Light calibration worked",g_calibrated_light_threshold_val,avg_light_reading,g_light_delta_value,0);
 	}
 
