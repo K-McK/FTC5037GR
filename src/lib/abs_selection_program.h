@@ -14,6 +14,10 @@
 #ifndef ABS_SELECTION_PROGRAM_H
 #define ABS_SELECTION_PROGRAM_H
 
+#include "abs_selection_custom.h"
+#include "abs_selection_number.h"
+#include "abs_selection_quick.h"
+
 void selection_program()
 {
 	while(nNxtButtonPressed == kEnterButton){}

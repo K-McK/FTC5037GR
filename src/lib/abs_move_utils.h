@@ -104,7 +104,7 @@ typedef enum
  *     Move the block lifter
  *  @var e_motor_move::GRABBER
  *     close the block grabber
- *  @var e_motor_move::ROGGER_SLIDE
+ *  @var e_motor_move::ROGER_SLIDE
  *     Slide the flag liffter back
  */
 typedef enum
@@ -112,7 +112,7 @@ typedef enum
 	ABDD,
 	LIFT,
 	GRABBER,
-	ROGGER_SLIDE
+	ROGER_SLIDE
 } e_motor_move;
 
 /**

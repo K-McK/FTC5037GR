@@ -15,6 +15,9 @@
 #ifndef ABS_SENSOR_H
 #define ABS_SENSOR_H
 
+#include "math_utils.h"
+#include "abs_get_gyro_sensor_val.h"
+
 task abs_sensors()
 {
 	g_prev_time = nPgmTime;
@@ -112,7 +115,7 @@ task abs_sensors()
 		//-------------------------
 
 		g_curr_time=nPgmTime;
-		g_raw_gyro = HTGYROreadRot(HTGYRO);
+		g_raw_gyro = abs_get_gyro_sensor_val(CALIBRATED);
 		g_const_heading += (g_raw_gyro - g_drift) * (float)(g_curr_time-g_prev_time)/1000;
 		g_rel_heading += (g_raw_gyro - g_drift) * (float)(g_curr_time-g_prev_time)/1000;
 		g_prev_time = g_curr_time;

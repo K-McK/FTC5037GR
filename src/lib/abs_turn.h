@@ -18,6 +18,8 @@
 #ifndef ABS_TURN_H
 #define ABS_TURN_H
 
+#include "abs_log.h"
+
 /** macros */
 
 //=======================================

@@ -14,6 +14,8 @@
 #ifndef ABS_GYRO_CAL_H
 #define ABS_GYRO_CAL_H
 
+#include "abs_log.h"
+
 float abs_gyro_cal(long caltime)
 {
 	long highest = -1000, lowest = 10000;
@@ -21,6 +23,9 @@ float abs_gyro_cal(long caltime)
 	g_start_time = nPgmTime;
 	long samples=0;
 	long data;
+
+	g_original_gyro_val = HTGYROreadRot(HTGYRO);		// get initial gyro reading
+
 	while (nPgmTime < g_start_time+(caltime*1000))		// loop for the requested number of seconds
 	{
 		samples +=1;					// count the number of iterations for averaging
@@ -31,6 +36,10 @@ float abs_gyro_cal(long caltime)
 	}
 	//g_gyro_noise=abs(highest-lowest);			// save the spread in the data for diagnostic display
 	g_gyro_noise=abs(highest-lowest);
+
+	g_original_gyro_val = (g_original_gyro_val - (average/samples)) * (float)(nPgmTime - g_start_time) / 1000;
+        abs_log(__FILE__,"Original Gyro Reading",g_original_gyro_val,0,0,0);
+
 	return average/samples;					// and return the average drift
 }
 

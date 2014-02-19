@@ -16,6 +16,8 @@
 #ifndef ABS_GYRO_DRIVE_H
 #define ABS_GYRO_DRIVE_H
 
+#include "abs_move_utils.h"
+
 void abs_gyro_drive(int speed,e_drive_direction dir)
 {
 	int error = 0 - g_rel_heading;

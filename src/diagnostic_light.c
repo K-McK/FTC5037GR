@@ -19,9 +19,9 @@
 
 /**
 *
-*  @file auto.c
+*  @file diagnostic_light.c
 *
-*  @brief The automatic program for the robot.
+*  @brief Controls a light on the robot to allow us to know whats going on with us
 *
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
@@ -35,54 +35,57 @@
 
 #include "joystickdriver.c"
 #include "lib/xander/hitechnic-sensormux.h"
-#include "lib/xander/lego-light.h"
 #include "lib/xander/hitechnic-irseeker-v2.h"
 #include "lib/xander/hitechnic-gyro.h"
 #include "lib/xander/hitechnic-angle.h"
 #include "lib/xander/hitechnic-accelerometer.h"
+#include "lib/xander/lego-light.h"
 
-#include "lib/global_variables.h"
+//-----------------------
+// custom functions includes
+//-----------------------
+
+#include "lib/global_varaibles.h"
+#include "lib/abs_selection_number.h"
+#include "lib/abs_selection_custom.h"
+#include "lib/abs_selection_quick.h"
+#include "lib/abs_selection_program.h"
+#include "lib/abs_screen.h"
+#include "lib/abs_gyro_cal.h"
+#include "lib/math_utils.h"
+#include "lib/abs_sensors.h"
+#include "lib/abs_move_utils.h"
+#include "lib/abs_turn.h"
+#include "lib/abs_gyro_drive.h"
+#include "lib/abs_drive.h"
+#include "lib/abs_datalog.h"
 #include "lib/abs_initialize.h"
+#include "lib/abs_motor.h"
+#include "lib/abs_stop_robot.h"
+
+//-----------------------
+// auto mission includes
+//-----------------------
+
+#include "lib/abs_end_r1.h"
+#include "lib/abs_end_r2.h"
+
 #include "lib/abs_s1_mission_execute.h"
 #include "lib/abs_s2_mission_execute.h"
 #include "lib/abs_s3_mission_execute.h"
 #include "lib/abs_s4_mission_execute.h"
-#include "lib/abs_dlog.h"
-#include "lib/abs_stay_on_ramp.h"
 
 //========================================
 // Main program
 //========================================
+
 task main()
 {
-	Delete(LogFileName, LogIoResult);
-	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
-
-	abs_dlog(__FILE__ ,"program start","Start time:", nPgmTime);
-
-	abs_initialize();
-
-	g_rel_heading = 0;
-	switch(g_start_point)
+	disableDiagnosticsDisplay();
+	servo[light_sensor] = LIGHT_SERVO_DOWN;
+	LSsetActive(LEGOLS);
+	while(true)
 	{
-	case 1:
-		abs_s1_mission_execute();
-		break;
-	case 2:
-		abs_s2_mission_execute();
-		break;
-	case 3:
-		abs_s3_mission_execute();
-		break;
-	case 4:
-		abs_s4_mission_execute();
-		break;
+		nxtDisplayBigTextLine(1, "%4d", LSvalNorm(LEGOLS));
 	}
-
-	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
-	Close(LogFileHandle, LogIoResult);
-	LogData=false;
-
-	if(g_stay_on_ramp)
-	abs_stay_on_ramp();
 }

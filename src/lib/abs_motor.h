@@ -15,13 +15,16 @@
 #ifndef ABS_MOTOR_H
 #define ABS_MOTOR_H
 
+#include "global_variables.h"
+#include "abs_move_utils.h"
+
 void abs_motor(e_motor_move move_type)
 {
 	dl_step = dl_step+1;
 	//-----------------------------
 	// roger slide
 	//-----------------------------
-	if(move_type == ROGGER_SLIDE) servo[roger_slide] = 0;
+	if(move_type == ROGER_SLIDE) servo[roger_slide] = 0;
 
 	//-----------------------------
 	// ABDD

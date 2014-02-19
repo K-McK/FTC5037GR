@@ -1,18 +1,25 @@
 /**
-*
-*  @file abs_s3_mission_execute.h
-*
-*  @brief runs the missions from the starting point S3
-*
-*  @param None n/a
-*
-*  @return returns nothing
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
+ *
+ *  @file abs_s3_mission_execute.h
+ *
+ *  @brief runs the missions from the starting point S3
+ *
+ *  @param None n/a
+ *
+ *  @return returns nothing
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
+
 #ifndef ABS_S3_MISSION_EXECUTE_H
 #define ABS_S3_MISSION_EXECUTE_H
+
+#include "abs_drive.h"
+#include "abs_turn.h"
+#include "abs_stop_robot.h"
+#include "abs_end_ramp.h"
+#include "abs_log.h"
 
 void abs_s3_mission_execute()
 {
@@ -92,8 +99,8 @@ void abs_s3_mission_execute()
 	dl_change_event = true;
 	dl_ce_detail = dl_ce_end_delay;
 
-	dl_speed = g_end_delay*1000;
-	wait1Msec(g_end_delay*1000);
+	dl_speed = g_end_delay * DELAY_MULTIPLICATION_FACTOR;
+	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR);
 
 	dl_step++;
 	dl_robot_action_detail = dl_abdd_close;
@@ -111,12 +118,13 @@ void abs_s3_mission_execute()
 		servo[abdd] = g_abdd_down;
 		abs_stop_robot();
 		break;
-	case 2:
-		abs_end_r1(2000,40);
-		break;
-	case 3:
-		abs_end_r2(2000,40);
-		break;
+        case 2:
+        case 3:
+                abs_end_ramp(2000,40);
+                break;
+        default:
+                abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
+                break;
 	}
 }
 

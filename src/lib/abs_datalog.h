@@ -14,6 +14,8 @@
 #ifndef ABS_DATALOG_H
 #define ABS_DATALOG_H
 
+#include "abs_get_angle_sensor_val.h"
+
 /** macros */
 
 //=======================================
@@ -94,9 +96,9 @@ task abs_datalog()
 				WriteText(LogFileHandle, LogIoResult, sString);
 				StringFormat(sString,"dist %4d\t",dl_dist);
 				WriteText(LogFileHandle, LogIoResult, sString);
-				StringFormat(sString,"cur-angle raw %4d\t", HTANGreadAccumulatedAngle(angle_sensor));
+				StringFormat(sString,"cur-angle raw %4d\t", abs_get_angle_sensor_val(RELATIVE_ASU));
 				WriteText(LogFileHandle, LogIoResult, sString);
-				StringFormat(sString,"cur-angle btu %4d\t", HTANGreadAccumulatedAngle(angle_sensor)/18);
+				StringFormat(sString,"cur-angle btu %4d\t", abs_get_angle_sensor_val(RELATIVE_BPU));
 				break;
 			case dl_ce_drive_start:
 				StringFormat(sString,"Move start\t");
@@ -106,14 +108,14 @@ task abs_datalog()
 				WriteText(LogFileHandle, LogIoResult, sString);
 				StringFormat(sString,"dist %4d\t",dl_dist);
 				WriteText(LogFileHandle, LogIoResult, sString);
-				StringFormat(sString,"cur-angle raw %4d\t", HTANGreadAccumulatedAngle(angle_sensor));
+				StringFormat(sString,"cur-angle raw %4d\t", abs_get_angle_sensor_val(RELATIVE_ASU));
 				WriteText(LogFileHandle, LogIoResult, sString);
-				StringFormat(sString,"cur-angle btu %4d\t", HTANGreadAccumulatedAngle(angle_sensor)/18);
+				StringFormat(sString,"cur-angle btu %4d\t", abs_get_angle_sensor_val(RELATIVE_BPU));
 				break;
 			case dl_ce_angle_reset:
 				StringFormat(sString,"Angle reset\t");
 				WriteText(LogFileHandle, LogIoResult, sString);
-				StringFormat(sString,"(raw value) %4d\t",HTANGreadAccumulatedAngle(angle_sensor));
+				StringFormat(sString,"(raw value) %4d\t",abs_get_angle_sensor_val(RELATIVE_ASU));
 				break;
 			case dl_ce_turn_start:
 				StringFormat(sString,"Turn start\t");
@@ -196,7 +198,7 @@ task abs_datalog()
 					WriteText(LogFileHandle, LogIoResult, sString);
 				if(dl_dist_method == DL_ANGLE || dl_dist_method == DL_LIGHT)
 				{
-					StringFormat(sString, "%4d\t", (HTANGreadAccumulatedAngle(angle_sensor)/INT_ANGLE_SENSOR_CIRCUMFERENCE));	//current distance value interpreted for end triger, could be angle/IR
+					StringFormat(sString, "%4d\t", abs_get_angle_sensor_val(RELATIVE_BPU));	//current distance value interpreted for end triger, could be angle/IR
 					WriteText(LogFileHandle, LogIoResult, sString);
 				}
 				break;

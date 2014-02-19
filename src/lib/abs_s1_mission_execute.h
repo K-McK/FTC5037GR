@@ -11,8 +11,16 @@
 *  @copyright Copyright 2013, Got Robot? FTC Team 5037
 *
 */
+
 #ifndef ABS_S1_MISSION_EXECUTE_H
 #define ABS_S1_MISSION_EXECUTE_H
+
+#include "abs_drive.h"
+#include "abs_turn.h"
+#include "abs_stop_robot.h"
+#include "abs_end_ramp.h"
+#include "abs_log.h"
+#include "abs_get_angle_sensor_val.h"
 
 void abs_s1_mission_execute()
 {
@@ -27,28 +35,16 @@ void abs_s1_mission_execute()
 		dist_record=true;
 		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, GYRO);
-		if(HTANGreadAccumulatedAngle(angle_sensor)<(38*INT_ANGLE_SENSOR_CIRCUMFERENCE))
-			abs_drive(FORWARD, E_ANGLE, 40 ,50-(abs(HTANGreadAccumulatedAngle(angle_sensor))/18), true, GYRO);
+		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
+		{
+			dist_record = true;
+			abs_drive(FORWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, GYRO);
+		}
 		PlayTone(200,20);
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;
 		dl_speed = 1000;
 		wait1Msec(1000);
-		//if(g_IR_angle_dist_complete == true) g_end_point = 12;
-		//if(g_end_point == 2)
-		//{
-		//	if(HTANGreadAccumulatedAngle(angle_sensor)<(62*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate1_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(100*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate2_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(137*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate3_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(162*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_forward_crate4_to_turn_dist;
-		//}
-		//else if(g_end_point == 3)
-		//{
-		//	if(HTANGreadAccumulatedAngle(angle_sensor)<(62*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate1_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(100*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate2_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(137*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate3_to_turn_dist;
-		//	else if(HTANGreadAccumulatedAngle(angle_sensor)<(162*INT_ANGLE_SENSOR_CIRCUMFERENCE)) g_to_turn_dist = g_backwards_crate4_to_turn_dist;
-		//}
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;
 		dl_speed = 500;
@@ -56,8 +52,7 @@ void abs_s1_mission_execute()
 		break;
 
 	case 2:
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate4_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate4_to_turn_dist;
+		dist_record=true;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true, GYRO);
 
 		dl_step = dl_step+1;
@@ -67,20 +62,17 @@ void abs_s1_mission_execute()
 		break;
 
 	case 3:
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate3_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate3_to_turn_dist;
+		dist_record=true;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true, GYRO);
 		break;
 
 	case 4:
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate2_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate2_to_turn_dist;
+		dist_record=true;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true, GYRO);
 		break;
 
 	case 5:
-		if(g_end_point == 3)g_to_turn_dist = g_backwards_crate1_to_turn_dist;
-		else g_to_turn_dist = g_forward_crate1_to_turn_dist;
+		dist_record=true;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true, GYRO);
 		break;
 
@@ -135,6 +127,7 @@ void abs_s1_mission_execute()
 	dl_dist = g_abdd_up;
 	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);
 	servo[abdd] = g_abdd_up;
+	StartTask (abs_calibrate_light);
 	wait1Msec(2000);
 	servo[abdd] = g_abdd_down;
 	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
@@ -142,8 +135,8 @@ void abs_s1_mission_execute()
 	dl_change_event = true;
 	dl_ce_detail = dl_ce_end_delay;
 
-	dl_speed = g_end_delay*1000;
-	wait1Msec(g_end_delay*1000);
+	dl_speed = g_end_delay * DELAY_MULTIPLICATION_FACTOR;
+	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR);
 
 	dl_step++;
 	dl_robot_action_detail = dl_abdd_close;
@@ -166,12 +159,13 @@ void abs_s1_mission_execute()
 		servo[abdd] = g_abdd_down;
 		abs_stop_robot();
 		break;
-	case 2:
-		abs_end_r1(2000,40);
-		break;
-	case 3:
-		abs_end_r2(2000,40);
-		break;
+        case 2:
+        case 3:
+                abs_end_ramp(2000,40);
+                break;
+        default:
+                abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
+                break;
 	}
 }
 
