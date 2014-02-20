@@ -63,6 +63,7 @@ task main()
 	abs_initialize();
 
 	g_rel_heading = 0;
+	g_const_heading = 0;
 	switch(g_start_point)
 	{
 	case 1:
@@ -78,11 +79,30 @@ task main()
 		abs_s4_mission_execute();
 		break;
 	}
+	g_const_heading = 0;
+	switch(g_end_point)
+	{
+	case 1:
+		dl_step = dl_step+1;
+		dl_robot_action_state = dl_wait;
+		dl_speed = 2000;
+		wait1Msec(2000);
+		servo[abdd] = g_abdd_down;
+		abs_stop_robot();
+		break;
+	case 2:
+	case 3:
+		abs_end_ramp(2000,40);
+		break;
+	default:
+		abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
+		break;
+	}
 
 	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
 	Close(LogFileHandle, LogIoResult);
 	LogData=false;
 
 	if(g_stay_on_ramp)
-	abs_stay_on_ramp();
+		abs_stay_on_ramp();
 }

@@ -1,13 +1,13 @@
 #pragma systemFile // treat as system file to eliminate warnings for unused variables
 /**
  *
- *  @file global_varaibles.h
+ *  @file global_variables.h
  *
  *  @brief varaibles that are global
  *
  *  @param None n/a
  *
- *  @return Returns nothing
+ *  @return \
  *
  *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
@@ -513,6 +513,7 @@ int dl_dist = 0;
 int dl_gyro_heading = 0;
 bool dl_IR = false;
 int dl_cur_dist = 0;
+float g_delta_drift = 0;
 //string sString;
 
 int dl_dist_method = 0;
@@ -813,6 +814,7 @@ int g_number_max_limit [] = {0,4,30,7,30,5};
 int g_gyro_noise = 0;
 long g_start_time = 0;
 int g_drift = 0;
+float g_sacred_const_heading = 0;
 float g_const_heading = 0;
 float g_rel_heading = 0;
 long g_curr_time = 0;

@@ -133,25 +133,6 @@ void abs_s2_mission_execute()
 	dl_ce_detail = dl_ce_end_point;
 
 	wait1Msec(100);
-
-	switch(g_end_point)
-	{
-	case 1:
-		wait1Msec(2000);
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 2000;
-		servo[abdd] = g_abdd_down;
-		abs_stop_robot();
-		break;
-	case 2:
-	case 3:
-		abs_end_ramp(2000,40);
-		break;
-	default:
-		abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
-		break;
-	}
 }
 
 #endif /* !ABS_S2_MISSION_EXECUTE_H */

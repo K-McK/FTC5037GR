@@ -32,6 +32,9 @@
 void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int dist, int speed, bool stop_at_end, e_drive_type drive_type)
 {
 	//abs_log(__FILE__ ,"enter",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
+
+	int last_heading = g_const_heading;
+
 	switch(dist_method)
 	{
 	case E_IR_DETECT:
@@ -62,6 +65,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 	if(stop_at_end == true)	dl_robot_action_detail = dl_move_stop;
 	else dl_robot_action_detail = dl_move_no_stop;
+
 
 	//dl_ce_detail = dl_ce_drive_start;
 	//dl_change_event = true;
@@ -481,6 +485,8 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		//dist_record=false;
 	}
 	abs_log(__FILE__ ,"exit",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
+
+	g_const_heading = last_heading;
 }
 
 #endif /* !ABS_DRIVE_H */

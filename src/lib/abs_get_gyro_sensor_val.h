@@ -50,7 +50,8 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 
 	if(g_gyro_ran == false)
 		g_gyro_ran = true;
-	return last_gyro_read_time;
+
+	return last_gyro_read_val;
 }
 
 #endif /* !ABS_GET_GYRO_SENSOR_VAL_H */
