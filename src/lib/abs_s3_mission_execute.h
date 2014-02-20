@@ -110,22 +110,6 @@ void abs_s3_mission_execute()
 	dl_ce_detail = dl_ce_end_point;
 
 	wait1Msec(100);
-
-	switch(g_end_point)
-	{
-	case 1:
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
-		abs_stop_robot();
-		break;
-        case 2:
-        case 3:
-                abs_end_ramp(2000,40);
-                break;
-        default:
-                abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
-                break;
-	}
 }
 
 #endif /* !ABS_S3_MISSION_EXECUTE_H */

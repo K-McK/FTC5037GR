@@ -1,12 +1,12 @@
 /**
  *
- *  @file template.h (this should be the name of the function)
+ *  @file abs_lift_block_lifter.h
  *
  *  @brief  Enter a description of what this function does
  *
- *  @param
+ *  @param None N/A
  *
- *  @return
+ *  @return Returns nothing
  *
  *  @copyright Copyright 2013, Got Robot! FTC Team 5037
  */

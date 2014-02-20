@@ -1,6 +1,6 @@
 /**
 *
-*  @file abs_datalog.h
+*  @file abs_dlog.h
 *
 *  @brief A function that handels the data log
 *
@@ -17,6 +17,10 @@
 /** macros */
 void abs_dlog(const char * input1,const char * input2, const char * input3_str = NULL, int input3 = 0, const char * input4_str = NULL, int input4 = 0, const char * input5_str = NULL, int input5 = 0, const char * input6_str = NULL, int input6 = 0)
 {
+	StringFormat(sString, "");
+	strcat(sString,CRLF);
+	WriteText(LogFileHandle, LogIoResult, sString);
+
 	StringFormat(sString, "%4d\t",nPgmTime);
 	WriteText(LogFileHandle, LogIoResult, sString);
 
@@ -88,6 +92,10 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 	WriteText(LogFileHandle, LogIoResult, sString);
 
 	StringFormat(sString, "cnst-g %4d\t", g_const_heading);
+	WriteText(LogFileHandle, LogIoResult, sString);
+
+	StringFormat(sString, "");
+	strcat(sString,CRLF);
 	WriteText(LogFileHandle, LogIoResult, sString);
 }
 #endif /* !ABS_LOG_H */

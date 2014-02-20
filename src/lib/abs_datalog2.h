@@ -1,6 +1,6 @@
 /**
 *
-*  @file abs_datalog.h
+*  @file abs_datalog2.h
 *
 *  @brief A function that handels the data log
 *

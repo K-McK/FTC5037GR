@@ -115,9 +115,16 @@ task abs_sensors()
 		//-------------------------
 
 		g_curr_time=nPgmTime;
-		g_raw_gyro = abs_get_gyro_sensor_val(CALIBRATED);
-		g_const_heading += (g_raw_gyro - g_drift) * (float)(g_curr_time-g_prev_time)/1000;
-		g_rel_heading += (g_raw_gyro - g_drift) * (float)(g_curr_time-g_prev_time)/1000;
+		g_raw_gyro = abs_get_gyro_sensor_val(RAW);
+		//g_const_heading += (g_raw_gyro - g_drift) * (float)(g_curr_time-g_prev_time)/1000;
+		//g_rel_heading += (g_raw_gyro - g_drift) * (float)(g_curr_time-g_prev_time)/1000;
+		g_sacred_const_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		g_rel_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+
+		g_const_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+
+		//abs_dlog(__FILE__ ,"heading"," g_const_heading: %d ", g_const_heading," g_rel_heading: %d ", g_rel_heading);
+		//wait1Msec(100);
 		g_prev_time = g_curr_time;
 
 		g_recont_heading = g_const_heading % 360;

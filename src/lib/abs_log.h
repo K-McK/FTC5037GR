@@ -1,10 +1,10 @@
 /**
 *
-*  @file abs_datalog.h
+*  @file abs_log.h
 *
 *  @brief A function that handels the data log
 *
-*  @param N/A
+*  @param None N/A
 *
 *  @return Returns nothing
 *

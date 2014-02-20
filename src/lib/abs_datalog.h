@@ -76,7 +76,7 @@ task abs_datalog()
 	WriteText(LogFileHandle, LogIoResult, sString);
 
 	while(!LogData){EndTimeSlice();}
-	while(false)//LogData)
+	/*while(false)//LogData
 	{
 		if(dl_change_event == true)
 		{
@@ -259,7 +259,7 @@ task abs_datalog()
 			WriteText(LogFileHandle, LogIoResult, sString);
 			//wait1Msec(50);									// sample frequency
 		}
-	}
+	}*/
 	//Close(LogFileHandle, LogIoResult);		// close the file once we are told to stop
 	wait10Msec(20);
 }
