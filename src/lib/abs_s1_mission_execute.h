@@ -77,14 +77,14 @@ void abs_s1_mission_execute()
 		break;
 
 	case 6:
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 200;
-		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 190, 50, true, GYRO);
-		abs_turn(CLOCKWISE, POINT, TURN, 75, 60);
-		abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
+		g_screen_state = S_SMOKE_RUN2;
+		motor[right_motor] = 0;
+		motor[left_motor] = 0;
+		while(true)
+		{
+			g_sensor_value = g_rel_heading;
+			g_sensor_value2 = g_const_heading;
+		}
 		break;
 
 	case 7:
@@ -148,25 +148,6 @@ void abs_s1_mission_execute()
 	wait1Msec(100);
 
 	abs_log(__FILE__,"start of end",g_end_point,0,0,0);
-
-	switch(g_end_point)
-	{
-	case 1:
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 2000;
-		wait1Msec(2000);
-		servo[abdd] = g_abdd_down;
-		abs_stop_robot();
-		break;
-        case 2:
-        case 3:
-                abs_end_ramp(2000,40);
-                break;
-        default:
-                abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
-                break;
-	}
 }
 
 #endif /* !ABS_S1_MISSION_EXICUTE_H */

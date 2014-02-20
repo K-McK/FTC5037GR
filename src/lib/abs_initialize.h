@@ -16,7 +16,7 @@
 #define ABS_INITIALIZE_H
 
 #include "abs_screen.h"
-#include "abs_gyro_cal.h"
+#include "abs_gyro_wrapper.h"
 #include "abs_sensors.h"
 #include "abs_datalog.h"
 #include "abs_log.h"
@@ -39,7 +39,8 @@ void abs_initialize()
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);
 	selection_program();
 	PlaySoundFile("! Click.rso");
-	g_drift = abs_gyro_cal(g_gyro_cal_time);
+	//g_drift = abs_gyro_cal(g_gyro_cal_time);
+	g_drift = abs_gyro_wrapper();
 
 	if(!HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis))
 	{
