@@ -64,23 +64,31 @@ void abs_end_ramp(int delay, int lift_speed)
 	wait1Msec(200);
 	abs_control_light_sensor(ACTIVE);
 	servo[light_sensor] = LIGHT_SERVO_DOWN;
-	abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point), 60);
-
+	if(g_good_gyro)
+	{
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 60);
+	}
+	else
+	{
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 60);
+	}
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;
 	dl_speed = 200;
 	wait1Msec(200);
 	abs_drive(FORWARD, E_LIGHT, 110, 30, true, GYRO);
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 20)
-		{
-			abs_drive(BACKWARD, E_ANGLE, 110 - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
-		}
+	{
+		abs_drive(BACKWARD, E_ANGLE, 110 - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
+	}
+	abs_control_light_sensor(INACTIVE);
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;
 	dl_speed = 500;
 	wait1Msec(500);
 	StartTask(abs_lift_block_lifter);
-
+if(g_good_gyro)
+{
 	if(g_end_point == 2)
 	{
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, 60);
@@ -89,7 +97,18 @@ void abs_end_ramp(int delay, int lift_speed)
 	{
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 0, 50);
 	}
-
+}
+else
+{
+	if(g_end_point == 2)
+	{
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+	}
+	else
+	{
+		abs_turn(CLOCKWISE, POINT, TURN, 90, 50);
+	}
+}
 	/** before entering the ramp, pause for the requested time */
 	wait1Msec(g_ramp_delay * DELAY_MULTIPLICATION_FACTOR);
 

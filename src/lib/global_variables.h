@@ -720,6 +720,12 @@ int g_calibrated_light_threshold_val = 0;
 int g_end_ramp_lift_speed = 40;
 bool g_shift_due_to_ir = false;
 
+bool g_good_gyro = true;
+
+bool g_gyro_ran = false;
+//Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
+#define MAX_TURN_RATE 0.72
+
 #define STAY_ON_RAMP_WAIT_TIME 100
 #define LIGHT_SENSOR_CALIBRATION_TIME 2000
 #define LIGHT_CALIBRATION_SAMPLE_RATE 100

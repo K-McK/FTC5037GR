@@ -58,7 +58,7 @@ task main()
 	Delete(LogFileName, LogIoResult);
 	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
 
-	abs_dlog(__FILE__ ,"program start","Start time:", nPgmTime);
+	abs_dlog(__FILE__ ,"Program start"," Start time:", nPgmTime);
 
 	abs_initialize();
 
