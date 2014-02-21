@@ -36,9 +36,13 @@ task abs_screen ()
 			break;
 		case S_DELAY:
 			if(g_auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
+			else if(g_auto_selection_point == SELECTION_CORNOR_DELAY) nxtDisplayBigTextLine(1, "Cornor  ");
+			else if(g_auto_selection_point == SELECTION_RAMP_DELAY) nxtDisplayBigTextLine(1, "Ramp    ");
 			else nxtDisplayBigTextLine(1, "Mission ");
 			nxtDisplayBigTextLine(3, "Delay");
 			if(g_auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(5, "%2d", g_input_array[STARTING_DELAY]);
+			else if(g_auto_selection_point == SELECTION_CORNOR_DELAY) nxtDisplayBigTextLine(5, "%2d", g_input_array[CORNOR_DELAY]);
+			else if(g_auto_selection_point == SELECTION_RAMP_DELAY) nxtDisplayBigTextLine(5, "%2d", g_input_array[RAMP_DELAY]);
 			else nxtDisplayBigTextLine(5, "%2d", g_input_array[END_DELAY]);
 			break;
 		case S_CAL_TIME:
@@ -158,6 +162,7 @@ task abs_screen ()
 			if(selection_type == SELECTION_TYPE_CUSTOM) nxtDisplayBigTextLine(5, "custom  ");
 			else if(selection_type == SELECTION_TYPE_NUMBER) nxtDisplayBigTextLine(5, "number  ");
 			else if(selection_type == SELECTION_TYPE_QUICK) nxtDisplayBigTextLine(5, "quick    ");
+			else if(selection_type == SELECTION_TYPE_ADVANCED) nxtDisplayBigTextLine(5, "advanced");
 			else if(selection_type == SELECTION_TYPE_OPTIONS) nxtDisplayBigTextLine(5, "options ");
 			break;
 		case S_NUMBER_SELECTION:
