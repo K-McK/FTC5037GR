@@ -66,8 +66,6 @@ task main()
 
 	abs_initialize();
 
-	abs_dlog("=================================================================================","","");
-
 	g_rel_heading = 0;
 	g_const_heading = 0;
 	switch(g_start_point)
@@ -85,9 +83,6 @@ task main()
 		abs_s4_mission_execute();
 		break;
 	}
-
-	abs_dlog("=================================================================================","","");
-	abs_dlog(__FILE__ ,"End start","");
 
 	g_const_heading = 0;
 	switch(g_end_point)

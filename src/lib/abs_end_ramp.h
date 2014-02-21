@@ -67,7 +67,7 @@ void abs_end_ramp(int delay, int lift_speed)
 	abs_control_light_sensor(ACTIVE);
 	servo[light_sensor] = LIGHT_SERVO_DOWN;
 
-	if(false)//g_good_gyro)
+	if(g_good_gyro && g_em_first_turn_type == END_MISSION_FIRST_TURN_CONST)
 	{
 		abs_dlog(__FILE__ ,"first turn: good gyro");
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
@@ -92,30 +92,31 @@ void abs_end_ramp(int delay, int lift_speed)
 	dl_speed = 500;
 	wait1Msec(500);
 	StartTask(abs_lift_block_lifter);
-if(false)//g_good_gyro)
-{
-	if(g_end_point == 2)
+
+	if(g_good_gyro && g_em_first_turn_type == END_MISSION_SECOND_TURN_CONST)
 	{
-		abs_dlog(__FILE__ ,"second turn: good gyro");
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, 40);//was 60
+		if(g_end_point == 2)
+		{
+			abs_dlog(__FILE__ ,"second turn: good gyro");
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, 40);//was 60
+		}
+		else
+		{
+			abs_dlog(__FILE__ ,"second turn: bad gyro");
+			abs_turn(CLOCKWISE, POINT, TURN_TO, 0, 40);//was 50
+		}
 	}
 	else
 	{
-		abs_dlog(__FILE__ ,"second turn: bad gyro");
-		abs_turn(CLOCKWISE, POINT, TURN_TO, 0, 40);//was 50
+		if(g_end_point == 2)
+		{
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+		}
+		else
+		{
+			abs_turn(CLOCKWISE, POINT, TURN, 90, 50);
+		}
 	}
-}
-else
-{
-	if(g_end_point == 2)
-	{
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
-	}
-	else
-	{
-		abs_turn(CLOCKWISE, POINT, TURN, 90, 50);
-	}
-}
 	/** before entering the ramp, pause for the requested time */
 	wait1Msec(g_ramp_delay * DELAY_MULTIPLICATION_FACTOR);
 
