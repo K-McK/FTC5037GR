@@ -15,8 +15,6 @@
 
 #include "math_utils.h"
 
-#define GYRO_VALUE_QUEUE_SIZE 20
-
 int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 {
 	static int last_gyro_read_time = 0;
@@ -24,7 +22,7 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 	static bool queue_empty = true;
 	static int current_index = 0;
 
-        if(current_index == GYRO_VALUE_QUEUE_SIZE) { current_index = 0; }
+	if(current_index == GYRO_VALUE_QUEUE_SIZE) { current_index = 0; }
 
 	int current_time = nPgmTime;
 	int last_val;
@@ -47,12 +45,12 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 	}
 
 	/**
-	 * if the queue is empty, initialize all values to the first reading
-	 * otherwise, insert the value to the next point in the queue
-	 */
+	* if the queue is empty, initialize all values to the first reading
+	* otherwise, insert the value to the next point in the queue
+	*/
 	if(queue_empty)
 	{
- 		for(int i=0; i<GYRO_VALUE_QUEUE_SIZE; i++)
+		for(int i=0; i<GYRO_VALUE_QUEUE_SIZE; i++)
 		{
 			g_gyro_values[i] = last_gyro_read_val;
 		}
@@ -72,9 +70,9 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 		{
 			g_good_gyro = false;
 			for(int i=0;i<GYRO_VALUE_QUEUE_SIZE;i++)
-   			{
+			{
 				abs_dlog(__FILE__, "Gyro Queue", "Entry %d = ", i, "%d", g_gyro_values[i]);
- 			}
+			}
 		}
 	}
 
