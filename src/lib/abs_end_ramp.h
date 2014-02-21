@@ -67,7 +67,7 @@ void abs_end_ramp(int delay, int lift_speed)
 	abs_control_light_sensor(ACTIVE);
 	servo[light_sensor] = LIGHT_SERVO_DOWN;
 
-	if(g_good_gyro)
+	if(false)//g_good_gyro)
 	{
 		abs_dlog(__FILE__ ,"first turn: good gyro");
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
