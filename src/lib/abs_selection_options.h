@@ -23,6 +23,8 @@ void abs_selection_options()
 	g_screen_state = S_END_TURN_OPTIONS;
 	g_selection_turn = 1;
 
+	while(nNxtButtonPressed == kEnterButton){}
+
 	while(nNxtButtonPressed != kEnterButton)
 	{
 		if(nNxtButtonPressed == kRightButton)
@@ -85,9 +87,9 @@ void abs_selection_options()
 			while(nNxtButtonPressed == kLeftButton){}
 			if(g_stay_on_ramp == false) g_stay_on_ramp = true;
 		}
-		PlaySoundFile("! Click.rso");
-		while(nNxtButtonPressed == kEnterButton){}
 	}
+	PlaySoundFile("! Click.rso");
+	while(nNxtButtonPressed == kEnterButton){}
 }
 
 #endif /* !ABS_SELECTION_OPTIONS_H */
