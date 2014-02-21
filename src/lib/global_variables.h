@@ -17,6 +17,8 @@
 // Define sensor multiplexor connectivity and port allocations
 //============================================================
 
+#include "compile_flags.h"
+
 const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S3_2;
 const tMUXSensor HTGYRO = msensor_S2_1;	   // HiTechnic GYRO sensor
