@@ -66,15 +66,16 @@ void abs_end_ramp(int delay, int lift_speed)
 	wait1Msec(200);
 	abs_control_light_sensor(ACTIVE);
 	servo[light_sensor] = LIGHT_SERVO_DOWN;
-	if(g_good_gyro)
+
+	if(false)//g_good_gyro)
 	{
 		abs_dlog(__FILE__ ,"first turn: good gyro");
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 60);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
 	}
 	else
 	{
 		abs_dlog(__FILE__ ,"first turn: bad gyro");
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, false/*g_good_gyro*/), 60);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, false/*g_good_gyro*/), 40);//was 60
 	}
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;
@@ -96,12 +97,12 @@ if(false)//g_good_gyro)
 	if(g_end_point == 2)
 	{
 		abs_dlog(__FILE__ ,"second turn: good gyro");
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, 60);
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, 40);//was 60
 	}
 	else
 	{
 		abs_dlog(__FILE__ ,"second turn: bad gyro");
-		abs_turn(CLOCKWISE, POINT, TURN_TO, 0, 50);
+		abs_turn(CLOCKWISE, POINT, TURN_TO, 0, 40);//was 50
 	}
 }
 else

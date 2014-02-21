@@ -100,9 +100,9 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 
 	if(e_stop == TURN)
 	{
-		while(i < 5)
+		while(abs(g_rel_heading) < abs(degree))//i < 5)
 		{
-			if (abs(g_rel_heading) > abs(degree)) i++;
+			//if (abs(g_rel_heading) > abs(degree)) i++;
 			nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
 		}
 		motor[right_motor] = 0;
