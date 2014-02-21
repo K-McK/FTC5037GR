@@ -63,9 +63,31 @@ void abs_selection_options()
 			if(g_em_second_turn_type == END_MISSION_SECOND_TURN_CONST) g_em_second_turn_type = END_MISSION_SECOND_TURN_REL;
 		}
 	}
-
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
+	eraseDisplay();
+	//---------------------------------------
+	// second turn selection
+	//---------------------------------------
+
+	g_screen_state = S_STAY_GROUND_OPTIONS;
+	while(nNxtButtonPressed != kEnterButton)
+	{
+		if(nNxtButtonPressed == kRightButton)
+		{
+			PlaySoundFile("! Click.rso");
+			while(nNxtButtonPressed == kRightButton){}
+			if(g_stay_on_ramp == true) g_stay_on_ramp = false;
+		}
+		if(nNxtButtonPressed == kLeftButton)
+		{
+			PlaySoundFile("! Click.rso");
+			while(nNxtButtonPressed == kLeftButton){}
+			if(g_stay_on_ramp == false) g_stay_on_ramp = true;
+		}
+		PlaySoundFile("! Click.rso");
+		while(nNxtButtonPressed == kEnterButton){}
+	}
 }
 
 #endif /* !ABS_SELECTION_OPTIONS_H */
