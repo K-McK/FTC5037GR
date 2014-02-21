@@ -15,8 +15,6 @@
 
 #include "math_utils.h"
 
-#define GYRO_VALUE_QUEUE_SIZE 20
-
 int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 {
 	static int last_gyro_read_time = 0;
@@ -24,7 +22,7 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 	static bool queue_empty = true;
 	static int current_index = 0;
 
-        if(current_index == GYRO_VALUE_QUEUE_SIZE) { current_index = 0; }
+	if(current_index == GYRO_VALUE_QUEUE_SIZE) { current_index = 0; }
 
 	int current_time = nPgmTime;
 	int last_val;
@@ -47,12 +45,13 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 	}
 
 	/**
-	 * if the queue is empty, initialize all values to the first reading
-	 * otherwise, insert the value to the next point in the queue
-	 */
+	* if the queue is empty, initialize all values to the first reading
+	* otherwise, insert the value to the next point in the queue
+	*/
 	if(queue_empty)
 	{
- 		for(int i=0; i<GYRO_VALUE_QUEUE_SIZE; i++)
+		queue_empty = false;
+		for(int i=0; i<GYRO_VALUE_QUEUE_SIZE; i++)
 		{
 			g_gyro_values[i] = last_gyro_read_val;
 		}
@@ -64,6 +63,14 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 
 	current_index++;
 
+	if(current_index%20==0)
+	{
+		for(int i=0;i<GYRO_VALUE_QUEUE_SIZE;i++)
+		{
+			abs_dlog(__FILE__, "Gyro Queue ", "Entry %d = ", i, "%d", g_gyro_values[i]);
+		}
+	}
+
 	if(g_gyro_ran == true)
 	{
 		int delta_val = abs(last_gyro_read_val - last_val);
@@ -71,18 +78,14 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 		if(delta_val / delta_time > MAX_TURN_RATE)
 		{
 			g_good_gyro = false;
-			for(int i=0;i<GYRO_VALUE_QUEUE_SIZE;i++)
-   			{
-				abs_dlog(__FILE__, "Gyro Queue", "Entry %d = ", i, "%d", g_gyro_values[i]);
- 			}
 		}
 	}
 
 	if(g_gyro_ran == false)
 		g_gyro_ran = true;
 
-	//return last_gyro_read_val;
-	return middle_value_avg();
+	return last_gyro_read_val;
+	//return middle_value_avg();
 }
 
 #endif /* !ABS_GET_GYRO_SENSOR_VAL_H */

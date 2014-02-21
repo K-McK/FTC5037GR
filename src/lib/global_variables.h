@@ -724,7 +724,7 @@ bool g_shift_due_to_ir = false;
 
 bool g_good_gyro = true;
 
-#define GYRO_VALUE_QUEUE_SIZE 10
+#define GYRO_VALUE_QUEUE_SIZE 20
 int g_gyro_values[GYRO_VALUE_QUEUE_SIZE];
 
 bool g_gyro_ran = false;
