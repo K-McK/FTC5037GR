@@ -724,7 +724,7 @@ bool g_shift_due_to_ir = false;
 
 bool g_good_gyro = true;
 
-#define GYRO_VALUE_QUEUE_SIZE 20
+#define GYRO_VALUE_QUEUE_SIZE 3
 int g_gyro_values[GYRO_VALUE_QUEUE_SIZE];
 
 bool g_gyro_ran = false;
@@ -800,7 +800,7 @@ int g_end_delay = 0;
 int g_ramp_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
-bool g_stay_on_ramp = false;
+bool g_stay_on_ramp = true;
 
 int g_dist_backwards = 0;
 
@@ -1081,6 +1081,7 @@ typedef enum
 #define S_MISSION_SHOW 25
 #define S_QUICK_SELECTION 26
 #define S_END_TURN_OPTIONS 27
+#define S_STAY_GROUND_OPTIONS 28
 
 int g_screen_state = 1;
 

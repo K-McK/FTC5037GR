@@ -178,7 +178,13 @@ task abs_screen ()
 			nxtDisplayBigTextLine(5, g_quick_names2[g_quick_mission]);
 			break;
 		case S_END_TURN_OPTIONS:
-			if(g_selection_turn == 1)nxtDisplayBigTextLine(1, "First");
+			nxtDisplayBigTextLine(1, "Stand   ");
+			nxtDisplayBigTextLine(3, "Ground  ");
+
+			if(g_stay_on_ramp == false) nxtDisplayBigTextLine(5, "false   ");
+			else nxtDisplayBigTextLine(5, "true    ");
+			break;
+		case S_STAY_GROUND_OPTIONS:if(g_selection_turn == 1)nxtDisplayBigTextLine(1, "First");
 			else nxtDisplayBigTextLine(1, "Second");
 			nxtDisplayBigTextLine(3, "turn");
 			if(g_selection_turn == 1)

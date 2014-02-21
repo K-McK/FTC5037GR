@@ -108,6 +108,5 @@ task main()
 	Close(LogFileHandle, LogIoResult);
 	LogData=false;
 
-	if(g_stay_on_ramp)
-		abs_stay_on_ramp();
+	if(g_stay_on_ramp) abs_stay_on_ramp();
 }
