@@ -79,6 +79,7 @@ void abs_initialize()
 	StartTask(abs_sensors);
 	abs_reset_angle_sensor_val(HARD_RESET);
 
+	PlayTone(700, 100);
 	waitForStart();
 
 	abs_log(__FILE__ ,"auto start",nPgmTime,0,0,0);

@@ -724,8 +724,10 @@ bool g_shift_due_to_ir = false;
 
 bool g_good_gyro = true;
 
-#define GYRO_VALUE_QUEUE_SIZE 3
-int g_gyro_values[GYRO_VALUE_QUEUE_SIZE];
+#if DEBUG_MODE == 1
+	#define GYRO_VALUE_QUEUE_SIZE 3
+	int g_gyro_values[GYRO_VALUE_QUEUE_SIZE];
+#endif
 
 bool g_gyro_ran = false;
 //Tells the robot the max rate thats possable to happen so we can know if the gyro gliches

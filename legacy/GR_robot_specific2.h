@@ -3,11 +3,11 @@
 //============================================================
 // Define sensor multiplexor connectivity and port allocat ions
 //============================================================
-const tMUXSensor HTIRS2 = msensor_S2_4;     // HiTechnic Infrared sensor
-//const tMUXSensor LEGOLS = msensor_S2_2;			// LEGO light sensor
-const tMUXSensor LEGOUS = msensor_S2_1;			// LEGO sonar sensor (side mounted)
-const tMUXSensor LEGOUS2 = msensor_S2_3;		// LEGO sonar sensor (rear mounted)
-const tMUXSensor HTGYRO = msensor_S3_3;			// HiTechnic GYRO sensor
+//const tMUXSensor HTIRS2 = msensor_S2_4;     // HiTechnic Infrared sensor
+////const tMUXSensor LEGOLS = msensor_S2_2;			// LEGO light sensor
+//const tMUXSensor LEGOUS = msensor_S2_1;			// LEGO sonar sensor (side mounted)
+//const tMUXSensor LEGOUS2 = msensor_S2_3;		// LEGO sonar sensor (rear mounted)
+//const tMUXSensor HTGYRO = msensor_S3_3;			// HiTechnic GYRO sensor
 //const tMUXSensor HTIRS2_2 = msensor_S4_1;     // HiTechnic Infrared sensor
 
 //==============================================================

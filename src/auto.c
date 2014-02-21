@@ -45,6 +45,7 @@
 // Custom include
 //-----------------------
 
+#include "lib/compile_flags.h"
 #include "lib/global_variables.h"
 #include "lib/abs_initialize.h"
 #include "lib/abs_s1_mission_execute.h"
