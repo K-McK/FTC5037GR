@@ -242,7 +242,8 @@ typedef enum
 {
 	SELECTION_TYPE_NUMBER,
 	SELECTION_TYPE_CUSTOM,
-	SELECTION_TYPE_QUICK
+	SELECTION_TYPE_QUICK,
+	SELECTION_TYPE_OPTIONS
 } e_selection_types;
 
 e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
@@ -770,6 +771,24 @@ bool g_gyro_ran = false;
 
 #define DELAY_MULTIPLICATION_FACTOR 1000
 
+typedef enum
+{
+	END_MISSION_FIRST_TURN_REL,
+	END_MISSION_FIRST_TURN_CONST
+} e_em_first_turn_types;
+
+e_em_first_turn_types g_em_first_turn_type = END_MISSION_FIRST_TURN_REL;
+
+typedef enum
+{
+	END_MISSION_SECOND_TURN_REL,
+	END_MISSION_SECOND_TURN_CONST
+} e_em_second_turn_types;
+
+e_em_second_turn_types g_em_second_turn_type = END_MISSION_FIRST_TURN_REL;
+
+int g_selection_turn = 1;
+
 int g_end_point = 1;
 int g_start_point = 1;
 int g_mission_number = 1;
@@ -1058,6 +1077,7 @@ typedef enum
 #define S_SELECTION_SUB_RAMP 24
 #define S_MISSION_SHOW 25
 #define S_QUICK_SELECTION 26
+#define S_END_TURN_OPTIONS 27
 
 int g_screen_state = 1;
 

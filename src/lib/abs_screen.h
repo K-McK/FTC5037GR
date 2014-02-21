@@ -158,6 +158,7 @@ task abs_screen ()
 			if(selection_type == SELECTION_TYPE_CUSTOM) nxtDisplayBigTextLine(5, "custom  ");
 			else if(selection_type == SELECTION_TYPE_NUMBER) nxtDisplayBigTextLine(5, "number  ");
 			else if(selection_type == SELECTION_TYPE_QUICK) nxtDisplayBigTextLine(5, "quick    ");
+			else if(selection_type == SELECTION_TYPE_OPTIONS) nxtDisplayBigTextLine(5, "options ");
 			break;
 		case S_NUMBER_SELECTION:
 			nxtDisplayBigTextLine(1, "Mission");
@@ -175,6 +176,21 @@ task abs_screen ()
 			nxtDisplayBigTextLine(1, "Mission");
 			nxtDisplayBigTextLine(3, g_quick_names1[g_quick_mission]);
 			nxtDisplayBigTextLine(5, g_quick_names2[g_quick_mission]);
+			break;
+		case S_END_TURN_OPTIONS:
+			if(g_selection_turn == 1)nxtDisplayBigTextLine(1, "First");
+			else nxtDisplayBigTextLine(1, "Second");
+			nxtDisplayBigTextLine(3, "turn");
+			if(g_selection_turn == 1)
+			{
+				if(g_em_first_turn_type == END_MISSION_FIRST_TURN_REL) nxtDisplayBigTextLine(5, "RELATIVE");
+				else nxtDisplayBigTextLine(5, "CONSTANT");
+			}
+			else
+			{
+				if(g_em_second_turn_type == END_MISSION_FIRST_TURN_REL) nxtDisplayBigTextLine(5, "RELATIVE");
+				else nxtDisplayBigTextLine(5, "CONSTANT");
+			}
 			break;
 		}
 	}

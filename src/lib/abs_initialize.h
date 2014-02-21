@@ -37,7 +37,7 @@ void abs_initialize()
 	servo[light_sensor] = LIGHT_SERVO_UP;
 	abs_control_light_sensor(INACTIVE);
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);
-	selection_program();
+	abs_selection_program();
 	PlaySoundFile("! Click.rso");
 	//g_drift = abs_gyro_cal(g_gyro_cal_time);
 	g_drift = abs_gyro_wrapper();
