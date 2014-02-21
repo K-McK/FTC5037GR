@@ -47,10 +47,11 @@
 // custom functions includes
 //-----------------------
 
-#include "lib/global_varaibles.h"
+#include "lib/global_variables.h"
 #include "lib/abs_joystick_drive.h"
 #include "lib/abs_joystick_gunner.h"
 #include "lib/abs_tele_op_initialize.h"
+
 //========================================
 // Main program
 //========================================
@@ -61,7 +62,6 @@ task main ()
 	StartTask(abs_joystick_gunner);
 	while(g_program_done==false)
 	{
-		abs_joystick_drive(LINEAR);
+		abs_joystick_drive();//(LINEAR);
 	}
-	LogData = false;
 }

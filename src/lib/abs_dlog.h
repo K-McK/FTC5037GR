@@ -93,9 +93,5 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 
 	StringFormat(sString, "cnst-g %4d\t", g_const_heading);
 	WriteText(LogFileHandle, LogIoResult, sString);
-
-	StringFormat(sString, "");
-	strcat(sString,CRLF);
-	WriteText(LogFileHandle, LogIoResult, sString);
 }
 #endif /* !ABS_LOG_H */
