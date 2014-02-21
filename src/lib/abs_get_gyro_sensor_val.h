@@ -50,6 +50,7 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 	*/
 	if(queue_empty)
 	{
+		queue_empty = false;
 		for(int i=0; i<GYRO_VALUE_QUEUE_SIZE; i++)
 		{
 			g_gyro_values[i] = last_gyro_read_val;
@@ -62,6 +63,14 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 
 	current_index++;
 
+	if(current_index%20==0)
+	{
+		for(int i=0;i<GYRO_VALUE_QUEUE_SIZE;i++)
+		{
+			abs_dlog(__FILE__, "Gyro Queue ", "Entry %d = ", i, "%d", g_gyro_values[i]);
+		}
+	}
+
 	if(g_gyro_ran == true)
 	{
 		int delta_val = abs(last_gyro_read_val - last_val);
@@ -69,18 +78,14 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 		if(delta_val / delta_time > MAX_TURN_RATE)
 		{
 			g_good_gyro = false;
-			for(int i=0;i<GYRO_VALUE_QUEUE_SIZE;i++)
-			{
-				abs_dlog(__FILE__, "Gyro Queue", "Entry %d = ", i, "%d", g_gyro_values[i]);
-			}
 		}
 	}
 
 	if(g_gyro_ran == false)
 		g_gyro_ran = true;
 
-	//return last_gyro_read_val;
-	return middle_value_avg();
+	return last_gyro_read_val;
+	//return middle_value_avg();
 }
 
 #endif /* !ABS_GET_GYRO_SENSOR_VAL_H */

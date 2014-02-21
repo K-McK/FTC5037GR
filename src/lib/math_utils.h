@@ -63,7 +63,7 @@ int middle_value_avg()
 
 	for(int i=0;i<GYRO_VALUE_QUEUE_SIZE;i++)
 	{
-		if(i != GYRO_VALUE_QUEUE_SIZE)
+		if(i != GYRO_VALUE_QUEUE_SIZE-1)
 		{
 			_min = min(g_gyro_values[i], g_gyro_values[i+1]);
 			_max = max(g_gyro_values[i], g_gyro_values[i+1]);
