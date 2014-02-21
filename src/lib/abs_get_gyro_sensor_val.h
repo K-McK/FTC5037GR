@@ -71,6 +71,10 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 		if(delta_val / delta_time > MAX_TURN_RATE)
 		{
 			g_good_gyro = false;
+			for(int i=0;i<GYRO_VALUE_QUEUE_SIZE;i++)
+   			{
+				abs_dlog(__FILE__, "Gyro Queue", "Entry %d = ", i, "%d", g_gyro_values[i]);
+ 			}
 		}
 	}
 
