@@ -55,6 +55,8 @@
 //#define range(X, Y) ((X) > (Y) ? (X) : (Y))
 #define safe_motor_speed(X) ((abs(X) > 10) ? (X) : 0)
 
+#if DEBUG_MODE == 1
+
 int middle_value_avg()
 {
 	int _min = g_gyro_values[0];
@@ -71,5 +73,6 @@ int middle_value_avg()
 
 	return ((running_sum - _min - _max) / (GYRO_VALUE_QUEUE_SIZE - 2));
 }
+#endif
 
 #endif /* !MATH_UTILS_H */\

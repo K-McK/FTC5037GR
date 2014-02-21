@@ -17,6 +17,8 @@
 // Define sensor multiplexor connectivity and port allocations
 //============================================================
 
+#include "compile_flags.h"
+
 const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S3_2;
 const tMUXSensor HTGYRO = msensor_S2_1;	   // HiTechnic GYRO sensor
@@ -219,7 +221,9 @@ typedef enum
 	SELECTION_SELECTION_TYPE,
 	SELECTION_GRAPH_NUMBER_INPUT,
 	SELECTION_QUICK_INPUT,
-	SELECTION_SUB_RAMP
+	SELECTION_SUB_RAMP,
+	SELECTION_CORNOR_DELAY,
+	SELECTION_RAMP_DELAY
 } e_auto_selection_points;
 
 e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
@@ -243,6 +247,7 @@ typedef enum
 	SELECTION_TYPE_NUMBER,
 	SELECTION_TYPE_CUSTOM,
 	SELECTION_TYPE_QUICK,
+	SELECTION_TYPE_ADVANCED,
 	SELECTION_TYPE_OPTIONS
 } e_selection_types;
 
@@ -271,7 +276,9 @@ typedef enum
 	STARTING_DELAY,
 	SCOREING_POINT,
 	END_DELAY,
-	END_POINT
+	END_POINT,
+	CORNOR_DELAY,
+	RAMP_DELAY
 } e_selection_values;
 
 //=========================================================
@@ -440,7 +447,7 @@ int g_test_value = 0;
 * 		 Tells the robot all of the different options for automus
 */
 
-#define INPUT_ARRAY_SIZE 6
+#define INPUT_ARRAY_SIZE 8
 
 int g_input_array[INPUT_ARRAY_SIZE];
 
@@ -800,6 +807,7 @@ int g_mission_number = 1;
 int g_delay = 0;
 int g_end_delay = 0;
 int g_ramp_delay = 0;
+int g_cornor_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
 bool g_stay_on_ramp = true;

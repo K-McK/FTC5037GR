@@ -77,6 +77,8 @@ void abs_end_ramp(int delay, int lift_speed)
 		abs_dlog(__FILE__ ,"first turn: bad gyro");
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, false/*g_good_gyro*/), 40);//was 60
 	}
+
+	wait1Msec(g_input_array[CORNOR_DELAY]*DELAY_MULTIPLICATION_FACTOR);
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;
 	dl_speed = 200;
@@ -118,7 +120,7 @@ void abs_end_ramp(int delay, int lift_speed)
 		}
 	}
 	/** before entering the ramp, pause for the requested time */
-	wait1Msec(g_ramp_delay * DELAY_MULTIPLICATION_FACTOR);
+	wait1Msec(g_input_array[RAMP_DELAY] * DELAY_MULTIPLICATION_FACTOR);
 
 	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
 	else abs_drive(FORWARD, E_ANGLE, 130, 50, true, GYRO);
