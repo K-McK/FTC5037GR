@@ -1,0 +1,31 @@
+ 134	auto.c	program start Start time:	134 
+16265	abs_gyro_cal.h	Original Gyro Reading	   0	   0	   0	   0	
+61979	abs_initialize.h	auto start	-3557	   0	   0	   0	
+Number
+ 2	 0	 1	 4	 4	
+ 2	 0	 1	 4	 2	Y	
+61999	abs_drive.h	IR enter	  40	   3	   2	   0	rel-g    0	cnst-g  -45	
+62042	abs_drive.h	reset angle	  40	   3	   0	   0	rel-g    0	cnst-g  -45	
+64943	abs_drive.h	Raw values	2735	 152	   0	   0	rel-g   -1	cnst-g  -46	
+64971	abs_drive.h	exit	  40	   3	2765	 154	rel-g   -1	cnst-g  -46	
+66022	abs_drive.h	angle enter	  50	   6	2796	 155	rel-g   -2	cnst-g  -48	
+66062	abs_drive.h	reset angle	  50	   6	   0	   0	rel-g    0	cnst-g  -48	
+66414	abs_drive.h	angle break	  50	   6	 135	   8	rel-g    0	cnst-g  -48	
+66463	abs_drive.h	Raw values	2614	 144	   0	   0	rel-g    0	cnst-g  -48	
+66492	abs_drive.h	exit	  50	   6	 208	  12	rel-g    0	cnst-g  -48	
+67001	abs_s2_mission_execute.h	abdd up	   2	  10	   0	   0	
+69007	abs_s2_mission_execute.h	abdd down	   2	 235	   0	   0	
+70080	abs_calibrate_light.h	Captured Data	  20	  28	  21	  29	
+70084	abs_calibrate_light.h	Light calibration worked	  30	  28	   2	   0	
+73121	abs_end_ramp.h	Function Enter	2000	  40	   0	   0	
+75144	abs_drive.h	angle enter	  50	 133	 252	  14	rel-g   -8	cnst-g  -56	
+75195	abs_drive.h	reset angle	  50	 133	   0	   0	rel-g    0	cnst-g  -56	
+77656	abs_drive.h	angle break	  50	 133	2418	 134	rel-g   -1	cnst-g  -57	
+77698	abs_drive.h	Raw values	  79	   3	   0	   0	rel-g    0	cnst-g  -57	
+77736	abs_drive.h	exit	  50	 133	2503	 139	rel-g    0	cnst-g  -57	
+78031	abs_turn.h	enter CC	  60	 275	   0	 -56	
+78035	abs_turn.h	enter CC	  60	 -29	   0	 -56	
+78466	abs_turn.h	exit	  60	 -29	 -35	 -92	
+78472	abs_turn.h	exit	  60	 275	 -35	 -92	
+78695	abs_drive.h	light enter	  30	 110	  30	 139	rel-g  -39	cnst-g  -95	
+78732	abs_drive.h	reset angle	  30	 110	   0	   0	rel-g    0	cnst-g  -95	

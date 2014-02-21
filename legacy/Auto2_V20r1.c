@@ -39,12 +39,6 @@
 // Include files for FTC hardware, 3rd party sensors and sensor multiplexors
 //==========================================================================
 #include "joystickdriver.c"
-#include "drivers/hitechnic-sensormux.h"
-#include "drivers/hitechnic-gyro.h"
-#include "drivers/hitechnic-magfield.h"
-#include "drivers/hitechnic-irseeker-v2.h"
-#include "drivers/lego-touch.h"
-#include "drivers/lego-ultrasound.h"
 //#include "drivers/lego-light.h"
 
 //=============================================================
