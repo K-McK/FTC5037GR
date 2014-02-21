@@ -55,4 +55,29 @@
 //#define range(X, Y) ((X) > (Y) ? (X) : (Y))
 #define safe_motor_speed(X) ((abs(X) > 10) ? (X) : 0)
 
+
+
+int middle_value_avg()
+{
+	int min;
+	int max;
+
+	for(int i=0, i<size; i++)
+	{
+		if(i != size)
+  		{
+			min = min(g_gyro_values[i], g_gyro_values[i+1]);
+			max = max(g_gyro_values[i], g_gyro_values[i+1]);
+		}
+
+		running_sum += g_gyro_values[i];
+	}
+
+	/** remove the two most extreme readings */
+	running_sum -= min;	
+	running_sum -= max;	
+
+	return (int)(running_sum / (size - 2));
+}
+
 #endif /* !MATH_UTILS_H */\
