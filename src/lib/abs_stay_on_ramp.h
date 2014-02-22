@@ -1,8 +1,8 @@
 /**
 *
-*  @file template.h (this should be the name of the function)
+*  @file abs_stay_on_ramp.h
 *
-*  @brief  Enter a description of what this function does
+*  @brief  Allows the robot to stay on the ramp even of someone pushes us
 *
 *  @param
 *

@@ -7,7 +7,7 @@
  *
  *  @param None n/a
  *
- *  @return \
+ *  @return
  *
  *  @copyright Copyright 2013, Got Robot? FTC Team 5037
  *
@@ -493,6 +493,15 @@ int g_input_array[INPUT_ARRAY_SIZE];
  *
  * @var dl_drive_details
  *		Tells the robot the drive details for data loging
+ *
+ * @def DL_ANGLE
+ *		Tells the robot the data loging value for this sensor
+ * @def DL_LIGHT
+ *		Tells the robot the data loging value for this sensor
+ * @def DL_TIME
+ *		Tells the robot the data loging value for this sensor
+ * @def DL_IR
+ *		Tells the robot the data loging value for this sensor
  */
 const string LogFileName = "DATALOG.txt";
 TFileIOResult LogIoResult;
@@ -524,6 +533,17 @@ int dl_dist_method = 0;
 #define DL_IR 3
 
 int dl_move_break = 0;
+
+/**
+ * @def DL_ANGLE_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ * @def DL_LIGHT_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ * @def DL_TIME_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ * @def DL_IR_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ */
 
 #define DL_ANGLE_BREAK 0
 #define DL_LIGHT_BREAK 1
@@ -572,6 +592,16 @@ int dl_drive_details [] = {0,4};
  * @def dl_ce_end_delay
  *		tell the robot when the robot dose this
  * @def dl_ce_end_point
+ *		tell the robot when the robot dose this
+  * @def dl_ce_drive_end
+ *		tell the robot when the robot dose this
+  * @def dl_ce_drive_start
+ *		tell the robot when the robot dose this
+  * @def dl_ce_angle_reset
+ *		tell the robot when the robot dose this
+  * @def dl_ce_turn_end
+ *		tell the robot when the robot dose this
+  * @def dl_ce_turn_start
  *		tell the robot when the robot dose this
  */
 #define dl_ce_program_start 1
@@ -724,7 +754,18 @@ bool g_shift_due_to_ir = false;
 bool g_good_gyro = true;
 
 bool g_gyro_ran = false;
-//Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
+/**
+ * @def MAX_TURN_RATE
+ *		Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
+ * @def STAY_ON_RAMP_WAIT_TIME
+ *		Tells the robot the wait time before it  gose on the ramp
+ * @def LIGHT_SENSOR_CALIBRATION_TIME
+ *		Tells the robot the time it needs to calibrate
+ * @def LIGHT_CALIBRATION_SAMPLE_RATE
+ *		Tells the robot the Calibration sample rate
+ * @def DEFAULT_CALIBRATED_LIGHT_THRESHOLD
+ *		Tells the robot the default calibration of the light to force it to fail if it gives us weid readings
+ */
 #define MAX_TURN_RATE 0.72
 
 #define STAY_ON_RAMP_WAIT_TIME 100
