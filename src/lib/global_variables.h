@@ -343,12 +343,34 @@ typedef enum
 
 e_auto_sub_selection_ramp g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
 
+/**
+*  @enum e_gyro_val_type the type of gyro units to read
+*  @var e_gyro_val_type::RAW
+*     provides the raw gyro value
+*   @var e_gyro_val_type::CALIBRATED
+*     provides the calibrated gyro value
+*/
 typedef enum
 {
 	RAW,
 	CALIBRATED
 } e_gyro_val_type;
 
+/**
+*  @enum e_angle_val_type the type of angle sensor units to read
+*  @var e_angle_val_type::RELATIVE_ASU
+*     provides the angle sensor reading in relative angle sensor units
+*   @var e_angle_val_type::RELATIVE_BPU
+*     provides the angle sensor reading in relative Black Perl units
+*   @var e_angle_val_type::RELATIVE_CENTIMETERS
+*     provides the angle sensor reading in relative centimeters
+*  @var e_angle_val_type::RAW_ASU
+*     provides the angle sensor reading in raw angle sensor units
+*   @var e_angle_val_type::RAW_BPU
+*     provides the angle sensor reading in raw Black Perl units
+*   @var e_angle_val_type::RAW_CENTIMETERS
+*     provides the angle sensor reading in raw centimeters
+*/
 typedef enum
 {
 	RELATIVE_ASU,
@@ -359,6 +381,13 @@ typedef enum
 	RAW_CENTIMETERS
 } e_angle_val_type;
 
+/**
+*  @enum e_angle_reset_type the type of angle sensor reset to perform
+*  @var e_angle_val_type::SOFT_RESET
+*     resets the interpretation of the angle sensor without resetting the actual sensor
+*   @var e_angle_val_type::HARD_RESET
+*     resets the actual sensor
+*/
 typedef enum
 {
 	SOFT_RESET,
@@ -455,6 +484,21 @@ int g_input_array[INPUT_ARRAY_SIZE];
 // Datalogging variables
 //=========================================================
 /**
+* @var LogFileName
+*		The name of the data logging file
+*
+* @var LogIoResult
+*		The success status of writing to the log file
+*
+* @var LogFileHandle
+*		The file handle variable (represents the file)
+*
+* @var LogFileSize
+*		The size of the log file
+*
+* @var CRLF
+*		characters required to cause output to appear on a new line
+*
 * @var LogData
 *		Tells the robot is if should log data or not
 *
@@ -572,15 +616,25 @@ int dl_drive_details [] = {0,4};
 
 /**
 * @def dl_ce_program_start
-*		 tell the robot when the robot dose this
+*		 tell the robot when the robot does this
 * @def dl_ce_start_delay
-*		tell the robot when the robot dose this
+*		tell the robot when the robot does this
 * @def dl_ce_score_start
-*		tell the robot when the robot dose this
+*		tell the robot when the robot does this
 * @def dl_ce_end_delay
-*		tell the robot when the robot dose this
+*		tell the robot when the robot does this
 * @def dl_ce_end_point
-*		tell the robot when the robot dose this
+*		tell the robot when the robot does this
+* @def dl_ce_drive_end
+*		tell the robot when the robot does this
+* @def dl_ce_drive_start
+*		tell the robot when the robot does this
+* @def dl_ce_angle_reset
+*		tell the robot when the robot does this
+* @def dl_ce_turn_end
+*		tell the robot when the robot does this
+* @def dl_ce_turn_start
+*		tell the robot when the robot does this
 */
 #define dl_ce_program_start 1
 #define dl_ce_start_delay 2
@@ -724,11 +778,29 @@ bool g_joy2_enabled = false;
 
 int g_selection_value = 0;
 
+/**
+ *
+ * @var g_light_delta_value
+ *	the difference in light between black and white that we are looking for
+ * @var g_calibrated_light_threshold_val
+ *	a configurable threshold for detecting the white line
+ * @var g_end_ramp_lift_speed
+ *	the speed to lift the block lifter before entering the ramp
+ * @var g_shift_due_to_ir
+ *	flag indicating that the robot jerked because of detecting IR from starting position 2
+ * @var g_good_gyro
+ *	flag indicating that the gyro has not given a bad reading
+ * @def GYRO_VALUE_QUEUE_SIZE
+ *	the size of the queue used to store the gyro readings
+ * @var g_gyro_values
+ *	array used to store all the gyro readings for debug purposes
+ * @var g_gyro_ran
+ *	flag indicating that we have performed at least one gyro read
+ */
 const int g_light_delta_value = 2;
 int g_calibrated_light_threshold_val = 0;
 int g_end_ramp_lift_speed = 40;
 bool g_shift_due_to_ir = false;
-
 bool g_good_gyro = true;
 
 #if DEBUG_MODE == 1
@@ -737,13 +809,27 @@ bool g_good_gyro = true;
 #endif
 
 bool g_gyro_ran = false;
-//Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
-#define MAX_TURN_RATE 0.72
 
+/**
+ * @def MAX_TURN_RATE
+ *	Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
+ * @def STAY_ON_RAMP_WAIT_TIME
+ *	the frequency that the robot will check to see if it is moving during stand-your-ground
+ * @def LIGHT_SENSOR_CALIBRATION_TIME
+ *	number of milliseconds the light sensor will calibrate for
+ * @def LIGHT_CALIBRATION_SAMPLE_RATE
+ *	how frequently the light level will be sampled
+ * @def DEFAULT_CALIBRATED_THRESHOLD
+ *	the default threshold value to use when the calibration fails
+ * @def DELAY_MULTIPLICATION_FACTOR
+ *	the factor to multiply all delays by
+ */
+#define MAX_TURN_RATE 0.72
 #define STAY_ON_RAMP_WAIT_TIME 100
 #define LIGHT_SENSOR_CALIBRATION_TIME 2000
 #define LIGHT_CALIBRATION_SAMPLE_RATE 100
 #define DEFAULT_CALIBRATED_LIGHT_THRESHOLD 9999
+#define DELAY_MULTIPLICATION_FACTOR 1000
 
 //=============================================================
 // Define user configurable parameters
@@ -780,8 +866,6 @@ bool g_gyro_ran = false;
 * @var g_number_max_limit
 *		Tells the robot the minunum amount of numbers
 */
-
-#define DELAY_MULTIPLICATION_FACTOR 1000
 
 typedef enum
 {
