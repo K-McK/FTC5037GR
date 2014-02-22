@@ -14,7 +14,7 @@
 #ifndef ABS_JOYSTICK_DRIVE_H
 #define ABS_JOYSTICK_DRIVE_H
 
-void abs_joystick_drive(e_joystick_method joy_type)
+void abs_joystick_drive()//(e_joystick_method joy_type)
 {
 	//-----------------------------
 	// ground arm
@@ -56,7 +56,7 @@ void abs_joystick_drive(e_joystick_method joy_type)
 	int j1 = abs(joystick.joy1_y1);
 	int j2 = abs(joystick.joy1_y2);
 
-	if(joy_type == LINEAR)
+	if(true)//(joy_type == LINEAR)
 	{
 		speed1 = j1*100/127;
 		speed2 = j2*100/127;

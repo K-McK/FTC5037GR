@@ -1,16 +1,16 @@
 /**
- *
- *  @file abs_joystick_gunner.h
- *
- *  @brief The header file that handles the joystick motor control
- *
- *  @param None n/a
- *
- *  @return Returns nothing
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file abs_joystick_gunner.h
+*
+*  @brief The header file that handles the joystick motor control
+*
+*  @param None n/a
+*
+*  @return Returns nothing
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 #ifndef ABS_JOYSTICK_GUNNER_H
 #define ABS_JOYSTICK_GUNNER_H
 

@@ -58,7 +58,7 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 			StringFormat(sString, "\t");
 			StringFormat(sString, input4_str);
 			WriteText(LogFileHandle, LogIoResult, sString);
-			StringFormat(sString, "\t%d",input3);
+			StringFormat(sString, "\t%d",input4);
 			WriteText(LogFileHandle, LogIoResult, sString);
 			if(input5_str == NULL)
 			{
@@ -67,9 +67,9 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 			else
 			{
 				StringFormat(sString, "\t");
-				StringFormat(sString, input4_str);
+				StringFormat(sString, input5_str);
 				WriteText(LogFileHandle, LogIoResult, sString);
-				StringFormat(sString, "\t%d",input3);
+				StringFormat(sString, "\t%d",input5);
 				WriteText(LogFileHandle, LogIoResult, sString);
 				if(input6_str == NULL)
 				{
@@ -80,7 +80,7 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 					StringFormat(sString, "\t");
 					StringFormat(sString, input6_str);
 					WriteText(LogFileHandle, LogIoResult, sString);
-					StringFormat(sString, "\t%d",input3);
+					StringFormat(sString, "\t%d",input6);
 					WriteText(LogFileHandle, LogIoResult, sString);
 				}
 			}
@@ -92,10 +92,6 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 	WriteText(LogFileHandle, LogIoResult, sString);
 
 	StringFormat(sString, "cnst-g %4d\t", g_const_heading);
-	WriteText(LogFileHandle, LogIoResult, sString);
-
-	StringFormat(sString, "");
-	strcat(sString,CRLF);
 	WriteText(LogFileHandle, LogIoResult, sString);
 }
 #endif /* !ABS_LOG_H */

@@ -17,8 +17,10 @@
 #include "abs_selection_custom.h"
 #include "abs_selection_number.h"
 #include "abs_selection_quick.h"
+#include "abs_selection_advanced.h"
+#include "abs_selection_options.h"
 
-void selection_program()
+void abs_selection_program()
 {
 	while(nNxtButtonPressed == kEnterButton){}
 
@@ -36,8 +38,8 @@ void selection_program()
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kRightButton){}
-			if(j < 3) j++;
-			else j = 3;
+			if(j < 5) j++;
+			else j = 5;
 		}
 		if(nNxtButtonPressed == kLeftButton)
 		{
@@ -48,15 +50,11 @@ void selection_program()
 		}
 		switch(j)
 		{
-		case 1:
-			selection_type = SELECTION_TYPE_CUSTOM;
-			break;
-		case 2:
-			selection_type = SELECTION_TYPE_NUMBER;
-			break;
-		case 3:
-			selection_type = SELECTION_TYPE_QUICK;
-			break;
+		case 1: selection_type = SELECTION_TYPE_CUSTOM; break;
+		case 2: selection_type = SELECTION_TYPE_NUMBER; break;
+		case 3: selection_type = SELECTION_TYPE_QUICK; break;
+		case 4: selection_type = SELECTION_TYPE_ADVANCED; break;
+		case 5: selection_type = SELECTION_TYPE_OPTIONS; break;
 		}
 	}
 	PlaySoundFile("! Click.rso");
@@ -69,6 +67,16 @@ void selection_program()
 	if(selection_type == SELECTION_TYPE_CUSTOM) abs_selection_custom();
 	if(selection_type == SELECTION_TYPE_NUMBER)abs_selection_number();
 	if(selection_type == SELECTION_TYPE_QUICK) abs_selection_quick();
+	if(selection_type == SELECTION_TYPE_ADVANCED)
+	{
+		abs_selection_custom();
+		abs_selection_advanced();
+	}
+	if(selection_type == SELECTION_TYPE_OPTIONS)
+	{
+		abs_selection_options();
+		abs_selection_program();
+	}
 
 	g_start_point=g_input_array[STARTING_POINT];
 	g_start_delay=g_input_array[STARTING_DELAY];

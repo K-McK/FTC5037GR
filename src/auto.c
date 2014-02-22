@@ -41,6 +41,11 @@
 #include "lib/xander/hitechnic-angle.h"
 #include "lib/xander/hitechnic-accelerometer.h"
 
+//-----------------------
+// Custom include
+//-----------------------
+
+#include "lib/compile_flags.h"
 #include "lib/global_variables.h"
 #include "lib/abs_initialize.h"
 #include "lib/abs_s1_mission_execute.h"
@@ -79,6 +84,7 @@ task main()
 		abs_s4_mission_execute();
 		break;
 	}
+
 	g_const_heading = 0;
 	switch(g_end_point)
 	{
@@ -103,6 +109,5 @@ task main()
 	Close(LogFileHandle, LogIoResult);
 	LogData=false;
 
-	if(g_stay_on_ramp)
-		abs_stay_on_ramp();
+	if(g_stay_on_ramp) abs_stay_on_ramp();
 }

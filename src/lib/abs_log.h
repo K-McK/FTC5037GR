@@ -17,6 +17,11 @@
 /** macros */
 void abs_log(const char * input1,const char * input2, int input3, int input4, int input5,int input6)
 {
+
+	StringFormat(sString, "");
+	strcat(sString,CRLF);
+	WriteText(LogFileHandle, LogIoResult, sString);
+
 	StringFormat(sString, "%4d\t",nPgmTime);
 	WriteText(LogFileHandle, LogIoResult, sString);
 
@@ -54,9 +59,5 @@ void abs_log(const char * input1,const char * input2, int input3, int input4, in
 		StringFormat(sString, "cnst-g %4d\t", g_const_heading);
 		WriteText(LogFileHandle, LogIoResult, sString);
 	}
-
-	StringFormat(sString, "");
-	strcat(sString,CRLF);
-	WriteText(LogFileHandle, LogIoResult, sString);
 }
 #endif /* !ABS_LOG_H */
