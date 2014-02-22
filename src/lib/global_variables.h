@@ -1,17 +1,17 @@
 #pragma systemFile // treat as system file to eliminate warnings for unused variables
 /**
-*
-*  @file global_variables.h
-*
-*  @brief varaibles that are global
-*
-*  @param None n/a
-*
-*  @return \
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
+ *
+ *  @file global_variables.h
+ *
+ *  @brief varaibles that are global
+ *
+ *  @param None n/a
+ *
+ *  @return
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
 //
 //============================================================
 // Define sensor multiplexor connectivity and port allocations
@@ -484,68 +484,77 @@ int g_input_array[INPUT_ARRAY_SIZE];
 // Datalogging variables
 //=========================================================
 /**
-* @var LogFileName
-*		The name of the data logging file
-*
-* @var LogIoResult
-*		The success status of writing to the log file
-*
-* @var LogFileHandle
-*		The file handle variable (represents the file)
-*
-* @var LogFileSize
-*		The size of the log file
-*
-* @var CRLF
-*		characters required to cause output to appear on a new line
-*
-* @var LogData
-*		Tells the robot is if should log data or not
-*
-* @var dl_step
-*		Tells the robot what data login step its on
-*
-* @var dl_robot_action_state
-*		Tells the robot what the action state is
-*
-* @var dl_change_event
-*		Tells the robot if it changes events for data loging
-*
-* @var dl_ce_detail
-*		Tells the robot the details for the data loging
-*
-* @var dl_robot_action_detail
-*		Tells the robot what its action detail is
-*
-* @var dl_mission_number
-*		Tells the robot the data loging mission number
-*
-* @var dl_speed
-*		Tells the robot the speed of the data loging
-*
-* @var dl_dist
-*		Tells the robot the distence of something it should data log
-*
-* @var dl_gyro_heading
-*		Tells the data loging the gyro_heading
-*
-* @var dl_IR
-*		Tells the robot if it should data log IR or not
-*
-* @var dl_cur_dist
-*		Tells the data loging the robots current distence
-*
-* @var sString
-*		Tells the robot the string we are sending to the wright handler
-*
-* @def DL_MOVE_SPEED
-*		Tells the robot how fast its going so it can put it int he data loging
-* @def DL_MOVE_DIST
-*		Tells the robot how far its move so it can put it in the data loging
-*
-* @var dl_drive_details
-*		Tells the robot the drive details for data loging
-*/
+ * @var LogFileName
+ *		The name of the data logging file
+ *
+ * @var LogIoResult
+ *		The success status of writing to the log file
+ *
+ * @var LogFileHandle
+ *		The file handle variable (represents the file)
+ *
+ * @var LogFileSize
+ *		The size of the log file
+ *
+ * @var CRLF
+ *		characters required to cause output to appear on a new line
+ *
+ * @var LogData
+ *		Tells the robot is if should log data or not
+ *
+ * @var dl_step
+ *		Tells the robot what data login step its on
+ *
+ * @var dl_robot_action_state
+ *		Tells the robot what the action state is
+ *
+ * @var dl_change_event
+ *		Tells the robot if it changes events for data loging
+ *
+ * @var dl_ce_detail
+ *		Tells the robot the details for the data loging
+ *
+ * @var dl_robot_action_detail
+ *		Tells the robot what its action detail is
+ *
+ * @var dl_mission_number
+ *		Tells the robot the data loging mission number
+ *
+ * @var dl_speed
+ *		Tells the robot the speed of the data loging
+ *
+ * @var dl_dist
+ *		Tells the robot the distence of something it should data log
+ *
+ * @var dl_gyro_heading
+ *		Tells the data loging the gyro_heading
+ *
+ * @var dl_IR
+ *		Tells the robot if it should data log IR or not
+ *
+ * @var dl_cur_dist
+ *		Tells the data loging the robots current distence
+ *
+ * @var sString
+ *		Tells the robot the string we are sending to the wright handler
+ *
+ * @def DL_MOVE_SPEED
+ *		Tells the robot how fast its going so it can put it int he data loging
+ * @def DL_MOVE_DIST
+ *		Tells the robot how far its move so it can put it in the data loging
+ *
+ * @var dl_drive_details
+ *		Tells the robot the drive details for data loging
+ *
+ * @def DL_ANGLE
+ *		Tells the robot the data loging value for this sensor
+ * @def DL_LIGHT
+ *		Tells the robot the data loging value for this sensor
+ * @def DL_TIME
+ *		Tells the robot the data loging value for this sensor
+ * @def DL_IR
+ *		Tells the robot the data loging value for this sensor
+ */
 const string LogFileName = "DATALOG.txt";
 TFileIOResult LogIoResult;
 TFileHandle LogFileHandle;
@@ -576,6 +585,17 @@ int dl_dist_method = 0;
 #define DL_IR 3
 
 int dl_move_break = 0;
+
+/**
+ * @def DL_ANGLE_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ * @def DL_LIGHT_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ * @def DL_TIME_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ * @def DL_IR_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ */
 
 #define DL_ANGLE_BREAK 0
 #define DL_LIGHT_BREAK 1
@@ -615,27 +635,27 @@ int dl_drive_details [] = {0,4};
 //---------------
 
 /**
-* @def dl_ce_program_start
-*		 tell the robot when the robot does this
-* @def dl_ce_start_delay
-*		tell the robot when the robot does this
-* @def dl_ce_score_start
-*		tell the robot when the robot does this
-* @def dl_ce_end_delay
-*		tell the robot when the robot does this
-* @def dl_ce_end_point
-*		tell the robot when the robot does this
-* @def dl_ce_drive_end
-*		tell the robot when the robot does this
-* @def dl_ce_drive_start
-*		tell the robot when the robot does this
-* @def dl_ce_angle_reset
-*		tell the robot when the robot does this
-* @def dl_ce_turn_end
-*		tell the robot when the robot does this
-* @def dl_ce_turn_start
-*		tell the robot when the robot does this
-*/
+ * @def dl_ce_program_start
+ *		 tell the robot when the robot does this
+ * @def dl_ce_start_delay
+ *		tell the robot when the robot does this
+ * @def dl_ce_score_start
+ *		tell the robot when the robot does this
+ * @def dl_ce_end_delay
+ *		tell the robot when the robot does this
+ * @def dl_ce_end_point
+ *		tell the robot when the robot does this
+ * @def dl_ce_drive_end
+ *		tell the robot when the robot does this
+ * @def dl_ce_drive_start
+ *		tell the robot when the robot does this
+ * @def dl_ce_angle_reset
+ *		tell the robot when the robot does this
+ * @def dl_ce_turn_end
+ *		tell the robot when the robot does this
+ * @def dl_ce_turn_start
+ *		tell the robot when the robot does this
+ */
 #define dl_ce_program_start 1
 #define dl_ce_start_delay 2
 #define dl_ce_score_start 3
@@ -809,18 +829,17 @@ bool g_good_gyro = true;
 #endif
 
 bool g_gyro_ran = false;
-
 /**
  * @def MAX_TURN_RATE
- *	Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
+ *		Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
  * @def STAY_ON_RAMP_WAIT_TIME
- *	the frequency that the robot will check to see if it is moving during stand-your-ground
+ *		Tells the robot the wait time before it  gose on the ramp
  * @def LIGHT_SENSOR_CALIBRATION_TIME
- *	number of milliseconds the light sensor will calibrate for
+ *		Tells the robot the time it needs to calibrate
  * @def LIGHT_CALIBRATION_SAMPLE_RATE
- *	how frequently the light level will be sampled
- * @def DEFAULT_CALIBRATED_THRESHOLD
- *	the default threshold value to use when the calibration fails
+ *		Tells the robot the Calibration sample rate
+ * @def DEFAULT_CALIBRATED_LIGHT_THRESHOLD
+ *		Tells the robot the default calibration of the light to force it to fail if it gives us weid readings
  * @def DELAY_MULTIPLICATION_FACTOR
  *	the factor to multiply all delays by
  */
