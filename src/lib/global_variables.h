@@ -76,6 +76,10 @@ bool g_gyro_true = false;
 
 #define LIGHT_SERVO_DOWN 255
 #define LIGHT_SERVO_UP 127
+/**
+ * @var g_angle_sensor_val
+ *		Tells the robot the value of the raw angle sensor
+ */
 
 long g_angle_sensor_val = 0;
 
@@ -152,6 +156,14 @@ long g_angle_sensor_val = 0;
 *
 * @var g_ground_arm_down
 * 		Tells the robot where to put the ground arm when going down
+*
+* @var g_original_gyro_val
+*			Tells the robot what then orginal value of the gyro was
+* @var g_light_threshold
+* 		Tells the robot what the light threshhold is
+*
+* @var g_light_move_min_dist
+* 		Tells the robot how far it should move before it should be in light detection distence
 */
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
@@ -205,6 +217,10 @@ const int g_light_move_min_dist = 70;
 *			Tells the robot to go to this part in the selection program
 *	@var e_auto_selection_points::SELECTION_SUB_RAMP
 *			Tells the robot to go to this part in the selection program
+*	@var e_auto_selection_points::SELECTION_CORNOR_DELAY
+*			Tells the robot to go to this part in the selection program
+*	@var e_auto_selection_points::SELECTION_RAMP_DELAY
+*			Tells the robot to go to this part in the selection program
 * @var g_auto_selection_point
 *			Tells the robot what phase its in on auto
 */
@@ -239,6 +255,10 @@ e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
 *     Select one of the custom programs
 *  @var e_auto_selection_points::SELECTION_TYPE_QUICK
 *     Select one of the most commenly used progams
+*  @var e_auto_selection_points::SELECTION_TYPE_ADVANCED
+*     Select some of the more advanced fetures for auto
+*  @var e_auto_selection_points::SELECTION_TYPE_OPTIONS
+*     Chnage the settings for the robots auto
 * @var selection_type
 *		Tells the robot the selection type
 */
@@ -267,6 +287,10 @@ e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
 *     Tells the robot what number you are editing the delay at the end
 *  @var e_auto_selection_points::END_POINT
 *     Tells the robot what number you are editing where you end the program
+*  @var e_auto_selection_points::CORNOR_DELAY
+*     Tells the robot to do the corner delay
+*  @var e_auto_selection_points::RAMP_DELAY
+*     Tells the robot to do the ramp delay
 */
 
 typedef enum
@@ -554,6 +578,10 @@ int g_input_array[INPUT_ARRAY_SIZE];
  *		Tells the robot the data loging value for this sensor
  * @def DL_IR
  *		Tells the robot the data loging value for this sensor
+ * @var g_delta_drift
+ *		Tells the robot the delta of the drift
+ * @var dl_dist_method
+ *		Tells the robot the method we are going to calculate the distence
  */
 const string LogFileName = "DATALOG.txt";
 TFileIOResult LogIoResult;
@@ -583,7 +611,10 @@ int dl_dist_method = 0;
 #define DL_LIGHT 1
 #define DL_TIME 2
 #define DL_IR 3
-
+/**
+ * @var dl_move_break
+ *		Tells the robot the move break for data loging
+ */
 int dl_move_break = 0;
 
 /**
@@ -884,15 +915,35 @@ bool g_gyro_ran = false;
 *		Tells the robot the maxenum amount of numbers
 * @var g_number_max_limit
 *		Tells the robot the minunum amount of numbers
+*
+*
 */
 
+/**
+*  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
+*  @var e_em_first_turn_types::END_MISSION_FIRST_TURN_REL
+*     Do a relitive turn
+*   @var e_em_first_turn_types::END_MISSION_FIRST_TURN_CONST
+*     Do a consant turn
+*/
 typedef enum
 {
 	END_MISSION_FIRST_TURN_REL,
 	END_MISSION_FIRST_TURN_CONST
 } e_em_first_turn_types;
-
+/**
+ * @var g_em_first_turn_type
+ *		Tells the robot the the first turn of the end of auto
+ */
 e_em_first_turn_types g_em_first_turn_type = END_MISSION_FIRST_TURN_REL;
+
+/**
+*  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
+*  @var e_em_first_turn_types::END_MISSION_SECOND_TURN_REL
+*     Do a relitive turn
+*   @var e_em_first_turn_types::END_MISSION_SECOND_TURN_CONST
+*     Do a consant turn
+*/
 
 typedef enum
 {
@@ -900,6 +951,16 @@ typedef enum
 	END_MISSION_SECOND_TURN_CONST
 } e_em_second_turn_types;
 
+/**
+ * @var g_em_second_turn_type
+ *		Tells the robot the the second turn of the end of auto
+ * @var g_selection_turn
+ *		Tells the robot the selected turn
+ * @var g_cornor_delay
+ *		Tells the robot the time it should wait at the cornor
+ * @var g_stay_on_ramp
+ *		Tells the robot if it should push back an a robot if it pushes on it
+ */
 e_em_second_turn_types g_em_second_turn_type = END_MISSION_FIRST_TURN_REL;
 
 int g_selection_turn = 1;
@@ -945,6 +1006,8 @@ int g_number_max_limit [] = {0,4,30,7,30,5};
 *		Tells the robt the raw gyro value
 * @var g_recont_heading
 *		This is the recalculated const gyro heading
+* @var g_sacred_const_heading
+*		This is the recalculated value of the gyrp baced on a calculation
 */
 int g_gyro_noise = 0;
 long g_start_time = 0;
@@ -992,6 +1055,9 @@ int g_recont_heading = 0; //this is the recalculated const gyro heading
 *
 * @var g_reset_angle
 *		a varable that tells the robot to reset the angle sensor value
+*
+* @var dist_record
+*		Tells the robot if it should calcuate the distence it needs to go instead of a raw value
 */
 
 bool dist_record = true;
@@ -1097,6 +1163,13 @@ string g_basic_word_list [] = {
 	"yes     ",
 	"no      "};
 
+/**
+*  @enum e_light_sensor_status Tells the robot if it should turn on the light sensor
+*  @var e_light_sensor_status::ACTIVE
+*     Turn it on
+*   @var e_light_sensor_status::INACTIVE
+*     turn it off
+*/
 typedef enum
 {
 	ACTIVE,
@@ -1162,6 +1235,10 @@ typedef enum
 *     Tells the robot the screen state number for this screen statestate
 *  @def S_QUICK_SELECTION
 *     Tells the robot the screen state number for this screen statestate
+*  @def S_END_TURN_OPTIONS
+*			Tells the robot the screen state number for this screen statestate
+*  @def S_STAY_GROUND_OPTIONS
+*			Tells the robot the screen state number for this screen statestate
 *  @var g_screen_state
 *			Tells the robt what it should desply on the screen
 */
