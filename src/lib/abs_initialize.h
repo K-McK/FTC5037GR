@@ -80,7 +80,14 @@ void abs_initialize()
 	abs_reset_angle_sensor_val(HARD_RESET);
 
 	PlayTone(700, 100);
+
+#if WAIT == 0
 	waitForStart();
+
+#else
+while(nNxtButtonPressed == kEnterButton){}
+if(nNxtButtonPressed != kEnterButton) wait1Msec(5000);
+#endif
 
 	abs_log(__FILE__ ,"auto start",nPgmTime,0,0,0);
 
