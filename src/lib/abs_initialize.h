@@ -81,12 +81,11 @@ void abs_initialize()
 
 	PlayTone(700, 100);
 
-#if WAIT == 0
+#if USE_WAIT_FOR_START == 1
 	waitForStart();
-
 #else
-while(nNxtButtonPressed == kEnterButton){}
-if(nNxtButtonPressed != kEnterButton) wait1Msec(5000);
+	while(nNxtButtonPressed == kEnterButton){}
+	if(nNxtButtonPressed != kEnterButton) wait1Msec(5000);
 #endif
 
 	abs_log(__FILE__ ,"auto start",nPgmTime,0,0,0);

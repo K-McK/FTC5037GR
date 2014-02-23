@@ -83,10 +83,10 @@ void abs_end_ramp(int delay, int lift_speed)
 	dl_robot_action_state = dl_wait;
 	dl_speed = 200;
 	wait1Msec(200);
-	abs_drive(FORWARD, E_LIGHT, 110, 30, true, GYRO);
-	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 20)
+	abs_drive(FORWARD, E_LIGHT, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE, 30, true, GYRO);
+	if(abs_get_angle_sensor_val(RELATIVE_BPU) < MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)
 	{
-		abs_drive(FORWARD, E_ANGLE, 110 - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, MAX_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
 	}
 	abs_control_light_sensor(INACTIVE);
 	dl_step = dl_step+1;
