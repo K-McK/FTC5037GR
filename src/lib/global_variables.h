@@ -469,6 +469,9 @@ const int g_backwards_crate4_to_turn_dist = 140;
 
 #define MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE 110
 #define MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE 20
+
+#define FORWARD_IR_THRESHOLD 7
+#define BACKWARD_IR_THRESHOLD 3
 //=========================================================
 // Smoke test varaibles
 //=========================================================
