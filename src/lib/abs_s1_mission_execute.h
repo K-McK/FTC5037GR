@@ -34,7 +34,7 @@ void abs_s1_mission_execute()
 	case 1:
 		dist_record=true;
 		g_screen_state = S_ANGLE_SHOW;
-		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, GYRO);
+		abs_drive(FORWARD, E_IR_DETECT, FORWARD_IR_THRESHOLD, 40, true, GYRO);
 		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
 		{
 			dist_record = true;
