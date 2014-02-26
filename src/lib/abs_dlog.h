@@ -21,7 +21,7 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 	strcat(sString,CRLF);
 	WriteText(LogFileHandle, LogIoResult, sString);
 
-	StringFormat(sString, "%4d\t",nPgmTime);
+	StringFormat(sString, "%09.3f\t",(((float)nPgmTime)/1000));
 	WriteText(LogFileHandle, LogIoResult, sString);
 
 	if(!strcmp(input1,""))StringFormat(sString, input1);
