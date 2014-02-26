@@ -28,18 +28,18 @@ void abs_s2_mission_execute()
 	{
 	case 0:
 		g_screen_state = S_ANGLE_SHOW;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true, g_drive_type);
 		break;
 
 	case 1:
 		dist_record=true;
-		abs_drive(BACKWARD, E_IR_DETECT, BACKWARD_IR_THRESHOLD, 40, true, GYRO);
+		abs_drive(BACKWARD, E_IR_DETECT, BACKWARD_IR_THRESHOLD, 40, true, g_drive_type);
 		g_shift_due_to_ir = true;
 		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
 		{
 			dist_record = true;
 			//g_shift_due_to_ir = false;
-			abs_drive(BACKWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, GYRO);
+			abs_drive(BACKWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, g_drive_type);
 		}
 		//Only use g_shift_due_to_ir when shifted due the the ir detecting
 		PlayTone(200,20);
@@ -49,7 +49,7 @@ void abs_s2_mission_execute()
 		wait1Msec(1000);
 		if(g_shift_due_to_ir)
 		{
-			abs_drive(FORWARD, E_ANGLE, /*distance in cm*/6, 50, true, GYRO);
+			abs_drive(FORWARD, E_ANGLE, /*distance in cm*/6, 50, true, g_drive_type);
 		}
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;
@@ -59,22 +59,22 @@ void abs_s2_mission_execute()
 
 	case 2:
 		dist_record=true;
-		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/40, 50, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/40, 50, true, g_drive_type);
 		break;
 
 	case 3:
 		dist_record=true;
-		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/65, 50, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/65, 50, true, g_drive_type);
 		break;
 
 	case 4:
 		dist_record=true;
-		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/115, 50, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/115, 50, true, g_drive_type);
 		break;
 
 	case 5:
 		dist_record=true;
-		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/140, 50, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, /*distance in cm*/140, 50, true, g_drive_type);
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;
 		dl_speed = 2000;
@@ -87,9 +87,9 @@ void abs_s2_mission_execute()
 		dl_robot_action_state = dl_wait;
 		dl_speed = 200;
 		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 190, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 190, 50, true, g_drive_type);
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 75, 60);
-		abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 80, 50, true, g_drive_type);
 		break;
 
 	case 7:
@@ -98,13 +98,13 @@ void abs_s2_mission_execute()
 		dl_robot_action_state = dl_wait;
 		dl_speed = 200;
 		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 87, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 87, 50, true, g_drive_type);
 		motor[block_lift_motor] = 40;
 		motor[block_lift_motor2] = 40;
 		abs_turn(CLOCKWISE, POINT, TURN, 103, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 80, 50, true, g_drive_type);
 		break;
 	}
 	dl_step++;

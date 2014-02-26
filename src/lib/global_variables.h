@@ -980,6 +980,7 @@ int g_cornor_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
 bool g_stay_on_ramp = true;
+e_drive_type g_drive_type = GYRO;
 
 int g_dist_backwards = 0;
 
