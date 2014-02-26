@@ -22,6 +22,7 @@
 #include "abs_control_light_sensor.h"
 #include "abs_mission_to_turn_amount.h"
 #include "abs_lift_block_lifter.h"
+#include "global_variables.h"
 
 void abs_end_ramp(int delay, int lift_speed)
 {
@@ -86,7 +87,7 @@ void abs_end_ramp(int delay, int lift_speed)
 	abs_drive(FORWARD, E_LIGHT, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE, 30, true, g_drive_type);
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)
 	{
-		abs_drive(FORWARD, E_ANGLE, MAX_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
+		abs_drive(FORWARD, E_ANGLE, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
 	}
 	abs_control_light_sensor(INACTIVE);
 	dl_step = dl_step+1;
