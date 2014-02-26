@@ -33,7 +33,7 @@ void abs_s2_mission_execute()
 
 	case 1:
 		dist_record=true;
-		abs_drive(BACKWARD, E_IR_DETECT, 3, 40, true, GYRO);
+		abs_drive(BACKWARD, E_IR_DETECT, BACKWARD_IR_THRESHOLD, 40, true, GYRO);
 		g_shift_due_to_ir = true;
 		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
 		{

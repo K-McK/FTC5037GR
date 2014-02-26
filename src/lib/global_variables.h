@@ -188,7 +188,7 @@ const int g_ground_arm_down = 120;
 
 const int g_light_threshold = 30;
 
-const int g_light_move_min_dist = 70;
+const int g_light_move_min_dist = 70; // REMOVE
 
 //=========================================================
 // auto selection points
@@ -467,6 +467,11 @@ const int g_backwards_crate2_to_turn_dist = 65;
 const int g_backwards_crate3_to_turn_dist = 115;
 const int g_backwards_crate4_to_turn_dist = 140;
 
+#define MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE 110
+#define MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE 20
+
+#define FORWARD_IR_THRESHOLD 7
+#define BACKWARD_IR_THRESHOLD 3
 //=========================================================
 // Smoke test varaibles
 //=========================================================
