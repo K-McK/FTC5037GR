@@ -25,6 +25,7 @@
 
 #include "abs_gyro_drive.h"
 #include "abs_log.h"
+#include "abs_dlog.h"
 #include "abs_reset_angle_sensor.h"
 #include "abs_get_angle_sensor_val.h"
 #include "abs_move_utils.h"
@@ -377,6 +378,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	{
 		bool light_fail = false;
 		abs_reset_angle_sensor_val(SOFT_RESET);
+
 		abs_log(__FILE__ ,"reset angle",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
 
 		int max_light_detected = 0;
@@ -385,9 +387,9 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			//finds out what the highest value of the light sensor was
 			max_light_detected = max(max_light_detected, g_light_sensor);
 
-			if(g_light_sensor>g_calibrated_light_threshold_val&&abs_get_angle_sensor_val(RELATIVE_ASU)<g_light_move_min_dist)
+			if(g_light_sensor>g_calibrated_light_threshold_val&&abs_get_angle_sensor_val(RELATIVE_BPU)<MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)
 			{
-				abs_log(__FILE__ ,"Premature light detection",g_light_move_min_dist,abs_get_angle_sensor_val(RELATIVE_ASU),g_calibrated_light_threshold_val,g_light_sensor);
+				abs_dlog(__FILE__ ,"Premature light detection: ", "Min BPU: %d", MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE, "Actual BPU when detected: %d", abs_get_angle_sensor_val(RELATIVE_BPU), "Light Threshold: %d", g_calibrated_light_threshold_val, "Light Value detected: %d", max_light_detected);
 				light_fail = true;
 			}
 
@@ -401,7 +403,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				dl_move_break = DL_ANGLE_BREAK;
 
-				abs_log(__FILE__ ,"angle break",speed,dist,g_calibrated_light_threshold_val,max_light_detected);
+				abs_dlog(__FILE__ ,"angle break: ", "speed: %d", speed, "max distance: %d", dist, "Light Threshold: %d", g_calibrated_light_threshold_val, "Light Value detected: %d", max_light_detected);
 
 				break;
 			}
@@ -467,12 +469,12 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			if(g_shift_due_to_ir)
 			{
 				//subtract 5 to account for drift of stop in ir
-				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 7 - 5;
+				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5 - 5;
 				else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
 			}
 			else
 			{
-				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 7;
+				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5;
 				else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
 			}
 			abs_log(__FILE__,"Raw values",abs_get_angle_sensor_val(RAW_ASU),abs_get_angle_sensor_val(RAW_BPU),0,0);

@@ -1,17 +1,17 @@
 #pragma systemFile // treat as system file to eliminate warnings for unused variables
 /**
-*
-*  @file global_variables.h
-*
-*  @brief varaibles that are global
-*
-*  @param None n/a
-*
-*  @return \
-*
-*  @copyright Copyright 2013, Got Robot? FTC Team 5037
-*
-*/
+ *
+ *  @file global_variables.h
+ *
+ *  @brief varaibles that are global
+ *
+ *  @param None n/a
+ *
+ *  @return
+ *
+ *  @copyright Copyright 2013, Got Robot? FTC Team 5037
+ *
+ */
 //
 //============================================================
 // Define sensor multiplexor connectivity and port allocations
@@ -76,6 +76,10 @@ bool g_gyro_true = false;
 
 #define LIGHT_SERVO_DOWN 255
 #define LIGHT_SERVO_UP 127
+/**
+ * @var g_angle_sensor_val
+ *		Tells the robot the value of the raw angle sensor
+ */
 
 long g_angle_sensor_val = 0;
 
@@ -152,6 +156,14 @@ long g_angle_sensor_val = 0;
 *
 * @var g_ground_arm_down
 * 		Tells the robot where to put the ground arm when going down
+*
+* @var g_original_gyro_val
+*			Tells the robot what then orginal value of the gyro was
+* @var g_light_threshold
+* 		Tells the robot what the light threshhold is
+*
+* @var g_light_move_min_dist
+* 		Tells the robot how far it should move before it should be in light detection distence
 */
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
@@ -176,7 +188,7 @@ const int g_ground_arm_down = 120;
 
 const int g_light_threshold = 30;
 
-const int g_light_move_min_dist = 70;
+const int g_light_move_min_dist = 70; // REMOVE
 
 //=========================================================
 // auto selection points
@@ -204,6 +216,10 @@ const int g_light_move_min_dist = 70;
 * @var e_auto_selection_points::SELECTION_QUICK_INPUT
 *			Tells the robot to go to this part in the selection program
 *	@var e_auto_selection_points::SELECTION_SUB_RAMP
+*			Tells the robot to go to this part in the selection program
+*	@var e_auto_selection_points::SELECTION_CORNOR_DELAY
+*			Tells the robot to go to this part in the selection program
+*	@var e_auto_selection_points::SELECTION_RAMP_DELAY
 *			Tells the robot to go to this part in the selection program
 * @var g_auto_selection_point
 *			Tells the robot what phase its in on auto
@@ -239,6 +255,10 @@ e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
 *     Select one of the custom programs
 *  @var e_auto_selection_points::SELECTION_TYPE_QUICK
 *     Select one of the most commenly used progams
+*  @var e_auto_selection_points::SELECTION_TYPE_ADVANCED
+*     Select some of the more advanced fetures for auto
+*  @var e_auto_selection_points::SELECTION_TYPE_OPTIONS
+*     Chnage the settings for the robots auto
 * @var selection_type
 *		Tells the robot the selection type
 */
@@ -267,6 +287,10 @@ e_selection_types selection_type = SELECTION_TYPE_CUSTOM;
 *     Tells the robot what number you are editing the delay at the end
 *  @var e_auto_selection_points::END_POINT
 *     Tells the robot what number you are editing where you end the program
+*  @var e_auto_selection_points::CORNOR_DELAY
+*     Tells the robot to do the corner delay
+*  @var e_auto_selection_points::RAMP_DELAY
+*     Tells the robot to do the ramp delay
 */
 
 typedef enum
@@ -343,12 +367,34 @@ typedef enum
 
 e_auto_sub_selection_ramp g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
 
+/**
+*  @enum e_gyro_val_type the type of gyro units to read
+*  @var e_gyro_val_type::RAW
+*     provides the raw gyro value
+*   @var e_gyro_val_type::CALIBRATED
+*     provides the calibrated gyro value
+*/
 typedef enum
 {
 	RAW,
 	CALIBRATED
 } e_gyro_val_type;
 
+/**
+*  @enum e_angle_val_type the type of angle sensor units to read
+*  @var e_angle_val_type::RELATIVE_ASU
+*     provides the angle sensor reading in relative angle sensor units
+*   @var e_angle_val_type::RELATIVE_BPU
+*     provides the angle sensor reading in relative Black Perl units
+*   @var e_angle_val_type::RELATIVE_CENTIMETERS
+*     provides the angle sensor reading in relative centimeters
+*  @var e_angle_val_type::RAW_ASU
+*     provides the angle sensor reading in raw angle sensor units
+*   @var e_angle_val_type::RAW_BPU
+*     provides the angle sensor reading in raw Black Perl units
+*   @var e_angle_val_type::RAW_CENTIMETERS
+*     provides the angle sensor reading in raw centimeters
+*/
 typedef enum
 {
 	RELATIVE_ASU,
@@ -359,6 +405,13 @@ typedef enum
 	RAW_CENTIMETERS
 } e_angle_val_type;
 
+/**
+*  @enum e_angle_reset_type the type of angle sensor reset to perform
+*  @var e_angle_val_type::SOFT_RESET
+*     resets the interpretation of the angle sensor without resetting the actual sensor
+*   @var e_angle_val_type::HARD_RESET
+*     resets the actual sensor
+*/
 typedef enum
 {
 	SOFT_RESET,
@@ -414,6 +467,11 @@ const int g_backwards_crate2_to_turn_dist = 65;
 const int g_backwards_crate3_to_turn_dist = 115;
 const int g_backwards_crate4_to_turn_dist = 140;
 
+#define MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE 110
+#define MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE 20
+
+#define FORWARD_IR_THRESHOLD 7
+#define BACKWARD_IR_THRESHOLD 3
 //=========================================================
 // Smoke test varaibles
 //=========================================================
@@ -455,53 +513,81 @@ int g_input_array[INPUT_ARRAY_SIZE];
 // Datalogging variables
 //=========================================================
 /**
-* @var LogData
-*		Tells the robot is if should log data or not
-*
-* @var dl_step
-*		Tells the robot what data login step its on
-*
-* @var dl_robot_action_state
-*		Tells the robot what the action state is
-*
-* @var dl_change_event
-*		Tells the robot if it changes events for data loging
-*
-* @var dl_ce_detail
-*		Tells the robot the details for the data loging
-*
-* @var dl_robot_action_detail
-*		Tells the robot what its action detail is
-*
-* @var dl_mission_number
-*		Tells the robot the data loging mission number
-*
-* @var dl_speed
-*		Tells the robot the speed of the data loging
-*
-* @var dl_dist
-*		Tells the robot the distence of something it should data log
-*
-* @var dl_gyro_heading
-*		Tells the data loging the gyro_heading
-*
-* @var dl_IR
-*		Tells the robot if it should data log IR or not
-*
-* @var dl_cur_dist
-*		Tells the data loging the robots current distence
-*
-* @var sString
-*		Tells the robot the string we are sending to the wright handler
-*
-* @def DL_MOVE_SPEED
-*		Tells the robot how fast its going so it can put it int he data loging
-* @def DL_MOVE_DIST
-*		Tells the robot how far its move so it can put it in the data loging
-*
-* @var dl_drive_details
-*		Tells the robot the drive details for data loging
-*/
+ * @var LogFileName
+ *		The name of the data logging file
+ *
+ * @var LogIoResult
+ *		The success status of writing to the log file
+ *
+ * @var LogFileHandle
+ *		The file handle variable (represents the file)
+ *
+ * @var LogFileSize
+ *		The size of the log file
+ *
+ * @var CRLF
+ *		characters required to cause output to appear on a new line
+ *
+ * @var LogData
+ *		Tells the robot is if should log data or not
+ *
+ * @var dl_step
+ *		Tells the robot what data login step its on
+ *
+ * @var dl_robot_action_state
+ *		Tells the robot what the action state is
+ *
+ * @var dl_change_event
+ *		Tells the robot if it changes events for data loging
+ *
+ * @var dl_ce_detail
+ *		Tells the robot the details for the data loging
+ *
+ * @var dl_robot_action_detail
+ *		Tells the robot what its action detail is
+ *
+ * @var dl_mission_number
+ *		Tells the robot the data loging mission number
+ *
+ * @var dl_speed
+ *		Tells the robot the speed of the data loging
+ *
+ * @var dl_dist
+ *		Tells the robot the distence of something it should data log
+ *
+ * @var dl_gyro_heading
+ *		Tells the data loging the gyro_heading
+ *
+ * @var dl_IR
+ *		Tells the robot if it should data log IR or not
+ *
+ * @var dl_cur_dist
+ *		Tells the data loging the robots current distence
+ *
+ * @var sString
+ *		Tells the robot the string we are sending to the wright handler
+ *
+ * @def DL_MOVE_SPEED
+ *		Tells the robot how fast its going so it can put it int he data loging
+ * @def DL_MOVE_DIST
+ *		Tells the robot how far its move so it can put it in the data loging
+ *
+ * @var dl_drive_details
+ *		Tells the robot the drive details for data loging
+ *
+ * @def DL_ANGLE
+ *		Tells the robot the data loging value for this sensor
+ * @def DL_LIGHT
+ *		Tells the robot the data loging value for this sensor
+ * @def DL_TIME
+ *		Tells the robot the data loging value for this sensor
+ * @def DL_IR
+ *		Tells the robot the data loging value for this sensor
+ * @var g_delta_drift
+ *		Tells the robot the delta of the drift
+ * @var dl_dist_method
+ *		Tells the robot the method we are going to calculate the distence
+ */
 const string LogFileName = "DATALOG.txt";
 TFileIOResult LogIoResult;
 TFileHandle LogFileHandle;
@@ -530,8 +616,22 @@ int dl_dist_method = 0;
 #define DL_LIGHT 1
 #define DL_TIME 2
 #define DL_IR 3
-
+/**
+ * @var dl_move_break
+ *		Tells the robot the move break for data loging
+ */
 int dl_move_break = 0;
+
+/**
+ * @def DL_ANGLE_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ * @def DL_LIGHT_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ * @def DL_TIME_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ * @def DL_IR_BREAK
+ *		Tells the robot the dataloging value for  this sensor break
+ */
 
 #define DL_ANGLE_BREAK 0
 #define DL_LIGHT_BREAK 1
@@ -571,17 +671,27 @@ int dl_drive_details [] = {0,4};
 //---------------
 
 /**
-* @def dl_ce_program_start
-*		 tell the robot when the robot dose this
-* @def dl_ce_start_delay
-*		tell the robot when the robot dose this
-* @def dl_ce_score_start
-*		tell the robot when the robot dose this
-* @def dl_ce_end_delay
-*		tell the robot when the robot dose this
-* @def dl_ce_end_point
-*		tell the robot when the robot dose this
-*/
+ * @def dl_ce_program_start
+ *		 tell the robot when the robot does this
+ * @def dl_ce_start_delay
+ *		tell the robot when the robot does this
+ * @def dl_ce_score_start
+ *		tell the robot when the robot does this
+ * @def dl_ce_end_delay
+ *		tell the robot when the robot does this
+ * @def dl_ce_end_point
+ *		tell the robot when the robot does this
+ * @def dl_ce_drive_end
+ *		tell the robot when the robot does this
+ * @def dl_ce_drive_start
+ *		tell the robot when the robot does this
+ * @def dl_ce_angle_reset
+ *		tell the robot when the robot does this
+ * @def dl_ce_turn_end
+ *		tell the robot when the robot does this
+ * @def dl_ce_turn_start
+ *		tell the robot when the robot does this
+ */
 #define dl_ce_program_start 1
 #define dl_ce_start_delay 2
 #define dl_ce_score_start 3
@@ -724,11 +834,29 @@ bool g_joy2_enabled = false;
 
 int g_selection_value = 0;
 
+/**
+ *
+ * @var g_light_delta_value
+ *	the difference in light between black and white that we are looking for
+ * @var g_calibrated_light_threshold_val
+ *	a configurable threshold for detecting the white line
+ * @var g_end_ramp_lift_speed
+ *	the speed to lift the block lifter before entering the ramp
+ * @var g_shift_due_to_ir
+ *	flag indicating that the robot jerked because of detecting IR from starting position 2
+ * @var g_good_gyro
+ *	flag indicating that the gyro has not given a bad reading
+ * @def GYRO_VALUE_QUEUE_SIZE
+ *	the size of the queue used to store the gyro readings
+ * @var g_gyro_values
+ *	array used to store all the gyro readings for debug purposes
+ * @var g_gyro_ran
+ *	flag indicating that we have performed at least one gyro read
+ */
 const int g_light_delta_value = 2;
 int g_calibrated_light_threshold_val = 0;
 int g_end_ramp_lift_speed = 40;
 bool g_shift_due_to_ir = false;
-
 bool g_good_gyro = true;
 
 #if DEBUG_MODE == 1
@@ -737,13 +865,26 @@ bool g_good_gyro = true;
 #endif
 
 bool g_gyro_ran = false;
-//Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
+/**
+ * @def MAX_TURN_RATE
+ *		Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
+ * @def STAY_ON_RAMP_WAIT_TIME
+ *		Tells the robot the wait time before it  gose on the ramp
+ * @def LIGHT_SENSOR_CALIBRATION_TIME
+ *		Tells the robot the time it needs to calibrate
+ * @def LIGHT_CALIBRATION_SAMPLE_RATE
+ *		Tells the robot the Calibration sample rate
+ * @def DEFAULT_CALIBRATED_LIGHT_THRESHOLD
+ *		Tells the robot the default calibration of the light to force it to fail if it gives us weid readings
+ * @def DELAY_MULTIPLICATION_FACTOR
+ *	the factor to multiply all delays by
+ */
 #define MAX_TURN_RATE 0.72
-
 #define STAY_ON_RAMP_WAIT_TIME 100
 #define LIGHT_SENSOR_CALIBRATION_TIME 2000
 #define LIGHT_CALIBRATION_SAMPLE_RATE 100
 #define DEFAULT_CALIBRATED_LIGHT_THRESHOLD 9999
+#define DELAY_MULTIPLICATION_FACTOR 1000
 
 //=============================================================
 // Define user configurable parameters
@@ -779,17 +920,35 @@ bool g_gyro_ran = false;
 *		Tells the robot the maxenum amount of numbers
 * @var g_number_max_limit
 *		Tells the robot the minunum amount of numbers
+*
+*
 */
 
-#define DELAY_MULTIPLICATION_FACTOR 1000
-
+/**
+*  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
+*  @var e_em_first_turn_types::END_MISSION_FIRST_TURN_REL
+*     Do a relitive turn
+*   @var e_em_first_turn_types::END_MISSION_FIRST_TURN_CONST
+*     Do a consant turn
+*/
 typedef enum
 {
 	END_MISSION_FIRST_TURN_REL,
 	END_MISSION_FIRST_TURN_CONST
 } e_em_first_turn_types;
-
+/**
+ * @var g_em_first_turn_type
+ *		Tells the robot the the first turn of the end of auto
+ */
 e_em_first_turn_types g_em_first_turn_type = END_MISSION_FIRST_TURN_REL;
+
+/**
+*  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
+*  @var e_em_first_turn_types::END_MISSION_SECOND_TURN_REL
+*     Do a relitive turn
+*   @var e_em_first_turn_types::END_MISSION_SECOND_TURN_CONST
+*     Do a consant turn
+*/
 
 typedef enum
 {
@@ -797,6 +956,16 @@ typedef enum
 	END_MISSION_SECOND_TURN_CONST
 } e_em_second_turn_types;
 
+/**
+ * @var g_em_second_turn_type
+ *		Tells the robot the the second turn of the end of auto
+ * @var g_selection_turn
+ *		Tells the robot the selected turn
+ * @var g_cornor_delay
+ *		Tells the robot the time it should wait at the cornor
+ * @var g_stay_on_ramp
+ *		Tells the robot if it should push back an a robot if it pushes on it
+ */
 e_em_second_turn_types g_em_second_turn_type = END_MISSION_FIRST_TURN_REL;
 
 int g_selection_turn = 1;
@@ -811,6 +980,7 @@ int g_cornor_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
 bool g_stay_on_ramp = true;
+e_drive_type g_drive_type = GYRO;
 
 int g_dist_backwards = 0;
 
@@ -842,6 +1012,8 @@ int g_number_max_limit [] = {0,4,30,7,30,5};
 *		Tells the robt the raw gyro value
 * @var g_recont_heading
 *		This is the recalculated const gyro heading
+* @var g_sacred_const_heading
+*		This is the recalculated value of the gyrp baced on a calculation
 */
 int g_gyro_noise = 0;
 long g_start_time = 0;
@@ -889,6 +1061,9 @@ int g_recont_heading = 0; //this is the recalculated const gyro heading
 *
 * @var g_reset_angle
 *		a varable that tells the robot to reset the angle sensor value
+*
+* @var dist_record
+*		Tells the robot if it should calcuate the distence it needs to go instead of a raw value
 */
 
 bool dist_record = true;
@@ -994,6 +1169,13 @@ string g_basic_word_list [] = {
 	"yes     ",
 	"no      "};
 
+/**
+*  @enum e_light_sensor_status Tells the robot if it should turn on the light sensor
+*  @var e_light_sensor_status::ACTIVE
+*     Turn it on
+*   @var e_light_sensor_status::INACTIVE
+*     turn it off
+*/
 typedef enum
 {
 	ACTIVE,
@@ -1059,6 +1241,10 @@ typedef enum
 *     Tells the robot the screen state number for this screen statestate
 *  @def S_QUICK_SELECTION
 *     Tells the robot the screen state number for this screen statestate
+*  @def S_END_TURN_OPTIONS
+*			Tells the robot the screen state number for this screen statestate
+*  @def S_STAY_GROUND_OPTIONS
+*			Tells the robot the screen state number for this screen statestate
 *  @var g_screen_state
 *			Tells the robt what it should desply on the screen
 */

@@ -29,53 +29,53 @@ void abs_s4_mission_execute()
 		break;
 
 	case 2:
-		abs_drive(FORWARD, E_ANGLE, 5, 30, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 5, 30, true, g_drive_type);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 45, 40);
-		abs_drive(FORWARD, E_ANGLE, 37, 60, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 37, 60, true, g_drive_type);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 136, 30);
-		abs_drive(FORWARD, E_ANGLE, 5, 30, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 5, 30, true, g_drive_type);
 
 		if(g_end_point == 3) g_to_turn_dist = g_forward_crate1_to_turn_dist;
 		else if(g_end_point == 2) g_to_turn_dist = 45;
 		break;
 
 	case 3:
-		abs_drive(FORWARD, E_ANGLE, 5, 30, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 5, 30, true, g_drive_type);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 45, 40);
-		abs_drive(FORWARD, E_ANGLE, 37, 60, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 37, 60, true, g_drive_type);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 136, 30);
-		abs_drive(BACKWARD, E_ANGLE, 7, 50, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, 7, 50, true, g_drive_type);
 		if(g_end_point == 3)g_to_turn_dist = g_forward_crate2_to_turn_dist;
 		else g_to_turn_dist = 70;
 		break;
 
 	case 4:
-		abs_drive(FORWARD, E_ANGLE, 5, 30, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 5, 30, true, g_drive_type);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 45, 40);
-		abs_drive(FORWARD, E_ANGLE, 37, 60, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 37, 60, true, g_drive_type);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 136, 30);
-		abs_drive(BACKWARD, E_ANGLE, 55, 50, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, 55, 50, true, g_drive_type);
 		if(g_end_point == 3)g_to_turn_dist = g_forward_crate3_to_turn_dist;
 		else g_to_turn_dist = 120;
 		break;
 
 	case 5:
-		abs_drive(FORWARD, E_ANGLE, 5, 30, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 5, 30, true, g_drive_type);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 45, 40);
-		abs_drive(FORWARD, E_ANGLE, 37, 60, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 37, 60, true, g_drive_type);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 136, 30);
-		abs_drive(BACKWARD, E_ANGLE, 82, 50, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, 82, 50, true, g_drive_type);
 		if(g_end_point == 3)g_to_turn_dist = g_forward_crate4_to_turn_dist;
 		else g_to_turn_dist = 145;
 		break;
 
 	case 6:
 		abs_turn(CLOCKWISE, SWING, TURN_TO, 60, 60);
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/30, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/30, 50, true, g_drive_type);
 		abs_turn(CLOCKWISE, POINT, TURN_TO, 120, 60);
-		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, g_drive_type);
 		abs_turn(CLOCKWISE, POINT, TURN, 90, 60);
-		abs_drive(FORWARD, E_ANGLE, 180, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 180, 50, true, g_drive_type);
 		break;
 
 	case 7:
