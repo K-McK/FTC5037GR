@@ -44,12 +44,12 @@ void abs_end_ramp(int delay, int lift_speed)
 	if(g_end_point == 2)
 	{
 		abs_dlog(__FILE__ ,"drive to ramp 1");
-		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, g_drive_type);
 	}
 	else
 	{
 		abs_dlog(__FILE__ ,"drive to ramp 2");
-		abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true, GYRO);
+		abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true, g_drive_type);
 	}
 
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 5)//15)
@@ -84,10 +84,10 @@ void abs_end_ramp(int delay, int lift_speed)
 	dl_robot_action_state = dl_wait;
 	dl_speed = 200;
 	wait1Msec(200);
-	abs_drive(FORWARD, E_LIGHT, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE, 30, true, GYRO);
+	abs_drive(FORWARD, E_LIGHT, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE, 30, true, g_drive_type);
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)
 	{
-		abs_drive(FORWARD, E_ANGLE, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
 	}
 	abs_control_light_sensor(INACTIVE);
 	dl_step = dl_step+1;
@@ -123,8 +123,8 @@ void abs_end_ramp(int delay, int lift_speed)
 	/** before entering the ramp, pause for the requested time */
 	wait1Msec(g_input_array[RAMP_DELAY] * DELAY_MULTIPLICATION_FACTOR);
 
-	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
-	else abs_drive(FORWARD, E_ANGLE, 130, 50, true, GYRO);
+	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, 50, true, g_drive_type);
+	else abs_drive(FORWARD, E_ANGLE, 130, 50, true, g_drive_type);
 
 	//if the lift task is still running at this point then stop it
 	StopTask(abs_lift_block_lifter);

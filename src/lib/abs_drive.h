@@ -25,6 +25,7 @@
 
 #include "abs_gyro_drive.h"
 #include "abs_log.h"
+#include "abs_dlog.h"
 #include "abs_reset_angle_sensor.h"
 #include "abs_get_angle_sensor_val.h"
 #include "abs_move_utils.h"

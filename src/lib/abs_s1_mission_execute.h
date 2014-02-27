@@ -28,17 +28,17 @@ void abs_s1_mission_execute()
 	{
 	case 0:
 		g_screen_state = S_ANGLE_SHOW;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true, g_drive_type);
 		break;
 
 	case 1:
 		dist_record=true;
 		g_screen_state = S_ANGLE_SHOW;
-		abs_drive(FORWARD, E_IR_DETECT, FORWARD_IR_THRESHOLD, 40, true, GYRO);
+		abs_drive(FORWARD, E_IR_DETECT, FORWARD_IR_THRESHOLD, 40, true, g_drive_type);
 		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
 		{
 			dist_record = true;
-			abs_drive(FORWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, GYRO);
+			abs_drive(FORWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, g_drive_type);
 		}
 		PlayTone(200,20);
 		dl_step = dl_step+1;
@@ -53,7 +53,7 @@ void abs_s1_mission_execute()
 
 	case 2:
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true, g_drive_type);
 
 		dl_step = dl_step+1;
 		dl_robot_action_state = dl_wait;
@@ -63,17 +63,17 @@ void abs_s1_mission_execute()
 
 	case 3:
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true, g_drive_type);
 		break;
 
 	case 4:
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true, g_drive_type);
 		break;
 
 	case 5:
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true, g_drive_type);
 		break;
 
 	case 6:
@@ -93,13 +93,13 @@ void abs_s1_mission_execute()
 		dl_robot_action_state = dl_wait;
 		dl_speed = 200;
 		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 87, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 87, 50, true, g_drive_type);
 		motor[block_lift_motor] = 40;
 		motor[block_lift_motor2] = 40;
 		abs_turn(CLOCKWISE, POINT, TURN, 103, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 80, 50, true, g_drive_type);
 		break;
 
 	case 140:
