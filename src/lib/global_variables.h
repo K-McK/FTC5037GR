@@ -666,6 +666,8 @@ int dl_drive_details [] = {0,4};
 #define dl_run_abdd 3
 #define dl_wait 4
 
+#define abdd_down_speed 0
+
 //---------------
 // change event details
 //---------------

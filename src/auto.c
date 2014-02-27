@@ -54,6 +54,7 @@
 #include "lib/abs_s4_mission_execute.h"
 #include "lib/abs_dlog.h"
 #include "lib/abs_stay_on_ramp.h"
+#include "lib/abs_end_ramp.h"
 
 //========================================
 // Main program
@@ -101,7 +102,7 @@ task main()
 		abs_end_ramp(2000,40);
 		break;
 	default:
-		abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
+		abs_dlog(__FILE__,"Invalid Ramp Option");
 		break;
 	}
 

@@ -120,15 +120,18 @@ void abs_s1_mission_execute()
 		}
 		break;
 	}
-	dl_step++;
+
+	/*dl_step++;
 	dl_robot_action_state = dl_run_abdd;
 	dl_robot_action_detail = dl_abdd_open;
 	dl_speed = servoChangeRate[abdd];
-	dl_dist = g_abdd_up;
+	dl_dist = g_abdd_up;*/
+
 	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);
 	servo[abdd] = g_abdd_up;
 	StartTask (abs_calibrate_light);
 	wait1Msec(2000);
+	servoChangeRate[abdd] = abdd_down_speed;
 	servo[abdd] = g_abdd_down;
 	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
 
