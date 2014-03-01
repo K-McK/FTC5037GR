@@ -24,98 +24,85 @@
 #include "abs_lift_block_lifter.h"
 #include "global_variables.h"
 
-void abs_end_ramp(int delay, int lift_speed)
+void abs_end_ramp(int delay)
 {
-	abs_log(__FILE__,"Function Enter",delay,lift_speed,0,0);
+	abs_log(__FILE__,"Function Enter",delay,0,0,0);		//enter and log the begining of the end mission
 
-	if(g_end_point != 2 && g_end_point !=3)
-	{
+	if(g_end_point != 2 && g_end_point !=3)						//2 & 3 are the only valid ramp options, if any other option is
+	{																									//selected send an error and exit the program
 		abs_log(__FILE__,"Function called for incorrect ramp",0,0,0,0);
 		return;
 	}
 
-	if(g_start_point == 1 || g_start_point == 2) g_to_turn_dist = g_dist_backwards;
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = delay;
-	wait1Msec(delay);
-	servo[abdd] = g_abdd_down;
+	if(g_start_point == 1 || g_start_point == 2) g_to_turn_dist = g_dist_backwards;//set the drive distance to recorded
+	wait1Msec(delay);						//wait the amount selected in auto.c							 //delivery distance if started at 1 or 2
+	servo[abdd] = g_abdd_down;	//comfirm the abdd is down to avoid driving it into field objects
 
-	if(g_end_point == 2)
+	if(g_end_point == 2)				//if the end ramp goal is point 1 (input of 2) drive forwards to wall
 	{
-		abs_dlog(__FILE__ ,"drive to ramp 1");
+		abs_dlog(__FILE__ ,"drive to ramp 1");	//log ramp decision
 		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, g_drive_type);
 	}
-	else
+	else												//if the end ramp goal is point 2 (input of 3) drive backwards to wall
 	{
-		abs_dlog(__FILE__ ,"drive to ramp 2");
+		abs_dlog(__FILE__ ,"drive to ramp 2");	//log ramp decision
 		abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true, g_drive_type);
 	}
 
-	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 5)//15)
-	{
-		abs_log(__FILE__,"dist fail",abs_get_angle_sensor_val(RELATIVE_BPU),0,0,0);
+	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 5)//15)	//robot movement error detection, if robot has not moved min distance
+	{																										//to reach wall from crate assume the robot has failed and stop moving
+		abs_log(__FILE__,"dist fail",abs_get_angle_sensor_val(RELATIVE_BPU),0,0,0);	//log error and end program
 		motor[left_motor] = 0;
 		motor[right_motor] = 0;
 		PlayTone(300,200);
 		return;
 	}
-
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = 200;
 	wait1Msec(200);
-	abs_control_light_sensor(ACTIVE);
-	servo[light_sensor] = LIGHT_SERVO_DOWN;
+	abs_control_light_sensor(ACTIVE);				//turn on light sensor for line detection
+	servo[light_sensor] = LIGHT_SERVO_DOWN;	//and lower the light sensor into position
 
-	if(g_good_gyro && g_em_first_turn_type == END_MISSION_FIRST_TURN_CONST)
-	{
-		abs_dlog(__FILE__ ,"first turn: good gyro");
+	if(g_good_gyro && g_em_first_turn_type == END_MISSION_FIRST_TURN_CONST)	//if the gyro is detected as good and 1st turn sub
+	{																																				//menu option is selected as true use const turn
+		abs_dlog(__FILE__ ,"first turn: good gyro");	//log turn type conclusion as const
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
 	}
 	else
 	{
-		abs_dlog(__FILE__ ,"first turn: bad gyro");
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, false/*g_good_gyro*/), 40);//was 60
+		abs_dlog(__FILE__ ,"first turn: bad gyro");	//log turn type conclusion as rel
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, false), 40);//was 60
 	}
 
-	wait1Msec(g_input_array[CORNOR_DELAY]*DELAY_MULTIPLICATION_FACTOR);
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = 200;
-	wait1Msec(200);
-	abs_drive(FORWARD, E_LIGHT, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE, 30, true, g_drive_type);
-	if(abs_get_angle_sensor_val(RELATIVE_BPU) < MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)
-	{
+	wait1Msec(g_input_array[CORNOR_DELAY]*DELAY_MULTIPLICATION_FACTOR);	//wait for corner delay amount, this is only an option
+	wait1Msec(200);																											//in the advanced selection
+	abs_drive(FORWARD, E_LIGHT, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE, 30, true, g_drive_type);	//drive looking for the line
+	if(abs_get_angle_sensor_val(RELATIVE_BPU) < MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)	//check for dist travel is less then min
+	{																																								//dist, if so make up needed dist
 		abs_drive(FORWARD, E_ANGLE, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
 	}
-	abs_control_light_sensor(INACTIVE);
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = 500;
+	abs_control_light_sensor(INACTIVE);	//turn off the light sensor
 	wait1Msec(500);
-	StartTask(abs_lift_block_lifter);
+	StartTask(abs_lift_block_lifter);	//raise the block lift to drive onto ramp safely
 
-	if(g_good_gyro && g_em_first_turn_type == END_MISSION_SECOND_TURN_CONST)
-	{
-		if(g_end_point == 2)
+	if(g_good_gyro && g_em_first_turn_type == END_MISSION_SECOND_TURN_CONST)//if the gyro is detected as good and 1st turn sub
+	{																																				//menu option is selected as true use const turn
+		if(g_end_point == 2)	//if end point is ramp 1 turn to the left so grabbers drive first
 		{
-			abs_dlog(__FILE__ ,"second turn: good gyro");
+			abs_dlog(__FILE__ ,"second turn: good gyro");	//log turn type conclusion as const
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, 40);//was 60
 		}
-		else
+		else	//else: if end point is ramp 2 turn to the left so grabbers drive first
 		{
-			abs_dlog(__FILE__ ,"second turn: bad gyro");
+			abs_dlog(__FILE__ ,"second turn: bad gyro");	//log turn type conclusion as rel
 			abs_turn(CLOCKWISE, POINT, TURN_TO, 0, 40);//was 50
 		}
 	}
 	else
 	{
-		if(g_end_point == 2)
+		if(g_end_point == 2)	//if end point is ramp 1 turn to the left so grabbers drive first
 		{
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
 		}
-		else
+		else	//else: if end point is ramp 2 turn to the left so grabbers drive first
 		{
 			abs_turn(CLOCKWISE, POINT, TURN, 90, 50);
 		}
@@ -123,6 +110,7 @@ void abs_end_ramp(int delay, int lift_speed)
 	/** before entering the ramp, pause for the requested time */
 	wait1Msec(g_input_array[RAMP_DELAY] * DELAY_MULTIPLICATION_FACTOR);
 
+	//drive to closest for farthest ramp spot based on auto selection input
 	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, 50, true, g_drive_type);
 	else abs_drive(FORWARD, E_ANGLE, 130, 50, true, g_drive_type);
 

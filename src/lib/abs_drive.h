@@ -55,35 +55,20 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		break;
 	}
 	int i = 0;
-	dl_step = dl_step+1;
-
-	dl_robot_action_state = dl_gyro_move;
 	nMotorEncoder(right_motor)= 0;
 	g_rel_heading = 0;
-	if(dir==BACKWARD)dl_speed = -speed;
-	else dl_speed = speed;
-	dl_dist = dist;
-
-	if(stop_at_end == true)	dl_robot_action_detail = dl_move_stop;
-	else dl_robot_action_detail = dl_move_no_stop;
-
-
-	//dl_ce_detail = dl_ce_drive_start;
-	//dl_change_event = true;
 
 	//------------------------
 	// time stopping method
 	//------------------------
 	if(dist_method == E_TIME)
 	{
-		dl_move_break = DL_TIME_BREAK;
 		ClearTimer(T1);
 		while(time1[T1] < dist)
 		{
 			if(drive_type == GYRO)
 			{
 				abs_gyro_drive(speed,dir);
-				dl_cur_dist = time1[T1];
 			}
 
 			/** No gyro correction*/
@@ -114,7 +99,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			if(drive_type == GYRO)
 			{
 				abs_gyro_drive(speed,dir);
-				dl_cur_dist = nMotorEncoder(right_motor);
 			}
 
 			/** No gyro correction*/
@@ -150,16 +134,12 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		else //start point = 3
 		{total_dist= 100;
 			half_dist = 100;}
-		dl_move_break = DL_IR_BREAK;
 		if(dir == FORWARD)
 		{
 			while(true)
 			{
-				dl_cur_dist = g_bearing_ac2;
 				if(abs_get_angle_sensor_val(RELATIVE_BPU) > total_dist)
 				{
-					dl_move_break = DL_ANGLE_BREAK;
-
 					abs_log(__FILE__ ,"angle break",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
 					break;
 				}
@@ -236,7 +216,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		abs_reset_angle_sensor_val(SOFT_RESET);
 		abs_log(__FILE__ ,"reset angle",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
 
-		dl_move_break = DL_IR_BREAK;
 		if(dir == FORWARD)
 		{
 			while(g_ir_bearing2 > dist)
@@ -275,7 +254,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else if(dist_method == E_TILT)
 	{
-		dl_cur_dist = g_accelermoeter_average;
 		int j = 0;
 		g_sensor_reference_drive = true;
 		while(j<30)
@@ -312,16 +290,12 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		abs_log(__FILE__ ,"reset angle",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
 		int temp_angle = abs_get_angle_sensor_val(RELATIVE_BPU);
 
-		//dl_move_break = DL_ANGLE_BREAK;
-		//dl_ce_detail = dl_ce_angle_reset;
-		//dl_change_event = true;
 		if(abs_get_angle_sensor_val(RELATIVE_ASU) < 40)
 		{
 			while(abs_get_angle_sensor_val(RELATIVE_BPU) < dist)
 			{
 				if(drive_type == GYRO)
 				{
-					dl_cur_dist = abs_get_angle_sensor_val(RELATIVE_ASU);
 					abs_gyro_drive(speed,dir);
 				}
 
@@ -348,7 +322,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				if(drive_type == GYRO)
 				{
-					dl_cur_dist = abs_get_angle_sensor_val(RELATIVE_ASU);
 					abs_gyro_drive(speed,dir);
 				}
 
@@ -395,23 +368,18 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 			if(g_light_sensor>g_calibrated_light_threshold_val&&light_fail==false)
 			{
-				dl_move_break = DL_LIGHT_BREAK;
 				abs_log(__FILE__ ,"light break",speed,dist,g_calibrated_light_threshold_val,g_light_sensor);
 				break;
 			}
 			else if (abs_get_angle_sensor_val(RELATIVE_BPU) > dist)
 			{
-				dl_move_break = DL_ANGLE_BREAK;
-
 				abs_dlog(__FILE__ ,"angle break: ", "speed: %d", speed, "max distance: %d", dist, "Light Threshold: %d", g_calibrated_light_threshold_val, "Light Value detected: %d", max_light_detected);
 
 				break;
 			}
-			dl_cur_dist = g_calibrated_light_threshold_val;
 
 			if(drive_type == GYRO)
 			{
-				dl_cur_dist = abs_get_angle_sensor_val(RELATIVE_ASU);
 				abs_gyro_drive(speed,dir);
 			}
 
@@ -452,8 +420,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	}
 	g_debug_time_2 = nPgmTime;
 
-	dl_ce_detail = dl_ce_drive_end;
-	dl_change_event = true;
 	servo[light_sensor] = LIGHT_SERVO_UP;
 
 	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
@@ -466,7 +432,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		}
 		else if(g_start_point==2)
 		{
-			if(g_shift_due_to_ir)
+			if(g_mission_number==1)
 			{
 				//subtract 5 to account for drift of stop in ir
 				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5 - 5;

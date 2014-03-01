@@ -42,7 +42,8 @@
 //-----------------------
 // custom functions includes
 //-----------------------
-#include "lib/global_varaibles.h"
+#include "lib/compile_flags.h"
+#include "lib/global_variables.h"
 #include "lib/abs_screen.h"
 #include "lib/math_utils.h"
 #include "lib/abs_sensors.h"
