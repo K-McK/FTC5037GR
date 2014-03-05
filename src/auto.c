@@ -33,11 +33,20 @@
 // sensor/mux/joystick includes
 //-----------------------
 
+#include "lib/compile_flags.h"
+
 #include "joystickdriver.c"
 #include "lib/xander/hitechnic-sensormux.h"
 #include "lib/xander/lego-light.h"
 #include "lib/xander/hitechnic-irseeker-v2.h"
-#include "lib/xander/hitechnic-gyro.h"
+
+#if MOCK_GYRO == 1
+  #include "rcunit/mock/event_manager.h"
+  #include "rcunit/mock/rc_mock_gyro.h"
+#else
+  #include "lib/xander/hitechnic-gyro.h"
+#endif
+
 #include "lib/xander/hitechnic-angle.h"
 #include "lib/xander/hitechnic-accelerometer.h"
 
@@ -45,7 +54,6 @@
 // Custom include
 //-----------------------
 
-#include "lib/compile_flags.h"
 #include "lib/global_variables.h"
 #include "lib/abs_initialize.h"
 #include "lib/abs_s1_mission_execute.h"
@@ -56,12 +64,17 @@
 #include "lib/abs_stay_on_ramp.h"
 #include "lib/abs_end_ramp.h"
 
+
 //========================================
 // Main program
 //========================================
 task main()
 {
-	Delete(LogFileName, LogIoResult);
+#if MOCK_GYRO == 1
+  rcu_initialize();
+#endif
+
+  Delete(LogFileName, LogIoResult);
 	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
 
 	abs_dlog(__FILE__ ,"Program start"," Start time:", nPgmTime);

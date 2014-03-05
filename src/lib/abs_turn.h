@@ -23,12 +23,15 @@
 /** macros */
 
 //=======================================
-// point turn
+// turn
 //=======================================
 void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method e_stop, int degree, int speed)
 {
-	if(dir == COUNTERCLOCKWISE)abs_log(__FILE__ ,"enter CC",speed,degree,g_rel_heading,g_const_heading);
-	else abs_log(__FILE__ ,"enter C",speed,degree,g_rel_heading,g_const_heading);
+	//data log baced on turn direction
+	if(dir == COUNTERCLOCKWISE)
+		abs_log(__FILE__ ,"enter CC",speed,degree,g_rel_heading,g_const_heading);
+	else
+		abs_log(__FILE__ ,"enter C",speed,degree,g_rel_heading,g_const_heading);
 
 	dl_robot_action_state = dl_gyro_turn;
 	int i = 0;
@@ -41,8 +44,11 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 	dl_ce_detail = dl_ce_turn_start;
 	dl_change_event = true;
 
+	//turn to a direction instead of turning an amount
+
 	if(e_stop == TURN_TO)
 	{
+		//turn baced on the angle of
 		if(dir == COUNTERCLOCKWISE)
 		{
 			dl_robot_action_detail = dl_turn_counterclockwise;
@@ -50,6 +56,7 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 			else target = -(360-(degree-g_recont_heading));
 		}
 		else
+			//turn to a amount
 		{
 			dl_robot_action_detail = dl_turn_clockwise;
 			if(degree<g_recont_heading) target = 360-(g_recont_heading-degree);
@@ -97,7 +104,7 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 	//-------------------------
 	// turn condition
 	//-------------------------
-
+//stop the robot
 	if(e_stop == TURN)
 	{
 		while(abs(g_rel_heading) < abs(degree))//i < 5)

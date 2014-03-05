@@ -34,6 +34,8 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 	if(gyro_val == RAW)
 	{
 		last_gyro_read_val = HTGYROreadRot(HTGYRO);
+		abs_dlog(__FILE__ ,"Getting last gyro read val"," last gyro read val: %f", last_gyro_read_val);
+
 	}
 	else
 	{

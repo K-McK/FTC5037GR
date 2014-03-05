@@ -46,12 +46,12 @@ void abs_end_ramp(int delay, int lift_speed)
 	if(g_end_point == 2)
 	{
 		abs_dlog(__FILE__ ,"drive to ramp 1");
-		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, g_drive_type);
+		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, end_program_drive_speed, true, g_drive_type);
 	}
 	else
 	{
 		abs_dlog(__FILE__ ,"drive to ramp 2");
-		abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true, g_drive_type);
+		abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, end_program_drive_speed, true, g_drive_type);
 	}
 
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 5)//15)
@@ -103,30 +103,30 @@ void abs_end_ramp(int delay, int lift_speed)
 		if(g_end_point == 2)
 		{
 			abs_dlog(__FILE__ ,"second turn: good gyro");
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, 40);//was 60
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, end_program_drive_speed);//was 60
 		}
 		else
 		{
 			abs_dlog(__FILE__ ,"second turn: bad gyro");
-			abs_turn(CLOCKWISE, POINT, TURN_TO, 0, 40);//was 50
+			abs_turn(CLOCKWISE, POINT, TURN_TO, 0, end_program_drive_speed);//was 50
 		}
 	}
 	else
 	{
 		if(g_end_point == 2)
 		{
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, end_program_drive_speed);
 		}
 		else
 		{
-			abs_turn(CLOCKWISE, POINT, TURN, 90, 50);
+			abs_turn(CLOCKWISE, POINT, TURN, 90, end_program_drive_speed);
 		}
 	}
 	/** before entering the ramp, pause for the requested time */
 	wait1Msec(g_input_array[RAMP_DELAY] * DELAY_MULTIPLICATION_FACTOR);
 
-	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, 50, true, g_drive_type);
-	else abs_drive(FORWARD, E_ANGLE, 130, 50, true, g_drive_type);
+	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, end_program_drive_speed, true, g_drive_type);
+	else abs_drive(FORWARD, E_ANGLE, 130, end_program_drive_speed, true, g_drive_type);
 
 	//if the lift task is still running at this point then stop it
 	StopTask(abs_lift_block_lifter);
