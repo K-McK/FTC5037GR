@@ -93,7 +93,7 @@ void abs_smoke_execute ()
 				g_sensor_value2 = g_bearing_ac2;
 				break;
 			case ST_TILT:
-				g_sensor_value = abs_get_angle_sensor_val(RELATIVE);
+				//g_sensor_value = abs_get_angle_sensor_val(RELATIVE);
 				break;
 			case ST_ACCELEROMETER:
 				g_sensor_value = g_accelermoeter_sensor;
