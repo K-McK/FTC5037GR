@@ -26,57 +26,44 @@ void abs_s1_mission_execute()
 {
 	switch(g_mission_number)
 	{
-	case 0:
+	case 0:		//test option only used for tests, currently angle sensor
 		g_screen_state = S_ANGLE_SHOW;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true, g_drive_type);
+		abs_drive(FORWARD, E_ANGLE, 600, 50, true, g_drive_type);
 		break;
 
-	case 1:
-		dist_record=true;
+	case 1:	//IR mission
+		dist_record=true;			//set to record the following movement for end movement distance
 		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, FORWARD_IR_THRESHOLD, 40, true, g_drive_type);
-		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
+		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)		//if robot did not drive minimal distance drive to first crate
 		{
 			dist_record = true;
 			abs_drive(FORWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, g_drive_type);
 		}
-		PlayTone(200,20);
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 1000;
-		wait1Msec(1000);
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 500;
-		wait1Msec(500);
 		break;
 
-	case 2:
+	case 2:	//deliver to crate 4 mission
 		dist_record=true;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true, g_drive_type);
-
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 2000;
 		wait1Msec(2000);
 		break;
 
-	case 3:
+	case 3://deliver to crate 3 mission
 		dist_record=true;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true, g_drive_type);
 		break;
 
-	case 4:
+	case 4:	//deliver to crate 2 mission
 		dist_record=true;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true, g_drive_type);
 		break;
 
-	case 5:
+	case 5:	//deliver to crate 1 mission
 		dist_record=true;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true, g_drive_type);
 		break;
 
-	case 6:
+	case 6:	//test option to read the gyro, will be defence mission 1
 		g_screen_state = S_SMOKE_RUN2;
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
@@ -87,11 +74,8 @@ void abs_s1_mission_execute()
 		}
 		break;
 
-	case 7:
+	case 7: //will be defence mission 2
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 98, 60);
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 200;
 		wait1Msec(200);
 		abs_drive(FORWARD, E_ANGLE, 87, 50, true, g_drive_type);
 		motor[block_lift_motor] = 40;
@@ -101,54 +85,16 @@ void abs_s1_mission_execute()
 		motor[block_lift_motor2] = 0;
 		abs_drive(FORWARD, E_ANGLE, 80, 50, true, g_drive_type);
 		break;
-
-	case 140:
-		int dist = 30;
-		bool done = false;
-		while(done == false)
-		{
-			int ac_start_time = nPgmTime;
-			int i = 0;
-			while((g_accelermoeter_sensor < dist+5) && (g_accelermoeter_sensor > dist-5) && ((ac_start_time - nPgmTime)<500))
-			{
-				i++;
-				PlayTone(20,20);
-				wait1Msec(1);
-			}
-			if(i > 490) done = true;
-			PlayTone(20,20);
-		}
-		break;
 	}
-
-	/*dl_step++;
-	dl_robot_action_state = dl_run_abdd;
-	dl_robot_action_detail = dl_abdd_open;
-	dl_speed = servoChangeRate[abdd];
-	dl_dist = g_abdd_up;*/
-
-	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);
+	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);	//open and log abdd
 	servo[abdd] = g_abdd_up;
-	StartTask (abs_calibrate_light);
+	StartTask (abs_calibrate_light);	//calibrate the light sensor to find the white line
 	wait1Msec(2000);
 	servoChangeRate[abdd] = abdd_down_speed;
-	servo[abdd] = g_abdd_down;
+	servo[abdd] = g_abdd_down;	//return and log the abdd
 	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
 
-	dl_change_event = true;
-	dl_ce_detail = dl_ce_end_delay;
-
-	dl_speed = g_end_delay * DELAY_MULTIPLICATION_FACTOR;
-	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR);
-
-	dl_step++;
-	dl_robot_action_detail = dl_abdd_close;
-	dl_dist = g_abdd_down;
-
-	dl_change_event = true;
-	dl_ce_detail = dl_ce_end_point;
-
-	wait1Msec(100);
+	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR); //wait for end delay, number option tab 4
 
 	abs_log(__FILE__,"start of end",g_end_point,0,0,0);
 }

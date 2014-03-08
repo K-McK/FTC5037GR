@@ -70,58 +70,51 @@
 //========================================
 task main()
 {
-#if MOCK_GYRO == 1
-  rcu_initialize();
-#endif
+	Delete(LogFileName, LogIoResult);																	//open the datalog file so it is excisable
+	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);	//throughout the program
 
-  Delete(LogFileName, LogIoResult);
-	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);
-
-	abs_dlog(__FILE__ ,"Program start"," Start time:", nPgmTime);
+	abs_dlog(__FILE__ ,"Program start"," Start time:", nPgmTime);			//write the first entry starting the datalog
 
 	abs_initialize();
 
-	g_rel_heading = 0;
+	g_rel_heading = 0;						//reset the const and the rel gyro value for the start of the robots mission
 	g_const_heading = 0;
 	switch(g_start_point)
 	{
 	case 1:
-		abs_s1_mission_execute();
+		abs_s1_mission_execute();		//missions for starting position 1
 		break;
 	case 2:
-		abs_s2_mission_execute();
+		abs_s2_mission_execute();		//missions for starting position 2
 		break;
 	case 3:
-		abs_s3_mission_execute();
+		abs_s3_mission_execute();		//missions for starting position 3
 		break;
 	case 4:
-		abs_s4_mission_execute();
+		abs_s4_mission_execute();		//missions for starting position 4
 		break;
 	}
 
-	g_const_heading = 0;
+	g_const_heading = 0;					//reset the constant value for the end mission section of the program
 	switch(g_end_point)
 	{
-	case 1:
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 2000;
+	case 1:												//case 1: compleat start
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
 		abs_stop_robot();
 		break;
-	case 2:
+	case 2:												//case 2&3: end point is on the ramp
 	case 3:
-		abs_end_ramp(2000,40);
+		abs_end_ramp(2000);
 		break;
-	default:
+	default:											//error case: if this is executed something went wrong with the auto selection
 		abs_dlog(__FILE__,"Invalid Ramp Option");
 		break;
 	}
 
 	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
-	Close(LogFileHandle, LogIoResult);
+	Close(LogFileHandle, LogIoResult);			//close the datalogging
 	LogData=false;
 
-	if(g_stay_on_ramp) abs_stay_on_ramp();
+	if(g_stay_on_ramp) abs_stay_on_ramp();	//if config selected robot resists being pushed
 }
