@@ -31,6 +31,7 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 	else abs_log(__FILE__ ,"enter C",speed,degree,g_rel_heading,g_const_heading);
 
 	g_rel_heading = 0;
+	g_rel_heading2 = 0;
 	int target = 0;
 
 	if(e_stop == TURN_TO)
@@ -90,11 +91,11 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 
 	if(e_stop == TURN)
 	{
-		while(abs(g_rel_heading) < abs(degree))/*i < 5)*/nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
+		while(abs(g_rel_heading_use) < abs(degree))/*i < 5)*/nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
 	}
-	abs_log(__FILE__ ,"exit",speed,degree,g_rel_heading,g_const_heading);
+	abs_log(__FILE__ ,"exit",speed,degree,g_rel_heading_use,g_const_heading_use);
 }
 
 #endif /* !ABS_TURN_H */

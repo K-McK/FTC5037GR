@@ -15,7 +15,7 @@
 
 #include "math_utils.h"
 
-int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
+int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val,e_gyro_names which_gyro)
 {
 	static int last_gyro_read_time = 0;
 	static int last_gyro_read_val = 0;
@@ -33,11 +33,13 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val)
 
 	if(gyro_val == RAW)
 	{
-		last_gyro_read_val = HTGYROreadRot(HTGYRO);
+		if(which_gyro==GYRO1) last_gyro_read_val = HTGYROreadRot(HTGYRO);
+		else last_gyro_read_val = HTGYROreadRot(HTGYRO2);
 	}
 	else
 	{
-		last_gyro_read_val = HTGYROreadRot(HTGYRO) - g_original_gyro_val;
+		if(which_gyro==GYRO1) last_gyro_read_val = HTGYROreadRot(HTGYRO) - g_original_gyro_val;
+		else last_gyro_read_val = HTGYROreadRot(HTGYRO2) - g_original_gyro_val;
 	}
 
 #if DEBUG_MODE == 1

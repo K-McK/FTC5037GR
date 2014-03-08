@@ -19,11 +19,15 @@
 
 #include "compile_flags.h"
 
-const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
-const tMUXSensor HTAC = msensor_S3_2;
-const tMUXSensor HTGYRO = msensor_S2_1;	   // HiTechnic GYRO sensor
-const tMUXSensor HTIRS2_2 = msensor_S3_3;     // HiTechnic Infrared sensor 2
-const tMUXSensor LEGOLS = msensor_S3_4;
+const tMUXSensor LEGOLS = msensor_S2_1;
+const tMUXSensor HTANGLE = msensor_S2_2;
+const tMUXSensor HTIRS2 = msensor_S2_3;     // HiTechnic Infrared sensor
+//const tMUXSensor HTAC = msensor_S3_2;			//accelerometer is removed to make room for the angle sensor
+const tMUXSensor HTIRS2_2 = msensor_S2_4;     // HiTechnic Infrared sensor 2
+
+const tMUXSensor HTGYRO = msensor_S3_1;	   // HiTechnic GYRO sensor
+
+const tMUXSensor HTGYRO2 = msensor_S4_1;	   // our second HiTechnic GYRO sensor
 
 /**
 * @var g_gyro_true
@@ -82,6 +86,7 @@ bool g_gyro_true = false;
  */
 
 long g_angle_sensor_val = 0;
+long g_angle_sensor = 0;
 
 /**
 *
@@ -181,6 +186,7 @@ const int g_abdd_down = 235;
 
 const int g_gyro_adjust = 10;
 int g_original_gyro_val = 0;
+int g_original_gyro_val2 = 0;
 
 const int g_ground_arm_up = 0;
 
@@ -380,6 +386,14 @@ typedef enum
 	CALIBRATED
 } e_gyro_val_type;
 
+//=======needs=doxegen==========
+typedef enum
+{
+	GYRO1,
+	GYRO2
+} e_gyro_names;
+e_gyro_names g_gyro_use = GYRO1;
+
 /**
 *  @enum e_angle_val_type the type of angle sensor units to read
 *  @var e_angle_val_type::RELATIVE_ASU
@@ -547,6 +561,7 @@ bool LogData = false;
 
 
 float g_delta_drift = 0;
+float g_delta_drift2 = 0;
 //string sString;
 
 int dl_drive_details [] = {0,4};
@@ -782,16 +797,30 @@ int g_number_max_limit [] = {0,4,30,7,30,5};
 * @var g_sacred_const_heading
 *		This is the recalculated value of the gyrp baced on a calculation
 */
+bool g_gyro1_cal_done = false;
+bool g_gyro2_cal_done = false;
+
 int g_gyro_noise = 0;
+int g_gyro_noise2 = 0;
 long g_start_time = 0;
-int g_drift = 0;
+int g_gyro1_drift = 0;
+int g_gyro2_drift = 0;
 float g_sacred_const_heading = 0;
+float g_sacred_const_heading2 = 0;
+float g_sacred_const_heading_use = 0;
 float g_const_heading = 0;
+float g_const_heading2 = 0;
+float g_const_heading_use = 0;
 float g_rel_heading = 0;
+float g_rel_heading2 = 0;
+float g_rel_heading_use = 0;
 long g_curr_time = 0;
 long g_prev_time = 0;
 int g_raw_gyro = 0;
+int g_raw_gyro2 = 0;
 int g_recont_heading = 0; //this is the recalculated const gyro heading
+int g_recont_heading2 = 0;
+int g_recont_heading_use = 0;
 
 /**
 * Sensor variables

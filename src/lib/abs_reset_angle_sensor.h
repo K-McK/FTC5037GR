@@ -15,9 +15,9 @@
 
 long abs_reset_angle_sensor_val(e_angle_reset_type reset_type)
 {
-  if(reset_type == HARD_RESET) { HTANGresetAccumulatedAngle(angle_sensor); }
+  //if(reset_type == HARD_RESET) { HTANGresetAccumulatedAngle(angle_sensor); }
 
-  g_angle_sensor_val = HTANGreadAccumulatedAngle(angle_sensor);
+  g_angle_sensor_val = g_angle_sensor;
 
     return (g_angle_sensor_val);
 }
