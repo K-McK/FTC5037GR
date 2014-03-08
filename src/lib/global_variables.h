@@ -21,7 +21,11 @@
 
 const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S3_2;
+
+#if MOCK_GYRO == 0
 const tMUXSensor HTGYRO = msensor_S2_1;	   // HiTechnic GYRO sensor
+#endif
+
 const tMUXSensor HTIRS2_2 = msensor_S3_3;     // HiTechnic Infrared sensor 2
 const tMUXSensor LEGOLS = msensor_S3_4;
 
@@ -451,6 +455,19 @@ typedef enum
 *
 * @var g_backwards_crate4_to_turn_dist
 * 		 Tells the robot how far it need to go to get to the turn
+*
+* @def MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE
+*				Tells the robot the max distence it need to go to reach the line
+*
+* @def MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE
+*				Tells the robot the min distence it needs to go  to reach the line
+*
+* @def FORWARD_IR_THRESHOLD
+*				Tells the robot the minimum distence it need to go to detect the ir
+*
+* @def BACKWARD_IR_THRESHOLD
+*				Tells the robot the minimum distence it need to go to detect the ir
+*
 */
 
 int g_to_turn_dist = 0;
@@ -472,6 +489,10 @@ const int g_backwards_crate4_to_turn_dist = 140;
 
 #define FORWARD_IR_THRESHOLD 7
 #define BACKWARD_IR_THRESHOLD 3
+
+#define MIN_DRIVE_SPEED 10
+#define DRIVE_SPEED_PERCENTAGE_DROP 50
+#define DRIVE_SPEED_COEFFICIENT 5
 //=========================================================
 // Smoke test varaibles
 //=========================================================
@@ -583,6 +604,9 @@ int dl_drive_details [] = {0,4};
 *
 * @var g_selection_value
 *		degbuging var for this
+*
+* @def end_program_drive_speed
+*		Tells the robot the speed of its self
 */
 
 int g_debug_time_1 = 0;
@@ -601,6 +625,7 @@ bool g_joy2_enabled = false;
 
 int g_selection_value = 0;
 
+#define end_program_drive_speed 50
 /**
  *
  * @var g_light_delta_value
@@ -732,6 +757,8 @@ typedef enum
  *		Tells the robot the time it should wait at the cornor
  * @var g_stay_on_ramp
  *		Tells the robot if it should push back an a robot if it pushes on it
+ * @var g_drive_type
+ *		Tells the robot if it should drive useing the gyro, encode or non
  */
 e_em_second_turn_types g_em_second_turn_type = END_MISSION_FIRST_TURN_REL;
 
@@ -747,6 +774,7 @@ int g_cornor_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
 bool g_stay_on_ramp = true;
+
 e_drive_type g_drive_type = GYRO;
 
 int g_dist_backwards = 0;

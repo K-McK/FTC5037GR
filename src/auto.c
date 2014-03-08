@@ -33,11 +33,20 @@
 // sensor/mux/joystick includes
 //-----------------------
 
+#include "lib/compile_flags.h"
+
 #include "joystickdriver.c"
 #include "lib/xander/hitechnic-sensormux.h"
 #include "lib/xander/lego-light.h"
 #include "lib/xander/hitechnic-irseeker-v2.h"
-#include "lib/xander/hitechnic-gyro.h"
+
+#if MOCK_GYRO == 1
+  #include "rcunit/mock/event_manager.h"
+  #include "rcunit/mock/rc_mock_gyro.h"
+#else
+  #include "lib/xander/hitechnic-gyro.h"
+#endif
+
 #include "lib/xander/hitechnic-angle.h"
 #include "lib/xander/hitechnic-accelerometer.h"
 
@@ -45,7 +54,6 @@
 // Custom include
 //-----------------------
 
-#include "lib/compile_flags.h"
 #include "lib/global_variables.h"
 #include "lib/abs_initialize.h"
 #include "lib/abs_s1_mission_execute.h"
@@ -54,6 +62,8 @@
 #include "lib/abs_s4_mission_execute.h"
 #include "lib/abs_dlog.h"
 #include "lib/abs_stay_on_ramp.h"
+#include "lib/abs_end_ramp.h"
+
 
 //========================================
 // Main program
@@ -98,7 +108,7 @@ task main()
 		abs_end_ramp(2000);
 		break;
 	default:											//error case: if this is executed something went wrong with the auto selection
-		abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
+		abs_dlog(__FILE__,"Invalid Ramp Option");
 		break;
 	}
 

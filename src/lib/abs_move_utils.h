@@ -127,4 +127,6 @@ typedef enum
  */
 #define distance_to_encoder_derees(X) (X*360/DRIVE_WHEELS_CIRCUMFERENCE)
 
+#define adjusted_speed(X, Y, Z) max(MIN_DRIVE_SPEED,(min(((DRIVE_SPEED_COEFFICIENT*sqrt((Y)-(Z))+DRIVE_SPEED_PERCENTAGE_DROP)*X/100), (X))))
+
 #endif /* !ABS_TURN_UTILS */

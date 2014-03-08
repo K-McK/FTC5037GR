@@ -90,6 +90,7 @@ void abs_s1_mission_execute()
 	servo[abdd] = g_abdd_up;
 	StartTask (abs_calibrate_light);	//calibrate the light sensor to find the white line
 	wait1Msec(2000);
+	servoChangeRate[abdd] = abdd_down_speed;
 	servo[abdd] = g_abdd_down;	//return and log the abdd
 	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
 
