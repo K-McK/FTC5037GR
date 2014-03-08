@@ -307,7 +307,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				if(drive_type == GYRO)
 				{
-					abs_gyro_drive(adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
+					abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
 				}
 
 				/** No gyro correction*/
@@ -315,13 +315,13 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				{
 					if(dir == FORWARD)
 					{
-						motor[left_motor] = adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-						motor[right_motor] = adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
 					}
 					else
 					{
-						motor[left_motor] = -adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-						motor[right_motor] = -adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
 					}
 				}
 			}
@@ -333,7 +333,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				if(drive_type == GYRO)
 				{
-					abs_gyro_drive(adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
+					abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
 				}
 
 				/** No gyro correction*/
@@ -341,13 +341,13 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				{
 					if(dir == FORWARD)
 					{
-						motor[left_motor] = adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-						motor[right_motor] = adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
 					}
 					else
 					{
-						motor[left_motor] = -adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-						motor[right_motor] = -adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
 					}
 				}
 			}
@@ -392,7 +392,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 			if(drive_type == GYRO)
 			{
-				abs_gyro_drive(adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
+				abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
 			}
 
 			/** No gyro correction*/
@@ -400,13 +400,13 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				if(dir == FORWARD)
 				{
-					motor[left_motor] = adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-					motor[right_motor] = adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
 				}
 				else
 				{
-					motor[left_motor] = -adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-					motor[right_motor] = -adjusted_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
 				}
 			}
 		}
