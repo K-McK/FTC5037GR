@@ -491,8 +491,13 @@ const int g_backwards_crate4_to_turn_dist = 140;
 #define BACKWARD_IR_THRESHOLD 3
 
 #define MIN_DRIVE_SPEED 10
+#define MIN_TURN_SPEED 10
 #define DRIVE_SPEED_PERCENTAGE_DROP 50
 #define DRIVE_SPEED_COEFFICIENT 5
+#define TURN_SPEED_PERCENTAGE_DROP 50
+#define TURN_SPEED_COEFFICIENT 5
+
+int abdd_down_speed = 3;
 //=========================================================
 // Smoke test varaibles
 //=========================================================

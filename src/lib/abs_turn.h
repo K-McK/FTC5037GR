@@ -60,17 +60,23 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 		//-------------------------
 		// swing turn
 		//-------------------------
+
 		if(turn_method == SWING)
 		{
-			if(dir == COUNTERCLOCKWISE)
+			while(abs(g_rel_heading) < abs(degree))/*i < 5)*/
 			{
-				motor[right_motor] = speed;
-				motor[left_motor] = 0;
-			}
-			else
-			{
-				motor[right_motor] = 0;
-				motor[left_motor] = speed;
+				nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
+
+				if(dir == COUNTERCLOCKWISE)
+				{
+					motor[right_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+					motor[left_motor] = 0;
+				}
+				else
+				{
+					motor[right_motor] = 0;
+					motor[left_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+				}
 			}
 		}
 
@@ -79,25 +85,33 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 		//-------------------------
 		else
 		{
-			if(dir == COUNTERCLOCKWISE)
+			while(abs(g_rel_heading) < abs(degree))/*i < 5)*/
 			{
-				motor[right_motor] = speed;
-				motor[left_motor] = -speed;
-			}
-			else
-			{
-				motor[right_motor] = -speed;
-				motor[left_motor] = speed;
+				nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
+
+				if(dir == COUNTERCLOCKWISE)
+				{
+					motor[right_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+					motor[left_motor] = -adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+				}
+				else
+				{
+					motor[right_motor] = -adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+					motor[left_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+				}
 			}
 		}
 	}
 	//-------------------------
 	// turn condition
 	//-------------------------
-//stop the robot
+	//stop the robot
 	if(e_stop == TURN)
 	{
-		while(abs(g_rel_heading) < abs(degree))/*i < 5)*/nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
+		while(abs(g_rel_heading) < abs(degree))/*i < 5)*/
+		{
+			nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
+		}
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
 	}
