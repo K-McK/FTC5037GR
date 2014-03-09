@@ -24,6 +24,8 @@
 #include "abs_calibrate_light.h"
 #include "abs_selection_program.h"
 #include "abs_control_light_sensor.h"
+#include "abs_gyro1_cal.h"
+#include "abs_gyro2_cal.h"
 
 void abs_initialize()
 {
@@ -39,30 +41,54 @@ void abs_initialize()
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);		//set input array to 0, this ensures the robot doesn't get invalid inputs
 	abs_selection_program();		//start the selection program to receive the robot's mission from the drivers
 	PlaySoundFile("! Click.rso");
+
+	StartTask(abs_gyro1_cal);
+	StartTask(abs_gyro2_cal);
+
+	while(g_gyro1_cal_done==false&&g_gyro2_cal_done==false){}
+
+	if(g_gyro_noise<g_gyro_noise2)
+	{
+		g_gyro_use=GYRO1;
+		abs_dlog(__FILE__ ,"gyro use:", "GYRO1");
+	}
+	else
+	{
+		g_gyro_use=GYRO2;
+		abs_dlog(__FILE__ ,"gyro use:", "GYRO2");
+	}
+
 	//g_drift = abs_gyro_cal(g_gyro_cal_time);
-	g_drift = abs_gyro_wrapper();		//calibrate the gyro, we're using our wrapper function to calibrate the gyro 5 times
-																	//to get the avg of drift and the delta of drift
-	if(!HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis))//=================================================
-	{																												//-error detection: accelermoeter error,
-		g_error = ERR_ACCELERMOETER;													// accelermoeter is not give the robot readings
-		g_error_type = ERROR_NONLETHAL;												//
-	}																												//-error: nonleathal, robot does not currently use accelermoeter
-	if(g_gyro_noise>10)																			//=================================================
-	{																												//-error detection: gyro calibrate fail,
-		g_error = ERR_GYRO_CAL;																// gyro reads value that is too large for not starting yet
-		g_error = ERROR_LETHAL;																//
-	}																												//-error: leathal, auto needs accurate gyro to run successfully
-	if(HTSMUXreadPowerStatus(SENSOR_MUX))										//=================================================
-	{																												//-error detection: general sensor mux power fail,
-		g_error = ERR_SENSOR_MUX;															// robot reads the sensor mux is not powered
-		g_error_type = ERROR_NONLETHAL;												//
-	}																												//-error: nonleathal, robot can still run missions not using IR
-	if(HTSMUXreadPowerStatus(GYRO_MUX))											//=================================================
-	{																												//-error detection: gyro sensor mux power fail,
-		g_error = ERR_GYRO_MUX;																// robot reads the gyro mux is not powered
-		g_error = ERROR_LETHAL;																//
-	}																												//-error: leathal, robot needs the gyro to run successfully
-																													//=================================================
+
+	//g_drift = abs_gyro_wrapper();		//calibrate the gyro, we're using our wrapper function to calibrate the gyro 5 times
+	//to get the avg of drift and the delta of drift
+	if(false)//!HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis))
+	{																								//=================================================
+		g_error = ERR_ACCELERMOETER;									//-error detection: accelermoeter error,
+		g_error_type = ERROR_NONLETHAL;								// EDIT: accelermoeter was removed to make room for the moved angle sensor
+		//																						// *accelermoeter is not give the robot readings*
+	}																								//-error: nonleathal, robot does not currently use accelermoeter
+	if(g_gyro_noise>10&&g_gyro_noise2>10)						//=================================================
+	{																								//-error detection: gyro calibrate fail,
+		g_error = ERR_GYRO_CAL;												// gyro reads value that is too large for not starting yet
+		g_error = ERROR_LETHAL;												//
+	}																								//-error: leathal, auto needs accurate gyro to run successfully
+	if(HTSMUXreadPowerStatus(SENSOR_MUX))						//=================================================
+	{																								//-error detection: general sensor mux power fail,
+		g_error = ERR_SENSOR_MUX;											// robot reads the sensor mux is not powered
+		g_error_type = ERROR_LETHAL;//NONLETHAL;			// EDIT: angle sensor moved, all muxes are needed now
+	}																								//-error: *nonleathal, robot can still run missions not using IR*
+	if(HTSMUXreadPowerStatus(GYRO_MUX))							//=================================================
+	{																								//-error detection: 1st gyro sensor mux power fail,
+		g_error = ERR_GYRO_MUX;												// robot reads the gyro mux is not powered
+		g_error = ERROR_LETHAL;												//
+	}																								//-error: leathal, robot needs the gyro to run successfully
+	if(HTSMUXreadPowerStatus(GYRO_MUX2))						//=================================================
+	{																								//-error detection: 2nd gyro sensor mux power fail,
+		g_error = ERR_GYRO_MUX;												// robot reads the gyro mux is not powered
+		g_error = ERROR_LETHAL;												//
+	}																								//-error: leathal, robot needs the gyro to run successfully
+	//																							//=================================================
 	if(g_error != 0)		//if there is an error start beebing and stop program advancement
 	{
 		g_screen_state = S_ERROR;

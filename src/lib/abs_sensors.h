@@ -115,48 +115,70 @@ task abs_sensors()
 		//-------------------------
 
 		g_curr_time=nPgmTime;
-		g_raw_gyro = abs_get_gyro_sensor_val(RAW);
-		g_sacred_const_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-		g_rel_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
 
-		g_const_heading += (g_raw_gyro - (g_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		// gyro 1
+		g_raw_gyro = abs_get_gyro_sensor_val(RAW,GYRO1);
+		g_sacred_const_heading += (g_raw_gyro - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		g_rel_heading += (g_raw_gyro - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+
+		g_const_heading += (g_raw_gyro - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+
+		// gyro 2
+		g_raw_gyro2 = abs_get_gyro_sensor_val(RAW,GYRO2);
+		g_sacred_const_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		g_rel_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+
+		g_const_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+
+		//used gyro
+		if(g_gyro_use==GYRO1)
+		{
+			g_sacred_const_heading_use = g_sacred_const_heading;
+			g_rel_heading_use = g_rel_heading;
+			g_const_heading_use = g_const_heading;
+		}
+		else
+		{
+			g_sacred_const_heading_use = g_sacred_const_heading2;
+			g_rel_heading_use = g_rel_heading2;
+			g_const_heading_use = g_const_heading2;
+		}
 
 		//abs_dlog(__FILE__ ,"heading"," g_const_heading: %d ", g_const_heading," g_rel_heading: %d ", g_rel_heading);
 		//wait1Msec(100);
 		g_prev_time = g_curr_time;
 
-		g_recont_heading = g_const_heading % 360;
+		g_recont_heading = /*g_const_heading*/g_const_heading_use % 360;
 		if(g_recont_heading<0) g_recont_heading += 360;
 
 		//-------------------------
 		// HiTechnic accelermoeter
 		//-------------------------
 
-		HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis);
-		g_accelermoeter_sensor = g_x_axis;
+		//HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis);
+		//g_accelermoeter_sensor = g_x_axis;
 
-		if(g_sensor_reference_drive == true)
-		{
-			g_accelermoeter_reads++;
-			g_accelermoeter_array[g_accelermoeter_reads%50]=g_accelermoeter_sensor;
-			for(int i=0;i<30;i++)
-			{
-				g_accelermoeter_total_value = g_accelermoeter_array[i];
-			}
-			g_accelermoeter_average = g_accelermoeter_total_value/50;
-		}
-		else
-		{
-			g_accelermoeter_reads = 0;
-			g_accelermoeter_total_value = 0;
-			g_accelermoeter_average = 0;
-			memset(g_accelermoeter_array,0,30);
-		}
+		//if(g_sensor_reference_drive == true)
+		//{
+		//	g_accelermoeter_reads++;
+		//	g_accelermoeter_array[g_accelermoeter_reads%50]=g_accelermoeter_sensor;
+		//	for(int i=0;i<30;i++)
+		//	{
+		//		g_accelermoeter_total_value = g_accelermoeter_array[i];
+		//	}
+		//	g_accelermoeter_average = g_accelermoeter_total_value/50;
+		//}
+		//else
+		//{
+		//	g_accelermoeter_reads = 0;
+		//	g_accelermoeter_total_value = 0;
+		//	g_accelermoeter_average = 0;
+		//	memset(g_accelermoeter_array,0,30);
+		//}
 		//-------------------------
 		// HiTechnic angle sensor
 		//-------------------------
-		//if(g_reset_angle == true) HTANGresetAccumulatedAngle(HTANG);
-		//else angle_sensor = HTANGreadAccumulatedAngle(HTANG);
+		g_angle_sensor = HTANGreadAccumulatedAngle(HTANGLE);
 	}
 }
 #endif
