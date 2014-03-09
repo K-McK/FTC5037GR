@@ -105,16 +105,9 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 	//-------------------------
 	// turn condition
 	//-------------------------
-	//stop the robot
-	if(e_stop == TURN)
-	{
-		while(abs(g_rel_heading) < abs(degree))/*i < 5)*/
-		{
-			nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
-		}
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
-	}
+
 	abs_log(__FILE__ ,"exit",speed,degree,g_rel_heading,g_const_heading);
 }
 

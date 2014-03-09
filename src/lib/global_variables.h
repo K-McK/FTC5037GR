@@ -470,7 +470,10 @@ typedef enum
 * @def MIN_DRIVE_SPEED
 *				Tells the robot the minanum drive speed
 * @def MIN_TURN_SPEED
-* 			Tells the robot
+* 			Tells the robot the minanum turn speed
+*
+* @def DRIVE_SPEED_PERCENTAGE_DROP
+*				Tells the robot the percentage it can drop
 */
 
 int g_to_turn_dist = 0;
