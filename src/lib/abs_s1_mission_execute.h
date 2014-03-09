@@ -80,8 +80,8 @@ void abs_s1_mission_execute()
 		motor[left_motor] = 0;
 		while(true)
 		{
-			g_sensor_value = abs_get_angle_sensor_val(RELATIVE_ASU);
-			g_sensor_value2 = abs_get_angle_sensor_val(RELATIVE_BPU);
+			g_sensor_value = g_EOPD_sensor;
+			g_sensor_value2 = 0;//abs_get_angle_sensor_val(RELATIVE_BPU);
 		}
 		break;
 	}
