@@ -57,6 +57,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	int i = 0;
 	nMotorEncoder(right_motor)= 0;
 	g_rel_heading = 0;
+	g_rel_heading2 = 0;
 
 	//------------------------
 	// time stopping method

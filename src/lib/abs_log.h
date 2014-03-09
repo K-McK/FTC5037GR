@@ -53,10 +53,10 @@ void abs_log(const char * input1,const char * input2, int input3, int input4, in
 
 	if(input1=="abs_drive.h")
 	{
-		StringFormat(sString, "rel-g %4d\t", g_rel_heading);
+		StringFormat(sString, "rel-g %4d\t", g_rel_heading_use);
 		WriteText(LogFileHandle, LogIoResult, sString);
 
-		StringFormat(sString, "cnst-g %4d\t", g_const_heading);
+		StringFormat(sString, "cnst-g %4d\t", g_const_heading_use);
 		WriteText(LogFileHandle, LogIoResult, sString);
 	}
 }
