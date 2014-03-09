@@ -69,7 +69,7 @@ task abs_screen ()
 		case S_GYRO_SHOW:
 			nxtDisplayBigTextLine(1, "GyroValue");
 			nxtDisplayBigTextLine(3, "%2d", g_const_heading);
-			nxtDisplayBigTextLine(5, "%2d", g_rel_heading);
+			nxtDisplayBigTextLine(5, "%2d", g_rel_heading_use);
 			break;
 		case S_IR_SHOW:
 			nxtDisplayBigTextLine(1, "IR Value");
