@@ -29,11 +29,12 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 {
 	//data log baced on turn direction
 	if(dir == COUNTERCLOCKWISE)
-		abs_log(__FILE__ ,"enter CC",speed,degree,g_rel_heading,g_const_heading);
+		abs_log(__FILE__ ,"enter CC",speed,degree,g_rel_heading_use,g_const_heading_use);
 	else
-		abs_log(__FILE__ ,"enter C",speed,degree,g_rel_heading,g_const_heading);
+		abs_log(__FILE__ ,"enter C",speed,degree,g_rel_heading_use,g_const_heading_use);
 
 	g_rel_heading = 0;
+	g_rel_heading2 = 0;
 	int target = 0;
 
 	//turn to a direction instead of turning an amount
@@ -63,19 +64,19 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 
 		if(turn_method == SWING)
 		{
-			while(abs(g_rel_heading) < abs(degree))/*i < 5)*/
+			while(abs(g_rel_heading_use) < abs(degree))/*i < 5)*/
 			{
 				nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
 
 				if(dir == COUNTERCLOCKWISE)
 				{
-					motor[right_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+					motor[right_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
 					motor[left_motor] = 0;
 				}
 				else
 				{
 					motor[right_motor] = 0;
-					motor[left_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+					motor[left_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
 				}
 			}
 		}
@@ -85,19 +86,19 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 		//-------------------------
 		else
 		{
-			while(abs(g_rel_heading) < abs(degree))/*i < 5)*/
+			while(abs(g_rel_heading_use) < abs(degree))/*i < 5)*/
 			{
 				nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
 
 				if(dir == COUNTERCLOCKWISE)
 				{
-					motor[right_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
-					motor[left_motor] = -adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+					motor[right_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
+					motor[left_motor] = -adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
 				}
 				else
 				{
-					motor[right_motor] = -adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
-					motor[left_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
+					motor[right_motor] = -adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
+					motor[left_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
 				}
 			}
 		}
@@ -108,7 +109,7 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
 
-	abs_log(__FILE__ ,"exit",speed,degree,g_rel_heading,g_const_heading);
+	abs_log(__FILE__ ,"exit",speed,degree,g_rel_heading_use,g_const_heading_use);
 }
 
 #endif /* !ABS_TURN_H */

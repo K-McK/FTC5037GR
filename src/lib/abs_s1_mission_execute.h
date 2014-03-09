@@ -44,23 +44,23 @@ void abs_s1_mission_execute()
 
 	case 2:	//deliver to crate 4 mission
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true, g_drive_type);
+		abs_drive(FORWARD, E_ANGLE, 150, 50, true, g_drive_type);
 		wait1Msec(2000);
 		break;
 
 	case 3://deliver to crate 3 mission
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true, g_drive_type);
+		abs_drive(FORWARD, E_ANGLE, 125, 50, true, g_drive_type);
 		break;
 
 	case 4:	//deliver to crate 2 mission
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true, g_drive_type);
+		abs_drive(FORWARD, E_ANGLE, 75, 50, true, g_drive_type);
 		break;
 
 	case 5:	//deliver to crate 1 mission
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true, g_drive_type);
+		abs_drive(FORWARD, E_ANGLE, 50, 50, true, g_drive_type);
 		break;
 
 	case 6:	//test option to read the gyro, will be defence mission 1
@@ -70,20 +70,19 @@ void abs_s1_mission_execute()
 		while(true)
 		{
 			g_sensor_value = g_rel_heading;
-			g_sensor_value2 = g_const_heading;
+			g_sensor_value2 = g_rel_heading2;
 		}
 		break;
 
 	case 7: //will be defence mission 2
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 98, 60);
-		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 87, 50, true, g_drive_type);
-		motor[block_lift_motor] = 40;
-		motor[block_lift_motor2] = 40;
-		abs_turn(CLOCKWISE, POINT, TURN, 103, 60);
-		motor[block_lift_motor] = 0;
-		motor[block_lift_motor2] = 0;
-		abs_drive(FORWARD, E_ANGLE, 80, 50, true, g_drive_type);
+		g_screen_state = S_SMOKE_RUN2;
+		motor[right_motor] = 0;
+		motor[left_motor] = 0;
+		while(true)
+		{
+			g_sensor_value = abs_get_angle_sensor_val(RELATIVE_ASU);
+			g_sensor_value2 = abs_get_angle_sensor_val(RELATIVE_BPU);
+		}
 		break;
 	}
 	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);	//open and log abdd
