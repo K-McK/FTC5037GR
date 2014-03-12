@@ -19,8 +19,8 @@
 
 #include "compile_flags.h"
 
-#define HIGH_PRIORITY_TASK 9
-#define MEDIUM_PRIORITY_TASK 6
+#define HIGH_PRIORITY_TASK 7
+#define MEDIUM_PRIORITY_TASK 5
 #define LOW_PRIORITY_TASK 3
 #define BACKGROUND_TASK 1
 
