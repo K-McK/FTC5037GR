@@ -69,7 +69,7 @@ void abs_end_ramp(int delay)
 	else
 	{
 		abs_dlog(__FILE__ ,"first turn: bad gyro");	//log turn type conclusion as rel
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, false), 40);//was 60
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
 	}
 
 	wait1Msec(g_input_array[CORNOR_DELAY]*DELAY_MULTIPLICATION_FACTOR);	//wait for corner delay amount, this is only an option
