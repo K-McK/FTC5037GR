@@ -19,6 +19,11 @@
 
 #include "compile_flags.h"
 
+#define HIGH_PRIORITY_TASK 9
+#define MEDIUM_PRIORITY_TASK 6
+#define LOW_PRIORITY_TASK 3
+#define BACKGROUND_TASK 1
+
 const tMUXSensor HTEOPD = msensor_S2_1;
 const tMUXSensor LEGOLS = msensor_S3_2;//2_1;
 const tMUXSensor HTANGLE = msensor_S2_2;

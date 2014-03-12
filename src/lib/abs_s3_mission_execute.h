@@ -87,7 +87,7 @@ void abs_s3_mission_execute()
 	}
 	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);	//open and log abdd
 	servo[abdd] = g_abdd_up;
-	StartTask (abs_calibrate_light);	//calibrate the light sensor to find the white line
+	StartTask (abs_calibrate_light, MEDIUM_PRIORITY_TASK);	//calibrate the light sensor to find the white line
 	wait1Msec(2000);
 	servo[abdd] = g_abdd_down;	//return and log the abdd
 	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
