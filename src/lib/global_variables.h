@@ -19,7 +19,13 @@
 
 #include "compile_flags.h"
 
-const tMUXSensor LEGOLS = msensor_S2_1;
+#define HIGH_PRIORITY_TASK 7
+#define MEDIUM_PRIORITY_TASK 5
+#define LOW_PRIORITY_TASK 3
+#define BACKGROUND_TASK 1
+
+const tMUXSensor HTEOPD = msensor_S2_1;
+const tMUXSensor LEGOLS = msensor_S3_2;//2_1;
 const tMUXSensor HTANGLE = msensor_S2_2;
 const tMUXSensor HTIRS2 = msensor_S2_3;     // HiTechnic Infrared sensor
 //const tMUXSensor HTAC = msensor_S3_2;			//accelerometer is removed to make room for the angle sensor
@@ -87,6 +93,8 @@ bool g_gyro_true = false;
 
 long g_angle_sensor_val = 0;
 long g_angle_sensor = 0;
+
+int g_EOPD_sensor = 0;
 
 /**
 *

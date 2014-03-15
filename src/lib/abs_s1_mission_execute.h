@@ -80,14 +80,14 @@ void abs_s1_mission_execute()
 		motor[left_motor] = 0;
 		while(true)
 		{
-			g_sensor_value = abs_get_angle_sensor_val(RELATIVE_ASU);
-			g_sensor_value2 = abs_get_angle_sensor_val(RELATIVE_BPU);
+			g_sensor_value = g_EOPD_sensor;
+			g_sensor_value2 = 0;//abs_get_angle_sensor_val(RELATIVE_BPU);
 		}
 		break;
 	}
 	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);	//open and log abdd
 	servo[abdd] = g_abdd_up;
-	StartTask (abs_calibrate_light);	//calibrate the light sensor to find the white line
+	StartTask (abs_calibrate_light, MEDIUM_PRIORITY_TASK);	//calibrate the light sensor to find the white line
 	wait1Msec(2000);
 	servoChangeRate[abdd] = abdd_down_speed;
 	servo[abdd] = g_abdd_down;	//return and log the abdd

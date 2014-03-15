@@ -314,15 +314,17 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				/** No gyro correction*/
 				else
 				{
+  					int adjusted_speed = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+
 					if(dir == FORWARD)
 					{
-						motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-						motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[left_motor] = adjusted_speed;
+						motor[right_motor] = adjusted_speed;
 					}
 					else
 					{
-						motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-						motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[left_motor] = -adjusted_speed;
+						motor[right_motor] = -adjusted_speed;
 					}
 				}
 			}
@@ -340,15 +342,17 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				/** No gyro correction*/
 				else
 				{
+  					int adjusted_speed = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+
 					if(dir == FORWARD)
 					{
-						motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-						motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[left_motor] = adjusted_speed;
+						motor[right_motor] = adjusted_speed;
 					}
 					else
 					{
-						motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-						motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+						motor[left_motor] = -adjusted_speed;
+						motor[right_motor] = -adjusted_speed;
 					}
 				}
 			}
@@ -375,8 +379,12 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 			if(g_light_sensor>g_calibrated_light_threshold_val&&abs_get_angle_sensor_val(RELATIVE_BPU)<MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)
 			{
-				abs_dlog(__FILE__ ,"Premature light detection: ", "Min BPU: %d", MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE, "Actual BPU when detected: %d", abs_get_angle_sensor_val(RELATIVE_BPU), "Light Threshold: %d", g_calibrated_light_threshold_val, "Light Value detected: %d", max_light_detected);
-				light_fail = true;
+				// make sure we only print this once
+				if(!light_fail)
+				{
+					abs_dlog(__FILE__ ,"Premature light detection: ", "Min BPU: %d", MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE, "Actual BPU when detected: %d", abs_get_angle_sensor_val(RELATIVE_BPU), "Light Threshold: %d", g_calibrated_light_threshold_val, "Light Value detected: %d", max_light_detected);
+					light_fail = true;
+				}
 			}
 
 			if(g_light_sensor>g_calibrated_light_threshold_val&&light_fail==false)
@@ -399,15 +407,17 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			/** No gyro correction*/
 			else
 			{
+  				int adjusted_speed = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+
 				if(dir == FORWARD)
 				{
-					motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-					motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[left_motor] = adjusted_speed;
+					motor[right_motor] = adjusted_speed;
 				}
 				else
 				{
-					motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-					motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[left_motor] = -adjusted_speed;
+					motor[right_motor] = -adjusted_speed;
 				}
 			}
 		}
@@ -463,6 +473,10 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		{
 			if(g_end_point==2)	g_dist_backwards = 170 - abs_get_angle_sensor_val(RELATIVE_BPU);
 			else if(g_end_point==3) g_dist_backwards = 75 + abs_get_angle_sensor_val(RELATIVE_BPU);
+		}
+		else
+ 		{
+			//TODO:  add the code for this default case
 		}
 		//dist_record=false;
 	}
