@@ -86,7 +86,7 @@ void abs_smoke_execute ()
 			switch(g_sensor_num)
 			{
 			case ST_GYRO:
-				g_sensor_value = g_rel_heading;
+				g_sensor_value = g_rel_heading_use;
 				break;
 			case ST_IR:
 				g_sensor_value = g_bearing_ac1;

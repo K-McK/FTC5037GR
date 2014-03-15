@@ -23,25 +23,32 @@
 /** macros */
 
 //=======================================
-// point turn
+// turn
 //=======================================
 void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method e_stop, int degree, int speed)
 {
-	if(dir == COUNTERCLOCKWISE)abs_log(__FILE__ ,"enter CC",speed,degree,g_rel_heading,g_const_heading);
-	else abs_log(__FILE__ ,"enter C",speed,degree,g_rel_heading,g_const_heading);
+	//data log baced on turn direction
+	if(dir == COUNTERCLOCKWISE)
+		abs_log(__FILE__ ,"enter CC",speed,degree,g_rel_heading_use,g_const_heading_use);
+	else
+		abs_log(__FILE__ ,"enter C",speed,degree,g_rel_heading_use,g_const_heading_use);
 
 	g_rel_heading = 0;
 	g_rel_heading2 = 0;
 	int target = 0;
 
+	//turn to a direction instead of turning an amount
+
 	if(e_stop == TURN_TO)
 	{
+		//turn baced on the angle of
 		if(dir == COUNTERCLOCKWISE)
 		{
 			if(degree<g_recont_heading) target = -(g_recont_heading-degree);
 			else target = -(360-(degree-g_recont_heading));
 		}
 		else
+			//turn to a amount
 		{
 			if(degree<g_recont_heading) target = 360-(g_recont_heading-degree);
 			else target = degree-g_recont_heading;
@@ -54,17 +61,23 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 		//-------------------------
 		// swing turn
 		//-------------------------
+
 		if(turn_method == SWING)
 		{
-			if(dir == COUNTERCLOCKWISE)
+			while(abs(g_rel_heading_use) < abs(degree))/*i < 5)*/
 			{
-				motor[right_motor] = speed;
-				motor[left_motor] = 0;
-			}
-			else
-			{
-				motor[right_motor] = 0;
-				motor[left_motor] = speed;
+				nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
+
+				if(dir == COUNTERCLOCKWISE)
+				{
+					motor[right_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
+					motor[left_motor] = 0;
+				}
+				else
+				{
+					motor[right_motor] = 0;
+					motor[left_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
+				}
 			}
 		}
 
@@ -73,28 +86,29 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 		//-------------------------
 		else
 		{
-			if(dir == COUNTERCLOCKWISE)
+			while(abs(g_rel_heading_use) < abs(degree))/*i < 5)*/
 			{
-				motor[right_motor] = speed;
-				motor[left_motor] = -speed;
-			}
-			else
-			{
-				motor[right_motor] = -speed;
-				motor[left_motor] = speed;
+				nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
+
+				if(dir == COUNTERCLOCKWISE)
+				{
+					motor[right_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
+					motor[left_motor] = -adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
+				}
+				else
+				{
+					motor[right_motor] = -adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
+					motor[left_motor] = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading_use));
+				}
 			}
 		}
 	}
 	//-------------------------
 	// turn condition
 	//-------------------------
-
-	if(e_stop == TURN)
-	{
-		while(abs(g_rel_heading_use) < abs(degree))/*i < 5)*/nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
-	}
+
 	abs_log(__FILE__ ,"exit",speed,degree,g_rel_heading_use,g_const_heading_use);
 }
 

@@ -1,23 +1,28 @@
 #pragma systemFile // treat as system file to eliminate warnings for unused variables
 /**
- *
- *  @file global_variables.h
- *
- *  @brief varaibles that are global
- *
- *  @param None n/a
- *
- *  @return
- *
- *  @copyright Copyright 2013, Got Robot? FTC Team 5037
- *
- */
+*
+*  @file global_variables.h
+*
+*  @brief varaibles that are global
+*
+*  @param None n/a
+*
+*  @return
+*
+*  @copyright Copyright 2013, Got Robot? FTC Team 5037
+*
+*/
 //
 //============================================================
 // Define sensor multiplexor connectivity and port allocations
 //============================================================
 
 #include "compile_flags.h"
+
+#define HIGH_PRIORITY_TASK 7
+#define MEDIUM_PRIORITY_TASK 5
+#define LOW_PRIORITY_TASK 3
+#define BACKGROUND_TASK 1
 
 const tMUXSensor HTEOPD = msensor_S2_1;
 const tMUXSensor LEGOLS = msensor_S3_2;//2_1;
@@ -82,9 +87,9 @@ bool g_gyro_true = false;
 #define LIGHT_SERVO_DOWN 255
 #define LIGHT_SERVO_UP 127
 /**
- * @var g_angle_sensor_val
- *		Tells the robot the value of the raw angle sensor
- */
+* @var g_angle_sensor_val
+*		Tells the robot the value of the raw angle sensor
+*/
 
 long g_angle_sensor_val = 0;
 long g_angle_sensor = 0;
@@ -468,6 +473,25 @@ typedef enum
 *
 * @var g_backwards_crate4_to_turn_dist
 * 		 Tells the robot how far it need to go to get to the turn
+*
+* @def MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE
+*				Tells the robot the max distence it need to go to reach the line
+*
+* @def MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE
+*				Tells the robot the min distence it needs to go  to reach the line
+*
+* @def FORWARD_IR_THRESHOLD
+*				Tells the robot the minimum distence it need to go to detect the ir
+*
+* @def BACKWARD_IR_THRESHOLD
+*				Tells the robot the minimum distence it need to go to detect the ir
+* @def MIN_DRIVE_SPEED
+*				Tells the robot the minanum drive speed
+* @def MIN_TURN_SPEED
+* 			Tells the robot the minanum turn speed
+*
+* @def DRIVE_SPEED_PERCENTAGE_DROP
+*				Tells the robot the percentage it can drop
 */
 
 int g_to_turn_dist = 0;
@@ -489,6 +513,15 @@ const int g_backwards_crate4_to_turn_dist = 140;
 
 #define FORWARD_IR_THRESHOLD 7
 #define BACKWARD_IR_THRESHOLD 3
+
+#define MIN_DRIVE_SPEED 10
+#define MIN_TURN_SPEED 10
+#define DRIVE_SPEED_PERCENTAGE_DROP 50
+#define DRIVE_SPEED_COEFFICIENT 5
+#define TURN_SPEED_PERCENTAGE_DROP 50
+#define TURN_SPEED_COEFFICIENT 5
+
+int abdd_down_speed = 3;
 //=========================================================
 // Smoke test varaibles
 //=========================================================
@@ -530,29 +563,29 @@ int g_input_array[INPUT_ARRAY_SIZE];
 // Datalogging variables
 //=========================================================
 /**
- * @var LogFileName
- *		The name of the data logging file
- *
- * @var LogIoResult
- *		The success status of writing to the log file
- *
- * @var LogFileHandle
- *		The file handle variable (represents the file)
- *
- * @var LogFileSize
- *		The size of the log file
- *
- * @var CRLF
- *		characters required to cause output to appear on a new line
- *
- * @var LogData
- *		Tells the robot is if should log data or not
- *
- * @var g_delta_drift
- *		Tells the robot the delta of the drift
- * @var dl_dist_method
- *		Tells the robot the method we are going to calculate the distence
- */
+* @var LogFileName
+*		The name of the data logging file
+*
+* @var LogIoResult
+*		The success status of writing to the log file
+*
+* @var LogFileHandle
+*		The file handle variable (represents the file)
+*
+* @var LogFileSize
+*		The size of the log file
+*
+* @var CRLF
+*		characters required to cause output to appear on a new line
+*
+* @var LogData
+*		Tells the robot is if should log data or not
+*
+* @var g_delta_drift
+*		Tells the robot the delta of the drift
+* @var dl_dist_method
+*		Tells the robot the method we are going to calculate the distence
+*/
 const string LogFileName = "DATALOG.txt";
 TFileIOResult LogIoResult;
 TFileHandle LogFileHandle;
@@ -601,6 +634,9 @@ int dl_drive_details [] = {0,4};
 *
 * @var g_selection_value
 *		degbuging var for this
+*
+* @def end_program_drive_speed
+*		Tells the robot the speed of its self
 */
 
 int g_debug_time_1 = 0;
@@ -619,25 +655,26 @@ bool g_joy2_enabled = false;
 
 int g_selection_value = 0;
 
+#define end_program_drive_speed 50
 /**
- *
- * @var g_light_delta_value
- *	the difference in light between black and white that we are looking for
- * @var g_calibrated_light_threshold_val
- *	a configurable threshold for detecting the white line
- * @var g_end_ramp_lift_speed
- *	the speed to lift the block lifter before entering the ramp
- * @var g_shift_due_to_ir
- *	flag indicating that the robot jerked because of detecting IR from starting position 2
- * @var g_good_gyro
- *	flag indicating that the gyro has not given a bad reading
- * @def GYRO_VALUE_QUEUE_SIZE
- *	the size of the queue used to store the gyro readings
- * @var g_gyro_values
- *	array used to store all the gyro readings for debug purposes
- * @var g_gyro_ran
- *	flag indicating that we have performed at least one gyro read
- */
+*
+* @var g_light_delta_value
+*	the difference in light between black and white that we are looking for
+* @var g_calibrated_light_threshold_val
+*	a configurable threshold for detecting the white line
+* @var g_end_ramp_lift_speed
+*	the speed to lift the block lifter before entering the ramp
+* @var g_shift_due_to_ir
+*	flag indicating that the robot jerked because of detecting IR from starting position 2
+* @var g_good_gyro
+*	flag indicating that the gyro has not given a bad reading
+* @def GYRO_VALUE_QUEUE_SIZE
+*	the size of the queue used to store the gyro readings
+* @var g_gyro_values
+*	array used to store all the gyro readings for debug purposes
+* @var g_gyro_ran
+*	flag indicating that we have performed at least one gyro read
+*/
 const int g_light_delta_value = 2;
 int g_calibrated_light_threshold_val = 0;
 int g_end_ramp_lift_speed = 40;
@@ -645,25 +682,25 @@ bool g_shift_due_to_ir = false;
 bool g_good_gyro = true;
 
 #if DEBUG_MODE == 1
-	#define GYRO_VALUE_QUEUE_SIZE 3
-	int g_gyro_values[GYRO_VALUE_QUEUE_SIZE];
+#define GYRO_VALUE_QUEUE_SIZE 3
+int g_gyro_values[GYRO_VALUE_QUEUE_SIZE];
 #endif
 
 bool g_gyro_ran = false;
 /**
- * @def MAX_TURN_RATE
- *		Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
- * @def STAY_ON_RAMP_WAIT_TIME
- *		Tells the robot the wait time before it  gose on the ramp
- * @def LIGHT_SENSOR_CALIBRATION_TIME
- *		Tells the robot the time it needs to calibrate
- * @def LIGHT_CALIBRATION_SAMPLE_RATE
- *		Tells the robot the Calibration sample rate
- * @def DEFAULT_CALIBRATED_LIGHT_THRESHOLD
- *		Tells the robot the default calibration of the light to force it to fail if it gives us weid readings
- * @def DELAY_MULTIPLICATION_FACTOR
- *	the factor to multiply all delays by
- */
+* @def MAX_TURN_RATE
+*		Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
+* @def STAY_ON_RAMP_WAIT_TIME
+*		Tells the robot the wait time before it  gose on the ramp
+* @def LIGHT_SENSOR_CALIBRATION_TIME
+*		Tells the robot the time it needs to calibrate
+* @def LIGHT_CALIBRATION_SAMPLE_RATE
+*		Tells the robot the Calibration sample rate
+* @def DEFAULT_CALIBRATED_LIGHT_THRESHOLD
+*		Tells the robot the default calibration of the light to force it to fail if it gives us weid readings
+* @def DELAY_MULTIPLICATION_FACTOR
+*	the factor to multiply all delays by
+*/
 #define MAX_TURN_RATE 0.72
 #define STAY_ON_RAMP_WAIT_TIME 100
 #define LIGHT_SENSOR_CALIBRATION_TIME 2000
@@ -722,9 +759,9 @@ typedef enum
 	END_MISSION_FIRST_TURN_CONST
 } e_em_first_turn_types;
 /**
- * @var g_em_first_turn_type
- *		Tells the robot the the first turn of the end of auto
- */
+* @var g_em_first_turn_type
+*		Tells the robot the the first turn of the end of auto
+*/
 e_em_first_turn_types g_em_first_turn_type = END_MISSION_FIRST_TURN_REL;
 
 /**
@@ -742,15 +779,17 @@ typedef enum
 } e_em_second_turn_types;
 
 /**
- * @var g_em_second_turn_type
- *		Tells the robot the the second turn of the end of auto
- * @var g_selection_turn
- *		Tells the robot the selected turn
- * @var g_cornor_delay
- *		Tells the robot the time it should wait at the cornor
- * @var g_stay_on_ramp
- *		Tells the robot if it should push back an a robot if it pushes on it
- */
+* @var g_em_second_turn_type
+*		Tells the robot the the second turn of the end of auto
+* @var g_selection_turn
+*		Tells the robot the selected turn
+* @var g_cornor_delay
+*		Tells the robot the time it should wait at the cornor
+* @var g_stay_on_ramp
+*		Tells the robot if it should push back an a robot if it pushes on it
+* @var g_drive_type
+*		Tells the robot if it should drive useing the gyro, encode or non
+*/
 e_em_second_turn_types g_em_second_turn_type = END_MISSION_FIRST_TURN_REL;
 
 int g_selection_turn = 1;
@@ -765,6 +804,7 @@ int g_cornor_delay = 0;
 int g_start_delay = 0;
 int g_gyro_cal_time = 5;
 bool g_stay_on_ramp = true;
+
 e_drive_type g_drive_type = GYRO;
 
 int g_dist_backwards = 0;

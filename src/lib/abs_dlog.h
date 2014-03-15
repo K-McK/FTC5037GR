@@ -88,7 +88,7 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 	}
 
 
-	StringFormat(sString, "rel-g %4d\t", g_rel_heading);
+	StringFormat(sString, "rel-g %4d\t", g_rel_heading_use);
 	WriteText(LogFileHandle, LogIoResult, sString);
 
 	StringFormat(sString, "cnst-g %4d\t", g_const_heading);

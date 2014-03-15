@@ -41,12 +41,12 @@ void abs_end_ramp(int delay)
 	if(g_end_point == 2)				//if the end ramp goal is point 1 (input of 2) drive forwards to wall
 	{
 		abs_dlog(__FILE__ ,"drive to ramp 1");	//log ramp decision
-		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, 50, true, g_drive_type);
+		abs_drive(FORWARD, E_ANGLE, g_to_turn_dist, end_program_drive_speed, true, g_drive_type);
 	}
 	else												//if the end ramp goal is point 2 (input of 3) drive backwards to wall
 	{
 		abs_dlog(__FILE__ ,"drive to ramp 2");	//log ramp decision
-		abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, 50, true, g_drive_type);
+		abs_drive(BACKWARD, E_ANGLE, g_to_turn_dist, end_program_drive_speed, true, g_drive_type);
 	}
 
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 5)//15)	//robot movement error detection, if robot has not moved min distance
@@ -69,7 +69,7 @@ void abs_end_ramp(int delay)
 	else
 	{
 		abs_dlog(__FILE__ ,"first turn: bad gyro");	//log turn type conclusion as rel
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, false), 40);//was 60
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
 	}
 
 	wait1Msec(g_input_array[CORNOR_DELAY]*DELAY_MULTIPLICATION_FACTOR);	//wait for corner delay amount, this is only an option
@@ -81,38 +81,38 @@ void abs_end_ramp(int delay)
 	}
 	abs_control_light_sensor(INACTIVE);	//turn off the light sensor
 	wait1Msec(500);
-	StartTask(abs_lift_block_lifter);	//raise the block lift to drive onto ramp safely
+	StartTask(abs_lift_block_lifter, MEDIUM_PRIORITY_TASK);	//raise the block lift to drive onto ramp safely
 
 	if(g_good_gyro && g_em_first_turn_type == END_MISSION_SECOND_TURN_CONST)//if the gyro is detected as good and 1st turn sub
 	{																																				//menu option is selected as true use const turn
 		if(g_end_point == 2)	//if end point is ramp 1 turn to the left so grabbers drive first
 		{
 			abs_dlog(__FILE__ ,"second turn: good gyro");	//log turn type conclusion as const
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, 40);//was 60
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, end_program_drive_speed);//was 60
 		}
 		else	//else: if end point is ramp 2 turn to the left so grabbers drive first
 		{
 			abs_dlog(__FILE__ ,"second turn: bad gyro");	//log turn type conclusion as rel
-			abs_turn(CLOCKWISE, POINT, TURN_TO, 0, 40);//was 50
+			abs_turn(CLOCKWISE, POINT, TURN_TO, 0, end_program_drive_speed);//was 50
 		}
 	}
 	else
 	{
 		if(g_end_point == 2)	//if end point is ramp 1 turn to the left so grabbers drive first
 		{
-			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, 60);
+			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, end_program_drive_speed);
 		}
 		else	//else: if end point is ramp 2 turn to the left so grabbers drive first
 		{
-			abs_turn(CLOCKWISE, POINT, TURN, 90, 50);
+			abs_turn(CLOCKWISE, POINT, TURN, 90, end_program_drive_speed);
 		}
 	}
 	/** before entering the ramp, pause for the requested time */
 	wait1Msec(g_input_array[RAMP_DELAY] * DELAY_MULTIPLICATION_FACTOR);
 
 	//drive to closest for farthest ramp spot based on auto selection input
-	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, 50, true, g_drive_type);
-	else abs_drive(FORWARD, E_ANGLE, 130, 50, true, g_drive_type);
+	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, end_program_drive_speed, true, g_drive_type);
+	else abs_drive(FORWARD, E_ANGLE, 130, end_program_drive_speed, true, g_drive_type);
 
 	//if the lift task is still running at this point then stop it
 	StopTask(abs_lift_block_lifter);
