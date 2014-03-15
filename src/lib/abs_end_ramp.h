@@ -68,7 +68,7 @@ void abs_end_ramp(int delay)
 	}
 	else
 	{
-		abs_dlog(__FILE__ ,"first turn: bad gyro");	//log turn type conclusion as rel
+		abs_dlog(__FILE__ ,"first turn: gyro gyro");	//log turn type conclusion as rel
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, false), 40);//was 60
 	}
 
@@ -77,6 +77,7 @@ void abs_end_ramp(int delay)
 	abs_drive(FORWARD, E_LIGHT, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE, 30, true, g_drive_type);	//drive looking for the line
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)	//check for dist travel is less then min
 	{																																								//dist, if so make up needed dist
+		abs_dlog(__FILE__ ,"backup, min dist fail", "Cur dist: %d", abs_get_angle_sensor_val(RELATIVE_BPU), "Min dist: %d", MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU));
 		abs_drive(FORWARD, E_ANGLE, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
 	}
 	abs_control_light_sensor(INACTIVE);	//turn off the light sensor
@@ -92,7 +93,7 @@ void abs_end_ramp(int delay)
 		}
 		else	//else: if end point is ramp 2 turn to the left so grabbers drive first
 		{
-			abs_dlog(__FILE__ ,"second turn: bad gyro");	//log turn type conclusion as rel
+			abs_dlog(__FILE__ ,"second turn: good gyro");	//log turn type conclusion as rel
 			abs_turn(CLOCKWISE, POINT, TURN_TO, 0, end_program_drive_speed);//was 50
 		}
 	}
@@ -100,10 +101,12 @@ void abs_end_ramp(int delay)
 	{
 		if(g_end_point == 2)	//if end point is ramp 1 turn to the left so grabbers drive first
 		{
+			abs_dlog(__FILE__ ,"second turn: bad gyro");
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, end_program_drive_speed);
 		}
 		else	//else: if end point is ramp 2 turn to the left so grabbers drive first
 		{
+			abs_dlog(__FILE__ ,"second turn: bad gyro");
 			abs_turn(CLOCKWISE, POINT, TURN, 90, end_program_drive_speed);
 		}
 	}

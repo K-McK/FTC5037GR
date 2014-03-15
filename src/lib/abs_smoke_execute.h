@@ -104,17 +104,20 @@ void abs_smoke_execute ()
 			// Block lift
 			//---------------------------------
 		case 4:
+			g_screen_state = S_SMOKE_RUN2;
 			if(nNxtButtonPressed == kLeftButton)
 			{
 				motor[block_lift_motor] = g_robot_lift_down;
 				motor[block_lift_motor2] = g_robot_lift_down;
-				g_test_value = g_robot_lift_down;
+				g_sensor_value = g_robot_lift_down;
+				g_sensor_value2 = nMotorEncoder[block_lift_motor2];
 			}
 			else if(nNxtButtonPressed == kRightButton)
 			{
 				motor[block_lift_motor] = g_robot_lift_up;
 				motor[block_lift_motor2] = g_robot_lift_up;
-				g_test_value = g_robot_lift_up;
+				g_sensor_value = g_robot_lift_up;
+				g_sensor_value2 = nMotorEncoder[block_lift_motor2];
 			}
 			else
 			{
@@ -140,93 +143,93 @@ void abs_smoke_execute ()
 			switch(g_test_value)
 			{
 			case 1:
-			servo[grabber_left] = GRABBER_LEFT_OPEN;
-			servo[grabber_right] = GRABBER_RIGHT_OPEN;
+				servo[grabber_left] = GRABBER_LEFT_OPEN;
+				servo[grabber_right] = GRABBER_RIGHT_OPEN;
 				break;
 			case 2:
-			servo[grabber_left] = GRABBER_LEFT_MID;
-			servo[grabber_right] = GRABBER_RIGHT_MID;
+				servo[grabber_left] = GRABBER_LEFT_MID;
+				servo[grabber_right] = GRABBER_RIGHT_MID;
 				break;
 			case 3:
-			servo[grabber_left] = GRABBER_LEFT_CLOSE;
-			servo[grabber_right] = GRABBER_RIGHT_CLOSE;
+				servo[grabber_left] = GRABBER_LEFT_CLOSE;
+				servo[grabber_right] = GRABBER_RIGHT_CLOSE;
 				break;
 			}
-		break;
-		//---------------------------------
-		// sky hook
-		//---------------------------------
-	case 6:
-		if(nNxtButtonPressed == kLeftButton)
-		{
-			motor[sky_hook] = g_robot_lift_up;
-			g_test_value = g_robot_lift_up;
-		}
-		else if(nNxtButtonPressed == kRightButton)
-		{
-			motor[sky_hook] = g_robot_lift_down;
-			g_test_value = g_robot_lift_down;
-		}
-		else
-		{
-			motor[sky_hook] = 0;
-			g_test_value = 0;
-		}
-		break;
-		//---------------------------------
-		// roger slide
-		//---------------------------------
-	case 7:
-		if(nNxtButtonPressed == kLeftButton)
-		{
-			servo[roger_slide] = 255;
-			g_test_value = 255;
-		}
-		else if(nNxtButtonPressed == kRightButton)
-		{
-			servo[roger_slide] = 0;
-			g_test_value = 0;
-		}
-		else
-		{
-			servo[roger_slide] = 127;
-			g_test_value = 127;
-		}
-		break;
-		//---------------------------------
-		// ground arm
-		//---------------------------------
-	case 8:
-		if(nNxtButtonPressed == kLeftButton)
-		{
-			servo[ground_arm] = g_ground_arm_down;
-			g_test_value = g_ground_arm_down;
-		}
-		else if(nNxtButtonPressed == kRightButton)
-		{
-			servo[ground_arm] = g_ground_arm_up;
-			g_test_value = g_ground_arm_up;
-		}
-		break;
-		//---------------------------------
-		// light sensor
-		//---------------------------------
+			break;
+			//---------------------------------
+			// sky hook
+			//---------------------------------
+		case 6:
+			if(nNxtButtonPressed == kLeftButton)
+			{
+				motor[sky_hook] = g_robot_lift_up;
+				g_test_value = g_robot_lift_up;
+			}
+			else if(nNxtButtonPressed == kRightButton)
+			{
+				motor[sky_hook] = g_robot_lift_down;
+				g_test_value = g_robot_lift_down;
+			}
+			else
+			{
+				motor[sky_hook] = 0;
+				g_test_value = 0;
+			}
+			break;
+			//---------------------------------
+			// roger slide
+			//---------------------------------
+		case 7:
+			if(nNxtButtonPressed == kLeftButton)
+			{
+				servo[roger_slide] = 255;
+				g_test_value = 255;
+			}
+			else if(nNxtButtonPressed == kRightButton)
+			{
+				servo[roger_slide] = 0;
+				g_test_value = 0;
+			}
+			else
+			{
+				servo[roger_slide] = 127;
+				g_test_value = 127;
+			}
+			break;
+			//---------------------------------
+			// ground arm
+			//---------------------------------
+		case 8:
+			if(nNxtButtonPressed == kLeftButton)
+			{
+				servo[ground_arm] = g_ground_arm_down;
+				g_test_value = g_ground_arm_down;
+			}
+			else if(nNxtButtonPressed == kRightButton)
+			{
+				servo[ground_arm] = g_ground_arm_up;
+				g_test_value = g_ground_arm_up;
+			}
+			break;
+			//---------------------------------
+			// light sensor
+			//---------------------------------
 
-	case 9:
-		if(nNxtButtonPressed == kLeftButton)
-		{
-			servo[ground_arm] = g_ground_arm_down;
-			g_test_value = g_ground_arm_down;
+		case 9:
+			if(nNxtButtonPressed == kLeftButton)
+			{
+				servo[ground_arm] = g_ground_arm_down;
+				g_test_value = g_ground_arm_down;
+			}
+			else if(nNxtButtonPressed == kRightButton)
+			{
+				servo[ground_arm] = g_ground_arm_up;
+				g_test_value = g_ground_arm_up;
+			}
+			break;
 		}
-		else if(nNxtButtonPressed == kRightButton)
-		{
-			servo[ground_arm] = g_ground_arm_up;
-			g_test_value = g_ground_arm_up;
-		}
-		break;
 	}
-}
-PlaySoundFile("! Click.rso");
+	PlaySoundFile("! Click.rso");
 }
 
 #endif /* !ABS_SMOKE_EXECUTE_H */

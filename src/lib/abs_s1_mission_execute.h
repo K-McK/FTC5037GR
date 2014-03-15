@@ -45,7 +45,6 @@ void abs_s1_mission_execute()
 	case 2:	//deliver to crate 4 mission
 		dist_record=true;
 		abs_drive(FORWARD, E_ANGLE, 150, 50, true, g_drive_type);
-		wait1Msec(2000);
 		break;
 
 	case 3://deliver to crate 3 mission

@@ -42,12 +42,14 @@ void abs_initialize()
 	abs_selection_program();		//start the selection program to receive the robot's mission from the drivers
 	PlaySoundFile("! Click.rso");
 
-	StartTask(abs_gyro1_cal);
-	StartTask(abs_gyro2_cal);
+	//StartTask(abs_gyro1_cal);
+	//StartTask(abs_gyro2_cal);
 
-	while(g_gyro1_cal_done==false&&g_gyro2_cal_done==false){}
+	g_gyro1_drift = abs_gyro_wrapper(GYRO1);
 
-	if(g_gyro_noise<g_gyro_noise2)
+	//while(g_gyro1_cal_done==false&&g_gyro2_cal_done==false){}
+
+	if(true)//g_gyro_noise<g_gyro_noise2)
 	{
 		g_gyro_use=GYRO1;
 		abs_dlog(__FILE__ ,"gyro use:", "GYRO1");
@@ -68,9 +70,14 @@ void abs_initialize()
 		g_error_type = ERROR_NONLETHAL;								// EDIT: accelermoeter was removed to make room for the moved angle sensor
 		//																						// *accelermoeter is not give the robot readings*
 	}																								//-error: nonleathal, robot does not currently use accelermoeter
-	if(g_gyro_noise>10&&g_gyro_noise2>10)						//=================================================
+	if(g_gyro_noise>10)															//=================================================
 	{																								//-error detection: gyro calibrate fail,
-		g_error = ERR_GYRO_CAL;												// gyro reads value that is too large for not starting yet
+		g_error = ERR_GYRO_CAL1;											// gyro reads value that is too large for not starting yet
+		g_error = ERROR_LETHAL;												//
+	}																								//-error: leathal, auto needs accurate gyro to run successfully
+	if(false)//g_gyro_noise2>10)										//=================================================
+	{																								//-error detection: gyro calibrate fail,
+		g_error = ERR_GYRO_CAL2;											// gyro reads value that is too large for not starting yet
 		g_error = ERROR_LETHAL;												//
 	}																								//-error: leathal, auto needs accurate gyro to run successfully
 	if(HTSMUXreadPowerStatus(SENSOR_MUX))						//=================================================
@@ -98,8 +105,8 @@ void abs_initialize()
 			PlayTone (250,25);
 			wait1Msec(500);
 			if(nNxtButtonPressed == kEnterButton && g_error_type == ERROR_NONLETHAL)break;	//if the error is nonleathal and
-		}																																									//driver tries to over-ride skip error
-	}
+		}
+	}//driver tries to over-ride skip error
 	LogData=true;
 	g_screen_state = S_READY;		//set the screen to show the program feedback before the auto starts
 	StartTask(abs_sensors);			//start the rest of the sensors
