@@ -22,7 +22,7 @@ void abs_tele_op_initialize()
 
 	servo[abdd] = g_abdd_down;
 
-	StartTask(abs_screen);
+	StartTask(abs_screen, BACKGROUND_TASK);
 	g_screen_state = S_MISC_SHOW;
 	getJoystickSettings(joystick);
 	//memset(dl_joy1_btns,0,12);

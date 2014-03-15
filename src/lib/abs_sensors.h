@@ -179,6 +179,11 @@ task abs_sensors()
 		// HiTechnic angle sensor
 		//-------------------------
 		g_angle_sensor = HTANGreadAccumulatedAngle(HTANGLE);
+		//-------------------------
+		// EOPD
+		//-------------------------
+		HTEOPDsetLongRange(HTEOPD);
+		g_EOPD_sensor = HTEOPDreadRaw(HTEOPD);
 	}
 }
 #endif

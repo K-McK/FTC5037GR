@@ -29,7 +29,7 @@
 
 void abs_initialize()
 {
-	StartTask(abs_screen);		//start the screen function, this handels all screen interactions
+	StartTask(abs_screen, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
 	disableDiagnosticsDisplay();		//turn off the robotc firmware diagnostic text to clear screen
 	servoChangeRate[abdd] = 3;										//============================================================
 	servo[roger_slide] = 127;											// set all of the robots outputs to their starting positions
@@ -42,8 +42,8 @@ void abs_initialize()
 	abs_selection_program();		//start the selection program to receive the robot's mission from the drivers
 	PlaySoundFile("! Click.rso");
 
-	//StartTask(abs_gyro1_cal);
-	//StartTask(abs_gyro2_cal);
+	//StartTask(abs_gyro1_cal, HIGH_PRIORITY_TASK);
+	//StartTask(abs_gyro2_cal, HIGH_PRIORITY_TASK);
 
 	g_gyro1_drift = abs_gyro_wrapper(GYRO1);
 
@@ -109,7 +109,7 @@ void abs_initialize()
 	}//driver tries to over-ride skip error
 	LogData=true;
 	g_screen_state = S_READY;		//set the screen to show the program feedback before the auto starts
-	StartTask(abs_sensors);			//start the rest of the sensors
+	StartTask(abs_sensors, HIGH_PRIORITY_TASK);			//start the rest of the sensors
 	abs_reset_angle_sensor_val(HARD_RESET);	//reset the angle sensor
 
 	PlayTone(700, 100);					//play 'happy sound' to tell drivers the robot is ready to run
@@ -123,7 +123,7 @@ void abs_initialize()
 
 	abs_log(__FILE__ ,"auto start",nPgmTime,0,0,0);		//log the start of the mission run
 
-	StartTask(abs_datalog);		//log the robots mission inputs into the datalog file
+	StartTask(abs_datalog, BACKGROUND_TASK);		//log the robots mission inputs into the datalog file
 	eraseDisplay();
 	g_start_time = nPgmTime;		//set the start time
 	g_screen_state = S_DELAY_WAIT;

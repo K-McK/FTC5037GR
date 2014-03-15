@@ -69,7 +69,7 @@ void abs_end_ramp(int delay)
 	else
 	{
 		abs_dlog(__FILE__ ,"first turn: gyro gyro");	//log turn type conclusion as rel
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, false), 40);//was 60
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
 	}
 
 	wait1Msec(g_input_array[CORNOR_DELAY]*DELAY_MULTIPLICATION_FACTOR);	//wait for corner delay amount, this is only an option
@@ -82,7 +82,7 @@ void abs_end_ramp(int delay)
 	}
 	abs_control_light_sensor(INACTIVE);	//turn off the light sensor
 	wait1Msec(500);
-	StartTask(abs_lift_block_lifter);	//raise the block lift to drive onto ramp safely
+	StartTask(abs_lift_block_lifter, MEDIUM_PRIORITY_TASK);	//raise the block lift to drive onto ramp safely
 
 	if(g_good_gyro && g_em_first_turn_type == END_MISSION_SECOND_TURN_CONST)//if the gyro is detected as good and 1st turn sub
 	{																																				//menu option is selected as true use const turn
