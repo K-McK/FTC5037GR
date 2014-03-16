@@ -29,7 +29,12 @@
 
 void abs_initialize()
 {
+#if USE_TASK_PRIORITY == 1
 	StartTask(abs_screen, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
+#else
+	StartTask(abs_screen);		//start the screen function, this handels all screen interactions
+#endif
+
 	disableDiagnosticsDisplay();		//turn off the robotc firmware diagnostic text to clear screen
 	servoChangeRate[abdd] = 3;										//============================================================
 	servo[roger_slide] = 127;											// set all of the robots outputs to their starting positions
@@ -42,14 +47,61 @@ void abs_initialize()
 	abs_selection_program();		//start the selection program to receive the robot's mission from the drivers
 	PlaySoundFile("! Click.rso");
 
-	//StartTask(abs_gyro1_cal, HIGH_PRIORITY_TASK);
-	//StartTask(abs_gyro2_cal, HIGH_PRIORITY_TASK);
+#if USE_TASK_PRIORITY == 1
+  if(g_gyro1_active)
+  {
+  	StartTask(abs_gyro1_cal, HIGH_PRIORITY_TASK);
+  }
+  else
+  {
+  	g_gyro1_cal_done = true;
+  	g_gyro1_drift = 9999;
+		g_gyro_noise = 9999;
+  }
 
-	g_gyro1_drift = abs_gyro_wrapper(GYRO1);
+  if(g_gyro2_active)
+  {
+	  StartTask(abs_gyro2_cal, HIGH_PRIORITY_TASK);
+	}
+	else
+	{
+		g_gyro2_cal_done = true;
+		g_gyro2_drift = 9999;
+		g_gyro_noise2 = 9999;
+	}
 
-	//while(g_gyro1_cal_done==false&&g_gyro2_cal_done==false){}
+#else
+  if(g_gyro1_active)
+  {
+  	StartTask(abs_gyro1_cal);
+  }
+  else
+  {
+  	g_gyro1_cal_done = true;
+  	g_gyro1_drift = 9999;
+		g_gyro_noise = 9999;
+  }
 
-	if(true)//g_gyro_noise<g_gyro_noise2)
+  if(g_gyro2_active)
+  {
+  	StartTask(abs_gyro2_cal);
+	}
+	else
+	{
+		g_gyro2_cal_done = true;
+		g_gyro2_drift = 9999;
+		g_gyro_noise2 = 9999;
+	}
+
+#endif
+
+	while(g_gyro1_cal_done==false || g_gyro2_cal_done==false)
+	{
+		PlayTone(400,10);
+		wait1Msec(100);
+	}
+
+	if(g_gyro_noise<g_gyro_noise2)
 	{
 		g_gyro_use=GYRO1;
 		abs_dlog(__FILE__ ,"gyro use:", "GYRO1");
@@ -109,7 +161,12 @@ void abs_initialize()
 	}//driver tries to over-ride skip error
 	LogData=true;
 	g_screen_state = S_READY;		//set the screen to show the program feedback before the auto starts
-	StartTask(abs_sensors, HIGH_PRIORITY_TASK);			//start the rest of the sensors
+
+	#if USE_TASK_PRIORITY == 1
+	StartTask(abs_sensors, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
+#else
+	StartTask(abs_sensors);		//start the screen function, this handels all screen interactions
+#endif
 	abs_reset_angle_sensor_val(HARD_RESET);	//reset the angle sensor
 
 	PlayTone(700, 100);					//play 'happy sound' to tell drivers the robot is ready to run
@@ -123,7 +180,12 @@ void abs_initialize()
 
 	abs_log(__FILE__ ,"auto start",nPgmTime,0,0,0);		//log the start of the mission run
 
-	StartTask(abs_datalog, BACKGROUND_TASK);		//log the robots mission inputs into the datalog file
+	#if USE_TASK_PRIORITY == 1
+	StartTask(abs_datalog, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
+#else
+	StartTask(abs_datalog);		//start the screen function, this handels all screen interactions
+#endif
+
 	eraseDisplay();
 	g_start_time = nPgmTime;		//set the start time
 	g_screen_state = S_DELAY_WAIT;

@@ -16,5 +16,6 @@
 #define DEBUG_MODE 0
 #define USE_WAIT_FOR_START 1
 #define MOCK_GYRO 0
+#define USE_TASK_PRIORITY 0
 
 #endif /* !COMPILE_FLAGS_H */

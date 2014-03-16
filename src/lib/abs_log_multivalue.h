@@ -13,7 +13,7 @@
 #ifndef ABS_LOG_MULTIVALUE_H
 #define ABS_LOG_MULTIVALUE_H
 
-#define LOG_LIST_SIZE 10
+#define LOG_LIST_SIZE 6
 #define NUM_MULTI_LOGS 3
 
 typedef enum
@@ -46,10 +46,7 @@ void abs_log_multivalue(int list, int value)
 			"index 3", log_array[list][3],
 			"index 4", log_array[list][4],
 			"index 5", log_array[list][5],
-			"index 6", log_array[list][6],
-			"index 7", log_array[list][7],
-			"index 8", log_array[list][8],
-			"index 9", log_array[list][9]);
+			"index 6", log_array[list][6]);
 );
 	}
 	else

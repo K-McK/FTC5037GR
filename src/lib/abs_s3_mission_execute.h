@@ -87,7 +87,11 @@ void abs_s3_mission_execute()
 	}
 	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);	//open and log abdd
 	servo[abdd] = g_abdd_up;
-	StartTask (abs_calibrate_light, MEDIUM_PRIORITY_TASK);	//calibrate the light sensor to find the white line
+#if USE_TASK_PRIORITY == 1
+	StartTask(abs_calibrate_light, MEDIUM_PRIORITY_TASK);		//start the screen function, this handels all screen interactions
+#else
+	StartTask(abs_calibrate_light);		//start the screen function, this handels all screen interactions
+#endif
 	wait1Msec(2000);
 	servo[abdd] = g_abdd_down;	//return and log the abdd
 	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);

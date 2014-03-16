@@ -19,10 +19,10 @@
 
 #include "compile_flags.h"
 
-#define HIGH_PRIORITY_TASK 7
+#define HIGH_PRIORITY_TASK 5
 #define MEDIUM_PRIORITY_TASK 5
-#define LOW_PRIORITY_TASK 3
-#define BACKGROUND_TASK 1
+#define LOW_PRIORITY_TASK 5
+#define BACKGROUND_TASK 5
 
 const tMUXSensor HTEOPD = msensor_S2_1;
 const tMUXSensor LEGOLS = msensor_S3_2;//2_1;
@@ -559,6 +559,8 @@ int g_test_value = 0;
 
 int g_input_array[INPUT_ARRAY_SIZE];
 
+bool g_gyro1_active = true;
+bool g_gyro2_active = false;
 //=========================================================
 // Datalogging variables
 //=========================================================

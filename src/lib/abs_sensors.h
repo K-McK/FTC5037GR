@@ -124,11 +124,11 @@ task abs_sensors()
 		g_const_heading += (g_raw_gyro - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
 
 		// gyro 2
-		//g_raw_gyro2 = abs_get_gyro_sensor_val(RAW,GYRO2);
-		//g_sacred_const_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-		//g_rel_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		g_raw_gyro2 = abs_get_gyro_sensor_val(RAW,GYRO2);
+		g_sacred_const_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		g_rel_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
 
-		//g_const_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		g_const_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
 
 		//used gyro
 		if(g_gyro_use==GYRO1)

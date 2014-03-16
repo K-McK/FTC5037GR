@@ -82,7 +82,12 @@ void abs_end_ramp(int delay)
 	}
 	abs_control_light_sensor(INACTIVE);	//turn off the light sensor
 	wait1Msec(500);
-	StartTask(abs_lift_block_lifter, MEDIUM_PRIORITY_TASK);	//raise the block lift to drive onto ramp safely
+
+#if USE_TASK_PRIORITY == 1
+	StartTask(abs_lift_block_lifter, MEDIUM_PRIORITY_TASK);		//start the screen function, this handels all screen interactions
+#else
+	StartTask(abs_lift_block_lifter);		//start the screen function, this handels all screen interactions
+#endif
 
 	if(g_good_gyro && g_em_first_turn_type == END_MISSION_SECOND_TURN_CONST)//if the gyro is detected as good and 1st turn sub
 	{																																				//menu option is selected as true use const turn
