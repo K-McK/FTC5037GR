@@ -19,7 +19,7 @@
 #include "abs_turn.h"
 #include "abs_stop_robot.h"
 #include "abs_end_ramp.h"
-#include "abs_log.h"
+#include "abs_dlog.h"
 
 void abs_s3_mission_execute()
 {
@@ -85,7 +85,7 @@ void abs_s3_mission_execute()
 	case 7:	//will be defence mission 2
 		break;
 	}
-	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);	//open and log abdd
+	abs_dlog(__FILE__,"abdd up", "instance", 2, "g_abdd_up", g_abdd_up);	//open and log abdd
 	servo[abdd] = g_abdd_up;
 #if USE_TASK_PRIORITY == 1
 	StartTask(abs_calibrate_light, MEDIUM_PRIORITY_TASK);		//start the screen function, this handels all screen interactions
@@ -94,7 +94,7 @@ void abs_s3_mission_execute()
 #endif
 	wait1Msec(2000);
 	servo[abdd] = g_abdd_down;	//return and log the abdd
-	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
+	abs_dlog(__FILE__,"abdd down","instance", 2, "g_abbd_down", g_abdd_down);
 
 	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR); //wait for end delay, number option tab 4
 }

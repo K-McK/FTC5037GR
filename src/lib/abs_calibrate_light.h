@@ -14,7 +14,7 @@
 #define ABS_CALIBRATE_LIGHT_H
 
 #include "global_variables.h"
-#include "abs_log.h"
+#include "abs_dlog.h"
 #include "abs_control_light_sensor.h"
 #include "math_utils.h"
 
@@ -43,18 +43,19 @@ task abs_calibrate_light()
 
         //avg_light_reading_int = (int)avg_light_reading;
 
-	abs_log(__FILE__ ,"Captured Data",i,avg_light_reading,min_light_reading,max_light_reading);
+	abs_dlog(__FILE__ , "Captured Data", "count", i, "avg light reading", avg_light_reading, "min light reading", min_light_reading, "max light reading", max_light_reading);
 
 	//Tells the robot how bright the white line should be based on how black black is
 	if(avg_light_reading == 0)
 	{
 		g_calibrated_light_threshold_val = DEFAULT_CALIBRATED_LIGHT_THRESHOLD;
-		abs_log(__FILE__ ,"Light calibration failed",g_calibrated_light_threshold_val,avg_light_reading,g_light_delta_value,0);
+		abs_dlog(__FILE__ , "Light calibration failed", "g_calibrated_light_threshold_val", g_calibrated_light_threshold_val, "avg_light_reading", avg_light_reading, "g_light_delta_value", g_light_delta_value);
 	}
 	else
 	{
 		g_calibrated_light_threshold_val = avg_light_reading + g_light_delta_value;
-		abs_log(__FILE__ ,"Light calibration worked",g_calibrated_light_threshold_val,avg_light_reading,g_light_delta_value,0);
+
+		abs_dlog(__FILE__ , "Light calibration worked", "g_calibrated_light_threshold_val", g_calibrated_light_threshold_val, "avg_light_reading", avg_light_reading, "g_light_delta_value", g_light_delta_value);
 	}
 
 	abs_control_light_sensor(INACTIVE);

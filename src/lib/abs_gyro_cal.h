@@ -14,7 +14,7 @@
 #ifndef ABS_GYRO_CAL_H
 #define ABS_GYRO_CAL_H
 
-#include "abs_log.h"
+#include "abs_dlog.h"
 
 float abs_gyro_cal(long caltime,e_gyro_names which_gyro)
 {
@@ -43,12 +43,12 @@ float abs_gyro_cal(long caltime,e_gyro_names which_gyro)
 	if(which_gyro==GYRO1)
 	{
 		g_original_gyro_val = (g_original_gyro_val - (average/samples)) * (float)(nPgmTime - g_start_time) / 1000;
-		abs_log(__FILE__,"Original Gyro Reading1",g_original_gyro_val,0,0,0);
+		abs_dlog(__FILE__,"Original Gyro Reading1", "g_original_gyro_val", g_original_gyro_val);
 	}
 	else
 	{
 		g_original_gyro_val2 = (g_original_gyro_val2 - (average/samples)) * (float)(nPgmTime - g_start_time) / 1000;
-		abs_log(__FILE__,"Original Gyro Reading1",g_original_gyro_val2,0,0,0);
+		abs_dlog(__FILE__,"Original Gyro Reading1", "g_original_gyro_val2", g_original_gyro_val2);
 	}
 
 	return average/samples;					// and return the average drift
