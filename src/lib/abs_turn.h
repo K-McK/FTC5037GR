@@ -89,6 +89,7 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 			while(abs(g_rel_heading_use) < abs(degree))/*i < 5)*/
 			{
 				nxtDisplayCenteredBigTextLine(5, "%d", g_recont_heading);
+				abs_dlog(__FILE__, "what I think rel heading is now", "g_rel_heading_use", g_rel_heading_use);
 
 				if(dir == COUNTERCLOCKWISE)
 				{
