@@ -18,7 +18,7 @@
 #ifndef ABS_TURN_H
 #define ABS_TURN_H
 
-#include "abs_log.h"
+#include "abs_dlog.h"
 
 /** macros */
 
@@ -29,9 +29,9 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 {
 	//data log baced on turn direction
 	if(dir == COUNTERCLOCKWISE)
-		abs_log(__FILE__ ,"enter CC",speed,degree,g_rel_heading_use,g_const_heading_use);
+		abs_dlog(__FILE__ ,"enter CC","speed", speed, "degree", degree, "g_rel_heading_use", g_rel_heading_use, "g_const_heading_use", g_const_heading_use);
 	else
-		abs_log(__FILE__ ,"enter C",speed,degree,g_rel_heading_use,g_const_heading_use);
+		abs_dlog(__FILE__ ,"enter C", "speed", speed, "degree", degree, "g_rel_heading_use", g_rel_heading_use, "g_const_heading_use", g_const_heading_use);
 
 	g_rel_heading = 0;
 	g_rel_heading2 = 0;
@@ -110,7 +110,7 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
 
-	abs_log(__FILE__ ,"exit",speed,degree,g_rel_heading_use,g_const_heading_use);
+	abs_dlog(__FILE__ ,"exit", "speed", speed, "degree", degree, "g_rel_heading_use", g_rel_heading_use, "g_const_heading_use", g_const_heading_use);
 }
 
 #endif /* !ABS_TURN_H */

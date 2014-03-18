@@ -17,7 +17,7 @@
 
 #include "abs_drive.h"
 #include "abs_turn.h"
-#include "abs_log.h"
+#include "abs_dlog.h"
 #include "abs_get_angle_sensor_val.h"
 #include "abs_control_light_sensor.h"
 #include "abs_mission_to_turn_amount.h"
@@ -26,11 +26,11 @@
 
 void abs_end_ramp(int delay)
 {
-	abs_log(__FILE__,"Function Enter",delay,0,0,0);		//enter and log the begining of the end mission
+	abs_dlog(__FILE__, "Function Enter", "delay", delay);		//enter and log the begining of the end mission
 
 	if(g_end_point != 2 && g_end_point !=3)						//2 & 3 are the only valid ramp options, if any other option is
 	{																									//selected send an error and exit the program
-		abs_log(__FILE__,"Function called for incorrect ramp",0,0,0,0);
+		abs_dlog(__FILE__, "Function called for incorrect ramp");
 		return;
 	}
 
@@ -51,7 +51,7 @@ void abs_end_ramp(int delay)
 
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 5)//15)	//robot movement error detection, if robot has not moved min distance
 	{																										//to reach wall from crate assume the robot has failed and stop moving
-		abs_log(__FILE__,"dist fail",abs_get_angle_sensor_val(RELATIVE_BPU),0,0,0);	//log error and end program
+		abs_dlog(__FILE__, "dist fail", "relative BPU", abs_get_angle_sensor_val(RELATIVE_BPU));	//log error and end program
 		motor[left_motor] = 0;
 		motor[right_motor] = 0;
 		PlayTone(300,200);

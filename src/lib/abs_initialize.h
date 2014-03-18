@@ -19,7 +19,7 @@
 #include "abs_gyro_wrapper.h"
 #include "abs_sensors.h"
 #include "abs_datalog.h"
-#include "abs_log.h"
+#include "abs_dlog.h"
 #include "abs_reset_angle_sensor.h"
 #include "abs_calibrate_light.h"
 #include "abs_selection_program.h"
@@ -178,7 +178,7 @@ void abs_initialize()
 	if(nNxtButtonPressed != kEnterButton) wait1Msec(5000);
 #endif
 
-	abs_log(__FILE__ ,"auto start",nPgmTime,0,0,0);		//log the start of the mission run
+	abs_dlog(__FILE__ , "auto start", "program time", nPgmTime);		//log the start of the mission run
 
 	#if USE_TASK_PRIORITY == 1
 	StartTask(abs_datalog, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
