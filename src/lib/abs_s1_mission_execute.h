@@ -19,7 +19,7 @@
 #include "abs_turn.h"
 #include "abs_stop_robot.h"
 #include "abs_end_ramp.h"
-#include "abs_log.h"
+#include "abs_dlog.h"
 #include "abs_get_angle_sensor_val.h"
 
 void abs_s1_mission_execute()
@@ -45,7 +45,6 @@ void abs_s1_mission_execute()
 	case 2:	//deliver to crate 4 mission
 		dist_record=true;
 		abs_drive(FORWARD, E_ANGLE, 150, 50, true, g_drive_type);
-		wait1Msec(2000);
 		break;
 
 	case 3://deliver to crate 3 mission
@@ -85,17 +84,21 @@ void abs_s1_mission_execute()
 		}
 		break;
 	}
-	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);	//open and log abdd
+	abs_dlog(__FILE__,"abdd up", "instance", 2, "g_abdd_up", g_abdd_up);	//open and log abdd
 	servo[abdd] = g_abdd_up;
-	StartTask (abs_calibrate_light, MEDIUM_PRIORITY_TASK);	//calibrate the light sensor to find the white line
+	#if USE_TASK_PRIORITY == 1
+	StartTask(abs_calibrate_light, MEDIUM_PRIORITY_TASK);		//start the screen function, this handels all screen interactions
+#else
+	StartTask(abs_calibrate_light);		//start the screen function, this handels all screen interactions
+#endif
 	wait1Msec(2000);
 	servoChangeRate[abdd] = abdd_down_speed;
 	servo[abdd] = g_abdd_down;	//return and log the abdd
-	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
+	abs_dlog(__FILE__,"abdd down", "instance", 2, "g_abdd_down", g_abdd_down);
 
 	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR); //wait for end delay, number option tab 4
 
-	abs_log(__FILE__,"start of end",g_end_point,0,0,0);
+	abs_dlog(__FILE__,"start of end", "g_end_point", g_end_point);
 }
 
 #endif /* !ABS_S1_MISSION_EXICUTE_H */

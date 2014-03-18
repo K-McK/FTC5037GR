@@ -42,8 +42,8 @@ float abs_gyro_wrapper(e_gyro_names which_gyro)
 
 	if(which_gyro==GYRO1) abs_dlog("GYRO1","");
 	else abs_dlog("GYRO2","");
-	abs_dlog(__FILE__ ,"Program start"," dr1: ", drift_gyro_array[0]," dr2: %d ", drift_gyro_array[1]," dr3: %d ", drift_gyro_array[2]," dr4: %d ", drift_gyro_array[3]);
-	abs_dlog(__FILE__ ,"Program start"," d1: ", delta_gyro_array[0]," d2: %f ", delta_gyro_array[1]," d3: %f ", delta_gyro_array[2]);
+	abs_dlog(__FILE__ ,"Program start"," drift1: ", drift_gyro_array[0]," drift2: %d ", drift_gyro_array[1]," drift3: %d ", drift_gyro_array[2]," drift4: %d ", drift_gyro_array[3]);
+	abs_dlog(__FILE__ ,"Program start"," delta1: ", delta_gyro_array[0]," delta2: %f ", delta_gyro_array[1]," delta3: %f ", delta_gyro_array[2]);
 	abs_dlog(__FILE__ ,"Program start"," Drift: ", drift_gyro_array[REPEAT-1], " delta: ", g_delta_drift);//change based on gyro in use
 
 	return drift_gyro_array[REPEAT-1];

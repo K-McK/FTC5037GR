@@ -2,7 +2,7 @@
 *
 *  @file abs_dlog.h
 *
-*  @brief A function that handels the data log
+*  @brief A function that handles the data log
 *
 *  @param N/A
 *
@@ -14,7 +14,19 @@
 #ifndef ABS_DLOG_H
 #define ABS_DLOG_H
 
-/** macros */
+void log_parameter(const char * key, int value)
+{
+	if(key != NULL)
+	{
+		StringFormat(sString, "\t");
+		StringFormat(sString, key);
+		WriteText(LogFileHandle, LogIoResult, sString);
+		StringFormat(sString, ": %d",value);
+		WriteText(LogFileHandle, LogIoResult, sString);
+	}
+}
+
+
 void abs_dlog(const char * input1,const char * input2, const char * input3_str = NULL, int input3 = 0, const char * input4_str = NULL, int input4 = 0, const char * input5_str = NULL, int input5 = 0, const char * input6_str = NULL, int input6 = 0)
 {
 	StringFormat(sString, "");
@@ -37,56 +49,10 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 	StringFormat(sString, input2);
 	WriteText(LogFileHandle, LogIoResult, sString);
 
-	if(input3_str == NULL)
-	{
-		return;
-	}
-	else
-	{
-		StringFormat(sString, "\t");
-		StringFormat(sString, input3_str);
-		WriteText(LogFileHandle, LogIoResult, sString);
-		StringFormat(sString, "\t%d",input3);
-		WriteText(LogFileHandle, LogIoResult, sString);
-
-		if(input4_str == NULL)
-		{
-			return;
-		}
-		else
-		{
-			StringFormat(sString, "\t");
-			StringFormat(sString, input4_str);
-			WriteText(LogFileHandle, LogIoResult, sString);
-			StringFormat(sString, "\t%d",input4);
-			WriteText(LogFileHandle, LogIoResult, sString);
-			if(input5_str == NULL)
-			{
-				return;
-			}
-			else
-			{
-				StringFormat(sString, "\t");
-				StringFormat(sString, input5_str);
-				WriteText(LogFileHandle, LogIoResult, sString);
-				StringFormat(sString, "\t%d",input5);
-				WriteText(LogFileHandle, LogIoResult, sString);
-				if(input6_str == NULL)
-				{
-					return;
-				}
-				else
-				{
-					StringFormat(sString, "\t");
-					StringFormat(sString, input6_str);
-					WriteText(LogFileHandle, LogIoResult, sString);
-					StringFormat(sString, "\t%d",input6);
-					WriteText(LogFileHandle, LogIoResult, sString);
-				}
-			}
-		}
-	}
-
+	log_parameter(input3_str, input3);
+	log_parameter(input4_str, input4);
+	log_parameter(input5_str, input5);
+	log_parameter(input6_str, input6);
 
 	StringFormat(sString, "rel-g %4d\t", g_rel_heading_use);
 	WriteText(LogFileHandle, LogIoResult, sString);

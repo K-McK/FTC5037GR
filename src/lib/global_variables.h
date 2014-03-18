@@ -19,10 +19,10 @@
 
 #include "compile_flags.h"
 
-#define HIGH_PRIORITY_TASK 7
+#define HIGH_PRIORITY_TASK 5
 #define MEDIUM_PRIORITY_TASK 5
-#define LOW_PRIORITY_TASK 3
-#define BACKGROUND_TASK 1
+#define LOW_PRIORITY_TASK 5
+#define BACKGROUND_TASK 5
 
 const tMUXSensor HTEOPD = msensor_S2_1;
 const tMUXSensor LEGOLS = msensor_S3_2;//2_1;
@@ -559,6 +559,8 @@ int g_test_value = 0;
 
 int g_input_array[INPUT_ARRAY_SIZE];
 
+bool g_gyro1_active = true;
+bool g_gyro2_active = false;
 //=========================================================
 // Datalogging variables
 //=========================================================
@@ -1150,11 +1152,12 @@ int g_graph_selection_tab = 0;
 *			Tells the robot the number for an error
 */
 #define ERR_NONE 0
-#define ERR_GYRO_CAL 1
+#define ERR_GYRO_CAL1 1
 #define ERR_GYRO_MUX 2
 #define ERR_SENSOR_MUX 3
 #define ERR_JOYSTICKS 4
 #define ERR_ACCELERMOETER 5
+#define ERR_GYRO_CAL2 6
 
 int g_error = 0;
 
@@ -1418,11 +1421,11 @@ int g_max_quick_missions = 6;
 */
 string g_error_list1 [] = {
 	"Unknown ",
-	"GyroCal ",
+	"GyroCal1",
 	"Gyro    ",
 	"Sensor  ",
 	"joystick",
-	"Test 5  ",
+	"GyroCal2",
 	"Test 6  ",
 	"Test 7  ",
 	"Test 8  ",
