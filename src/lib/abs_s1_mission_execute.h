@@ -27,13 +27,11 @@ void abs_s1_mission_execute()
 	switch(g_mission_number)
 	{
 	case 0:		//test option only used for tests, currently angle sensor
-		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_ANGLE, 600, 50, true, g_drive_type);
 		break;
 
 	case 1:	//IR mission
 		dist_record=true;			//set to record the following movement for end movement distance
-		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, FORWARD_IR_THRESHOLD, 40, true, g_drive_type);
 		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)		//if robot did not drive minimal distance drive to first crate
 		{
@@ -63,7 +61,6 @@ void abs_s1_mission_execute()
 		break;
 
 	case 6:	//test option to read the gyro, will be defence mission 1
-		g_screen_state = S_SMOKE_RUN2;
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
 		while(true)
@@ -74,7 +71,6 @@ void abs_s1_mission_execute()
 		break;
 
 	case 7: //will be defence mission 2
-		g_screen_state = S_SMOKE_RUN2;
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
 		while(true)

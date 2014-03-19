@@ -176,7 +176,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 					motor[right_motor] = speed;
 				}
 			}
-			//g_screen_state = S_TIME_SHOW;
 			g_debug_time_1 = nPgmTime;
 		}
 		else if(dir == BACKWARD)
