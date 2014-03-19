@@ -1193,25 +1193,7 @@ string g_starting_names1 [] = {
 	"S1      ",
 	"S2      ",
 	"S3      ",
-	"S4      ",
-	"Test 5  ",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"S4      "};
 
 //==============================================================================
 // Define the text to be displayed for each starting point line 2
@@ -1223,28 +1205,7 @@ string g_starting_names1 [] = {
 
 string g_starting_names2 [] = {
 	"        ",
-	"        ",
-	"Test 2  ",
-	"Test 3  ",
-	"Test 4  ",
-	"Test 5  ",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"        "};
 
 //==============================================================================
 // Define the text to be displayed for each ending point line 1
@@ -1260,24 +1221,7 @@ string g_ending_names1 [] = {
 	"Ramp 1  ",
 	"Ramp 2  ",
 	"Ramp 1  ",
-	"Ramp 2  ",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"Ramp 2  "};
 
 //==============================================================================
 // Define the text to be displayed for each ending point line 2
@@ -1292,24 +1236,7 @@ string g_ending_names2 [] = {
 	"Stop    ",
 	"Stop    ",
 	"Continue",
-	"Continue",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"Continue"};
 
 //==============================================================================
 // Define the text to be displayed for each mission
@@ -1325,23 +1252,7 @@ string g_mission_names1 [] = {
 	"crate 3 ",
 	"crate 2 ",
 	"crate 1 ",
-	"defence ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"defence "};
 
 //==============================================================================
 // Define the text to be displayed on the second line for each mission
@@ -1359,21 +1270,7 @@ string g_mission_names2 [] = {
 	"Test 5  ",
 	"score 4 ",
 	"score 3 ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"Test 8  "};
 
 //==============================================================================
 // Define the text to be displayed for quick selection
@@ -1386,11 +1283,7 @@ string g_mission_names2 [] = {
 string g_quick_names1 [] = {
 	"Unknown ",
 	"Standard",
-	"S Ramp 2",
-	"Test 3  ",
-	"Test 4  ",
-	"Test 5  ",
-	"Test 6  "};
+	"S Ramp 2"};
 
 /**
 * @var g_quick_names2
@@ -1403,11 +1296,7 @@ string g_quick_names1 [] = {
 string g_quick_names2 [] = {
 	"Unknown ",
 	"10142   ",
-	"10143   ",
-	"Test 3  ",
-	"Test 4  ",
-	"Test 5  ",
-	"Test 6  "};
+	"10143   "};
 
 int g_quick_mission = 1;
 int g_max_quick_missions = 6;
@@ -1425,24 +1314,7 @@ string g_error_list1 [] = {
 	"Gyro    ",
 	"Sensor  ",
 	"joystick",
-	"GyroCal2",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"GyroCal2"};
 /**
 * @var g_error_list2
 *		Tells the robot the names of the errors for the second line
@@ -1453,25 +1325,7 @@ string g_error_list2 [] = {
 	"Failure ",
 	"Mux     ",
 	"Mux     ",
-	"fail    ",
-	"Test 5  ",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"fail    "};
 
 //==============================================================================
 // Define the text to be displayed for smoke test line 1
@@ -1489,21 +1343,7 @@ string g_smoke_test1 [] = {
 	"Grabbers",
 	"sky hook",
 	"roger   ",
-	"ground  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"ground  "};
 
 //==============================================================================
 // Define the text to be displayed for smoke test line 2
@@ -1521,18 +1361,4 @@ string g_smoke_test2 [] = {
 	"        ",
 	"        ",
 	"slide   ",
-	"arm     ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"arm     "};
