@@ -62,7 +62,6 @@ void abs_s1_mission_execute()
 		break;
 
 	case 6:	//test option to read the gyro, will be defence mission 1
-		g_screen_state = S_SMOKE_RUN2;
 		while(true)
 		{
 			abs_cscreen("Gyros   ","1    2  ","%1d    %1d",g_rel_heading,g_rel_heading2);

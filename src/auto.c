@@ -61,6 +61,7 @@
 #include "lib/abs_s2_mission_execute.h"
 #include "lib/abs_s3_mission_execute.h"
 #include "lib/abs_s4_mission_execute.h"
+#include "lib/abs_s5_mission_execute.h"
 #include "lib/abs_dlog.h"
 #include "lib/abs_stay_on_ramp.h"
 #include "lib/abs_end_ramp.h"
@@ -80,6 +81,8 @@ task main()
 
 	g_rel_heading = 0;						//reset the const and the rel gyro value for the start of the robots mission
 	g_const_heading = 0;
+	g_rel_heading2 = 0;						//reset the const and the rel gyro value for the start of the robots mission
+	g_const_heading2 = 0;
 	switch(g_start_point)
 	{
 	case 1:
@@ -93,6 +96,9 @@ task main()
 		break;
 	case 4:
 		abs_s4_mission_execute();		//missions for starting position 4
+		break;
+	case 5:
+		abs_s5_mission_execute();		//missions for starting position 4
 		break;
 	}
 
