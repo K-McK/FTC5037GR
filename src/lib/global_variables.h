@@ -205,58 +205,19 @@ const int g_light_threshold = 30;
 const int g_light_move_min_dist = 70; // REMOVE
 
 //=========================================================
-// auto selection points
+// auto selection type options
 //=========================================================
-/**
-* @enum e_auto_selection_points Tells the robot what part it is in the selection program
-* @var e_auto_selection_points::SELECTION_START_POINT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_START_DELAY
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_MISSION_POINT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_MISSION_DELAY
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_END_POINT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_SUB_GRABBERS
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_GYRO_CAL
-*      Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_SELECTION_TYPE
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_GRAPH_NUMBER_INPUT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_QUICK_INPUT
-*			Tells the robot to go to this part in the selection program
-*	@var e_auto_selection_points::SELECTION_SUB_RAMP
-*			Tells the robot to go to this part in the selection program
-*	@var e_auto_selection_points::SELECTION_CORNOR_DELAY
-*			Tells the robot to go to this part in the selection program
-*	@var e_auto_selection_points::SELECTION_RAMP_DELAY
-*			Tells the robot to go to this part in the selection program
-* @var g_auto_selection_point
-*			Tells the robot what phase its in on auto
-*/
 
 typedef enum
 {
-	SELECTION_START_POINT,
-	SELECTION_START_DELAY,
-	SELECTION_MISSION_POINT,
-	SELECTION_MISSION_DELAY,
-	SELECTION_END_POINT,
-	SELECTION_SUB_GRABBERS,
-	SELECTION_GYRO_CAL,
-	SELECTION_SELECTION_TYPE,
-	SELECTION_GRAPH_NUMBER_INPUT,
-	SELECTION_QUICK_INPUT,
-	SELECTION_SUB_RAMP,
-	SELECTION_CORNOR_DELAY,
-	SELECTION_RAMP_DELAY
-} e_auto_selection_points;
+	STALL_ERROR,
+	STALL_CRATE_RUN,
+	STALL_CORNER_RUN,
+	STALL_RAMP_RUN,
+	STALL_DEFENCE_RUN
+} e_stall_points;
 
-e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
+int g_stall_points [4];
 
 //=========================================================
 // auto selection type options
@@ -511,6 +472,8 @@ const int g_backwards_crate4_to_turn_dist = 140;
 #define MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE 110
 #define MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE 20
 
+#define DRIVE_DIST_TO_OPP_RAMP_SIDE 170
+
 #define FORWARD_IR_THRESHOLD 7
 #define BACKWARD_IR_THRESHOLD 3
 
@@ -522,27 +485,6 @@ const int g_backwards_crate4_to_turn_dist = 140;
 #define TURN_SPEED_COEFFICIENT 5
 
 int abdd_down_speed = 3;
-//=========================================================
-// Smoke test varaibles
-//=========================================================
-/**
-* @var g_smoke_test_num
-* 		 Tells the robot what the number is for what its useing smoke test on
-*
-* @var g_smoke_test_total
-* 		  Tells the robot the total number of of smoke test types
-*
-* @var g_smoke_run
-* 		 Tells the robot if its running smoke test or not
-*
-* @var g_test_value
-* 		 Tells the robot what to desply on the screen
-*/
-
-int g_smoke_test_num = 1;
-int g_smoke_test_total = 12;
-bool g_smoke_run = false;
-int g_test_value = 0;
 
 //=========================================================
 // auto number input variable
@@ -644,7 +586,7 @@ int dl_drive_details [] = {0,4};
 int g_debug_time_1 = 0;
 int g_debug_time_2 = 0;
 
-int g_auto_ending_points = 5;
+int g_auto_ending_points = 9;
 int g_travel_dist = 0;
 int g_auto_starting_points = 4;
 int g_auto_missions = 10;
@@ -801,7 +743,7 @@ int START_POINT_MAX_VAL = 4;
 int START_POINT_MIN_VAL = 0;
 
 int g_number_min_limit [] = {0,0,0,0,0,0,0};
-int g_number_max_limit [] = {0,4,30,7,30,5};
+int g_number_max_limit [] = {0,4,30,7,30,9};
 //=============================================================
 // Gyro variables
 //=============================================================
@@ -949,27 +891,6 @@ int g_accelermoeter_array [] = {0,30};
 ubyte g_accelermoeter_total_value = 0;
 int g_accelermoeter_average = 0;
 
-int g_sensor_num = 1;
-int g_sensor_max = 4;
-int g_sensor_value = 0;
-int g_sensor_value2 = 0;
-/**
-*
-*  @def ST_GYRO
-*     The reference value for the sensor in smoke test
-*  @def ST_IR
-*     The reference value for the sensor in smoke test
-*  @def ST_ACCELEROMETER
-*     The reference value for the sensor in smoke test
-*  @def ST_TILT
-*     The reference value for the sensor in smoke test
-*/
-
-#define ST_GYRO 1
-#define ST_IR 2
-#define ST_ACCELEROMETER 3
-#define ST_TILT 4
-
 /**
 * @var g_sensor_reference_drive
 *		Tells the robot if it should run with sensors enabled
@@ -988,13 +909,6 @@ string g_sensor_list [] = {
 	"IR   IR2",
 	"accel   ",
 	"tilt    "};
-
-string g_basic_word_list [] = {
-	"unknown ",
-	"in      ",
-	"out     ",
-	"yes     ",
-	"no      "};
 
 /**
 *  @enum e_light_sensor_status Tells the robot if it should turn on the light sensor
@@ -1070,39 +984,3 @@ e_error_types g_error_type = ERROR_LETHAL;
 
 int g_quick_mission = 1;
 int g_max_quick_missions = 6;
-
-//==============================================================================
-// Define the text to be displayed for smoke test line 1
-//==============================================================================
-/**
-* @var g_smoke_test1
-*		Tells the robot the names of the smake test options
-*/
-string g_smoke_test1 [] = {
-	"Unknown ",
-	"Jolly   ",
-	"Drive   ",
-	"Sensor  ",
-	"Block   ",
-	"Grabbers",
-	"sky hook",
-	"roger   ",
-	"ground  "};
-
-//==============================================================================
-// Define the text to be displayed for smoke test line 2
-//==============================================================================
-/**
-* @var g_smoke_test2
-*		Tells the robot the names of the smake test options for the second line
-*/
-string g_smoke_test2 [] = {
-	"Unknown ",
-	"Roger   ",
-	"Train   ",
-	"Sensor  ",
-	"Lift    ",
-	"        ",
-	"        ",
-	"slide   ",
-	"arm     "};

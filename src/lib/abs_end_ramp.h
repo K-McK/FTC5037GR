@@ -79,8 +79,11 @@ void abs_end_ramp(int delay)
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)	//check for dist travel is less then min
 	{																																								//dist, if so make up needed dist
 		abs_dlog(__FILE__ ,"backup, min dist fail", "Cur dist: %d", abs_get_angle_sensor_val(RELATIVE_BPU), "Min dist: %d", MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU));
-		abs_drive(FORWARD, E_ANGLE, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
+		if(g_end_point>=6&&g_end_point<=9)abs_drive(FORWARD, E_ANGLE, DRIVE_DIST_TO_OPP_RAMP_SIDE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
+		else abs_drive(FORWARD, E_ANGLE, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
 	}
+	else if(g_end_point>=6&&g_end_point<=9) abs_drive(FORWARD, E_ANGLE, DRIVE_DIST_TO_OPP_RAMP_SIDE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
+
 	abs_control_light_sensor(INACTIVE);	//turn off the light sensor
 	wait1Msec(500);
 

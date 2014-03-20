@@ -65,8 +65,7 @@ void abs_s1_mission_execute()
 		g_screen_state = S_SMOKE_RUN2;
 		while(true)
 		{
-			g_sensor_value = g_rel_heading;
-			g_sensor_value2 = g_rel_heading2;
+			abs_cscreen("Gyros   ","1    2  ","%1d    %1d",g_rel_heading,g_rel_heading2);
 		}
 		break;
 
@@ -75,8 +74,6 @@ void abs_s1_mission_execute()
 		motor[left_motor] = 0;
 		while(true)
 		{
-			g_sensor_value = g_EOPD_sensor;
-			g_sensor_value2 = 0;//abs_get_angle_sensor_val(RELATIVE_BPU);
 		}
 		break;
 	}
