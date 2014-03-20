@@ -30,15 +30,15 @@ void abs_selection_options()
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kRightButton){}
-			if(g_em_first_turn_type == END_MISSION_FIRST_TURN_REL)  g_em_first_turn_type = END_MISSION_FIRST_TURN_CONST;
+			if(g_em_first_turn_type == RELATIVE_TURN)  g_em_first_turn_type = CONSTANT_TURN;
 		}
 		if(nNxtButtonPressed == kLeftButton)
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kLeftButton){}
-			if(g_em_first_turn_type == END_MISSION_FIRST_TURN_CONST) g_em_first_turn_type = END_MISSION_FIRST_TURN_REL;
+			if(g_em_first_turn_type == CONSTANT_TURN) g_em_first_turn_type = RELATIVE_TURN;
 		}
-		if(g_em_first_turn_type == END_MISSION_FIRST_TURN_REL) abs_cscreen("Options ","1st turn","rel     ");
+		if(g_em_first_turn_type == RELATIVE_TURN) abs_cscreen("Options ","1st turn","rel     ");
 		else abs_cscreen("Options ","1st turn","const   ");
 	}
 	PlaySoundFile("! Click.rso");
@@ -57,15 +57,15 @@ void abs_selection_options()
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kRightButton){}
-			if(g_em_second_turn_type == END_MISSION_SECOND_TURN_REL) g_em_second_turn_type = END_MISSION_SECOND_TURN_CONST;
+			if(g_em_second_turn_type == RELATIVE_TURN) g_em_second_turn_type = CONSTANT_TURN;
 		}
 		if(nNxtButtonPressed == kLeftButton)
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kLeftButton){}
-			if(g_em_second_turn_type == END_MISSION_SECOND_TURN_CONST) g_em_second_turn_type = END_MISSION_SECOND_TURN_REL;
+			if(g_em_second_turn_type == CONSTANT_TURN) g_em_second_turn_type = RELATIVE_TURN;
 		}
-		if(g_em_second_turn_type == END_MISSION_SECOND_TURN_REL) abs_cscreen("Options ","2st turn","rel     ");
+		if(g_em_second_turn_type == RELATIVE_TURN) abs_cscreen("Options ","2st turn","rel     ");
 		else abs_cscreen("Options ","2st turn","const   ");
 	}
 	PlaySoundFile("! Click.rso");

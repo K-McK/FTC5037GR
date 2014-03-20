@@ -692,35 +692,21 @@ bool g_gyro_ran = false;
 
 /**
 *  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
-*  @var e_em_first_turn_types::END_MISSION_FIRST_TURN_REL
+*  @var e_em_first_turn_types::RELATIVE_TURN
 *     Do a relitive turn
-*   @var e_em_first_turn_types::END_MISSION_FIRST_TURN_CONST
+*   @var e_em_first_turn_types::CONSTANT_TURN
 *     Do a consant turn
 */
 typedef enum
 {
-	END_MISSION_FIRST_TURN_REL,
-	END_MISSION_FIRST_TURN_CONST
-} e_em_first_turn_types;
+	RELATIVE_TURN,
+	CONSTANT_TURN
+} e_turn_types;
 /**
 * @var g_em_first_turn_type
 *		Tells the robot the the first turn of the end of auto
 */
-e_em_first_turn_types g_em_first_turn_type = END_MISSION_FIRST_TURN_REL;
-
-/**
-*  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
-*  @var e_em_first_turn_types::END_MISSION_SECOND_TURN_REL
-*     Do a relitive turn
-*   @var e_em_first_turn_types::END_MISSION_SECOND_TURN_CONST
-*     Do a consant turn
-*/
-
-typedef enum
-{
-	END_MISSION_SECOND_TURN_REL,
-	END_MISSION_SECOND_TURN_CONST
-} e_em_second_turn_types;
+e_turn_types g_em_first_turn_type = RELATIVE_TURN;
 
 /**
 * @var g_em_second_turn_type
@@ -734,7 +720,7 @@ typedef enum
 * @var g_drive_type
 *		Tells the robot if it should drive useing the gyro, encode or non
 */
-e_em_second_turn_types g_em_second_turn_type = END_MISSION_FIRST_TURN_REL;
+e_turn_types g_em_second_turn_type = RELATIVE_TURN;
 
 int g_selection_turn = 1;
 

@@ -21,6 +21,7 @@
 #include "abs_end_ramp.h"
 #include "abs_dlog.h"
 #include "abs_get_angle_sensor_val.h"
+#include "abs_stay_on_ramp.h"
 
 void abs_s1_mission_execute()
 {
@@ -61,8 +62,7 @@ void abs_s1_mission_execute()
 		break;
 
 	case 6:	//test option to read the gyro, will be defence mission 1
-		motor[right_motor] = 0;
-		motor[left_motor] = 0;
+		g_screen_state = S_SMOKE_RUN2;
 		while(true)
 		{
 			abs_cscreen("Gyros   ","1    2  ","%1d    %1d",g_rel_heading,g_rel_heading2);
@@ -91,7 +91,7 @@ void abs_s1_mission_execute()
 
 	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR); //wait for end delay, number option tab 4
 
-	abs_dlog(__FILE__,"start of end", "g_end_point", g_end_point);
+	//abs_dlog(__FILE__,"start of end", "g_end_point", g_end_point);
 }
 
 #endif /* !ABS_S1_MISSION_EXICUTE_H */

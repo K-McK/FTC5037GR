@@ -109,13 +109,13 @@ task main()
 		abs_end_ramp(2000);
 		break;
 	default:											//error case: if this is executed something went wrong with the auto selection
-		abs_dlog(__FILE__,"Invalid Ramp Option");
+		//abs_dlog(__FILE__,"Invalid Ramp Option");
 		break;
 	}
 
-	abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
+	//abs_dlog(__FILE__ ,"end auto", "End time:", nPgmTime);
 	Close(LogFileHandle, LogIoResult);			//close the datalogging
 	LogData=false;
 
-	if(g_stay_on_ramp) abs_stay_on_ramp();	//if config selected robot resists being pushed
+	if(g_stay_on_ramp) abs_hold_position();	//if config selected robot resists being pushed
 }

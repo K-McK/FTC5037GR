@@ -188,12 +188,12 @@ task abs_screen ()
 			nxtDisplayBigTextLine(3, "turn");
 			if(g_selection_turn == 1)
 			{
-				if(g_em_first_turn_type == END_MISSION_FIRST_TURN_REL) nxtDisplayBigTextLine(5, "RELATIVE");
+				if(g_em_first_turn_type == RELATIVE_TURN) nxtDisplayBigTextLine(5, "RELATIVE");
 				else nxtDisplayBigTextLine(5, "CONSTANT");
 			}
 			else
 			{
-				if(g_em_second_turn_type == END_MISSION_FIRST_TURN_REL) nxtDisplayBigTextLine(5, "RELATIVE");
+				if(g_em_second_turn_type == RELATIVE_TURN) nxtDisplayBigTextLine(5, "RELATIVE");
 				else nxtDisplayBigTextLine(5, "CONSTANT");
 			}
 			break;
