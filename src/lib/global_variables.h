@@ -205,58 +205,19 @@ const int g_light_threshold = 30;
 const int g_light_move_min_dist = 70; // REMOVE
 
 //=========================================================
-// auto selection points
+// auto selection type options
 //=========================================================
-/**
-* @enum e_auto_selection_points Tells the robot what part it is in the selection program
-* @var e_auto_selection_points::SELECTION_START_POINT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_START_DELAY
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_MISSION_POINT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_MISSION_DELAY
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_END_POINT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_SUB_GRABBERS
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_GYRO_CAL
-*      Tells the robot to go to this part in the selection program
-*  @var e_auto_selection_points::SELECTION_SELECTION_TYPE
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_GRAPH_NUMBER_INPUT
-*     Tells the robot to go to this part in the selection program
-* @var e_auto_selection_points::SELECTION_QUICK_INPUT
-*			Tells the robot to go to this part in the selection program
-*	@var e_auto_selection_points::SELECTION_SUB_RAMP
-*			Tells the robot to go to this part in the selection program
-*	@var e_auto_selection_points::SELECTION_CORNOR_DELAY
-*			Tells the robot to go to this part in the selection program
-*	@var e_auto_selection_points::SELECTION_RAMP_DELAY
-*			Tells the robot to go to this part in the selection program
-* @var g_auto_selection_point
-*			Tells the robot what phase its in on auto
-*/
 
 typedef enum
 {
-	SELECTION_START_POINT,
-	SELECTION_START_DELAY,
-	SELECTION_MISSION_POINT,
-	SELECTION_MISSION_DELAY,
-	SELECTION_END_POINT,
-	SELECTION_SUB_GRABBERS,
-	SELECTION_GYRO_CAL,
-	SELECTION_SELECTION_TYPE,
-	SELECTION_GRAPH_NUMBER_INPUT,
-	SELECTION_QUICK_INPUT,
-	SELECTION_SUB_RAMP,
-	SELECTION_CORNOR_DELAY,
-	SELECTION_RAMP_DELAY
-} e_auto_selection_points;
+	STALL_ERROR,
+	STALL_CRATE_RUN,
+	STALL_CORNER_RUN,
+	STALL_RAMP_RUN,
+	STALL_DEFENCE_RUN
+} e_stall_points;
 
-e_auto_selection_points g_auto_selection_point = SELECTION_START_POINT;
+int g_stall_points [4];
 
 //=========================================================
 // auto selection type options
@@ -511,6 +472,8 @@ const int g_backwards_crate4_to_turn_dist = 140;
 #define MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE 110
 #define MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE 20
 
+#define DRIVE_DIST_TO_OPP_RAMP_SIDE 170
+
 #define FORWARD_IR_THRESHOLD 7
 #define BACKWARD_IR_THRESHOLD 3
 
@@ -522,27 +485,6 @@ const int g_backwards_crate4_to_turn_dist = 140;
 #define TURN_SPEED_COEFFICIENT 5
 
 int abdd_down_speed = 3;
-//=========================================================
-// Smoke test varaibles
-//=========================================================
-/**
-* @var g_smoke_test_num
-* 		 Tells the robot what the number is for what its useing smoke test on
-*
-* @var g_smoke_test_total
-* 		  Tells the robot the total number of of smoke test types
-*
-* @var g_smoke_run
-* 		 Tells the robot if its running smoke test or not
-*
-* @var g_test_value
-* 		 Tells the robot what to desply on the screen
-*/
-
-int g_smoke_test_num = 1;
-int g_smoke_test_total = 12;
-bool g_smoke_run = false;
-int g_test_value = 0;
 
 //=========================================================
 // auto number input variable
@@ -644,7 +586,7 @@ int dl_drive_details [] = {0,4};
 int g_debug_time_1 = 0;
 int g_debug_time_2 = 0;
 
-int g_auto_ending_points = 5;
+int g_auto_ending_points = 9;
 int g_travel_dist = 0;
 int g_auto_starting_points = 4;
 int g_auto_missions = 10;
@@ -750,35 +692,21 @@ bool g_gyro_ran = false;
 
 /**
 *  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
-*  @var e_em_first_turn_types::END_MISSION_FIRST_TURN_REL
+*  @var e_em_first_turn_types::RELATIVE_TURN
 *     Do a relitive turn
-*   @var e_em_first_turn_types::END_MISSION_FIRST_TURN_CONST
+*   @var e_em_first_turn_types::CONSTANT_TURN
 *     Do a consant turn
 */
 typedef enum
 {
-	END_MISSION_FIRST_TURN_REL,
-	END_MISSION_FIRST_TURN_CONST
-} e_em_first_turn_types;
+	RELATIVE_TURN,
+	CONSTANT_TURN
+} e_turn_types;
 /**
 * @var g_em_first_turn_type
 *		Tells the robot the the first turn of the end of auto
 */
-e_em_first_turn_types g_em_first_turn_type = END_MISSION_FIRST_TURN_REL;
-
-/**
-*  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
-*  @var e_em_first_turn_types::END_MISSION_SECOND_TURN_REL
-*     Do a relitive turn
-*   @var e_em_first_turn_types::END_MISSION_SECOND_TURN_CONST
-*     Do a consant turn
-*/
-
-typedef enum
-{
-	END_MISSION_SECOND_TURN_REL,
-	END_MISSION_SECOND_TURN_CONST
-} e_em_second_turn_types;
+e_turn_types g_em_first_turn_type = RELATIVE_TURN;
 
 /**
 * @var g_em_second_turn_type
@@ -792,7 +720,7 @@ typedef enum
 * @var g_drive_type
 *		Tells the robot if it should drive useing the gyro, encode or non
 */
-e_em_second_turn_types g_em_second_turn_type = END_MISSION_FIRST_TURN_REL;
+e_turn_types g_em_second_turn_type = RELATIVE_TURN;
 
 int g_selection_turn = 1;
 
@@ -815,7 +743,7 @@ int START_POINT_MAX_VAL = 4;
 int START_POINT_MIN_VAL = 0;
 
 int g_number_min_limit [] = {0,0,0,0,0,0,0};
-int g_number_max_limit [] = {0,4,30,7,30,5};
+int g_number_max_limit [] = {0,4,30,7,30,9};
 //=============================================================
 // Gyro variables
 //=============================================================
@@ -963,27 +891,6 @@ int g_accelermoeter_array [] = {0,30};
 ubyte g_accelermoeter_total_value = 0;
 int g_accelermoeter_average = 0;
 
-int g_sensor_num = 1;
-int g_sensor_max = 4;
-int g_sensor_value = 0;
-int g_sensor_value2 = 0;
-/**
-*
-*  @def ST_GYRO
-*     The reference value for the sensor in smoke test
-*  @def ST_IR
-*     The reference value for the sensor in smoke test
-*  @def ST_ACCELEROMETER
-*     The reference value for the sensor in smoke test
-*  @def ST_TILT
-*     The reference value for the sensor in smoke test
-*/
-
-#define ST_GYRO 1
-#define ST_IR 2
-#define ST_ACCELEROMETER 3
-#define ST_TILT 4
-
 /**
 * @var g_sensor_reference_drive
 *		Tells the robot if it should run with sensors enabled
@@ -1003,13 +910,6 @@ string g_sensor_list [] = {
 	"accel   ",
 	"tilt    "};
 
-string g_basic_word_list [] = {
-	"unknown ",
-	"in      ",
-	"out     ",
-	"yes     ",
-	"no      "};
-
 /**
 *  @enum e_light_sensor_status Tells the robot if it should turn on the light sensor
 *  @var e_light_sensor_status::ACTIVE
@@ -1022,105 +922,6 @@ typedef enum
 	ACTIVE,
 	INACTIVE
 } e_light_sensor_status;
-
-//=============================================================
-// Define screen related variables
-//=============================================================
-/**
-*
-*  @def S_CLEAR
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_MISSION
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_DELAY
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_CAL_TIME
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_GYRO_CAL
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_READY
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_DELAY_WAIT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_GYRO_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ERROR
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_TEST
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN1
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN2
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN3
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SCREEN_CALL
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_IR_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_AC_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_MISC_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_STARTING_POINT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ENDING_POINT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SELECTION_SUB_GRABBERS
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ANGLE_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_TIME_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SELECTION_TYPE
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_NUMBER_SELECTION
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SELECTION_SUB_RAMP
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_MISSION_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_QUICK_SELECTION
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_END_TURN_OPTIONS
-*			Tells the robot the screen state number for this screen statestate
-*  @def S_STAY_GROUND_OPTIONS
-*			Tells the robot the screen state number for this screen statestate
-*  @var g_screen_state
-*			Tells the robt what it should desply on the screen
-*/
-
-#define S_CLEAR 0
-#define S_MISSION 1
-#define S_DELAY 2
-#define S_CAL_TIME 3
-#define S_GYRO_CAL 4
-#define S_READY 5
-#define S_DELAY_WAIT 6
-#define S_GYRO_SHOW 7
-#define S_ERROR 8
-#define S_SMOKE_TEST 9
-#define S_SMOKE_RUN1 10
-#define S_SMOKE_RUN2 11
-#define S_SMOKE_RUN3 12
-#define S_SCREEN_CALL 13
-#define S_IR_SHOW 14
-#define S_AC_SHOW 15
-#define S_MISC_SHOW 16
-#define S_STARTING_POINT 17
-#define S_ENDING_POINT 18
-#define S_SELECTION_SUB_GRABBERS 19
-#define S_ANGLE_SHOW 20
-#define S_TIME_SHOW 21
-#define S_SELECTION_TYPE 22
-#define S_NUMBER_SELECTION 23
-#define S_SELECTION_SUB_RAMP 24
-#define S_MISSION_SHOW 25
-#define S_QUICK_SELECTION 26
-#define S_END_TURN_OPTIONS 27
-#define S_STAY_GROUND_OPTIONS 28
-
-int g_screen_state = 1;
 
 //==============================================================
 // Define graph selection variables
@@ -1153,11 +954,12 @@ int g_graph_selection_tab = 0;
 */
 #define ERR_NONE 0
 #define ERR_GYRO_CAL1 1
-#define ERR_GYRO_MUX 2
+#define ERR_GYRO_MUX1 2
 #define ERR_SENSOR_MUX 3
 #define ERR_JOYSTICKS 4
 #define ERR_ACCELERMOETER 5
 #define ERR_GYRO_CAL2 6
+#define ERR_GYRO_MUX2 7
 
 int g_error = 0;
 
@@ -1180,185 +982,5 @@ typedef enum
 
 e_error_types g_error_type = ERROR_LETHAL;
 
-//==============================================================================
-// Define the text to be displayed for each starting point line 1
-//==============================================================================
-/**
-* @var g_starting_names1
-*		Tell the robot the names of the starting points
-*/
-
-string g_starting_names1 [] = {
-	"        ",
-	"S1      ",
-	"S2      ",
-	"S3      ",
-	"S4      "};
-
-//==============================================================================
-// Define the text to be displayed for each starting point line 2
-//==============================================================================
-/**
-* @var g_starting_names2
-*		Tell the robot the names of the second line of the screen when selectimg a starting posion
-*/
-
-string g_starting_names2 [] = {
-	"        ",
-	"        "};
-
-//==============================================================================
-// Define the text to be displayed for each ending point line 1
-//==============================================================================
-/**
-* @var g_ending_names1
-*		 Tells the robot the names of the end points
-*/
-
-string g_ending_names1 [] = {
-	"        ",
-	"Stop    ",
-	"Ramp 1  ",
-	"Ramp 2  ",
-	"Ramp 1  ",
-	"Ramp 2  "};
-
-//==============================================================================
-// Define the text to be displayed for each ending point line 2
-//==============================================================================
-/**
-* @var g_ending_names2
-*		 Tells the robot the names of the second line of the end points
-*/
-string g_ending_names2 [] = {
-	"        ",
-	"        ",
-	"Stop    ",
-	"Stop    ",
-	"Continue",
-	"Continue"};
-
-//==============================================================================
-// Define the text to be displayed for each mission
-//==============================================================================
-/**
-* @var g_mission_names1
-*		Tells the robot the names of the missions
-*/
-string g_mission_names1 [] = {
-	"        ",
-	"IR crate",
-	"crate 4 ",
-	"crate 3 ",
-	"crate 2 ",
-	"crate 1 ",
-	"defence "};
-
-//==============================================================================
-// Define the text to be displayed on the second line for each mission
-//==============================================================================
-/**
-* @var g_mission_names2
-*		Tells the robot the second line of the mission
-*/
-string g_mission_names2 [] = {
-	"        ",
-	"Test 1  ",
-	"Test 2  ",
-	"Test 3  ",
-	"Test 4  ",
-	"Test 5  ",
-	"score 4 ",
-	"score 3 ",
-	"Test 8  "};
-
-//==============================================================================
-// Define the text to be displayed for quick selection
-//==============================================================================
-/**
-* @var g_quick_names1
-*		 Tells the robot the quick select program names
-*/
-
-string g_quick_names1 [] = {
-	"Unknown ",
-	"Standard",
-	"S Ramp 2"};
-
-/**
-* @var g_quick_names2
-*		 Tells the robot the quick select program second line names
-* @var g_quick_mission
-*		Tells the robot the numbers of the quick missions
-* @var g_max_quick_missions
-*		Tells the robot the max amount of quick names
-*/
-string g_quick_names2 [] = {
-	"Unknown ",
-	"10142   ",
-	"10143   "};
-
 int g_quick_mission = 1;
 int g_max_quick_missions = 6;
-
-//==============================================================================
-// Define the text to be displayed for the errors
-//==============================================================================
-/**
-* @var g_error_list1
-*		 Tells the robot the names of the errors
-*/
-string g_error_list1 [] = {
-	"Unknown ",
-	"GyroCal1",
-	"Gyro    ",
-	"Sensor  ",
-	"joystick",
-	"GyroCal2"};
-/**
-* @var g_error_list2
-*		Tells the robot the names of the errors for the second line
-*/
-
-string g_error_list2 [] = {
-	"error   ",
-	"Failure ",
-	"Mux     ",
-	"Mux     ",
-	"fail    "};
-
-//==============================================================================
-// Define the text to be displayed for smoke test line 1
-//==============================================================================
-/**
-* @var g_smoke_test1
-*		Tells the robot the names of the smake test options
-*/
-string g_smoke_test1 [] = {
-	"Unknown ",
-	"Jolly   ",
-	"Drive   ",
-	"Sensor  ",
-	"Block   ",
-	"Grabbers",
-	"sky hook",
-	"roger   ",
-	"ground  "};
-
-//==============================================================================
-// Define the text to be displayed for smoke test line 2
-//==============================================================================
-/**
-* @var g_smoke_test2
-*		Tells the robot the names of the smake test options for the second line
-*/
-string g_smoke_test2 [] = {
-	"Unknown ",
-	"Roger   ",
-	"Train   ",
-	"Sensor  ",
-	"Lift    ",
-	"        ",
-	"        ",
-	"slide   ",
-	"arm     "};

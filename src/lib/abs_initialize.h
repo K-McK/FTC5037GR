@@ -15,7 +15,6 @@
 #ifndef ABS_INITIALIZE_H
 #define ABS_INITIALIZE_H
 
-#include "abs_screen.h"
 #include "abs_gyro_wrapper.h"
 #include "abs_sensors.h"
 #include "abs_datalog.h"
@@ -29,12 +28,6 @@
 
 void abs_initialize()
 {
-#if USE_TASK_PRIORITY == 1
-	StartTask(abs_screen, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
-#else
-	StartTask(abs_screen);		//start the screen function, this handels all screen interactions
-#endif
-
 	disableDiagnosticsDisplay();		//turn off the robotc firmware diagnostic text to clear screen
 	servoChangeRate[abdd] = 3;										//============================================================
 	servo[roger_slide] = 127;											// set all of the robots outputs to their starting positions
@@ -63,6 +56,8 @@ void abs_initialize()
 	{
 		StartTask(abs_gyro2_cal, HIGH_PRIORITY_TASK);
 	}
+
+	if(g_gyro2_active) StartTask(abs_gyro2_cal, HIGH_PRIORITY_TASK);
 	else
 	{
 		g_gyro2_cal_done = true;
@@ -96,6 +91,7 @@ void abs_initialize()
 #endif
 
 	while(g_gyro1_cal_done == false || g_gyro2_cal_done == false){}
+	abs_cscreen("Gyros   ","Calbrtng","  lol   ");
 
 	if(g_gyro_noise<g_gyro_noise2)
 	{
@@ -135,18 +131,26 @@ void abs_initialize()
 	}																								//-error: *nonleathal, robot can still run missions not using IR*
 	if(HTSMUXreadPowerStatus(GYRO_MUX))							//=================================================
 	{																								//-error detection: 1st gyro sensor mux power fail,
-		g_error = ERR_GYRO_MUX;												// robot reads the gyro mux is not powered
+		g_error = ERR_GYRO_MUX1;											// robot reads the gyro mux is not powered
 		g_error = ERROR_LETHAL;												//
 	}																								//-error: leathal, robot needs the gyro to run successfully
 	if(HTSMUXreadPowerStatus(GYRO_MUX2))						//=================================================
 	{																								//-error detection: 2nd gyro sensor mux power fail,
-		g_error = ERR_GYRO_MUX;												// robot reads the gyro mux is not powered
+		g_error = ERR_GYRO_MUX2;											// robot reads the gyro mux is not powered
 		g_error = ERROR_LETHAL;												//
 	}																								//-error: leathal, robot needs the gyro to run successfully
 	//																							//=================================================
 	if(g_error != 0)		//if there is an error start beebing and stop program advancement
 	{
-		g_screen_state = S_ERROR;
+		switch(g_error)
+		{
+		case ERR_ACCELERMOETER: abs_cscreen("ERROR N ","Accel   ","        "); break;
+		case ERR_GYRO_CAL1: abs_cscreen("ERROR L ","Gryo1   ","cal fail"); break;
+		case ERR_GYRO_CAL2: abs_cscreen("ERROR L ","Gryo2   ","cal fail"); break;
+		case ERR_SENSOR_MUX: abs_cscreen("ERROR L ","SensrMux","pwr fail"); break;
+		case ERR_GYRO_MUX1: abs_cscreen("ERROR L ","Gyro1Mux","pwr fail"); break;
+		case ERR_GYRO_MUX2: abs_cscreen("ERROR L ","Gyro1Mux","pwr fail"); break;
+		}
 		while(true)
 		{
 			g_gyro_true = true;
@@ -156,7 +160,11 @@ void abs_initialize()
 		}
 	}//driver tries to over-ride skip error
 	LogData=true;
-	g_screen_state = S_READY;		//set the screen to show the program feedback before the auto starts
+	abs_cscreen("Program ","Ready   ","        "); //set the screen to show the program feedback before the auto starts
+	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_CONTINUED)
+		nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d Y ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
+	else
+		nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d N ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
 
 #if USE_TASK_PRIORITY == 1
 	StartTask(abs_sensors, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
@@ -184,10 +192,11 @@ void abs_initialize()
 
 	eraseDisplay();
 	g_start_time = nPgmTime;		//set the start time
-	g_screen_state = S_DELAY_WAIT;
-	wait1Msec(g_start_delay*1000);	//wait for start delay, number option tab 2
+	time1[T1]=0;
+	while(time1[T1]<g_start_delay*1000)	//wait for start delay, number option tab 2
+	{abs_cscreen("Delay   ","","&1d       ",(g_start_delay*1000)-g_start_time);}
+	//wait1Msec(g_start_delay*1000);
 	eraseDisplay();
-	g_screen_state = S_GYRO_SHOW;		//tell screen to show the gyro value
 }
 
 #endif /* !ABS_INITIALIZE_H */

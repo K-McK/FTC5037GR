@@ -35,8 +35,8 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	/** logging constants */
 	const string speed_str = "speed";
 	const string dist_str = "dist";
-	const string rel_bpu_str = "relative BPU";
-	const string rel_asu_str = "relative ASU";
+	const string rel_bpu_str = "rel BPU";
+	const string rel_asu_str = "rel ASU";
 	const string bearing_ac2_str = "g_bearing_ac2";
 
 	int last_heading = g_const_heading;
@@ -183,7 +183,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 					motor[right_motor] = speed;
 				}
 			}
-			//g_screen_state = S_TIME_SHOW;
 			g_debug_time_1 = nPgmTime;
 		}
 		else if(dir == BACKWARD)
@@ -484,7 +483,10 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		}
 		//dist_record=false;
 	}
-	//abs_dlog(__FILE__ ,"exit", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
+
+	int rel_asu = abs_get_angle_sensor_val(RELATIVE_ASU);
+	int rel_bpu = abs_get_angle_sensor_val(RELATIVE_BPU);
+	abs_dlog(__FILE__ ,"exit", speed_str, speed, dist_str, dist, rel_asu_str, rel_asu, rel_bpu_str, rel_bpu);
 
 	g_const_heading = last_heading;
 }

@@ -27,12 +27,12 @@ task abs_screen ()
 		case S_CLEAR:
 			nxtDisplayBigTextLine(1, "              ");
 			nxtDisplayBigTextLine(3, "              ");
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+			nxtDisplayBigTextLine(5, "              ");
 			break;
 		case S_MISSION:
-			nxtDisplayBigTextLine(1, "Misson ","2%d", g_input_array[SCOREING_POINT]);
-			nxtDisplayBigTextLine(3, g_mission_names1[g_input_array[SCOREING_POINT]]);
-			nxtDisplayBigTextLine(5, g_mission_names2[g_input_array[SCOREING_POINT]]);
+			//nxtDisplayBigTextLine(1, "Misson ","2%d", g_input_array[SCOREING_POINT]);
+			//nxtDisplayBigTextLine(3, g_mission_names1[g_input_array[SCOREING_POINT]]);
+			//nxtDisplayBigTextLine(5, g_mission_names2[g_input_array[SCOREING_POINT]]);
 			break;
 		case S_DELAY:
 			if(g_auto_selection_point == SELECTION_START_DELAY) nxtDisplayBigTextLine(1, "Start   ");
@@ -48,12 +48,12 @@ task abs_screen ()
 		case S_CAL_TIME:
 			nxtDisplayBigTextLine(1, "CalTime");
 			nxtDisplayBigTextLine(3, "%2d", g_gyro_cal_time);
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+			nxtDisplayBigTextLine(5, "              ");
 			break;
 		case S_GYRO_CAL:
 			nxtDisplayTextLine(1, "Calibrating");
 			nxtDisplayBigTextLine(3, "%2d", (g_gyro_cal_time*1000)-(nPgmTime-g_start_time));
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+			nxtDisplayBigTextLine(5, "              ");
 			break;
 		case S_READY:
 			nxtDisplayBigTextLine(1, "Program");
@@ -64,7 +64,7 @@ task abs_screen ()
 		case S_DELAY_WAIT:
 			nxtDisplayBigTextLine(1, "Delay");
 			nxtDisplayBigTextLine(3, "%2d", (g_start_delay*1000)-(nPgmTime-g_start_time));
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+			nxtDisplayBigTextLine(5, "              ");
 			break;
 		case S_GYRO_SHOW:
 			nxtDisplayBigTextLine(1, "GyroValue");
@@ -74,12 +74,12 @@ task abs_screen ()
 		case S_IR_SHOW:
 			nxtDisplayBigTextLine(1, "IR Value");
 			nxtDisplayBigTextLine(3, "%2d  %2d", g_bearing_ac1, g_bearing_ac2);
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+			nxtDisplayBigTextLine(5, "              ");
 			break;
 		case S_AC_SHOW:
 			nxtDisplayBigTextLine(1, "ac Value");
 			nxtDisplayBigTextLine(3, "%2d  %2d", g_accelermoeter_sensor, g_misc);
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+			nxtDisplayBigTextLine(5, "              ");
 			break;
 		case S_ERROR:
 			if(g_error_type == ERROR_LETHAL)
@@ -103,7 +103,7 @@ task abs_screen ()
 		case S_SMOKE_RUN1:
 			nxtDisplayBigTextLine(1, g_smoke_test1[g_smoke_test_num]);
 			nxtDisplayBigTextLine(3, "%2d", g_test_value);
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+			nxtDisplayBigTextLine(5, "              ");
 			break;
 		case S_SMOKE_RUN2:
 			nxtDisplayBigTextLine(1, g_smoke_test1[g_smoke_test_num]);
@@ -113,26 +113,26 @@ task abs_screen ()
 		case S_SCREEN_CALL:
 			nxtDisplayBigTextLine(1, g_smoke_test1[g_smoke_test_num]);
 			nxtDisplayBigTextLine(3, "%2d", g_test_value);
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+			nxtDisplayBigTextLine(5, "              ");
 			break;
 		case S_MISC_SHOW:
 			nxtDisplayBigTextLine(1, "misc Value");
 			nxtDisplayBigTextLine(3, "%2d", g_misc);
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+			nxtDisplayBigTextLine(5, "              ");
 		case S_ANGLE_SHOW:
 			nxtDisplayBigTextLine(1, "angle Value");
 			nxtDisplayBigTextLine(3, "%2d", abs_get_angle_sensor_val(RELATIVE_ASU));
-			nxtDisplayBigTextLine(5, g_mission_names1[0]);
+			nxtDisplayBigTextLine(5, "              ");
 			break;
 		case S_STARTING_POINT:
-			nxtDisplayBigTextLine(1, "startPnt");
-			nxtDisplayBigTextLine(3, g_starting_names1[g_input_array[STARTING_POINT]]);
-			nxtDisplayBigTextLine(5, g_starting_names2[g_input_array[STARTING_POINT]]);
+			//nxtDisplayBigTextLine(1, "startPnt");
+			//nxtDisplayBigTextLine(3, g_starting_names1[g_input_array[STARTING_POINT]]);
+			//nxtDisplayBigTextLine(5, g_starting_names2[g_input_array[STARTING_POINT]]);
 			break;
 		case S_ENDING_POINT:
 			nxtDisplayBigTextLine(1, "endPoint");
-			nxtDisplayBigTextLine(3, g_ending_names1[g_input_array[END_POINT]]);
-			nxtDisplayBigTextLine(5, g_ending_names2[g_input_array[END_POINT]]);
+			//nxtDisplayBigTextLine(3, g_ending_names1[g_input_array[END_POINT]]);
+			//nxtDisplayBigTextLine(5, g_ending_names2[g_input_array[END_POINT]]);
 			break;
 		case S_SELECTION_SUB_GRABBERS:
 			nxtDisplayBigTextLine(1, "Grabbers");
@@ -179,8 +179,8 @@ task abs_screen ()
 			break;
 		case S_QUICK_SELECTION:
 			nxtDisplayBigTextLine(1, "Mission");
-			nxtDisplayBigTextLine(3, g_quick_names1[g_quick_mission]);
-			nxtDisplayBigTextLine(5, g_quick_names2[g_quick_mission]);
+			//nxtDisplayBigTextLine(3, g_quick_names1[g_quick_mission]);
+			//nxtDisplayBigTextLine(5, g_quick_names2[g_quick_mission]);
 			break;
 		case S_END_TURN_OPTIONS:
 			if(g_selection_turn == 1)nxtDisplayBigTextLine(1, "First");
@@ -188,12 +188,12 @@ task abs_screen ()
 			nxtDisplayBigTextLine(3, "turn");
 			if(g_selection_turn == 1)
 			{
-				if(g_em_first_turn_type == END_MISSION_FIRST_TURN_REL) nxtDisplayBigTextLine(5, "RELATIVE");
+				if(g_em_first_turn_type == RELATIVE_TURN) nxtDisplayBigTextLine(5, "RELATIVE");
 				else nxtDisplayBigTextLine(5, "CONSTANT");
 			}
 			else
 			{
-				if(g_em_second_turn_type == END_MISSION_FIRST_TURN_REL) nxtDisplayBigTextLine(5, "RELATIVE");
+				if(g_em_second_turn_type == RELATIVE_TURN) nxtDisplayBigTextLine(5, "RELATIVE");
 				else nxtDisplayBigTextLine(5, "CONSTANT");
 			}
 			break;

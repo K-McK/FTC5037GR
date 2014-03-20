@@ -14,16 +14,13 @@
 #ifndef ABS_SELECTION_CUSTOM_H
 #define ABS_SELECTION_CUSTOM_H
 
+#include "lib/abs_cscreen.h"
+
 void abs_selection_custom()
 {
-	//memset(g_input_array,0x01,INPUT_ARRAY_SIZE);
-
 	//---------------------------------------
 	// Start point selection 1
 	//---------------------------------------
-
-	g_auto_selection_point = SELECTION_START_POINT;
-	g_screen_state = S_STARTING_POINT;
 	g_input_array[STARTING_POINT] = 1;
 
 	while(nNxtButtonPressed != kEnterButton)
@@ -40,6 +37,7 @@ void abs_selection_custom()
 			while(nNxtButtonPressed == kLeftButton){}
 			if(g_input_array[STARTING_POINT] > 0) g_input_array[STARTING_POINT]--;
 		}
+		abs_cscreen("Starting","point   ","S%1d      ",g_input_array[STARTING_POINT]);
 	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
@@ -48,14 +46,11 @@ void abs_selection_custom()
 	//---------------------------------------
 	// Start of start time selection 2
 	//---------------------------------------
-
-	g_auto_selection_point = SELECTION_START_DELAY;
-	g_screen_state = S_DELAY;
 	g_input_array[STARTING_DELAY] = 0;
 
 	while(nNxtButtonPressed != kEnterButton)
 	{
-		g_delay = g_start_delay;
+		abs_cscreen("Starting","delay   ","%2d",g_input_array[STARTING_DELAY]);
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
@@ -76,9 +71,6 @@ void abs_selection_custom()
 	//---------------------------------------
 	// Start of mission selection 3
 	//---------------------------------------
-
-	g_auto_selection_point = SELECTION_MISSION_POINT;
-	g_screen_state = S_MISSION;
 	g_input_array[SCOREING_POINT] = 1;
 
 	while(nNxtButtonPressed != kEnterButton)
@@ -95,6 +87,15 @@ void abs_selection_custom()
 			while(nNxtButtonPressed == kLeftButton){}
 			if(g_input_array[SCOREING_POINT] > 0) g_input_array[SCOREING_POINT]--;
 		}
+		switch(g_input_array[SCOREING_POINT])
+		{
+		case 0: abs_cscreen("Scoring ","point   ","ERROR   "); break;
+		case 1: abs_cscreen("Scoring ","point   ","IR      "); break;
+		case 2: abs_cscreen("Scoring ","point   ","CRATE 4 "); break;
+		case 3: abs_cscreen("Scoring ","point   ","CRATE 3 "); break;
+		case 4: abs_cscreen("Scoring ","point   ","CRATE 2 "); break;
+		case 5: abs_cscreen("Scoring ","point   ","CRATE 1 "); break;
+		}
 	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
@@ -104,13 +105,8 @@ void abs_selection_custom()
 	// Start of time selection 4
 	//---------------------------------------
 
-	g_auto_selection_point = SELECTION_MISSION_DELAY;
-	g_screen_state = S_DELAY;
-	g_input_array[END_DELAY] = 0;
-
 	while(nNxtButtonPressed != kEnterButton)
 	{
-		g_delay = g_end_delay;
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
@@ -123,6 +119,7 @@ void abs_selection_custom()
 			while(nNxtButtonPressed == kLeftButton){}
 			if(g_input_array[END_DELAY] > 0) g_input_array[END_DELAY]--;
 		}
+		abs_cscreen("Score   ","delay   ","%2d       ",g_input_array[END_DELAY]);
 	}
 
 	PlaySoundFile("! Click.rso");
@@ -131,9 +128,6 @@ void abs_selection_custom()
 	//---------------------------------------
 	// Start of end point selection 5
 	//---------------------------------------
-
-	g_screen_state = S_ENDING_POINT;
-	g_auto_selection_point = SELECTION_END_POINT;
 	g_input_array[END_POINT] = 1;
 
 	while(nNxtButtonPressed != kEnterButton)
@@ -150,60 +144,29 @@ void abs_selection_custom()
 			while(nNxtButtonPressed == kLeftButton){}
 			if(g_input_array[END_POINT] > 0) g_input_array[END_POINT]--;
 		}
+		switch(g_input_array[END_POINT])
+		{
+		case 0: abs_cscreen("End pnt ","ERROR   ","        "); break;
+		case 1: abs_cscreen("End pnt ","stop    ","        "); break;
+		case 2: abs_cscreen("End pnt ","RAMP 1  ","stop    "); break;
+		case 3: abs_cscreen("End pnt ","RAMP 2  ","stop    "); break;
+		case 4: abs_cscreen("End pnt ","RAMP 1  ","continue"); break;
+		case 5: abs_cscreen("End pnt ","RAMP 2  ","continue"); break;
+		case 6: abs_cscreen("End pnt ","RAMP 3  ","stop    "); break;
+		case 7: abs_cscreen("End pnt ","RAMP 4  ","stop    "); break;
+		case 8: abs_cscreen("End pnt ","RAMP 3  ","continue"); break;
+		case 9: abs_cscreen("End pnt ","RAMP 4  ","continue"); break;
+		}
 	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
 	eraseDisplay();
 
-	//---------------------------------------
-	// Start of optional sub selection for ramp position
-	//---------------------------------------
-
-	//if(g_input_array[END_POINT] == 2 || g_input_array[END_POINT] == 3)
-	//{
-	//	g_auto_selection_point = SELECTION_SUB_RAMP;
-	//	g_screen_state = S_SELECTION_SUB_RAMP;
-
-	//	int i = 1;
-	//	while(nNxtButtonPressed != kEnterButton)
-	//	{
-	//		if(nNxtButtonPressed == kRightButton)
-	//		{
-	//			PlaySoundFile("! Click.rso");
-	//			while(nNxtButtonPressed == kRightButton){}
-	//			if(i < 2)
-	//			{
-	//				i++;
-	//				g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-	//			}
-	//		}
-	//		if(nNxtButtonPressed == kLeftButton)
-	//		{
-	//			PlaySoundFile("! Click.rso");
-	//			while(nNxtButtonPressed == kLeftButton){}
-	//			if(i > 1)
-	//			{
-	//				i--;
-	//				g_auto_grabber_selections = SUB_SELECTION_RAMP_STOP;
-	//			}
-	//		}
-	//	}
-
-		//PlaySoundFile("! Click.rso");
-		//while(nNxtButtonPressed == kEnterButton){}
-	//}
-	//if(g_auto_grabber_selections == SUB_SELECTION_RAMP_STOP&&g_input_array[5]==2)g_input_array=4;
-	//if(g_auto_grabber_selections == SUB_SELECTION_RAMP_CONTINUED&&g_input_array[5]==3)g_input_array=5;
-
-
-
-
-
 	g_start_point = g_input_array[STARTING_POINT];
 	g_start_delay = g_input_array[STARTING_DELAY];
 	g_mission_number = g_input_array[SCOREING_POINT];
 	g_end_delay = g_input_array[END_DELAY];
-	if(g_input_array[END_POINT] < 4 && g_input_array[END_POINT] > 0)
+	if((g_input_array[END_POINT] <= 3 && g_input_array[END_POINT] >= 1)||(g_input_array[END_POINT]==6||g_input_array[END_POINT]==7))
 	{
 		g_end_point = g_input_array[END_POINT];
 		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
@@ -218,13 +181,17 @@ void abs_selection_custom()
 		g_end_point = 3;
 		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 	}
-	else
+	else if(g_input_array[END_POINT] == 8)
 	{
-		g_end_point = 1; //error for if an invaid value is inputed
-		//PlayTone(400,60);
-	}
-
-	g_screen_state = S_MISSION_SHOW;
+		g_end_point = 6;
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+  }
+	else if(g_input_array[END_POINT] == 9)
+	{
+		g_end_point = 7;
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+  }
+	else g_end_point = 1; //error for if an invaid value is inputed
 }
 
 #endif /* !ABS_SELECTION_CUSTOM_H */

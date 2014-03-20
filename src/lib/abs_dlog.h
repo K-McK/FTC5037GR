@@ -27,7 +27,6 @@ void log_parameter(const char * key, int value)
 	}
 }
 
-
 void abs_dlog(const char * input1,const char * input2, const char * input3_str = NULL, int input3 = 0, const char * input4_str = NULL, int input4 = 0, const char * input5_str = NULL, int input5 = 0, const char * input6_str = NULL, int input6 = 0)
 {
 	string buff = "";
@@ -59,7 +58,7 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 	StringFormat(buff, "rel-g %4d\t", g_rel_heading_use);
 	WriteText(LogFileHandle, LogIoResult, buff);
 
-	StringFormat(buff, "cnst-g %4d\t", g_const_heading);
+	StringFormat(buff, "cnst-g %4d\t", g_const_heading_use);
 	WriteText(LogFileHandle, LogIoResult, buff);
 }
 #endif /* !ABS_LOG_H */
