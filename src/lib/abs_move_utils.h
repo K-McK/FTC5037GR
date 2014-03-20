@@ -140,7 +140,7 @@ int adjusted_speed(int speed, int max_move_dist, int current, int coefficient, i
 
 	if(reduced_speed > speed) { reduced_speed = speed; }
 
-	return max(reduced_speed, MIN_DRIVE_SPEED);
+	return speed;//max(reduced_speed, MIN_DRIVE_SPEED);
 }
 /**
  * X = Speed

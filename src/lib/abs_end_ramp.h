@@ -64,12 +64,13 @@ void abs_end_ramp(int delay)
 	if(g_good_gyro && g_em_first_turn_type == CONSTANT_TURN)	//if the gyro is detected as good and 1st turn sub
 	{																																				//menu option is selected as true use const turn
 		abs_dlog(__FILE__ ,"Turn 1: good gyro");	//log turn type conclusion as const
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
+		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro, TURN_TO), 40);//was 60
 	}
 	else
 	{
 		abs_dlog(__FILE__ ,"Turn 1: gyro gyro");	//log turn type conclusion as rel
-		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
+ 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro, TURN), 40);//was 60
+		//abs_turn(COUNTERCLOCKWISE, POINT, TURN, 85, 40);//was 60
 	}
 
 	wait1Msec(g_input_array[CORNOR_DELAY]*DELAY_MULTIPLICATION_FACTOR);	//wait for corner delay amount, this is only an option
