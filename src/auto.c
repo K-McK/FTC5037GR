@@ -73,7 +73,7 @@ task main()
 	Delete(LogFileName, LogIoResult);																	//open the datalog file so it is excisable
 	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);	//throughout the program
 
-	abs_dlog(__FILE__ ,"Program start"," Start time:", nPgmTime);			//write the first entry starting the datalog
+	abs_dlog(__FILE__ ,"Program start"," Start time", nPgmTime);			//write the first entry starting the datalog
 
 	abs_initialize();
 
