@@ -750,35 +750,21 @@ bool g_gyro_ran = false;
 
 /**
 *  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
-*  @var e_em_first_turn_types::END_MISSION_FIRST_TURN_REL
+*  @var e_em_first_turn_types::RELATIVE_TURN
 *     Do a relitive turn
-*   @var e_em_first_turn_types::END_MISSION_FIRST_TURN_CONST
+*   @var e_em_first_turn_types::CONSTANT_TURN
 *     Do a consant turn
 */
 typedef enum
 {
-	END_MISSION_FIRST_TURN_REL,
-	END_MISSION_FIRST_TURN_CONST
-} e_em_first_turn_types;
+	RELATIVE_TURN,
+	CONSTANT_TURN
+} e_turn_types;
 /**
 * @var g_em_first_turn_type
 *		Tells the robot the the first turn of the end of auto
 */
-e_em_first_turn_types g_em_first_turn_type = END_MISSION_FIRST_TURN_REL;
-
-/**
-*  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
-*  @var e_em_first_turn_types::END_MISSION_SECOND_TURN_REL
-*     Do a relitive turn
-*   @var e_em_first_turn_types::END_MISSION_SECOND_TURN_CONST
-*     Do a consant turn
-*/
-
-typedef enum
-{
-	END_MISSION_SECOND_TURN_REL,
-	END_MISSION_SECOND_TURN_CONST
-} e_em_second_turn_types;
+e_turn_types g_em_first_turn_type = RELATIVE_TURN;
 
 /**
 * @var g_em_second_turn_type
@@ -792,7 +778,7 @@ typedef enum
 * @var g_drive_type
 *		Tells the robot if it should drive useing the gyro, encode or non
 */
-e_em_second_turn_types g_em_second_turn_type = END_MISSION_FIRST_TURN_REL;
+e_turn_types g_em_second_turn_type = RELATIVE_TURN;
 
 int g_selection_turn = 1;
 
@@ -1023,105 +1009,6 @@ typedef enum
 	INACTIVE
 } e_light_sensor_status;
 
-//=============================================================
-// Define screen related variables
-//=============================================================
-/**
-*
-*  @def S_CLEAR
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_MISSION
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_DELAY
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_CAL_TIME
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_GYRO_CAL
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_READY
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_DELAY_WAIT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_GYRO_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ERROR
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_TEST
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN1
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN2
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN3
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SCREEN_CALL
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_IR_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_AC_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_MISC_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_STARTING_POINT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ENDING_POINT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SELECTION_SUB_GRABBERS
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ANGLE_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_TIME_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SELECTION_TYPE
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_NUMBER_SELECTION
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SELECTION_SUB_RAMP
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_MISSION_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_QUICK_SELECTION
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_END_TURN_OPTIONS
-*			Tells the robot the screen state number for this screen statestate
-*  @def S_STAY_GROUND_OPTIONS
-*			Tells the robot the screen state number for this screen statestate
-*  @var g_screen_state
-*			Tells the robt what it should desply on the screen
-*/
-
-#define S_CLEAR 0
-#define S_MISSION 1
-#define S_DELAY 2
-#define S_CAL_TIME 3
-#define S_GYRO_CAL 4
-#define S_READY 5
-#define S_DELAY_WAIT 6
-#define S_GYRO_SHOW 7
-#define S_ERROR 8
-#define S_SMOKE_TEST 9
-#define S_SMOKE_RUN1 10
-#define S_SMOKE_RUN2 11
-#define S_SMOKE_RUN3 12
-#define S_SCREEN_CALL 13
-#define S_IR_SHOW 14
-#define S_AC_SHOW 15
-#define S_MISC_SHOW 16
-#define S_STARTING_POINT 17
-#define S_ENDING_POINT 18
-#define S_SELECTION_SUB_GRABBERS 19
-#define S_ANGLE_SHOW 20
-#define S_TIME_SHOW 21
-#define S_SELECTION_TYPE 22
-#define S_NUMBER_SELECTION 23
-#define S_SELECTION_SUB_RAMP 24
-#define S_MISSION_SHOW 25
-#define S_QUICK_SELECTION 26
-#define S_END_TURN_OPTIONS 27
-#define S_STAY_GROUND_OPTIONS 28
-
-int g_screen_state = 1;
-
 //==============================================================
 // Define graph selection variables
 //==============================================================
@@ -1153,11 +1040,12 @@ int g_graph_selection_tab = 0;
 */
 #define ERR_NONE 0
 #define ERR_GYRO_CAL1 1
-#define ERR_GYRO_MUX 2
+#define ERR_GYRO_MUX1 2
 #define ERR_SENSOR_MUX 3
 #define ERR_JOYSTICKS 4
 #define ERR_ACCELERMOETER 5
 #define ERR_GYRO_CAL2 6
+#define ERR_GYRO_MUX2 7
 
 int g_error = 0;
 
@@ -1180,298 +1068,8 @@ typedef enum
 
 e_error_types g_error_type = ERROR_LETHAL;
 
-//==============================================================================
-// Define the text to be displayed for each starting point line 1
-//==============================================================================
-/**
-* @var g_starting_names1
-*		Tell the robot the names of the starting points
-*/
-
-string g_starting_names1 [] = {
-	"        ",
-	"S1      ",
-	"S2      ",
-	"S3      ",
-	"S4      ",
-	"Test 5  ",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
-
-//==============================================================================
-// Define the text to be displayed for each starting point line 2
-//==============================================================================
-/**
-* @var g_starting_names2
-*		Tell the robot the names of the second line of the screen when selectimg a starting posion
-*/
-
-string g_starting_names2 [] = {
-	"        ",
-	"        ",
-	"Test 2  ",
-	"Test 3  ",
-	"Test 4  ",
-	"Test 5  ",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
-
-//==============================================================================
-// Define the text to be displayed for each ending point line 1
-//==============================================================================
-/**
-* @var g_ending_names1
-*		 Tells the robot the names of the end points
-*/
-
-string g_ending_names1 [] = {
-	"        ",
-	"Stop    ",
-	"Ramp 1  ",
-	"Ramp 2  ",
-	"Ramp 1  ",
-	"Ramp 2  ",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
-
-//==============================================================================
-// Define the text to be displayed for each ending point line 2
-//==============================================================================
-/**
-* @var g_ending_names2
-*		 Tells the robot the names of the second line of the end points
-*/
-string g_ending_names2 [] = {
-	"        ",
-	"        ",
-	"Stop    ",
-	"Stop    ",
-	"Continue",
-	"Continue",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
-
-//==============================================================================
-// Define the text to be displayed for each mission
-//==============================================================================
-/**
-* @var g_mission_names1
-*		Tells the robot the names of the missions
-*/
-string g_mission_names1 [] = {
-	"        ",
-	"IR crate",
-	"crate 4 ",
-	"crate 3 ",
-	"crate 2 ",
-	"crate 1 ",
-	"defence ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
-
-//==============================================================================
-// Define the text to be displayed on the second line for each mission
-//==============================================================================
-/**
-* @var g_mission_names2
-*		Tells the robot the second line of the mission
-*/
-string g_mission_names2 [] = {
-	"        ",
-	"Test 1  ",
-	"Test 2  ",
-	"Test 3  ",
-	"Test 4  ",
-	"Test 5  ",
-	"score 4 ",
-	"score 3 ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
-
-//==============================================================================
-// Define the text to be displayed for quick selection
-//==============================================================================
-/**
-* @var g_quick_names1
-*		 Tells the robot the quick select program names
-*/
-
-string g_quick_names1 [] = {
-	"Unknown ",
-	"Standard",
-	"S Ramp 2",
-	"Test 3  ",
-	"Test 4  ",
-	"Test 5  ",
-	"Test 6  "};
-
-/**
-* @var g_quick_names2
-*		 Tells the robot the quick select program second line names
-* @var g_quick_mission
-*		Tells the robot the numbers of the quick missions
-* @var g_max_quick_missions
-*		Tells the robot the max amount of quick names
-*/
-string g_quick_names2 [] = {
-	"Unknown ",
-	"10142   ",
-	"10143   ",
-	"Test 3  ",
-	"Test 4  ",
-	"Test 5  ",
-	"Test 6  "};
-
 int g_quick_mission = 1;
 int g_max_quick_missions = 6;
-
-//==============================================================================
-// Define the text to be displayed for the errors
-//==============================================================================
-/**
-* @var g_error_list1
-*		 Tells the robot the names of the errors
-*/
-string g_error_list1 [] = {
-	"Unknown ",
-	"GyroCal1",
-	"Gyro    ",
-	"Sensor  ",
-	"joystick",
-	"GyroCal2",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
-/**
-* @var g_error_list2
-*		Tells the robot the names of the errors for the second line
-*/
-
-string g_error_list2 [] = {
-	"error   ",
-	"Failure ",
-	"Mux     ",
-	"Mux     ",
-	"fail    ",
-	"Test 5  ",
-	"Test 6  ",
-	"Test 7  ",
-	"Test 8  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
 
 //==============================================================================
 // Define the text to be displayed for smoke test line 1
@@ -1489,21 +1087,7 @@ string g_smoke_test1 [] = {
 	"Grabbers",
 	"sky hook",
 	"roger   ",
-	"ground  ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"ground  "};
 
 //==============================================================================
 // Define the text to be displayed for smoke test line 2
@@ -1521,18 +1105,4 @@ string g_smoke_test2 [] = {
 	"        ",
 	"        ",
 	"slide   ",
-	"arm     ",
-	"Test 9  ",
-	"Test 10 ",
-	"Test 11 ",
-	"Test 12 ",
-	"Test 13 ",
-	"Test 14 ",
-	"Test 15 ",
-	"Test 16 ",
-	"Test 17 ",
-	"Test 18 ",
-	"Test 19 ",
-	"Test 20 ",
-	"Test 21 ",
-	"Test 22 "};
+	"arm     "};

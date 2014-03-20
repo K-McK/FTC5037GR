@@ -14,31 +14,32 @@
 #ifndef ABS_SELECTION_OPTIONS_H
 #define ABS_SELECTION_OPTIONS_H
 
+#include "lib/abs_cscreen.h"
+
 void abs_selection_options()
 {
 	//---------------------------------------
 	// first turn
 	//---------------------------------------
-
-	g_screen_state = S_END_TURN_OPTIONS;
 	g_selection_turn = 1;
 
 	while(nNxtButtonPressed == kEnterButton){}
-
 	while(nNxtButtonPressed != kEnterButton)
 	{
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kRightButton){}
-			if(g_em_first_turn_type == END_MISSION_FIRST_TURN_REL) g_em_first_turn_type = END_MISSION_FIRST_TURN_CONST;
+			if(g_em_first_turn_type == RELATIVE_TURN)  g_em_first_turn_type = CONSTANT_TURN;
 		}
 		if(nNxtButtonPressed == kLeftButton)
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kLeftButton){}
-			if(g_em_first_turn_type == END_MISSION_FIRST_TURN_CONST) g_em_first_turn_type = END_MISSION_FIRST_TURN_REL;
+			if(g_em_first_turn_type == CONSTANT_TURN) g_em_first_turn_type = RELATIVE_TURN;
 		}
+		if(g_em_first_turn_type == RELATIVE_TURN) abs_cscreen("Options ","1st turn","rel     ");
+		else abs_cscreen("Options ","1st turn","const   ");
 	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
@@ -56,23 +57,23 @@ void abs_selection_options()
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kRightButton){}
-			if(g_em_second_turn_type == END_MISSION_SECOND_TURN_REL) g_em_second_turn_type = END_MISSION_SECOND_TURN_CONST;
+			if(g_em_second_turn_type == RELATIVE_TURN) g_em_second_turn_type = CONSTANT_TURN;
 		}
 		if(nNxtButtonPressed == kLeftButton)
 		{
 			PlaySoundFile("! Click.rso");
 			while(nNxtButtonPressed == kLeftButton){}
-			if(g_em_second_turn_type == END_MISSION_SECOND_TURN_CONST) g_em_second_turn_type = END_MISSION_SECOND_TURN_REL;
+			if(g_em_second_turn_type == CONSTANT_TURN) g_em_second_turn_type = RELATIVE_TURN;
 		}
+		if(g_em_second_turn_type == RELATIVE_TURN) abs_cscreen("Options ","2st turn","rel     ");
+		else abs_cscreen("Options ","2st turn","const   ");
 	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
 	eraseDisplay();
 	//---------------------------------------
-	// second turn selection
+	// stand ground
 	//---------------------------------------
-
-	g_screen_state = S_STAY_GROUND_OPTIONS;
 	while(nNxtButtonPressed != kEnterButton)
 	{
 		if(nNxtButtonPressed == kRightButton)
@@ -87,6 +88,8 @@ void abs_selection_options()
 			while(nNxtButtonPressed == kLeftButton){}
 			if(g_stay_on_ramp == false) g_stay_on_ramp = true;
 		}
+		if(g_stay_on_ramp == true) abs_cscreen("Stay on ","ramp    ","true    ");
+		else abs_cscreen("Stay on ","ramp    ","false   ");
 	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}

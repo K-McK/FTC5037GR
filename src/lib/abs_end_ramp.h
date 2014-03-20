@@ -51,7 +51,7 @@ void abs_end_ramp(int delay)
 
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 5)//15)	//robot movement error detection, if robot has not moved min distance
 	{																										//to reach wall from crate assume the robot has failed and stop moving
-		abs_dlog(__FILE__, "dist fail", "relative BPU", abs_get_angle_sensor_val(RELATIVE_BPU));	//log error and end program
+		abs_dlog(__FILE__, "dist fail", "rel BPU", abs_get_angle_sensor_val(RELATIVE_BPU));	//log error and end program
 		motor[left_motor] = 0;
 		motor[right_motor] = 0;
 		PlayTone(300,200);
@@ -61,14 +61,14 @@ void abs_end_ramp(int delay)
 	abs_control_light_sensor(ACTIVE);				//turn on light sensor for line detection
 	servo[light_sensor] = LIGHT_SERVO_DOWN;	//and lower the light sensor into position
 
-	if(g_good_gyro && g_em_first_turn_type == END_MISSION_FIRST_TURN_CONST)	//if the gyro is detected as good and 1st turn sub
+	if(g_good_gyro && g_em_first_turn_type == CONSTANT_TURN)	//if the gyro is detected as good and 1st turn sub
 	{																																				//menu option is selected as true use const turn
-		abs_dlog(__FILE__ ,"first turn: good gyro");	//log turn type conclusion as const
+		abs_dlog(__FILE__ ,"Turn 1: good gyro");	//log turn type conclusion as const
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
 	}
 	else
 	{
-		abs_dlog(__FILE__ ,"first turn: gyro gyro");	//log turn type conclusion as rel
+		abs_dlog(__FILE__ ,"Turn 1: gyro gyro");	//log turn type conclusion as rel
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
 	}
 
@@ -89,16 +89,16 @@ void abs_end_ramp(int delay)
 	StartTask(abs_lift_block_lifter);		//start the screen function, this handels all screen interactions
 #endif
 
-	if(g_good_gyro && g_em_first_turn_type == END_MISSION_SECOND_TURN_CONST)//if the gyro is detected as good and 1st turn sub
+	if(g_good_gyro && g_em_first_turn_type == CONSTANT_TURN)//if the gyro is detected as good and 1st turn sub
 	{																																				//menu option is selected as true use const turn
 		if(g_end_point == 2)	//if end point is ramp 1 turn to the left so grabbers drive first
 		{
-			abs_dlog(__FILE__ ,"second turn: good gyro");	//log turn type conclusion as const
+			abs_dlog(__FILE__ ,"Turn 2: good gyro");	//log turn type conclusion as const
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, 180, end_program_drive_speed);//was 60
 		}
 		else	//else: if end point is ramp 2 turn to the left so grabbers drive first
 		{
-			abs_dlog(__FILE__ ,"second turn: good gyro");	//log turn type conclusion as rel
+			abs_dlog(__FILE__ ,"Turn 2: good gyro");	//log turn type conclusion as rel
 			abs_turn(CLOCKWISE, POINT, TURN_TO, 0, end_program_drive_speed);//was 50
 		}
 	}
@@ -106,12 +106,12 @@ void abs_end_ramp(int delay)
 	{
 		if(g_end_point == 2)	//if end point is ramp 1 turn to the left so grabbers drive first
 		{
-			abs_dlog(__FILE__ ,"second turn: bad gyro");
+			abs_dlog(__FILE__ ,"Turn 2: bad gyro");
 			abs_turn(COUNTERCLOCKWISE, POINT, TURN, 90, end_program_drive_speed);
 		}
 		else	//else: if end point is ramp 2 turn to the left so grabbers drive first
 		{
-			abs_dlog(__FILE__ ,"second turn: bad gyro");
+			abs_dlog(__FILE__ ,"Turn 2: bad gyro");
 			abs_turn(CLOCKWISE, POINT, TURN, 90, end_program_drive_speed);
 		}
 	}

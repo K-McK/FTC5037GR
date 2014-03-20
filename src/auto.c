@@ -56,6 +56,7 @@
 
 #include "lib/global_variables.h"
 #include "lib/abs_initialize.h"
+#include "lib/abs_cscreen.h"
 #include "lib/abs_s1_mission_execute.h"
 #include "lib/abs_s2_mission_execute.h"
 #include "lib/abs_s3_mission_execute.h"
@@ -73,7 +74,7 @@ task main()
 	Delete(LogFileName, LogIoResult);																	//open the datalog file so it is excisable
 	OpenWrite(LogFileHandle, LogIoResult, LogFileName, LogFileSize);	//throughout the program
 
-	abs_dlog(__FILE__ ,"Program start"," Start time", nPgmTime);			//write the first entry starting the datalog
+	abs_dlog(__FILE__ ,"Program start"," Start time:", nPgmTime);			//write the first entry starting the datalog
 
 	abs_initialize();
 
