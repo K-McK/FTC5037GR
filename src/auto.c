@@ -116,5 +116,5 @@ task main()
 	Close(LogFileHandle, LogIoResult);			//close the datalogging
 	LogData=false;
 
-	if(g_stay_on_ramp) abs_stay_on_ramp();	//if config selected robot resists being pushed
+	if(g_stay_on_ramp) abs_hold_position();	//if config selected robot resists being pushed
 }

@@ -95,12 +95,6 @@ void abs_initialize()
 
 #endif
 
-	while(g_gyro1_cal_done==false || g_gyro2_cal_done==false)
-	{
-		PlayTone(400,10);
-		wait1Msec(100);
-	}
-
 	if(g_gyro_noise<g_gyro_noise2)
 	{
 		g_gyro_use=GYRO1;
