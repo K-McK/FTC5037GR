@@ -14,39 +14,33 @@
 #ifndef ABS_SELECTION_NUMBER_H
 #define ABS_SELECTION_NUMBER_H
 
+#include "lib/abs_cscreen.h"
+
 void abs_selection_number()
 {
 	//---------------------------------------
 	// number selection
 	//---------------------------------------
 
-	g_auto_selection_point = SELECTION_GRAPH_NUMBER_INPUT;
-	g_screen_state = S_NUMBER_SELECTION;
+	abs_cscreen("Number  ","00000   ","        ");
 
 	while(g_graph_selection_tab<5)
 	{
 		g_graph_selection_tab++;
 		while(nNxtButtonPressed != kEnterButton)
 		{
+			nxtDisplayBigTextLine(1, "%1d%1d%1d%1d%1d%1d%1d%1d",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
 			if(nNxtButtonPressed == kRightButton && g_input_array[g_graph_selection_tab] < g_number_max_limit[g_graph_selection_tab])
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
 				g_input_array[g_graph_selection_tab] ++;
 			}
-			else
-			{
-				//PlayTone(200,20);
-			}
 			if(nNxtButtonPressed == kLeftButton && g_input_array[g_graph_selection_tab] > g_number_min_limit[g_graph_selection_tab])
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kLeftButton){}
 				g_input_array[g_graph_selection_tab] --;
-			}
-			else
-			{
-				//PlayTone(200,20);
 			}
 		}
 		while(nNxtButtonPressed == kEnterButton){}
@@ -71,13 +65,7 @@ void abs_selection_number()
 		g_end_point = 3;
 		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 	}
-	else
-	{
-		g_end_point = 1; //error for if an invaid value is inputed
-		//PlayTone(400,60);
-	}
-
-	g_screen_state = S_MISSION_SHOW;
+	else g_end_point = 1; //error for if an invaid value is inputed
 }
 
 #endif /* !ABS_SELECTION_NUMBER_H */
