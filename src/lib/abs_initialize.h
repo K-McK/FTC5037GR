@@ -52,6 +52,11 @@ void abs_initialize()
 		g_gyro_noise = 9999;
 	}
 
+	if(g_gyro2_active)
+	{
+		StartTask(abs_gyro2_cal, HIGH_PRIORITY_TASK);
+	}
+
 	if(g_gyro2_active) StartTask(abs_gyro2_cal, HIGH_PRIORITY_TASK);
 	else
 	{
@@ -84,6 +89,8 @@ void abs_initialize()
 	}
 
 #endif
+
+	while(g_gyro1_cal_done == false || g_gyro2_cal_done == false){}
 
 	if(g_gyro_noise<g_gyro_noise2)
 	{

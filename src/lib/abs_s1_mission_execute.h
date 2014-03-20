@@ -21,6 +21,7 @@
 #include "abs_end_ramp.h"
 #include "abs_dlog.h"
 #include "abs_get_angle_sensor_val.h"
+#include "abs_stay_on_ramp.h"
 
 void abs_s1_mission_execute()
 {
@@ -61,17 +62,12 @@ void abs_s1_mission_execute()
 		break;
 
 	case 6:	//test option to read the gyro, will be defence mission 1
-		abs_drive(FORWARD, E_TILT, 72, 40, true, g_drive_type);
-		abs_turn(CLOCKWISE, POINT, TURN, 90, 40);
-		abs_drive(FORWARD, E_TILT, 100, 40, true, g_drive_type);
-
-		abs_hold_position();
-		//g_screen_state = S_SMOKE_RUN2;
-		/*while(true)
+		g_screen_state = S_SMOKE_RUN2;
+		while(true)
 		{
 			g_sensor_value = g_rel_heading;
 			g_sensor_value2 = g_rel_heading2;
-		}*/
+		}
 		break;
 
 	case 7: //will be defence mission 2
