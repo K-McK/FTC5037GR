@@ -48,20 +48,20 @@ void abs_initialize()
 	PlaySoundFile("! Click.rso");
 
 #if USE_TASK_PRIORITY == 1
-  if(g_gyro1_active)
-  {
-  	StartTask(abs_gyro1_cal, HIGH_PRIORITY_TASK);
-  }
-  else
-  {
-  	g_gyro1_cal_done = true;
-  	g_gyro1_drift = 9999;
+	if(g_gyro1_active)
+	{
+		StartTask(abs_gyro1_cal, HIGH_PRIORITY_TASK);
+	}
+	else
+	{
+		g_gyro1_cal_done = true;
+		g_gyro1_drift = 9999;
 		g_gyro_noise = 9999;
-  }
+	}
 
-  if(g_gyro2_active)
-  {
-	  StartTask(abs_gyro2_cal, HIGH_PRIORITY_TASK);
+	if(g_gyro2_active)
+	{
+		StartTask(abs_gyro2_cal, HIGH_PRIORITY_TASK);
 	}
 	else
 	{
@@ -71,20 +71,20 @@ void abs_initialize()
 	}
 
 #else
-  if(g_gyro1_active)
-  {
-  	StartTask(abs_gyro1_cal);
-  }
-  else
-  {
-  	g_gyro1_cal_done = true;
-  	g_gyro1_drift = 9999;
+	if(g_gyro1_active)
+	{
+		StartTask(abs_gyro1_cal);
+	}
+	else
+	{
+		g_gyro1_cal_done = true;
+		g_gyro1_drift = 9999;
 		g_gyro_noise = 9999;
-  }
+	}
 
-  if(g_gyro2_active)
-  {
-  	StartTask(abs_gyro2_cal);
+	if(g_gyro2_active)
+	{
+		StartTask(abs_gyro2_cal);
 	}
 	else
 	{
@@ -94,6 +94,8 @@ void abs_initialize()
 	}
 
 #endif
+
+	while(g_gyro1_cal_done == false || g_gyro2_cal_done == false){}
 
 	if(g_gyro_noise<g_gyro_noise2)
 	{
@@ -156,7 +158,7 @@ void abs_initialize()
 	LogData=true;
 	g_screen_state = S_READY;		//set the screen to show the program feedback before the auto starts
 
-	#if USE_TASK_PRIORITY == 1
+#if USE_TASK_PRIORITY == 1
 	StartTask(abs_sensors, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
 #else
 	StartTask(abs_sensors);		//start the screen function, this handels all screen interactions
@@ -174,7 +176,7 @@ void abs_initialize()
 
 	abs_dlog(__FILE__ , "auto start", "program time", nPgmTime);		//log the start of the mission run
 
-	#if USE_TASK_PRIORITY == 1
+#if USE_TASK_PRIORITY == 1
 	StartTask(abs_datalog, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
 #else
 	StartTask(abs_datalog);		//start the screen function, this handels all screen interactions
