@@ -98,7 +98,7 @@ void abs_s1_mission_execute()
 
 	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR); //wait for end delay, number option tab 4
 
-	abs_dlog(__FILE__,"start of end", "g_end_point", g_end_point);
+	//abs_dlog(__FILE__,"start of end", "g_end_point", g_end_point);
 }
 
 #endif /* !ABS_S1_MISSION_EXICUTE_H */

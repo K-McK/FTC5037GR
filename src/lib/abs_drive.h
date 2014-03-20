@@ -484,7 +484,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		}
 		//dist_record=false;
 	}
-	abs_dlog(__FILE__ ,"exit", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
+	//abs_dlog(__FILE__ ,"exit", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 
 	g_const_heading = last_heading;
 }
