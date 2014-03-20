@@ -29,7 +29,7 @@ void abs_selection_number()
 		g_graph_selection_tab++;
 		while(nNxtButtonPressed != kEnterButton)
 		{
-			nxtDisplayBigTextLine(1, "%1d%1d%1d%1d%1d%1d%1d%1d",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
+			nxtDisplayBigTextLine(3, "%1d%1d%1d%1d%1d%1d%1d%1d",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
 			if(nNxtButtonPressed == kRightButton && g_input_array[g_graph_selection_tab] < g_number_max_limit[g_graph_selection_tab])
 			{
 				PlaySoundFile("! Click.rso");
@@ -41,6 +41,14 @@ void abs_selection_number()
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kLeftButton){}
 				g_input_array[g_graph_selection_tab] --;
+			}
+			switch(g_graph_selection_tab)
+			{
+				case 1: nxtDisplayBigTextLine(5, "^       "); break;
+				case 2: nxtDisplayBigTextLine(5, " ^      "); break;
+				case 3: nxtDisplayBigTextLine(5, "  ^     "); break;
+				case 4: nxtDisplayBigTextLine(5, "   ^    "); break;
+				case 5: nxtDisplayBigTextLine(5, "    ^   "); break;
 			}
 		}
 		while(nNxtButtonPressed == kEnterButton){}

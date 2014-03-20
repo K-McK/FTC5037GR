@@ -85,6 +85,8 @@ void abs_initialize()
 
 #endif
 
+	abs_cscreen("Gyros   ","Calbrtng","  lol   ");
+
 	while(g_gyro1_cal_done==false || g_gyro2_cal_done==false)
 	{
 		PlayTone(400,10);
@@ -160,9 +162,9 @@ void abs_initialize()
 	LogData=true;
 	abs_cscreen("Program ","Ready   ","        "); //set the screen to show the program feedback before the auto starts
 	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_CONTINUED)
-		nxtDisplayBigTextLine(1, "%1d%1d%1d%1d%1d%1d%1d%1d Y ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
+		nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d Y ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
 	else
-		nxtDisplayBigTextLine(1, "%1d%1d%1d%1d%1d%1d%1d%1d N ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
+		nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d N ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
 
 #if USE_TASK_PRIORITY == 1
 	StartTask(abs_sensors, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions

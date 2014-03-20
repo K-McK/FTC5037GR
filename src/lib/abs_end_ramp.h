@@ -61,7 +61,7 @@ void abs_end_ramp(int delay)
 	abs_control_light_sensor(ACTIVE);				//turn on light sensor for line detection
 	servo[light_sensor] = LIGHT_SERVO_DOWN;	//and lower the light sensor into position
 
-	if(g_good_gyro && g_em_first_turn_type == END_MISSION_FIRST_TURN_CONST)	//if the gyro is detected as good and 1st turn sub
+	if(false)//g_good_gyro && g_em_first_turn_type == END_MISSION_FIRST_TURN_CONST)	//if the gyro is detected as good and 1st turn sub
 	{																																				//menu option is selected as true use const turn
 		abs_dlog(__FILE__ ,"first turn: good gyro");	//log turn type conclusion as const
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
@@ -78,8 +78,11 @@ void abs_end_ramp(int delay)
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)	//check for dist travel is less then min
 	{																																								//dist, if so make up needed dist
 		abs_dlog(__FILE__ ,"backup, min dist fail", "Cur dist: %d", abs_get_angle_sensor_val(RELATIVE_BPU), "Min dist: %d", MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU));
-		abs_drive(FORWARD, E_ANGLE, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
+		if(g_end_point>=6&&g_end_point<=9)abs_drive(FORWARD, E_ANGLE, DRIVE_DIST_TO_OPP_RAMP_SIDE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
+		else abs_drive(FORWARD, E_ANGLE, MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
 	}
+	else if(g_end_point>=6&&g_end_point<=9) abs_drive(FORWARD, E_ANGLE, DRIVE_DIST_TO_OPP_RAMP_SIDE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, g_drive_type);
+
 	abs_control_light_sensor(INACTIVE);	//turn off the light sensor
 	wait1Msec(500);
 
@@ -89,7 +92,7 @@ void abs_end_ramp(int delay)
 	StartTask(abs_lift_block_lifter);		//start the screen function, this handels all screen interactions
 #endif
 
-	if(g_good_gyro && g_em_first_turn_type == END_MISSION_SECOND_TURN_CONST)//if the gyro is detected as good and 1st turn sub
+	if(false)//g_good_gyro && g_em_first_turn_type == END_MISSION_SECOND_TURN_CONST)//if the gyro is detected as good and 1st turn sub
 	{																																				//menu option is selected as true use const turn
 		if(g_end_point == 2)	//if end point is ramp 1 turn to the left so grabbers drive first
 		{

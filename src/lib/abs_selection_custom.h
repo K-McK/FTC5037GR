@@ -89,12 +89,12 @@ void abs_selection_custom()
 		}
 		switch(g_input_array[SCOREING_POINT])
 		{
-		case 0: abs_cscreen("Starting","point   ","ERROR   "); break;
-		case 1: abs_cscreen("Starting","point   ","IR      "); break;
-		case 2: abs_cscreen("Starting","point   ","CRATE 4 "); break;
-		case 3: abs_cscreen("Starting","point   ","CRATE 3 "); break;
-		case 4: abs_cscreen("Starting","point   ","CRATE 2 "); break;
-		case 5: abs_cscreen("Starting","point   ","CRATE 1 "); break;
+		case 0: abs_cscreen("Scoring ","point   ","ERROR   "); break;
+		case 1: abs_cscreen("Scoring ","point   ","IR      "); break;
+		case 2: abs_cscreen("Scoring ","point   ","CRATE 4 "); break;
+		case 3: abs_cscreen("Scoring ","point   ","CRATE 3 "); break;
+		case 4: abs_cscreen("Scoring ","point   ","CRATE 2 "); break;
+		case 5: abs_cscreen("Scoring ","point   ","CRATE 1 "); break;
 		}
 	}
 	PlaySoundFile("! Click.rso");
@@ -104,7 +104,6 @@ void abs_selection_custom()
 	//---------------------------------------
 	// Start of time selection 4
 	//---------------------------------------
-	g_auto_selection_point = SELECTION_MISSION_DELAY;
 
 	while(nNxtButtonPressed != kEnterButton)
 	{
@@ -153,6 +152,10 @@ void abs_selection_custom()
 		case 3: abs_cscreen("End pnt ","RAMP 2  ","stop    "); break;
 		case 4: abs_cscreen("End pnt ","RAMP 1  ","continue"); break;
 		case 5: abs_cscreen("End pnt ","RAMP 2  ","continue"); break;
+		case 6: abs_cscreen("End pnt ","RAMP 3  ","stop    "); break;
+		case 7: abs_cscreen("End pnt ","RAMP 4  ","stop    "); break;
+		case 8: abs_cscreen("End pnt ","RAMP 3  ","continue"); break;
+		case 9: abs_cscreen("End pnt ","RAMP 4  ","continue"); break;
 		}
 	}
 	PlaySoundFile("! Click.rso");
@@ -163,7 +166,7 @@ void abs_selection_custom()
 	g_start_delay = g_input_array[STARTING_DELAY];
 	g_mission_number = g_input_array[SCOREING_POINT];
 	g_end_delay = g_input_array[END_DELAY];
-	if(g_input_array[END_POINT] < 4 && g_input_array[END_POINT] > 0)
+	if((g_input_array[END_POINT] <= 3 && g_input_array[END_POINT] >= 1)||(g_input_array[END_POINT]==6||g_input_array[END_POINT]==7))
 	{
 		g_end_point = g_input_array[END_POINT];
 		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
@@ -178,6 +181,16 @@ void abs_selection_custom()
 		g_end_point = 3;
 		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
 	}
+	else if(g_input_array[END_POINT] == 8)
+	{
+		g_end_point = 6;
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+  }
+	else if(g_input_array[END_POINT] == 9)
+	{
+		g_end_point = 7;
+		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
+  }
 	else g_end_point = 1; //error for if an invaid value is inputed
 }
 
