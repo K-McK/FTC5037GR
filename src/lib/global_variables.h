@@ -193,7 +193,7 @@ const int g_abdd_up = 10;
 const int g_abdd_down = 235;
 
 const int g_gyro_adjust = 10;
-int g_original_gyro_val = 0;
+int g_original_gyro_val1 = 0;
 int g_original_gyro_val2 = 0;
 
 const int g_ground_arm_up = 0;
@@ -502,7 +502,7 @@ int abdd_down_speed = 3;
 int g_input_array[INPUT_ARRAY_SIZE];
 
 bool g_gyro1_active = true;
-bool g_gyro2_active = false;
+bool g_gyro2_active = true;
 //=========================================================
 // Datalogging variables
 //=========================================================
@@ -588,7 +588,7 @@ int g_debug_time_2 = 0;
 
 int g_auto_ending_points = 9;
 int g_travel_dist = 0;
-int g_auto_starting_points = 4;
+int g_auto_starting_points = 6;
 int g_auto_missions = 10;
 int g_drive_heading = 0;
 int g_ir_heading = 5;
@@ -743,21 +743,21 @@ int START_POINT_MAX_VAL = 4;
 int START_POINT_MIN_VAL = 0;
 
 int g_number_min_limit [] = {0,0,0,0,0,0,0};
-int g_number_max_limit [] = {0,4,30,7,30,9};
+int g_number_max_limit [] = {0,6,30,7,30,9};
 //=============================================================
 // Gyro variables
 //=============================================================
 
 /**
-* @var g_gyro_noise
+* @var g_gyro_noise1
 *		Tells the robot how much gyro noise there is
 * @var g_start_time
 *		Tells the robot the start time
 * @var g_drift
 *		Tells the robot the gyro drift
-* @var g_const_heading
+* @var g_const_heading1
 *		Tells the robot the const heading
-* @var g_rel_heading
+* @var g_rel_heading1
 *		Tells the robot the relitive heading
 * @var g_curr_time
 *		Tells the robot the current time
@@ -773,7 +773,7 @@ int g_number_max_limit [] = {0,4,30,7,30,9};
 bool g_gyro1_cal_done = false;
 bool g_gyro2_cal_done = false;
 
-int g_gyro_noise = 0;
+int g_gyro_noise1 = 0;
 int g_gyro_noise2 = 0;
 long g_start_time = 0;
 int g_gyro1_drift = 0;
@@ -781,10 +781,10 @@ int g_gyro2_drift = 0;
 float g_sacred_const_heading = 0;
 float g_sacred_const_heading2 = 0;
 float g_sacred_const_heading_use = 0;
-float g_const_heading = 0;
+float g_const_heading1 = 0;
 float g_const_heading2 = 0;
 float g_const_heading_use = 0;
-float g_rel_heading = 0;
+float g_rel_heading1 = 0;
 float g_rel_heading2 = 0;
 float g_rel_heading_use = 0;
 long g_curr_time = 0;

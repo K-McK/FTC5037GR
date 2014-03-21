@@ -38,8 +38,8 @@ int abs_get_gyro_sensor_val(e_gyro_val_type gyro_val,e_gyro_names which_gyro)
 	}
 	else
 	{
-		if(which_gyro==GYRO1) last_gyro_read_val = HTGYROreadRot(HTGYRO) - g_original_gyro_val;
-		else last_gyro_read_val = HTGYROreadRot(HTGYRO2) - g_original_gyro_val;
+		if(which_gyro==GYRO1) last_gyro_read_val = HTGYROreadRot(HTGYRO) - g_original_gyro_val1;
+		else last_gyro_read_val = HTGYROreadRot(HTGYRO2) - g_original_gyro_val2;
 	}
 
 #if DEBUG_MODE == 1

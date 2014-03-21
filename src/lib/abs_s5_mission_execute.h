@@ -12,8 +12,8 @@
 *
 */
 
-#ifndef ABS_S1_MISSION_EXECUTE_H
-#define ABS_S1_MISSION_EXECUTE_H
+#ifndef ABS_S5_MISSION_EXECUTE_H
+#define ABS_S5_MISSION_EXECUTE_H
 
 #include "abs_drive.h"
 #include "abs_turn.h"
@@ -23,7 +23,7 @@
 #include "abs_get_angle_sensor_val.h"
 #include "abs_stay_on_ramp.h"
 
-void abs_s1_mission_execute()
+void abs_s5_mission_execute()
 {
 	switch(g_mission_number)
 	{
@@ -31,9 +31,9 @@ void abs_s1_mission_execute()
 		break;
 
 	case 1: //go to other side of the field and block an apponet
-		abs_drive(FORWARD, E_TILT, 30, 40, true, g_drive_type);
+		abs_drive(FORWARD, E_ANGLE, 240, 40, true, g_drive_type);
 		abs_turn(CLOCKWISE, POINT, TURN, 90, 40);
-		abs_drive(FORWARD, E_TILT, 100, 40, true, g_drive_type);
+		abs_drive(FORWARD, E_ANGLE, 100, 40, true, g_drive_type);
 		break;
 
 	case 2:
