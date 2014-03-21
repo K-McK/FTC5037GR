@@ -19,6 +19,7 @@
 #define ABS_TURN_H
 
 #include "abs_dlog.h"
+#include "abs_reset_heading.h"
 
 /** macros */
 
@@ -33,8 +34,6 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 	else
 		abs_dlog(__FILE__ ,"enter C", "speed", speed, "degree", degree, "g_rel_heading_use", g_rel_heading_use, "g_const_heading_use", g_const_heading_use);
 
-	g_rel_heading = 0;
-	g_rel_heading2 = 0;
 	int target = 0;
 
 	//turn to a direction instead of turning an amount
@@ -107,10 +106,13 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 	//-------------------------
 	// turn condition
 	//-------------------------
-		motor[right_motor] = 0;
-		motor[left_motor] = 0;
+	motor[right_motor] = 0;
+	motor[left_motor] = 0;
+
 
 	abs_dlog(__FILE__ ,"exit", "speed", speed, "degree", degree, "g_rel_heading_use", g_rel_heading_use, "g_const_heading_use", g_const_heading_use);
+
+	abs_reset_heading(RELATIVE);
 }
 
 #endif /* !ABS_TURN_H */

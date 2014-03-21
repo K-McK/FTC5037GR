@@ -24,7 +24,7 @@ float abs_gyro_cal(long caltime,e_gyro_names which_gyro)
 	long samples=0;
 	long data;
 
-	if(which_gyro==GYRO1) g_original_gyro_val = HTGYROreadRot(HTGYRO);		// get initial gyro reading
+	if(which_gyro==GYRO1) g_original_gyro_val1 = HTGYROreadRot(HTGYRO);		// get initial gyro reading
 	else g_original_gyro_val2 = HTGYROreadRot(HTGYRO2);
 
 	while (nPgmTime < g_start_time+(caltime*1000))		// loop for the requested number of seconds
@@ -37,13 +37,13 @@ float abs_gyro_cal(long caltime,e_gyro_names which_gyro)
 			if (lowest > data) lowest = data;	// likewise for the lowest value
 	}
 	//g_gyro_noise=abs(highest-lowest);			// save the spread in the data for diagnostic display
-	if(which_gyro==GYRO1)g_gyro_noise=abs(highest-lowest);
+	if(which_gyro==GYRO1)g_gyro_noise1=abs(highest-lowest);
 	else g_gyro_noise2=abs(highest-lowest);
 
 	if(which_gyro==GYRO1)
 	{
-		g_original_gyro_val = (g_original_gyro_val - (average/samples)) * (float)(nPgmTime - g_start_time) / 1000;
-		abs_dlog(__FILE__,"Original Gyro Reading1", "g_original_gyro_val", g_original_gyro_val);
+		g_original_gyro_val1 = (g_original_gyro_val1 - (average/samples)) * (float)(nPgmTime - g_start_time) / 1000;
+		abs_dlog(__FILE__,"Original Gyro Reading1", "g_original_gyro_val", g_original_gyro_val1);
 	}
 	else
 	{

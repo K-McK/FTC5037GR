@@ -39,8 +39,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	const string rel_asu_str = "rel ASU";
 	const string bearing_ac2_str = "g_bearing_ac2";
 
-	int last_heading = g_const_heading;
-
 	//log the paramiters
 	switch(dist_method)
 	{
@@ -62,8 +60,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	}
 	int i = 0;
 	nMotorEncoder(right_motor)= 0;
-	g_rel_heading = 0;
-	g_rel_heading2 = 0;
 
 	//------------------------
 	// time stopping method
@@ -262,40 +258,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			}
 		}
 	}
-	//------------------------
-	// accelermeoter sensor stopping method
-	//------------------------
-	//Stops the robot baced on the accelermeoter
-	else if(dist_method == E_TILT)
-	{
-		int j = 0;
-		g_sensor_reference_drive = true;
-		while(j<30)
-		{
-			if(drive_type == GYRO)
-			{
-				abs_gyro_drive(speed,dir);
-			}
-
-			/** No gyro correction*/
-			else
-			{
-				if(dir == FORWARD)
-				{
-					motor[left_motor] = speed;
-					motor[right_motor] = speed;
-				}
-				else
-				{
-					motor[left_motor] = -speed;
-					motor[right_motor] = -speed;
-				}
-			}
-			if(g_accelermoeter_average > dist) j++;
-		}
-		g_sensor_reference_drive = false;
-	}
-	//------------------------
 	// angle sensor stopping method
 	//------------------------
 	//Tells the robot to stop baced on the real distence it has went
@@ -303,60 +265,28 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	{
 		abs_reset_angle_sensor_val(SOFT_RESET);
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
-		int temp_angle = abs_get_angle_sensor_val(RELATIVE_BPU);
 
-		if(abs_get_angle_sensor_val(RELATIVE_ASU) < 40)
+		while(abs_get_angle_sensor_val(RELATIVE_BPU) < dist)
 		{
-			while(abs_get_angle_sensor_val(RELATIVE_BPU) < dist)
+			if(drive_type == GYRO)
 			{
-				if(drive_type == GYRO)
-				{
-					abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
-				}
-
-				/** No gyro correction*/
-				else
-				{
-  					int adj_speed = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-
-					if(dir == FORWARD)
-					{
-						motor[left_motor] = adj_speed;
-						motor[right_motor] = adj_speed;
-					}
-					else
-					{
-						motor[left_motor] = -adj_speed;
-						motor[right_motor] = -adj_speed;
-					}
-				}
+				abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
 			}
-		}
-		else
-		{
-			abs_dlog(__FILE__ ,"reset angle fail", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
-			while((abs_get_angle_sensor_val(RELATIVE_BPU)-abs(temp_angle)) < dist)
-			{
-				if(drive_type == GYRO)
-				{
-					abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
-				}
 
-				/** No gyro correction*/
+			/** No gyro correction*/
+			else
+			{
+				int adj_speed = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+
+				if(dir == FORWARD)
+				{
+					motor[left_motor] = adj_speed;
+					motor[right_motor] = adj_speed;
+				}
 				else
 				{
-  					int adj_speed = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
-
-					if(dir == FORWARD)
-					{
-						motor[left_motor] = adj_speed;
-						motor[right_motor] = adj_speed;
-					}
-					else
-					{
-						motor[left_motor] = -adj_speed;
-						motor[right_motor] = -adj_speed;
-					}
+					motor[left_motor] = -adj_speed;
+					motor[right_motor] = -adj_speed;
 				}
 			}
 		}
@@ -410,7 +340,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			/** No gyro correction*/
 			else
 			{
-  				int adj_speed = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+				int adj_speed = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
 
 				if(dir == FORWARD)
 				{
@@ -478,7 +408,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			else if(g_end_point==3) g_dist_backwards = 75 + abs_get_angle_sensor_val(RELATIVE_BPU);
 		}
 		else
- 		{
+		{
 			//TODO:  add the code for this default case
 		}
 		//dist_record=false;
@@ -487,8 +417,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	int rel_asu = abs_get_angle_sensor_val(RELATIVE_ASU);
 	int rel_bpu = abs_get_angle_sensor_val(RELATIVE_BPU);
 	abs_dlog(__FILE__ ,"exit", speed_str, speed, dist_str, dist, rel_asu_str, rel_asu, rel_bpu_str, rel_bpu);
-
-	g_const_heading = last_heading;
 }
 
 #endif /* !ABS_DRIVE_H */

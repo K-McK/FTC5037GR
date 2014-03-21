@@ -15,7 +15,11 @@
 #ifndef ABS_GYRO2_CAL_H
 #define ABS_GYRO2_CAL_H
 
-task abs_gyro2_cal()
+#if CALIBRATE_GYROS_IN_SERIES == 1
+  void abs_gyro2_cal()
+#else
+  task abs_gyro2_cal()
+#endif
 {
 	g_gyro2_drift = abs_gyro_wrapper(GYRO2);
 	g_gyro2_cal_done = true;

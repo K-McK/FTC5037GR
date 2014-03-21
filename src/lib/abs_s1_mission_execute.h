@@ -64,7 +64,7 @@ void abs_s1_mission_execute()
 	case 6:	//test option to read the gyro, will be defence mission 1
 		while(true)
 		{
-			abs_cscreen("Gyros   ","1    2  ","%1d    %1d",g_rel_heading,g_rel_heading2);
+			abs_cscreen("Gyros   ","1    2  ","%1d    %1d",g_rel_heading1,g_rel_heading2);
 		}
 		break;
 

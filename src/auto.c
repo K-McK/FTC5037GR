@@ -65,6 +65,7 @@
 #include "lib/abs_dlog.h"
 #include "lib/abs_stay_on_ramp.h"
 #include "lib/abs_end_ramp.h"
+#include "lib/abs_reset_heading.h"
 
 
 //========================================
@@ -78,11 +79,8 @@ task main()
 	abs_dlog(__FILE__ ,"Program start"," Start time:", nPgmTime);			//write the first entry starting the datalog
 
 	abs_initialize();
+	abs_reset_heading(RELATIVE_CONSTANT);
 
-	g_rel_heading = 0;						//reset the const and the rel gyro value for the start of the robots mission
-	g_const_heading = 0;
-	g_rel_heading2 = 0;						//reset the const and the rel gyro value for the start of the robots mission
-	g_const_heading2 = 0;
 	switch(g_start_point)
 	{
 	case 1:
@@ -102,7 +100,9 @@ task main()
 		break;
 	}
 
-	g_const_heading = 0;					//reset the constant value for the end mission section of the program
+	/** TODO:  see if this can be deleted */
+	abs_reset_heading(CONSTANT);					//reset the constant value for the end mission section of the program
+
 	switch(g_end_point)
 	{
 	case 1:												//case 1: compleat start
