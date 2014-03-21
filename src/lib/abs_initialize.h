@@ -25,6 +25,10 @@
 #include "abs_control_light_sensor.h"
 #include "abs_gyro1_cal.h"
 #include "abs_gyro2_cal.h"
+#include "abs_start_task.h"
+#include "abs_disable_gyro.h"
+
+#define MAX_ALLOWED_GYRO_NOISE 10
 
 void abs_initialize()
 {
@@ -40,60 +44,36 @@ void abs_initialize()
 	abs_selection_program();		//start the selection program to receive the robot's mission from the drivers
 	PlaySoundFile("! Click.rso");
 
-#if USE_TASK_PRIORITY == 1
 	if(g_gyro1_active)
 	{
-		StartTask(abs_gyro1_cal, HIGH_PRIORITY_TASK);
-	}
-	else
-	{
-		g_gyro1_cal_done = true;
-		g_gyro1_drift = 9999;
-		g_gyro_noise = 9999;
-	}
-
-	if(g_gyro2_active)
-	{
-		StartTask(abs_gyro2_cal, HIGH_PRIORITY_TASK);
-	}
-
-	if(g_gyro2_active) StartTask(abs_gyro2_cal, HIGH_PRIORITY_TASK);
-	else
-	{
-		g_gyro2_cal_done = true;
-		g_gyro2_drift = 9999;
-		g_gyro_noise2 = 9999;
-	}
-
+#if CALIBRATE_GYROS_IN_SERIES == 1
+		abs_gyro1_cal();
 #else
-	if(g_gyro1_active)
-	{
-		StartTask(abs_gyro1_cal);
+		abs_start_task(abs_gyro1_cal, HIGH_PRIORITY_TASK);
+#endif
 	}
 	else
 	{
-		g_gyro1_cal_done = true;
-		g_gyro1_drift = 9999;
-		g_gyro_noise = 9999;
+		abs_disable_gyro(GYRO1);
 	}
 
 	if(g_gyro2_active)
 	{
-		StartTask(abs_gyro2_cal);
+#if CALIBRATE_GYROS_IN_SERIES == 1
+		abs_gyro2_cal();
+#else
+		abs_start_task(abs_gyro2_cal, HIGH_PRIORITY_TASK);
+#endif
 	}
 	else
 	{
-		g_gyro2_cal_done = true;
-		g_gyro2_drift = 9999;
-		g_gyro_noise2 = 9999;
+		abs_disable_gyro(GYRO2);
 	}
-
-#endif
 
 	while(g_gyro1_cal_done == false || g_gyro2_cal_done == false){}
 	abs_cscreen("Gyros   ","Calbrtng","  lol   ");
 
-	if(g_gyro_noise<g_gyro_noise2)
+	if(g_gyro_noise1<g_gyro_noise2)
 	{
 		g_gyro_use=GYRO1;
 		abs_dlog(__FILE__ ,"gyro use:", "GYRO1");
@@ -114,12 +94,12 @@ void abs_initialize()
 		g_error_type = ERROR_NONLETHAL;								// EDIT: accelermoeter was removed to make room for the moved angle sensor
 		//																						// *accelermoeter is not give the robot readings*
 	}																								//-error: nonleathal, robot does not currently use accelermoeter
-	if(g_gyro_noise>10)															//=================================================
+	if(g_gyro_noise1>MAX_ALLOWED_GYRO_NOISE && g_gyro1_active)	//=================================================
 	{																								//-error detection: gyro calibrate fail,
 		g_error = ERR_GYRO_CAL1;											// gyro reads value that is too large for not starting yet
 		g_error = ERROR_LETHAL;												//
 	}																								//-error: leathal, auto needs accurate gyro to run successfully
-	if(false)//g_gyro_noise2>10)										//=================================================
+	if(g_gyro_noise2>MAX_ALLOWED_GYRO_NOISE && g_gyro2_active)	//=================================================
 	{																								//-error detection: gyro calibrate fail,
 		g_error = ERR_GYRO_CAL2;											// gyro reads value that is too large for not starting yet
 		g_error = ERROR_LETHAL;												//
@@ -166,11 +146,9 @@ void abs_initialize()
 	else
 		nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d N ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
 
-#if USE_TASK_PRIORITY == 1
-	StartTask(abs_sensors, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
-#else
-	StartTask(abs_sensors);		//start the screen function, this handels all screen interactions
-#endif
+
+	abs_start_task(abs_sensors, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
+
 	abs_reset_angle_sensor_val(HARD_RESET);	//reset the angle sensor
 
 	PlayTone(700, 100);					//play 'happy sound' to tell drivers the robot is ready to run
@@ -184,11 +162,7 @@ void abs_initialize()
 
 	abs_dlog(__FILE__ , "auto start", "program time", nPgmTime);		//log the start of the mission run
 
-#if USE_TASK_PRIORITY == 1
-	StartTask(abs_datalog, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
-#else
-	StartTask(abs_datalog);		//start the screen function, this handels all screen interactions
-#endif
+	abs_start_task(abs_datalog, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
 
 	eraseDisplay();
 	g_start_time = nPgmTime;		//set the start time
