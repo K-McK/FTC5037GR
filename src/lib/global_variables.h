@@ -502,7 +502,7 @@ int abdd_down_speed = 3;
 int g_input_array[INPUT_ARRAY_SIZE];
 
 bool g_gyro1_active = true;
-bool g_gyro2_active = false;
+bool g_gyro2_active = true;
 //=========================================================
 // Datalogging variables
 //=========================================================
@@ -588,7 +588,7 @@ int g_debug_time_2 = 0;
 
 int g_auto_ending_points = 9;
 int g_travel_dist = 0;
-int g_auto_starting_points = 4;
+int g_auto_starting_points = 6;
 int g_auto_missions = 10;
 int g_drive_heading = 0;
 int g_ir_heading = 5;
@@ -743,7 +743,7 @@ int START_POINT_MAX_VAL = 4;
 int START_POINT_MIN_VAL = 0;
 
 int g_number_min_limit [] = {0,0,0,0,0,0,0};
-int g_number_max_limit [] = {0,4,30,7,30,9};
+int g_number_max_limit [] = {0,6,30,7,30,9};
 //=============================================================
 // Gyro variables
 //=============================================================

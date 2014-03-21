@@ -61,6 +61,7 @@
 #include "lib/abs_s2_mission_execute.h"
 #include "lib/abs_s3_mission_execute.h"
 #include "lib/abs_s4_mission_execute.h"
+#include "lib/abs_s5_mission_execute.h"
 #include "lib/abs_dlog.h"
 #include "lib/abs_stay_on_ramp.h"
 #include "lib/abs_end_ramp.h"
@@ -93,6 +94,9 @@ task main()
 		break;
 	case 4:
 		abs_s4_mission_execute();		//missions for starting position 4
+		break;
+	case 5:
+		abs_s5_mission_execute();		//missions for starting position 4
 		break;
 	}
 
