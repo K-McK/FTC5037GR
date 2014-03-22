@@ -17,6 +17,7 @@
 void log_parameter(const char * key, int value)
 {
 	string buff = "";
+
 	if(key != NULL)
 	{
 		StringFormat(buff, "\t ");
