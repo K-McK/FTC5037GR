@@ -96,7 +96,7 @@ task main()
 		abs_s4_mission_execute();		//missions for starting position 4
 		break;
 	case 5:
-		abs_s5_mission_execute();		//missions for starting position 4
+		abs_s5_mission_execute();		//missions for starting position 5
 		break;
 	}
 
