@@ -16,12 +16,12 @@
 
 void log_parameter(const char * key, int value)
 {
-	string buff1 = "";
+	string buff1 = "\t";
 	string buff2 = "";
 
 	if(key != NULL)
 	{
-		StringFormat(buff1, "\t", key);
+		strcat(buff1, key);
 		StringFormat(buff2, ": %d", value);
 		strcat(buff1, buff2);
 		WriteText(LogFileHandle, LogIoResult, buff1);
