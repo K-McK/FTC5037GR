@@ -16,15 +16,15 @@
 
 void log_parameter(const char * key, int value)
 {
-	string buff = "";
+	string buff1 = "";
+	string buff2 = "";
 
 	if(key != NULL)
 	{
-		StringFormat(buff, "\t ");
-		strcat(buff, key);
-		WriteText(LogFileHandle, LogIoResult, buff);
-		StringFormat(buff, ": %d",value);
-		WriteText(LogFileHandle, LogIoResult, buff);
+		StringFormat(buff1, "\t", key);
+		StringFormat(buff2, ": %d", value);
+		strcat(buff1, buff2);
+		WriteText(LogFileHandle, LogIoResult, buff1);
 	}
 }
 
@@ -49,7 +49,7 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 	WriteText(LogFileHandle, LogIoResult, input1);
 
 	StringFormat(buff, "\t");
-	StringFormat(buff, input2);
+	strcat(buff, input2);
 	WriteText(LogFileHandle, LogIoResult, buff);
 
 	log_parameter(input3_str, input3);
