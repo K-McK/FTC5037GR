@@ -21,7 +21,7 @@ void log_parameter(const char * key, int value)
 	if(key != NULL)
 	{
 		StringFormat(buff, "\t ");
-		StringFormat(buff, key);
+		strcat(buff, key);
 		WriteText(LogFileHandle, LogIoResult, buff);
 		StringFormat(buff, ": %d",value);
 		WriteText(LogFileHandle, LogIoResult, buff);
@@ -38,14 +38,15 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 	StringFormat(buff, "%09.3f\t",(((float)nPgmTime)/1000));
 	WriteText(LogFileHandle, LogIoResult, buff);
 
+	StringFormat(buff, "rel-g %4d\t", g_rel_heading_use);
+	WriteText(LogFileHandle, LogIoResult, buff);
+
+	StringFormat(buff, "cnst-g %4d\t", g_const_heading_use);
+	WriteText(LogFileHandle, LogIoResult, buff);
+
 	if(!strcmp(input1,""))StringFormat(buff, input1);
 	else StringFormat(buff, "");
 	WriteText(LogFileHandle, LogIoResult, input1);
-
-
-	//StringFormat(buff, "\t");
-	//WriteText(LogFileHandle, LogIoResult, buff);
-	//StartTask(TaskID, nTaskPriority);
 
 	StringFormat(buff, "\t");
 	StringFormat(buff, input2);
@@ -55,11 +56,5 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 	log_parameter(input4_str, input4);
 	log_parameter(input5_str, input5);
 	log_parameter(input6_str, input6);
-
-	StringFormat(buff, "rel-g %4d\t", g_rel_heading_use);
-	WriteText(LogFileHandle, LogIoResult, buff);
-
-	StringFormat(buff, "cnst-g %4d\t", g_const_heading_use);
-	WriteText(LogFileHandle, LogIoResult, buff);
 }
 #endif /* !ABS_LOG_H */
