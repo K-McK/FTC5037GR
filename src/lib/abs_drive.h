@@ -379,7 +379,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 	servo[light_sensor] = LIGHT_SERVO_UP;
 
-	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
 	if(dist_record==true)
 	{
 		if(g_start_point==1)

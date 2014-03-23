@@ -1,7 +1,6 @@
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  HTServo)
-#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     GYRO_MUX,       sensorI2CCustom)
-#pragma config(Sensor, S3,     SENSOR_MUX,     sensorI2CCustom)
+#pragma config(Sensor, S3,     gyro,           sensorAnalogInactive)
 #pragma config(Sensor, S4,     angle_sensor,   sensorI2CCustom)
 #pragma config(Motor,  mtr_S1_C1_1,     jolly_roger,   tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     block_lift_motor2, tmotorTetrix, openLoop, reversed, encoder)
@@ -33,57 +32,37 @@
 
 #include "joystickdriver.c"
 #include "lib/xander/hitechnic-sensormux.h"
-//#include "drivers/lego-light.h"
+#include "lib/xander/lego-light.h"
 #include "lib/xander/hitechnic-irseeker-v2.h"
 #include "lib/xander/hitechnic-gyro.h"
 #include "lib/xander/hitechnic-angle.h"
 #include "lib/xander/hitechnic-accelerometer.h"
+#include "lib/xander/hitechnic-eopd.h"
 
 //-----------------------
 // custom functions includes
 //-----------------------
 #include "lib/compile_flags.h"
 #include "lib/global_variables.h"
-#include "lib/abs_screen.h"
 #include "lib/math_utils.h"
 #include "lib/abs_sensors.h"
 #include "lib/abs_smoke_execute.h"
+#include "lib/abs_cscreen.h"
 
 //==================================
 // main program
 //==================================
 task main()
 {
-	StartTask(abs_screen);
-	StartTask(abs_sensors);
-	g_test_value = 1;
+	//StartTask(abs_sensors);
+	HTANGresetAccumulatedAngle(angle_sensor);
 	while(true)
 	{
-		while(nNxtButtonPressed == kEnterButton){}
-		g_screen_state = S_SMOKE_TEST;
-		//---------------------------------------
-		// Start of mission selection
-		//---------------------------------------
+		int curr_time = nPgmTime;
+		//abs_cscreen("EOPD","SENSOR","%1d      ",g_EOPD_sensor);
+		int gyro_val += (gyro - (curr_time-prev_time)) * (float)(curr_time-prev_time)/1000;
 
-		while(nNxtButtonPressed != kEnterButton)
-		{
-			if(nNxtButtonPressed == kRightButton)
-			{
-				PlaySoundFile("! Click.rso");
-				while(nNxtButtonPressed == kRightButton){}
-				if(g_smoke_test_num < g_smoke_test_total) g_smoke_test_num++;
-				}
-			if(nNxtButtonPressed == kLeftButton)
-			{
-				PlaySoundFile("! Click.rso");
-				while(nNxtButtonPressed == kLeftButton){}
-				if(g_smoke_test_num > 1) g_smoke_test_num--;
-			}
-		}
-		PlaySoundFile("! Click.rso");
-		while(nNxtButtonPressed == kEnterButton){}
-		eraseDisplay();
-
-		abs_smoke_execute();
+		abs_cscreen("gyro    ","sensor  ","%1d      ",gyro_val);
+		int prev_time = nPgmTime;
 	}
 }

@@ -20,6 +20,8 @@
 #include "abs_selection_advanced.h"
 #include "abs_selection_options.h"
 #include "lib/abs_cscreen.h"
+#include "lib/abs_ramp_interpret.h"
+
 
 void abs_selection_program()
 {
@@ -79,24 +81,6 @@ void abs_selection_program()
 		abs_selection_options();
 		abs_selection_program();
 	}
-
-	g_start_point=g_input_array[STARTING_POINT];
-	g_start_delay=g_input_array[STARTING_DELAY];
-	g_mission_number=g_input_array[SCOREING_POINT];
-	g_end_delay=g_input_array[END_DELAY];
-	//mainly a check to make sure it works fine
-	if(g_input_array[END_POINT] < 4 && g_input_array[END_POINT] > 0)g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
-	if(g_input_array[END_POINT] == 4)
-	{
-		g_end_point=2;
-		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-	}
-	if(g_input_array[END_POINT] == 5)
-	{
-		g_end_point=3;
-		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-	}
-	if(g_input_array[END_POINT] == 1)g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
 
 	//---------------------------------------
 	// Start of gyro cal selection
