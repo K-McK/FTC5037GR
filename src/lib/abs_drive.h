@@ -54,8 +54,8 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	case E_TIME:
 		abs_dlog(__FILE__ , "time enter", speed_str, speed, dist_str, dist, "time", time1[T1], rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 		break;
-	case E_LIGHT:
-		abs_dlog(__FILE__ , "light enter", speed_str, speed, dist_str, dist, "g_calibrated_light_threshold_val", g_calibrated_light_threshold_val, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
+	case E_EOPD:
+		abs_dlog(__FILE__ , "EOPD enter", speed_str, speed, dist_str, dist, "g_calibrated_EOPD_threshold_val", g_calibrated_EOPD_threshold_val, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 		break;
 	}
 	int i = 0;
@@ -297,37 +297,37 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	// Light
 	//================
 	//stops baced on the light sensor
-	else if(dist_method == E_LIGHT)
+	else if(dist_method == E_EOPD)
 	{
-		bool light_fail = false;
+		bool EOPD_fail = false;
 		abs_reset_angle_sensor_val(SOFT_RESET);
 
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 
-		int max_light_detected = 0;
+		int max_EOPD_detected = 0;
 		while(true)
 		{
 			//finds out what the highest value of the light sensor was
-			max_light_detected = max(max_light_detected, g_light_sensor);
+			max_EOPD_detected = max(max_EOPD_detected, g_EOPD_sensor);
 
-			if(g_light_sensor>g_calibrated_light_threshold_val&&abs_get_angle_sensor_val(RELATIVE_BPU)<MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)
+			if(g_EOPD_sensor>g_calibrated_EOPD_threshold_val&&abs_get_angle_sensor_val(RELATIVE_BPU)<MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE)
 			{
 				// make sure we only print this once
-				if(!light_fail)
+				if(!EOPD_fail)
 				{
-					abs_dlog(__FILE__ ,"Premature light detection: ", "Min BPU: %d", MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE, "Actual BPU when detected: %d", abs_get_angle_sensor_val(RELATIVE_BPU), "Light Threshold: %d", g_calibrated_light_threshold_val, "Light Value detected: %d", max_light_detected);
-					light_fail = true;
+					abs_dlog(__FILE__ ,"Premature EOPD detection: ", "Min BPU: %d", MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE, "Actual BPU when detected: %d", abs_get_angle_sensor_val(RELATIVE_BPU), "EOPD Threshold: %d", g_calibrated_EOPD_threshold_val, "EOPD Value detected: %d", max_EOPD_detected);
+					EOPD_fail = true;
 				}
 			}
 
-			if(g_light_sensor>g_calibrated_light_threshold_val&&light_fail==false)
+			if(g_EOPD_sensor>g_calibrated_EOPD_threshold_val&&EOPD_fail==false)
 			{
-				abs_dlog(__FILE__ ,"light break", speed_str, speed, dist_str, dist, "g_calibrated_light_threshold", g_calibrated_light_threshold_val, "g_light_sensor", g_light_sensor);
+				abs_dlog(__FILE__ ,"EOPD break", speed_str, speed, dist_str, dist, "g_calibrated_EOPD_threshold", g_calibrated_EOPD_threshold_val, "g_EOPD_sensor", g_EOPD_sensor);
 				break;
 			}
 			else if (abs_get_angle_sensor_val(RELATIVE_BPU) > dist)
 			{
-				abs_dlog(__FILE__ ,"angle break: ", "speed: %d", speed, "max distance: %d", dist, "Light Threshold: %d", g_calibrated_light_threshold_val, "Light Value detected: %d", max_light_detected);
+				abs_dlog(__FILE__ ,"angle break: ", "speed: %d", speed, "max distance: %d", dist, "EOPD Threshold: %d", g_calibrated_EOPD_threshold_val, "EOPD Value detected: %d", max_EOPD_detected);
 
 				break;
 			}
@@ -377,7 +377,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	}
 	g_debug_time_2 = nPgmTime;
 
-	servo[light_sensor] = LIGHT_SERVO_UP;
+	servo[EOPD_sensor] = EOPD_SERVO_UP;
 
 	if(dist_record==true)
 	{
