@@ -759,12 +759,8 @@ int g_number_max_limit [] = {0,6,30,7,30,9};
 *		Tells the robot the current time
 * @var g_prev_time
 *		Tells the robot the current time
-* @var g_raw_gyro
-*		Tells the robt the raw gyro value
 * @var g_recont_heading
 *		This is the recalculated const gyro heading
-* @var g_sacred_const_heading
-*		This is the recalculated value of the gyrp baced on a calculation
 */
 bool g_gyro1_cal_done = false;
 bool g_gyro2_cal_done = false;
@@ -774,9 +770,6 @@ int g_gyro_noise2 = 0;
 long g_start_time = 0;
 int g_gyro1_drift = 0;
 int g_gyro2_drift = 0;
-float g_sacred_const_heading = 0;
-float g_sacred_const_heading2 = 0;
-float g_sacred_const_heading_use = 0;
 float g_const_heading1 = 0;
 float g_const_heading2 = 0;
 float g_const_heading_use = 0;
@@ -785,8 +778,6 @@ float g_rel_heading2 = 0;
 float g_rel_heading_use = 0;
 long g_curr_time = 0;
 long g_prev_time = 0;
-int g_raw_gyro = 0;
-int g_raw_gyro2 = 0;
 int g_recont_heading = 0; //this is the recalculated const gyro heading
 int g_recont_heading2 = 0;
 int g_recont_heading_use = 0;

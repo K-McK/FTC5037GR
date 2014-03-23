@@ -21,6 +21,8 @@
 task abs_sensors()
 {
 	g_prev_time = nPgmTime;
+	int raw_gyro1 = 0;
+  int raw_gyro2 = 0;
 
 	while(true)
 	{
@@ -117,29 +119,23 @@ task abs_sensors()
 		g_curr_time=nPgmTime;
 
 		// gyro 1
-		g_raw_gyro = abs_get_gyro_sensor_val(RAW,GYRO1);
-		g_sacred_const_heading += (g_raw_gyro - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-		g_rel_heading1 += (g_raw_gyro - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-
-		g_const_heading1 += (g_raw_gyro - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		raw_gyro1 = abs_get_gyro_sensor_val(RAW,GYRO1);
+		g_rel_heading1 += (raw_gyro1 - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		g_const_heading1 += (raw_gyro1 - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
 
 		// gyro 2
-		g_raw_gyro2 = abs_get_gyro_sensor_val(RAW,GYRO2);
-		g_sacred_const_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-		g_rel_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-
-		g_const_heading2 += (g_raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		raw_gyro2 = abs_get_gyro_sensor_val(RAW,GYRO2);
+		g_rel_heading2 += (raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		g_const_heading2 += (raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
 
 		//used gyro
 		if(g_gyro_use==GYRO1)
 		{
-			g_sacred_const_heading_use = g_sacred_const_heading;
 			g_rel_heading_use = g_rel_heading1;
 			g_const_heading_use = g_const_heading1;
 		}
 		else
 		{
-			g_sacred_const_heading_use = g_sacred_const_heading2;
 			g_rel_heading_use = g_rel_heading2;
 			g_const_heading_use = g_const_heading2;
 		}
