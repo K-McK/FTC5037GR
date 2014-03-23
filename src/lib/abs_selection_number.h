@@ -15,6 +15,8 @@
 #define ABS_SELECTION_NUMBER_H
 
 #include "lib/abs_cscreen.h"
+#include "lib/abs_ramp_interpret.h"
+
 
 void abs_selection_number()
 {
@@ -54,26 +56,7 @@ void abs_selection_number()
 		while(nNxtButtonPressed == kEnterButton){}
 		PlaySoundFile("! Click.rso");
 	}
-	g_start_point = g_input_array[STARTING_POINT];
-	g_start_delay = g_input_array[STARTING_DELAY];
-	g_mission_number = g_input_array[SCOREING_POINT];
-	g_end_delay = g_input_array[END_DELAY];
-	if(g_input_array[END_POINT] < 4 && g_input_array[END_POINT] > 0)
-	{
-		g_end_point = g_input_array[END_POINT];
-		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
-	}
-	else if(g_input_array[END_POINT] == 4)
-	{
-		g_end_point = 2;
-		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-	}
-	else if(g_input_array[END_POINT] == 5)
-	{
-		g_end_point = 3;
-		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-	}
-	else g_end_point = 1; //error for if an invaid value is inputed
+	abs_ramp_interpret();
 }
 
 #endif /* !ABS_SELECTION_NUMBER_H */
