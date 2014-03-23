@@ -162,7 +162,7 @@ void abs_initialize()
 
 	abs_dlog(__FILE__ , "auto start", "program time", nPgmTime);		//log the start of the mission run
 
-	abs_start_task(abs_datalog, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
+//	abs_start_task(abs_datalog, BACKGROUND_TASK);		//start the screen function, this handels all screen interactions
 
 	eraseDisplay();
 	g_start_time = nPgmTime;		//set the start time
