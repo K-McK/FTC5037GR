@@ -84,10 +84,6 @@ void abs_initialize()
 		abs_dlog(__FILE__ ,"gyro use:", "GYRO2");
 	}
 
-	//g_drift = abs_gyro_cal(g_gyro_cal_time);
-
-	//g_drift = abs_gyro_wrapper();		//calibrate the gyro, we're using our wrapper function to calibrate the gyro 5 times
-	//to get the avg of drift and the delta of drift
 	if(false)//!HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis))
 	{																								//=================================================
 		g_error = ERR_ACCELERMOETER;									//-error detection: accelermoeter error,
