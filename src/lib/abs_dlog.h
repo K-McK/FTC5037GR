@@ -44,8 +44,6 @@ void abs_dlog(const char * input1,const char * input2, const char * input3_str =
 	StringFormat(buff, "cnst-g %4d\t", g_const_heading_use);
 	WriteText(LogFileHandle, LogIoResult, buff);
 
-	if(!strcmp(input1,""))StringFormat(buff, input1);
-	else StringFormat(buff, "");
 	WriteText(LogFileHandle, LogIoResult, input1);
 
 	StringFormat(buff, "\t");
