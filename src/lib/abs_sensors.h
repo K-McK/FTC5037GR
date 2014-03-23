@@ -172,7 +172,7 @@ task abs_sensors()
 		//-------------------------
 		// HiTechnic angle sensor
 		//-------------------------
-		g_angle_sensor = HTANGreadAccumulatedAngle(HTANGLE);
+		g_angle_sensor = HTANGreadAccumulatedAngle(angle_sensor);
 		//-------------------------
 		// EOPD
 		//-------------------------

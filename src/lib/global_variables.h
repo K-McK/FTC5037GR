@@ -25,15 +25,10 @@
 #define BACKGROUND_TASK 5
 
 const tMUXSensor HTEOPD = msensor_S2_1;
-const tMUXSensor LEGOLS = msensor_S3_2;//2_1;
-const tMUXSensor HTANGLE = msensor_S2_2;
-const tMUXSensor HTIRS2 = msensor_S2_3;     // HiTechnic Infrared sensor
-//const tMUXSensor HTAC = msensor_S3_2;			//accelerometer is removed to make room for the angle sensor
-const tMUXSensor HTIRS2_2 = msensor_S2_4;     // HiTechnic Infrared sensor 2
+const tMUXSensor HTIRS2 = msensor_S2_3;
+const tMUXSensor HTIRS2_2 = msensor_S2_4;
 
-const tMUXSensor HTGYRO = msensor_S3_1;	   // HiTechnic GYRO sensor
-
-const tMUXSensor HTGYRO2 = msensor_S4_1;	   // our second HiTechnic GYRO sensor
+const tMUXSensor HTGYRO2 = msensor_S2_2;
 
 /**
 * @var g_gyro_true
@@ -283,16 +278,6 @@ typedef enum
 //=========================================================
 // auto sub selections
 //=========================================================
-/**
-*  @enum e_direction Tells the robot to drive backwords or forwards onto the ramp
-*  @var e_direction::SUB_SELECTION_GRABBERS_OUT
-*     turn clockwise drive with the grabbers out
-*  @var e_direction::SUB_SELECTION_GRABBERS_IN
-*     turn counterclockwise drive with the grabbers in
-*	@var g_auto_grabber_selections
-*			Tells the robot is the grabbers are in or out
-*/
-
 typedef enum
 {
 	SUB_SELECTION_GRABBERS_OUT,
@@ -300,6 +285,14 @@ typedef enum
 } e_auto_sub_selection;
 
 e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
+
+typedef enum
+{
+	SUB_SELECTION_RAMP_ALLY_SIDE,
+	SUB_SELECTION_RAMP_OPP_SIDE
+} e_auto_sub_selection_ramp_sides;
+
+e_auto_sub_selection_ramp_sides g_auto_sub_selection_ramp_side = SUB_SELECTION_RAMP_ALLY_SIDE;
 
 /**
 *  @enum e_auto_sub_selection_ramp Tells the robot to drive onto the ramp and continue or stop
@@ -502,7 +495,10 @@ int abdd_down_speed = 3;
 int g_input_array[INPUT_ARRAY_SIZE];
 
 bool g_gyro1_active = true;
-bool g_gyro2_active = true;
+bool g_gyro2_active = false;
+//=========================================================
+// backup function variables
+//=========================================================
 //=========================================================
 // Datalogging variables
 //=========================================================

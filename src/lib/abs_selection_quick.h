@@ -15,6 +15,7 @@
 #define ABS_SELECTION_QUICK_H
 
 #include "lib/abs_cscreen.h"
+#include "lib/abs_ramp_interpret.h"
 
 void abs_selection_quick()
 {
@@ -105,6 +106,7 @@ void abs_selection_quick()
 	}
 	while(nNxtButtonPressed == kEnterButton){}
 	PlaySoundFile("! Click.rso");
+	abs_ramp_interpret();
 }
 
 #endif /* !ABS_SELECTION_NUMBER_H */
