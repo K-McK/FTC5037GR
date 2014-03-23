@@ -80,9 +80,9 @@ void abs_s1_mission_execute()
 	abs_dlog(__FILE__,"abdd up", "instance", 2, "g_abdd_up", g_abdd_up);	//open and log abdd
 	servo[abdd] = g_abdd_up;
 	#if USE_TASK_PRIORITY == 1
-	StartTask(abs_calibrate_light, MEDIUM_PRIORITY_TASK);		//start the screen function, this handels all screen interactions
+	StartTask(abs_calibrate_EOPD, MEDIUM_PRIORITY_TASK);		//start the screen function, this handels all screen interactions
 #else
-	StartTask(abs_calibrate_light);		//start the screen function, this handels all screen interactions
+	StartTask(abs_calibrate_EOPD);		//start the screen function, this handels all screen interactions
 #endif
 	wait1Msec(2000);
 	servoChangeRate[abdd] = abdd_down_speed;

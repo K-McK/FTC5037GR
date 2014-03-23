@@ -20,9 +20,8 @@
 #include "abs_datalog.h"
 #include "abs_dlog.h"
 #include "abs_reset_angle_sensor.h"
-#include "abs_calibrate_light.h"
+#include "abs_calibrate_EOPD.h"
 #include "abs_selection_program.h"
-#include "abs_control_light_sensor.h"
 #include "abs_gyro1_cal.h"
 #include "abs_gyro2_cal.h"
 #include "abs_start_task.h"
@@ -37,9 +36,8 @@ void abs_initialize()
 	servo[roger_slide] = 127;											// set all of the robots outputs to their starting positions
 	servo[abdd] = g_abdd_down;										//
 	servo[grabber_left] = GRABBER_LEFT_CLOSE;			//-abdd is held down									-right grabber closes
-	servo[grabber_right] = GRABBER_RIGHT_CLOSE;		//-left grabber closes								-light sensor servo held up
-	servo[light_sensor] = LIGHT_SERVO_UP;					//-light sensor light is turned off
-	abs_control_light_sensor(INACTIVE);						//============================================================
+	servo[grabber_right] = GRABBER_RIGHT_CLOSE;		//-left grabber closes								-EOPD sensor servo held up
+	servo[EOPD_sensor] = EOPD_SERVO_UP;						//============================================================
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);		//set input array to 0, this ensures the robot doesn't get invalid inputs
 	abs_selection_program();		//start the selection program to receive the robot's mission from the drivers
 	PlaySoundFile("! Click.rso");
@@ -105,15 +103,15 @@ void abs_initialize()
 		g_error = ERR_SENSOR_MUX;											// robot reads the sensor mux is not powered
 		g_error_type = ERROR_LETHAL;//NONLETHAL;			// EDIT: angle sensor moved, all muxes are needed now
 	}																								//-error: *nonleathal, robot can still run missions not using IR*
-	if(false)//(HTSMUXreadPowerStatus(GYRO_MUX))							//=================================================
+	if(false)//(HTSMUXreadPowerStatus(GYRO_MUX))		//=================================================
 	{																								//-error detection: 1st gyro sensor mux power fail,
 		g_error = ERR_GYRO_MUX1;											// robot reads the gyro mux is not powered
-		g_error = ERROR_LETHAL;												//
+		g_error = ERROR_LETHAL;												// EDIT: mux removed
 	}																								//-error: leathal, robot needs the gyro to run successfully
-	if(false)//HTSMUXreadPowerStatus(GYRO_MUX2))						//=================================================
+	if(false)//HTSMUXreadPowerStatus(GYRO_MUX2))		//=================================================
 	{																								//-error detection: 2nd gyro sensor mux power fail,
 		g_error = ERR_GYRO_MUX2;											// robot reads the gyro mux is not powered
-		g_error = ERROR_LETHAL;												//
+		g_error = ERROR_LETHAL;												// EDIT: mux removed
 	}																								//-error: leathal, robot needs the gyro to run successfully
 	//																							//=================================================
 	if(g_error != 0)		//if there is an error start beebing and stop program advancement
@@ -137,7 +135,7 @@ void abs_initialize()
 	}//driver tries to over-ride skip error
 	LogData=true;
 	abs_cscreen("Program ","Ready   ","        "); //set the screen to show the program feedback before the auto starts
-	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_CONTINUED)
+	if(g_auto_selection_ramp_continue_options == SUB_SELECTION_RAMP_CONTINUED)
 		nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d Y ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
 	else
 		nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d N ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
