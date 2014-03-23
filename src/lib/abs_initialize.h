@@ -70,8 +70,8 @@ void abs_initialize()
 		abs_disable_gyro(GYRO2);
 	}
 
-	while(g_gyro1_cal_done == false || g_gyro2_cal_done == false){}
 	abs_cscreen("Gyros   ","Calbrtng","  lol   ");
+	while(g_gyro1_cal_done == false || g_gyro2_cal_done == false){}
 
 	if(g_gyro_noise1<g_gyro_noise2)
 	{
@@ -109,12 +109,12 @@ void abs_initialize()
 		g_error = ERR_SENSOR_MUX;											// robot reads the sensor mux is not powered
 		g_error_type = ERROR_LETHAL;//NONLETHAL;			// EDIT: angle sensor moved, all muxes are needed now
 	}																								//-error: *nonleathal, robot can still run missions not using IR*
-	if(HTSMUXreadPowerStatus(GYRO_MUX))							//=================================================
+	if(false)//(HTSMUXreadPowerStatus(GYRO_MUX))							//=================================================
 	{																								//-error detection: 1st gyro sensor mux power fail,
 		g_error = ERR_GYRO_MUX1;											// robot reads the gyro mux is not powered
 		g_error = ERROR_LETHAL;												//
 	}																								//-error: leathal, robot needs the gyro to run successfully
-	if(HTSMUXreadPowerStatus(GYRO_MUX2))						//=================================================
+	if(false)//HTSMUXreadPowerStatus(GYRO_MUX2))						//=================================================
 	{																								//-error detection: 2nd gyro sensor mux power fail,
 		g_error = ERR_GYRO_MUX2;											// robot reads the gyro mux is not powered
 		g_error = ERROR_LETHAL;												//

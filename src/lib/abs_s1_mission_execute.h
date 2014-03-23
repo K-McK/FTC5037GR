@@ -73,6 +73,7 @@ void abs_s1_mission_execute()
 		motor[left_motor] = 0;
 		while(true)
 		{
+			abs_cscreen("Angle   ","sensor  ","%1d       ",abs_get_angle_sensor_val(RAW_ASU));
 		}
 		break;
 	}

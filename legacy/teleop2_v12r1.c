@@ -262,7 +262,7 @@ task gyro()
 	gyro_mux_status=HTSMUXreadPowerStatus(GYRO_MUX);		// read the sensor multiplexor status
 	while (ir_mux_status || gyro_mux_status)  					// check good battery power on both muxes
 	{
-		PlayTone(750,25);
+		//PlayTone(750,25);
 		wait1Msec(500);
 	}
 
