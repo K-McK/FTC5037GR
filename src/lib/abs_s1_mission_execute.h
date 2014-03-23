@@ -73,7 +73,8 @@ void abs_s1_mission_execute()
 		motor[left_motor] = 0;
 		while(true)
 		{
-			abs_cscreen("Angle   ","sensor  ","%1d       ",abs_get_angle_sensor_val(RAW_ASU));
+			servo[EOPD_servo] = EOPD_SERVO_DOWN;
+			abs_cscreen("EOPD    ","sensor  ","%1d       ",g_EOPD_SENSOR);
 		}
 		break;
 	}
@@ -91,7 +92,7 @@ void abs_s1_mission_execute()
 
 	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR); //wait for end delay, number option tab 4
 
-	//abs_dlog(__FILE__,"start of end", "g_end_point", g_end_point);
+	abs_dlog(__FILE__,"start of end", "g_end_point", g_end_point);
 }
 
 #endif /* !ABS_S1_MISSION_EXICUTE_H */

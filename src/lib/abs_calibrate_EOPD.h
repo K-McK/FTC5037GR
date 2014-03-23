@@ -19,7 +19,7 @@
 
 task abs_calibrate_EOPD()
 {
-	servo[EOPD_sensor] = EOPD_SERVO_DOWN;
+	servo[EOPD_servo] = EOPD_SERVO_DOWN;
 	wait1Msec(1000);
 
 	long calibration_start = nPgmTime;
@@ -55,7 +55,7 @@ task abs_calibrate_EOPD()
 	}
 
 	wait1Msec(1000);
-	servo[EOPD_sensor] = EOPD_SERVO_UP;
+	servo[EOPD_servo] = EOPD_SERVO_UP;
 }
 
 #endif /* !TEMPLATE_H */

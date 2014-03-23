@@ -195,7 +195,7 @@ const int g_ground_arm_up = 0;
 
 const int g_ground_arm_down = 120;
 
-const int g_EOPD_threshold = 30;
+const int g_EOPD_threshold = 305;
 
 const int g_EOPD_move_min_dist = 70; // REMOVE
 
@@ -615,7 +615,7 @@ int g_selection_value = 0;
 * @var g_gyro_ran
 *	flag indicating that we have performed at least one gyro read
 */
-const int g_EOPD_delta_value = 2;
+const int g_EOPD_delta_value = 415;
 int g_calibrated_EOPD_threshold_val = 0;
 int g_end_ramp_lift_speed = 40;
 bool g_shift_due_to_ir = false;

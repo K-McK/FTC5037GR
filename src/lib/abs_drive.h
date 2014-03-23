@@ -377,7 +377,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	}
 	g_debug_time_2 = nPgmTime;
 
-	servo[EOPD_sensor] = EOPD_SERVO_UP;
+	servo[EOPD_servo] = EOPD_SERVO_UP;
 
 	if(dist_record==true)
 	{
