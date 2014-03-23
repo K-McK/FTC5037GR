@@ -63,10 +63,10 @@ bool g_gyro_true = false;
 *  @def GRABBER_RIGHT_CLOSE
 *     tells the robot where the left block grabber needs to be to be closed
 *
-* 	@def LIGHT_SERVO_DOWN
-* 		Tells the robot the poision of the light senser servo when its down
-* 	@def LIGHT_SERVO_UP
-* 		Tells the robot the poision of the light senser servo when its up
+* 	@def EOPD_SERVO_DOWN
+* 		Tells the robot the poision of the EOPD senser servo when its down
+* 	@def EOPD_SERVO_UP
+* 		Tells the robot the poision of the EOPD senser servo when its up
 */
 #define INT_ANGLE_SENSOR_CIRCUMFERENCE 18
 #define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE 17.6
@@ -79,8 +79,8 @@ bool g_gyro_true = false;
 #define GRABBER_LEFT_CLOSE 120
 #define GRABBER_RIGHT_CLOSE 131
 
-#define LIGHT_SERVO_DOWN 255
-#define LIGHT_SERVO_UP 127
+#define EOPD_SERVO_DOWN 255
+#define EOPD_SERVO_UP 127
 /**
 * @var g_angle_sensor_val
 *		Tells the robot the value of the raw angle sensor
@@ -167,11 +167,11 @@ int g_EOPD_sensor = 0;
 *
 * @var g_original_gyro_val
 *			Tells the robot what then orginal value of the gyro was
-* @var g_light_threshold
-* 		Tells the robot what the light threshhold is
+* @var g_EOPD_threshold
+* 		Tells the robot what the EOPD threshhold is
 *
-* @var g_light_move_min_dist
-* 		Tells the robot how far it should move before it should be in light detection distence
+* @var g_EOPD_move_min_dist
+* 		Tells the robot how far it should move before it should be in EOPD detection distence
 */
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
@@ -195,9 +195,9 @@ const int g_ground_arm_up = 0;
 
 const int g_ground_arm_down = 120;
 
-const int g_light_threshold = 30;
+const int g_EOPD_threshold = 30;
 
-const int g_light_move_min_dist = 70; // REMOVE
+const int g_EOPD_move_min_dist = 70; // REMOVE
 
 //=========================================================
 // auto selection type options
@@ -333,7 +333,7 @@ typedef enum
 	SUB_SELECTION_RAMP_CONTINUED
 } e_auto_sub_selection_ramp;
 
-e_auto_sub_selection_ramp g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
+e_auto_sub_selection_ramp g_auto_selection_ramp_continue_options = SUB_SELECTION_RAMP_STOP;
 
 /**
 *  @enum e_gyro_val_type the type of gyro units to read
@@ -598,9 +598,9 @@ int g_selection_value = 0;
 #define end_program_drive_speed 50
 /**
 *
-* @var g_light_delta_value
-*	the difference in light between black and white that we are looking for
-* @var g_calibrated_light_threshold_val
+* @var g_EOPD_delta_value
+*	the difference in EOPD values between black and white that we are looking for
+* @var g_calibrated_EOPD_threshold_val
 *	a configurable threshold for detecting the white line
 * @var g_end_ramp_lift_speed
 *	the speed to lift the block lifter before entering the ramp
@@ -615,8 +615,8 @@ int g_selection_value = 0;
 * @var g_gyro_ran
 *	flag indicating that we have performed at least one gyro read
 */
-const int g_light_delta_value = 2;
-int g_calibrated_light_threshold_val = 0;
+const int g_EOPD_delta_value = 2;
+int g_calibrated_EOPD_threshold_val = 0;
 int g_end_ramp_lift_speed = 40;
 bool g_shift_due_to_ir = false;
 bool g_good_gyro = true;
@@ -632,20 +632,20 @@ bool g_gyro_ran = false;
 *		Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
 * @def STAY_ON_RAMP_WAIT_TIME
 *		Tells the robot the wait time before it  gose on the ramp
-* @def LIGHT_SENSOR_CALIBRATION_TIME
-*		Tells the robot the time it needs to calibrate
-* @def LIGHT_CALIBRATION_SAMPLE_RATE
+* @def EOPD_SENSOR_CALIBRATION_TIME
+*		Tells the robot the time the EOPD needs to calibrate
+* @def EOPD_CALIBRATION_SAMPLE_RATE
 *		Tells the robot the Calibration sample rate
-* @def DEFAULT_CALIBRATED_LIGHT_THRESHOLD
-*		Tells the robot the default calibration of the light to force it to fail if it gives us weid readings
+* @def DEFAULT_CALIBRATED_EOPD_THRESHOLD
+*		Tells the robot the default calibration of the EOPD to force it to fail if it gives us weid readings
 * @def DELAY_MULTIPLICATION_FACTOR
 *	the factor to multiply all delays by
 */
 #define MAX_TURN_RATE 0.72
 #define STAY_ON_RAMP_WAIT_TIME 100
-#define LIGHT_SENSOR_CALIBRATION_TIME 2000
-#define LIGHT_CALIBRATION_SAMPLE_RATE 100
-#define DEFAULT_CALIBRATED_LIGHT_THRESHOLD 9999
+#define EOPD_SENSOR_CALIBRATION_TIME 2000
+#define EOPD_CALIBRATION_SAMPLE_RATE 100
+#define DEFAULT_CALIBRATED_EOPD_THRESHOLD 9999
 #define DELAY_MULTIPLICATION_FACTOR 1000
 
 //=============================================================
@@ -794,9 +794,6 @@ int g_recont_heading_use = 0;
 /**
 * Sensor variables
 *
-* @var g_light_sensor
-*		holds the value of the light sensor
-*
 * @var g_bearing_ac1
 *		the raw value from the first IR sensor
 *
@@ -832,7 +829,6 @@ int g_recont_heading_use = 0;
 */
 
 bool dist_record = true;
-int g_light_sensor;
 int g_bearing_ac1 = 0;
 int g_bearing_ac2 = 0;
 float g_ir_bearing1 = 0.0;
@@ -907,17 +903,17 @@ string g_sensor_list [] = {
 	"tilt    "};
 
 /**
-*  @enum e_light_sensor_status Tells the robot if it should turn on the light sensor
-*  @var e_light_sensor_status::ACTIVE
+*  @enum e_EOPD_sensor_status Tells the robot if it should turn on the EOPD sensor
+*  @var e_EOPD_sensor_status::ACTIVE
 *     Turn it on
-*   @var e_light_sensor_status::INACTIVE
+*   @var e_EOPD_sensor_status::INACTIVE
 *     turn it off
 */
 typedef enum
 {
 	ACTIVE,
 	INACTIVE
-} e_light_sensor_status;
+} e_EOPD_sensor_status;
 
 //==============================================================
 // Define graph selection variables
