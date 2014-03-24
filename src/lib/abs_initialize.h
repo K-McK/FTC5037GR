@@ -37,7 +37,8 @@ void abs_initialize()
 	servo[abdd] = g_abdd_down;										//
 	servo[grabber_left] = GRABBER_LEFT_CLOSE;			//-abdd is held down									-right grabber closes
 	servo[grabber_right] = GRABBER_RIGHT_CLOSE;		//-left grabber closes								-EOPD sensor servo held up
-	servo[EOPD_sensor] = EOPD_SERVO_UP;						//============================================================
+	servo[EOPD_servo] = EOPD_SERVO_UP;						//============================================================
+	memset(g_r_mission_movement_dists,0,RECOVERY_RECORD_AMOUNT+1);
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);		//set input array to 0, this ensures the robot doesn't get invalid inputs
 	abs_selection_program();		//start the selection program to receive the robot's mission from the drivers
 	PlaySoundFile("! Click.rso");

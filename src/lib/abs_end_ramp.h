@@ -57,7 +57,7 @@ void abs_end_ramp(int delay)
 		return;
 	}
 	wait1Msec(200);
-	servo[EOPD_sensor] = EOPD_SERVO_DOWN;	//and lower the EOPD sensor into position
+	servo[EOPD_servo] = EOPD_SERVO_DOWN;	//and lower the EOPD sensor into position
 
 	if(g_good_gyro && g_em_first_turn_type == CONSTANT_TURN)	//if the gyro is detected as good and 1st turn sub
 	{																																				//menu option is selected as true use const turn
