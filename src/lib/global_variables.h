@@ -499,6 +499,15 @@ bool g_gyro2_active = false;
 //=========================================================
 // backup function variables
 //=========================================================
+#define RECOVERY_RECORD_AMOUNT 5
+
+#define R_FIRST_MOVE 1
+#define R_CORNER_TURN 2
+#define R_CORNER_MOVE 3
+#define R_RAMP_TURN 4
+#define R_RAMP_MOVE 5
+
+int g_r_mission_movement_dists[RECOVERY_RECORD_AMOUNT+1];
 //=========================================================
 // Datalogging variables
 //=========================================================
@@ -615,7 +624,7 @@ int g_selection_value = 0;
 * @var g_gyro_ran
 *	flag indicating that we have performed at least one gyro read
 */
-const int g_EOPD_delta_value = 415;
+const int g_EOPD_delta_value = 300;
 int g_calibrated_EOPD_threshold_val = 0;
 int g_end_ramp_lift_speed = 40;
 bool g_shift_due_to_ir = false;
