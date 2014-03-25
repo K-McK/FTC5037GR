@@ -725,7 +725,7 @@ e_turn_types g_em_first_turn_type = RELATIVE_TURN;
 * @var g_drive_type
 *		Tells the robot if it should drive useing the gyro, encode or non
 */
-e_turn_types g_em_second_turn_type = RELATIVE_TURN;
+e_turn_types g_em_second_turn_type = CONSTANT_TURN;
 
 int g_selection_turn = 1;
 

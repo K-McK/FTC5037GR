@@ -36,6 +36,7 @@ void abs_s1_mission_execute()
 		abs_drive(FORWARD, E_IR_DETECT, FORWARD_IR_THRESHOLD, 40, true, g_drive_type);
 		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)		//if robot did not drive minimal distance drive to first crate
 		{
+			g_r_mission_movement_dists[R_FIRST_MOVE]=g_r_mission_movement_dists[R_FIRST_MOVE]+abs_get_angle_sensor_val(RELATIVE_BPU);
 			dist_record = true;
 			abs_drive(FORWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, g_drive_type);
 		}
@@ -89,6 +90,8 @@ void abs_s1_mission_execute()
 	servoChangeRate[abdd] = abdd_down_speed;
 	servo[abdd] = g_abdd_down;	//return and log the abdd
 	abs_dlog(__FILE__,"abdd down", "instance", 2, "g_abdd_down", g_abdd_down);
+
+	g_r_mission_movement_dists[R_FIRST_MOVE]=g_r_mission_movement_dists[R_FIRST_MOVE]+abs_get_angle_sensor_val(RELATIVE_BPU);
 
 	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR); //wait for end delay, number option tab 4
 
