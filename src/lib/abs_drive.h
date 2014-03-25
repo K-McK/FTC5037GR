@@ -258,6 +258,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			}
 		}
 	}
+	//------------------------
 	// angle sensor stopping method
 	//------------------------
 	//Tells the robot to stop baced on the real distence it has went
