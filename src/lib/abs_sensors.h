@@ -123,10 +123,10 @@ task abs_sensors()
 		int drift_compensation = 0;
 		static int last_drift_compensation_time = g_curr_time;
 
-		if(DRIFT_COMPENSATION_FACTOR * ((g_curr_time - last_drift_compensation_time)/1000) >= 1)
+		if(DRIFT_COMPENSATION_FACTOR * ((g_curr_time - last_drift_compensation_time)/1000000) >= 1)
 		{
 			last_drift_compensation_time = g_curr_time;
-			drift_compensation = DRIFT_COMPENSATION_FACTOR * ((g_curr_time - last_drift_compensation_time)/1000);
+			drift_compensation = DRIFT_COMPENSATION_FACTOR * ((g_curr_time - last_drift_compensation_time)/1000000);
 		}
 
 		// gyro 1
