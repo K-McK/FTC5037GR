@@ -17,8 +17,21 @@
 
 #include "abs_get_angle_sensor_val.h"
 
-void abs_smoke_execute ()
+void abs_smoke_execute(int test_num)
 {
+	while(nNxtButtonPressed!=kEnterButton)
+	{
+		switch(test_num)
+		{
+		case 1:
+			if(nNxtButtonPressed==kLeftButton)
+			{
+				motor[block_lift_motor] = g_block_speed_down;
+				motor[block_lift_motor2] = g_block_speed_down;
+			}
+			break;
+		}
+	}
 }
 
 #endif /* !ABS_SMOKE_EXECUTE_H */

@@ -19,6 +19,8 @@
 #include "abs_get_gyro_sensor_val.h"
 //#include "abs_log_multivalue.h"
 
+#define DRIFT_COMPENSATION_FACTOR 0.68  // gyro units per second
+
 task abs_sensors()
 {
 	g_prev_time = nPgmTime;
@@ -118,17 +120,25 @@ task abs_sensors()
 		//-------------------------
 
 		g_curr_time=nPgmTime;
+		int drift_compensation = 0;
+		static int last_drift_compensation_time = g_curr_time;
+
+		if(DRIFT_COMPENSATION_FACTOR * ((g_curr_time - last_drift_compensation_time)/1000) >= 1)
+		{
+			last_drift_compensation_time = g_curr_time;
+			drift_compensation = DRIFT_COMPENSATION_FACTOR * ((g_curr_time - last_drift_compensation_time)/1000);
+		}
 
 		// gyro 1
 		raw_gyro1 = abs_get_gyro_sensor_val(RAW,GYRO1);
-		g_rel_heading1 += (raw_gyro1 - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-		g_const_heading1 += (raw_gyro1 - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		g_rel_heading1 += ((raw_gyro1 - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000) + drift_compensation;
+		g_const_heading1 += ((raw_gyro1 - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000) + drift_compensation;
 //abs_log_multivalue(LIST1, g_rel_heading1);
 
 		// gyro 2
 		raw_gyro2 = abs_get_gyro_sensor_val(RAW,GYRO2);
-		g_rel_heading2 += (raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
-		g_const_heading2 += (raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000;
+		g_rel_heading2 += ((raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000) + drift_compensation;
+		g_const_heading2 += ((raw_gyro2 - (g_gyro2_drift+(g_delta_drift2*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000) + drift_compensation;
 //abs_log_multivalue(LIST2, g_rel_heading2);
 
 		//used gyro
