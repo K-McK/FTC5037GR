@@ -141,7 +141,7 @@ int adjusted_speed(int speed, int max_move_dist, int current, int coefficient, i
 
 	if(reduced_speed > speed) { reduced_speed = speed; }
 
-	return speed;//max(reduced_speed, MIN_DRIVE_SPEED);
+	return max(reduced_speed, MIN_DRIVE_SPEED);
 }
 /**
  * X = Speed
@@ -160,6 +160,6 @@ int adjusted_speed(int speed, int max_move_dist, int current, int coefficient, i
  *
  * Z = Current degrees
  */
-#define adjusted_turn_speed(X, Y, Z) adjusted_speed(X, Y, Z, TURN_SPEED_COEFFICIENT, TURN_SPEED_PERCENTAGE_DROP)
+#define adjusted_turn_speed(X, Y, Z) (X)//adjusted_speed(X, Y, Z, TURN_SPEED_COEFFICIENT, TURN_SPEED_PERCENTAGE_DROP)
 
 #endif /* !ABS_TURN_UTILS */

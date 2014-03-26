@@ -90,12 +90,14 @@ void abs_initialize()
 		//																						// *accelermoeter is not give the robot readings*
 	}																								//-error: nonleathal, robot does not currently use accelermoeter
 	if(g_gyro_noise1>MAX_ALLOWED_GYRO_NOISE && g_gyro1_active)	//=================================================
-	{																								//-error detection: gyro calibrate fail,
+	{	                                              //-error detection: gyro calibrate fail,
+		abs_dlog(__FILE__ ,"Gyro cal error", "Error with gyro 1");
 		g_error = ERR_GYRO_CAL1;											// gyro reads value that is too large for not starting yet
 		g_error = ERROR_LETHAL;												//
 	}																								//-error: leathal, auto needs accurate gyro to run successfully
 	if(g_gyro_noise2>MAX_ALLOWED_GYRO_NOISE && g_gyro2_active)	//=================================================
 	{																								//-error detection: gyro calibrate fail,
+		abs_dlog(__FILE__ ,"Gyro cal error", "Error with gyro 2");
 		g_error = ERR_GYRO_CAL2;											// gyro reads value that is too large for not starting yet
 		g_error = ERROR_LETHAL;												//
 	}																								//-error: leathal, auto needs accurate gyro to run successfully

@@ -187,7 +187,7 @@ const int g_flag_speed_left = -20;
 const int g_abdd_up = 10;
 const int g_abdd_down = 235;
 
-const int g_gyro_adjust = 10;
+const int g_gyro_adjust = 3;
 int g_original_gyro_val1 = 0;
 int g_original_gyro_val2 = 0;
 
