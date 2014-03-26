@@ -54,19 +54,6 @@ void abs_s5_mission_execute()
 	case 7:
 		break;
 	}
-	abs_dlog(__FILE__,"abdd up", "instance", 2, "g_abdd_up", g_abdd_up);	//open and log abdd
-	servo[abdd] = g_abdd_up;
-	#if USE_TASK_PRIORITY == 1
-	StartTask(abs_calibrate_EOPD, MEDIUM_PRIORITY_TASK);		//start the screen function, this handels all screen interactions
-#else
-	StartTask(abs_calibrate_EOPD);		//start the screen function, this handels all screen interactions
-#endif
-	wait1Msec(2000);
-	servoChangeRate[abdd] = abdd_down_speed;
-	servo[abdd] = g_abdd_down;	//return and log the abdd
-	abs_dlog(__FILE__,"abdd down", "instance", 2, "g_abdd_down", g_abdd_down);
-
-	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR); //wait for end delay, number option tab 4
 
 	//abs_dlog(__FILE__,"start of end", "g_end_point", g_end_point);
 }
