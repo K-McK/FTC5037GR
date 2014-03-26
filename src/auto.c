@@ -115,6 +115,11 @@ task main()
 	case 3:
 		abs_end_ramp(2000);
 		break;
+	case 4:
+	case 5:
+	case 6:
+	break;
+
 	default:											//error case: if this is executed something went wrong with the auto selection
 		abs_dlog(__FILE__,"Invalid Ramp Option");
 		break;
