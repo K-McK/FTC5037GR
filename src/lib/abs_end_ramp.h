@@ -56,6 +56,8 @@ void abs_end_ramp(int delay)
 		PlayTone(300,200);
 		return;
 	}
+
+
 	wait1Msec(200);
 	servo[EOPD_servo] = EOPD_SERVO_DOWN;	//and lower the EOPD sensor into position
 

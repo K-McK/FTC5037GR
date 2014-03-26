@@ -19,7 +19,7 @@
 #include "abs_get_gyro_sensor_val.h"
 //#include "abs_log_multivalue.h"
 
-#define DRIFT_COMPENSATION_FACTOR 0.68  // gyro units per second
+#define DRIFT_COMPENSATION_FACTOR 0.0070  // gyro units per second
 
 task abs_sensors()
 {
@@ -123,11 +123,11 @@ task abs_sensors()
 		int drift_compensation = 0;
 		static int last_drift_compensation_time = g_curr_time;
 
-		if(DRIFT_COMPENSATION_FACTOR * ((g_curr_time - last_drift_compensation_time)/1000) >= 1)
-		{
+		//if(DRIFT_COMPENSATION_FACTOR * ((g_curr_time - last_drift_compensation_time)/1000) >= 1)
+		//{
 			last_drift_compensation_time = g_curr_time;
 			drift_compensation = DRIFT_COMPENSATION_FACTOR * ((g_curr_time - last_drift_compensation_time)/1000);
-		}
+		//}
 
 		// gyro 1
 		raw_gyro1 = abs_get_gyro_sensor_val(RAW,GYRO1);
