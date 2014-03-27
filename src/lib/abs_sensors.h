@@ -130,10 +130,15 @@ task abs_sensors()
 		//}
 
 		// gyro 1
+		#if CLASSIC_GYRO_READ == 0
 		raw_gyro1 = abs_get_gyro_sensor_val(RAW,GYRO1);
 		g_rel_heading1 += ((raw_gyro1 - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000) + drift_compensation;
 		g_const_heading1 += ((raw_gyro1 - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000) + drift_compensation;
+		#else
+		g_rel_heading1 += ((raw_gyro1 - g_gyro1_drift) * (float)(g_curr_time-g_prev_time)/1000);
+		g_const_heading1 += ((raw_gyro1 - g_gyro1_drift) * (float)(g_curr_time-g_prev_time)/1000);
 		abs_log_multivalue(LIST1, g_rel_heading1);
+		#endif
 
 		// gyro 2
 		raw_gyro2 = abs_get_gyro_sensor_val(RAW,GYRO2);
