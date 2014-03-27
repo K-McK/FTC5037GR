@@ -34,33 +34,37 @@ typedef enum
 int abs_reset_heading(e_heading_reset_type type)
 {
 
-  switch(type)
-  {
-  	case RELATIVE:
-  		g_rel_heading1 = 0;
- 			g_rel_heading2 = 0;
- 			return 1;
- 			break;
+	switch(type)
+	{
+	case RELATIVE:
+		g_rel_heading1 = 0;
+		g_rel_heading2 = 0;
+		g_rel_heading_use = 0;
+		return 1;
+		break;
 
-  	case CONSTANT:
-  		g_const_heading1 = 0;
- 			g_const_heading2 = 0;
- 			return 1;
- 			break;
+	case CONSTANT:
+		g_const_heading1 = 0;
+		g_const_heading2 = 0;
+		g_const_heading_use = 0;
+		return 1;
+		break;
 
-  	case RELATIVE_CONSTANT:
-  	  g_rel_heading1 = 0;
- 			g_rel_heading2 = 0;
- 			g_const_heading1 = 0;
- 			g_const_heading2 = 0;
- 			return 1;
- 			break;
+	case RELATIVE_CONSTANT:
+		g_rel_heading1 = 0;
+		g_rel_heading2 = 0;
+		g_rel_heading_use = 0;
+		g_const_heading1 = 0;
+		g_const_heading2 = 0;
+		g_const_heading_use = 0;
+		return 1;
+		break;
 
-  	default:
-  		/** log a meaningful error here */
-  		return 0;
-  		break;
-  	}
+	default:
+		/** log a meaningful error here */
+		return 0;
+		break;
+	}
 }
 
 #endif /* !ABS_TURN_H */
