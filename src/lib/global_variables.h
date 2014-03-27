@@ -352,7 +352,9 @@ typedef enum
 typedef enum
 {
 	GYRO1,
-	GYRO2
+	GYRO2,
+	ALL_GYROS,
+	SELECTED_GYRO
 } e_gyro_names;
 e_gyro_names g_gyro_use = GYRO1;
 
