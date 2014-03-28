@@ -131,9 +131,9 @@ task abs_sensors()
 		drift_compensation = DRIFT_COMPENSATION_FACTOR * ((g_curr_time - last_drift_compensation_time)/1000);
 		//}
 
+		raw_gyro1 = abs_get_gyro_sensor_val(RAW,GYRO1);
 		// gyro 1
 		#if CLASSIC_GYRO_READ == 0
-		raw_gyro1 = abs_get_gyro_sensor_val(RAW,GYRO1);
 		abs_set_heading(RELATIVE, GYRO1, g_rel_heading1 + ((raw_gyro1 - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000) + drift_compensation);
 		abs_set_heading(CONSTANT, GYRO1, g_const_heading1 + ((raw_gyro1 - (g_gyro1_drift+(g_delta_drift*(float)(g_curr_time-g_prev_time)))) * (float)(g_curr_time-g_prev_time)/1000) + drift_compensation);
 		#else
