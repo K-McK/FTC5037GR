@@ -44,16 +44,17 @@ int abs_set_heading(e_heading_reset_type type, e_gyro_names gyro_to_set, float v
   switch(type)
   {
   	case RELATIVE:
-  	  if(gyro_to_set == GYRO1 || gyro_to_set == ALL_GYROS)	g_rel_heading1 = value;
+  	  if(gyro_to_set == GYRO1 || gyro_to_set == ALL_GYROS)g_rel_heading1 = value;
  			if(gyro_to_set == GYRO2 || gyro_to_set == ALL_GYROS) g_rel_heading2 = value;
- 			if(gyro_to_set == SELECTED_GYRO) g_rel_heading_use = value;
+ 			if(gyro_to_set == SELECTED_GYRO || gyro_to_set == ALL_GYROS) g_rel_heading_use = value;
+ 			if(gyro_to_set == ALL_GYROS)g_rel_heading1 = value;
  			return 1;
  			break;
 
   	case CONSTANT:
   		if(gyro_to_set == GYRO1 || gyro_to_set == ALL_GYROS) g_const_heading1 = value;
  			if(gyro_to_set == GYRO2 || gyro_to_set == ALL_GYROS) g_const_heading2 = value;
- 			if(gyro_to_set == SELECTED_GYRO) g_const_heading_use = value;
+ 			if(gyro_to_set == SELECTED_GYRO || gyro_to_set == ALL_GYROS) g_const_heading_use = value;
  			return 1;
  			break;
 
@@ -68,7 +69,7 @@ int abs_set_heading(e_heading_reset_type type, e_gyro_names gyro_to_set, float v
   	  	g_rel_heading2 = value;
   			g_const_heading2 = value;
   		}
-  		if(gyro_to_set == SELECTED_GYRO)
+  		if(gyro_to_set == SELECTED_GYRO || gyro_to_set == ALL_GYROS)
   	  {
   	  	g_rel_heading_use = value;
   			g_const_heading_use = value;
