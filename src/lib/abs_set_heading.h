@@ -48,14 +48,12 @@ int abs_set_heading(e_heading_reset_type type, e_gyro_names gyro_to_set, float v
  			if(gyro_to_set == GYRO2 || gyro_to_set == ALL_GYROS) g_rel_heading2 = value;
  			if(gyro_to_set == SELECTED_GYRO || gyro_to_set == ALL_GYROS) g_rel_heading_use = value;
  			if(gyro_to_set == ALL_GYROS)g_rel_heading1 = value;
- 			return 1;
  			break;
 
   	case CONSTANT:
   		if(gyro_to_set == GYRO1 || gyro_to_set == ALL_GYROS) g_const_heading1 = value;
  			if(gyro_to_set == GYRO2 || gyro_to_set == ALL_GYROS) g_const_heading2 = value;
  			if(gyro_to_set == SELECTED_GYRO || gyro_to_set == ALL_GYROS) g_const_heading_use = value;
- 			return 1;
  			break;
 
   	case RELATIVE_CONSTANT:
@@ -74,16 +72,17 @@ int abs_set_heading(e_heading_reset_type type, e_gyro_names gyro_to_set, float v
   	  	g_rel_heading_use = value;
   			g_const_heading_use = value;
   		}
- 			return 1;
  			break;
 
   	default:
   		/** log a meaningful error here */
+  		g_heading_lock = false;
   		return 0;
   		break;
   	}
 
     g_heading_lock = false;
+    return 1;
 
 }
 
