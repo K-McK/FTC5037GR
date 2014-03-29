@@ -829,6 +829,9 @@ bool g_joy2_enabled = false;
 
 int g_selection_value = 0;
 
+#define MIN_DRIVE_SPEED 10
+ #define DRIVE_SPEED_PERCENTAGE_DROP 50
+ #define DRIVE_SPEED_COEFFICIENT 5
 /**
  *
  * @var g_light_delta_value

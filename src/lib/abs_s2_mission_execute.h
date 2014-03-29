@@ -116,6 +116,7 @@ void abs_s2_mission_execute()
 	servo[abdd] = g_abdd_up;
 	StartTask (abs_calibrate_light);
 	wait1Msec(2000);
+	servoChangeRate[abdd] = 10;
 	servo[abdd] = g_abdd_down;
 	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
 

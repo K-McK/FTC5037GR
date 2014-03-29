@@ -14,6 +14,7 @@
 #ifndef ABS_MOVE_UTILS_H
 #define ABS_MOVE_UTILS_H
 
+#include "global_variables.h"
 /**
  *  @enum e_direction This enum is used to let the robot know to turn clockwise or counterclickwise
  *  @var e_direction::CLOCKWISE
@@ -126,5 +127,35 @@ typedef enum
  *  converts @a X to degrees
  */
 #define distance_to_encoder_derees(X) (X*360/DRIVE_WHEELS_CIRCUMFERENCE)
+
+//Tells the robot to turn and then slowdown when it approches its desination
+int adjusted_speed(int speed, int max_move_dist, int current, int coefficient, int percentage)
+{
+	float percent_of_speed = coefficient * sqrt(max_move_dist-current) + percentage;
+	int reduced_speed = (int)percent_of_speed * speed / 100;
+
+	if(reduced_speed > speed) { reduced_speed = speed; }
+
+	return max(reduced_speed, MIN_DRIVE_SPEED);
+}
+
+/**
+ * X = Speed
+ *
+ * Y = Max dist
+ *
+ * Z = Current dist
+ */
+#define adjusted_drive_speed(X, Y, Z) adjusted_speed(X, Y, Z, DRIVE_SPEED_COEFFICIENT, DRIVE_SPEED_PERCENTAGE_DROP)
+
+
+/**
+ * X = Speed
+ *
+ * Y = Max degrees
+ *
+ * Z = Current degrees
+ */
+#define adjusted_turn_speed(X, Y, Z) adjusted_speed(X, Y, Z, TURN_SPEED_COEFFICIENT, TURN_SPEED_PERCENTAGE_DROP)
 
 #endif /* !ABS_TURN_UTILS */
