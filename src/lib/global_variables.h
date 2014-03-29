@@ -590,6 +590,21 @@ bool g_joy2_enabled = false;
 
 int g_selection_value = 0;
 
+/**
+* @def MIN_DRIVE_SPEED
+*		Tells the robot the min drive speed
+* @def MIN_TURN_SPEED
+*		Tells the robot the min turn speed
+*	@def DRIVE_SPEED_PERCENTAGE_DROP
+*		Tells the robot the percentage it should drop when slowing down the speed
+* @def DRIVE_SPEED_COEFFICIENT
+*		Tells the robot how fast it should drop the speed
+*	@def TURN_SPEED_PERCENTAGE_DROP
+*		Tells the robot the persentage it should drop the speed
+* @def TURN_SPEED_COEFFICIENT
+*		Tells the robot how fast it should drop the speed
+*/
+
 #define MIN_DRIVE_SPEED 10
 #define MIN_TURN_SPEED 10
 #define DRIVE_SPEED_PERCENTAGE_DROP 50
