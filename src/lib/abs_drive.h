@@ -57,7 +57,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
                 abs_dlog(__FILE__ , "time enter", speed_str, speed, dist_str, dist, "time", time1[T1], rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
                 break;
 	case E_OPTICAL:
-                abs_dlog(__FILE__ , "Optical enter", speed_str, speed, dist_str, dist, "g_calibrated_light_threshold_val", g_calibrated_light_threshold_val, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
+                abs_dlog(__FILE__ , "Optical enter", speed_str, speed, dist_str, dist, "g_calibrated_optical_threshold_val", g_calibrated_optical_threshold_val, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
                 break;
 	}
 	int i = 0;
