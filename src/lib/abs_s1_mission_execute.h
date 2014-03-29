@@ -29,7 +29,6 @@ void abs_s1_mission_execute()
 	switch(g_mission_number)
 	{
 	case 0:
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true, GYRO);
 		break;
 
 	case 1:
@@ -85,32 +84,17 @@ void abs_s1_mission_execute()
 		motor[block_lift_motor2] = 0;
 		abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
 		break;
-
-	case 140:
-		int dist = 30;
-		bool done = false;
-		while(done == false)
-		{
-			int ac_start_time = nPgmTime;
-			int i = 0;
-			while((g_accelermoeter_sensor < dist+5) && (g_accelermoeter_sensor > dist-5) && ((ac_start_time - nPgmTime)<500))
-			{
-				i++;
-				PlayTone(20,20);
-				wait1Msec(1);
-			}
-			if(i > 490) done = true;
-			PlayTone(20,20);
-		}
-		break;
 	}
-	abs_dlog(__FILE__,"abdd up");
-	servo[abdd] = g_abdd_up;
-	StartTask (abs_calibrate_optical);
-	wait1Msec(2000);
-	servoChangeRate[abdd] = 10;
-	servo[abdd] = g_abdd_down;
-	abs_dlog(__FILE__,"abdd down");
+	if(g_mission_number != 0)
+	{
+		abs_dlog(__FILE__,"abdd up");
+		servo[abdd] = g_abdd_up;
+		StartTask (abs_calibrate_optical);
+		wait1Msec(2000);
+		servoChangeRate[abdd] = 10;
+		servo[abdd] = g_abdd_down;
+		abs_dlog(__FILE__,"abdd down");
+	}
 
 	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR);
 	wait1Msec(100);

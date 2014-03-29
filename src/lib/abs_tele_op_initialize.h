@@ -19,6 +19,7 @@ void abs_tele_op_initialize()
 	if(joystick.joy1_TopHat == -1) g_joy1_enabled = true;
 	if(joystick.joy2_TopHat == -1) g_joy2_enabled = true;
 
+	servoChangeRate[abdd] = 10;
 	servo[abdd] = g_abdd_down;
 
 	getJoystickSettings(joystick);
