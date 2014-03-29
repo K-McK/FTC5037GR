@@ -126,19 +126,22 @@ typedef enum
  *  @def distance_to_encoder_derees(X)
  *  converts @a X to degrees
  */
+
+
 #define distance_to_encoder_derees(X) (X*360/DRIVE_WHEELS_CIRCUMFERENCE)
+
+//#define adjusted_speed(X, Y, Z, C, P) (max(MIN_DRIVE_SPEED,(min(((C)*sqrt((Y)-(Z))+(P))*X/100),(X)))))
 
 //Tells the robot to turn and then slowdown when it approches its desination
 int adjusted_speed(int speed, int max_move_dist, int current, int coefficient, int percentage)
 {
-	float percent_of_speed = coefficient * sqrt(max_move_dist-current) + percentage;
+	float percent_of_speed = coefficient * sqrt(abs(max_move_dist-current)) + percentage;
 	int reduced_speed = (int)percent_of_speed * speed / 100;
 
 	if(reduced_speed > speed) { reduced_speed = speed; }
 
 	return max(reduced_speed, MIN_DRIVE_SPEED);
 }
-
 /**
  * X = Speed
  *

@@ -37,6 +37,7 @@ void abs_end_ramp(int delay, int lift_speed)
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;
 	dl_speed = delay;
+	wait1Msec(delay);
 	servo[abdd] = g_abdd_down;
 
 	if(g_end_point == 2)

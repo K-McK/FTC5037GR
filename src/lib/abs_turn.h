@@ -63,34 +63,39 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 		//-------------------------
 		// swing turn
 		//-------------------------
-		if(turn_method == SWING)
+		while(abs(g_rel_heading) < abs(degree))
 		{
-			if(dir == COUNTERCLOCKWISE)
-			{
-				motor[right_motor] = speed;
-				motor[left_motor] = 0;
-			}
-			else
-			{
-				motor[right_motor] = 0;
-				motor[left_motor] = speed;
-			}
-		}
+			int turn_speed = adjusted_turn_speed(speed, abs(degree), abs(g_rel_heading));
 
-		//-------------------------
-		// point turn
-		//-------------------------
-		else
-		{
-			if(dir == COUNTERCLOCKWISE)
+			if(turn_method == SWING)
 			{
-				motor[right_motor] = speed;
-				motor[left_motor] = -speed;
+				if(dir == COUNTERCLOCKWISE)
+				{
+					motor[right_motor] = turn_speed;
+					motor[left_motor] = 0;
+				}
+				else
+				{
+					motor[right_motor] = 0;
+					motor[left_motor] = turn_speed;
+				}
 			}
+
+			//-------------------------
+			// point turn
+			//-------------------------
 			else
 			{
-				motor[right_motor] = -speed;
-				motor[left_motor] = speed;
+				if(dir == COUNTERCLOCKWISE)
+				{
+					motor[right_motor] = turn_speed;
+					motor[left_motor] = -turn_speed;
+				}
+				else
+				{
+					motor[right_motor] = -turn_speed;
+					motor[left_motor] = turn_speed;
+				}
 			}
 		}
 	}
