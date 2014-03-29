@@ -467,12 +467,12 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			if(g_shift_due_to_ir)
 			{
 				//subtract 5 to account for drift of stop in ir
-				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 7 - 5;
+				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5 - 5;
 				else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
 			}
 			else
 			{
-				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 7;
+				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5;
 				else if(g_end_point == 3) g_dist_backwards = 196 - abs_get_angle_sensor_val(RAW_BPU);
 			}
 			abs_log(__FILE__,"Raw values",abs_get_angle_sensor_val(RAW_ASU),abs_get_angle_sensor_val(RAW_BPU),0,0);

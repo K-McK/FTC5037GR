@@ -15,4 +15,6 @@
 
 #define DEBUG_MODE 0
 
+#define WAIT 0
+
 #endif /* !COMPILE_FLAGS_H */
