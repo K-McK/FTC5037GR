@@ -18,7 +18,6 @@
 #include "abs_screen.h"
 #include "abs_gyro_wrapper.h"
 #include "abs_sensors.h"
-#include "abs_datalog.h"
 #include "abs_log.h"
 #include "abs_reset_angle_sensor.h"
 #include "abs_calibrate_light.h"
@@ -91,13 +90,9 @@ if(nNxtButtonPressed != kEnterButton) wait1Msec(5000);
 
 	abs_log(__FILE__ ,"auto start",nPgmTime,0,0,0);
 
-	StartTask(abs_datalog);
 	eraseDisplay();
 	g_start_time = nPgmTime;
 	g_screen_state = S_DELAY_WAIT;
-	dl_change_event = true;
-	dl_ce_detail = dl_ce_start_delay;
-	dl_speed = g_start_delay*1000;
 	wait1Msec(g_start_delay*1000);
 	eraseDisplay();
 	g_screen_state = S_GYRO_SHOW;

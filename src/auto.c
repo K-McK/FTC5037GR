@@ -89,9 +89,6 @@ task main()
 	switch(g_end_point)
 	{
 	case 1:
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 2000;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
 		abs_stop_robot();

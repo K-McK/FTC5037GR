@@ -15,11 +15,6 @@
 
 void abs_stop_robot()
 {
-	dl_robot_action_state = dl_robot_stop;
-	dl_robot_action_detail = 0;
-	dl_step = dl_step+1;
-	dl_dist = 0;
-	dl_speed = 0;
 	motor[left_motor] = 0;
 	motor[right_motor] = 0;
 	motor[block_lift_motor] = 0;

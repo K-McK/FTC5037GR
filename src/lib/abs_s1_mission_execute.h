@@ -41,13 +41,7 @@ void abs_s1_mission_execute()
 			abs_drive(FORWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, GYRO);
 		}
 		PlayTone(200,20);
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 1000;
 		wait1Msec(1000);
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 500;
 		wait1Msec(500);
 		break;
 
@@ -55,9 +49,6 @@ void abs_s1_mission_execute()
 		dist_record=true;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true, GYRO);
 
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 2000;
 		wait1Msec(2000);
 		break;
 
@@ -89,9 +80,6 @@ void abs_s1_mission_execute()
 
 	case 7:
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 98, 60);
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 200;
 		wait1Msec(200);
 		abs_drive(FORWARD, E_ANGLE, 87, 50, true, GYRO);
 		motor[block_lift_motor] = 40;
@@ -120,11 +108,6 @@ void abs_s1_mission_execute()
 		}
 		break;
 	}
-	dl_step++;
-	dl_robot_action_state = dl_run_abdd;
-	dl_robot_action_detail = dl_abdd_open;
-	dl_speed = servoChangeRate[abdd];
-	dl_dist = g_abdd_up;
 	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);
 	servo[abdd] = g_abdd_up;
 	StartTask (abs_calibrate_light);
@@ -132,19 +115,7 @@ void abs_s1_mission_execute()
 	servo[abdd] = g_abdd_down;
 	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
 
-	dl_change_event = true;
-	dl_ce_detail = dl_ce_end_delay;
-
-	dl_speed = g_end_delay * DELAY_MULTIPLICATION_FACTOR;
 	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR);
-
-	dl_step++;
-	dl_robot_action_detail = dl_abdd_close;
-	dl_dist = g_abdd_down;
-
-	dl_change_event = true;
-	dl_ce_detail = dl_ce_end_point;
-
 	wait1Msec(100);
 
 	abs_log(__FILE__,"start of end",g_end_point,0,0,0);

@@ -34,9 +34,6 @@ void abs_end_ramp(int delay, int lift_speed)
 	}
 
 	if(g_start_point == 1 || g_start_point == 2) g_to_turn_dist = g_dist_backwards;
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = delay;
 	wait1Msec(delay);
 	servo[abdd] = g_abdd_down;
 
@@ -60,9 +57,6 @@ void abs_end_ramp(int delay, int lift_speed)
 		return;
 	}
 
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = 200;
 	wait1Msec(200);
 	abs_control_light_sensor(ACTIVE);
 	servo[light_sensor] = LIGHT_SERVO_DOWN;
@@ -79,9 +73,6 @@ void abs_end_ramp(int delay, int lift_speed)
 	}
 
 	wait1Msec(g_input_array[CORNOR_DELAY]*DELAY_MULTIPLICATION_FACTOR);
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = 200;
 	wait1Msec(200);
 	abs_drive(FORWARD, E_LIGHT, 110, 30, true, GYRO);
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 20)
@@ -89,9 +80,6 @@ void abs_end_ramp(int delay, int lift_speed)
 		abs_drive(FORWARD, E_ANGLE, 110 - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
 	}
 	abs_control_light_sensor(INACTIVE);
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = 500;
 	wait1Msec(500);
 	StartTask(abs_lift_block_lifter);
 
