@@ -18,7 +18,7 @@
 #include "abs_screen.h"
 #include "abs_gyro_wrapper.h"
 #include "abs_sensors.h"
-#include "abs_log.h"
+#include "abs_dlog.h"
 #include "abs_reset_angle_sensor.h"
 #include "abs_calibrate_light.h"
 #include "abs_selection_program.h"
@@ -88,7 +88,7 @@ while(nNxtButtonPressed == kEnterButton){}
 if(nNxtButtonPressed != kEnterButton) wait1Msec(5000);
 #endif
 
-	abs_log(__FILE__ ,"auto start",nPgmTime,0,0,0);
+	abs_dlog(__FILE__ ,"auto start","timestamp",nPgmTime);
 
 	eraseDisplay();
 	g_start_time = nPgmTime;

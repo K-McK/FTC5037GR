@@ -98,7 +98,7 @@ task main()
 		abs_end_ramp(2000,40);
 		break;
 	default:
-		abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
+		abs_dlog(__FILE__,"Invalid Ramp Option");
 		break;
 	}
 

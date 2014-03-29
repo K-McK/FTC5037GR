@@ -19,7 +19,7 @@
 #include "abs_turn.h"
 #include "abs_stop_robot.h"
 #include "abs_end_ramp.h"
-#include "abs_log.h"
+#include "abs_dlog.h"
 #include "abs_get_angle_sensor_val.h"
 
 void abs_s2_mission_execute()
@@ -92,12 +92,12 @@ void abs_s2_mission_execute()
 		abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
 		break;
 	}
-	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);
+	abs_dlog(__FILE__,"abdd up");
 	servo[abdd] = g_abdd_up;
 	StartTask (abs_calibrate_light);
 	wait1Msec(2000);
 	servo[abdd] = g_abdd_down;
-	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);
+	abs_dlog(__FILE__,"abdd down");
 
 	wait1Msec(g_end_delay * DELAY_MULTIPLICATION_FACTOR);
 	wait1Msec(100);
