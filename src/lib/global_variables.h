@@ -339,6 +339,14 @@ typedef enum
 
 e_auto_sub_selection g_auto_grabber_selections = SUB_SELECTION_GRABBERS_IN;
 
+typedef enum
+{
+	SUB_SELECTION_RAMP_ALLY_SIDE,
+	SUB_SELECTION_RAMP_OPP_SIDE
+} e_auto_sub_selection_ramp_sides;
+
+e_auto_sub_selection_ramp_sides g_auto_sub_selection_ramp_side = SUB_SELECTION_RAMP_ALLY_SIDE;
+
 /**
 *  @enum e_auto_sub_selection_ramp Tells the robot to drive onto the ramp and continue or stop
 *  @var e_auto_sub_selection_ramp::SUB_SELECTION_RAMP_STOP
@@ -378,7 +386,7 @@ typedef enum
 	SUB_SELECTION_RAMP_CONTINUED
 } e_auto_sub_selection_ramp;
 
-e_auto_sub_selection_ramp g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
+e_auto_sub_selection_ramp g_auto_selection_ramp_continue_options = SUB_SELECTION_RAMP_STOP;
 
 /**
 *  @enum e_gyro_val_type the type of gyro units to read
@@ -479,28 +487,6 @@ const int g_backwards_crate1_to_turn_dist = 40;
 const int g_backwards_crate2_to_turn_dist = 65;
 const int g_backwards_crate3_to_turn_dist = 115;
 const int g_backwards_crate4_to_turn_dist = 140;
-
-//=========================================================
-// Smoke test varaibles
-//=========================================================
-/**
-* @var g_smoke_test_num
-* 		 Tells the robot what the number is for what its useing smoke test on
-*
-* @var g_smoke_test_total
-* 		  Tells the robot the total number of of smoke test types
-*
-* @var g_smoke_run
-* 		 Tells the robot if its running smoke test or not
-*
-* @var g_test_value
-* 		 Tells the robot what to desply on the screen
-*/
-
-int g_smoke_test_num = 1;
-int g_smoke_test_total = 12;
-bool g_smoke_run = false;
-int g_test_value = 0;
 
 //=========================================================
 // auto number input variable
@@ -938,47 +924,35 @@ bool g_gyro_ran = false;
 
 /**
 *  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
-*  @var e_em_first_turn_types::END_MISSION_FIRST_TURN_REL
+*  @var e_em_first_turn_types::RELATIVE_TURN
 *     Do a relitive turn
-*   @var e_em_first_turn_types::END_MISSION_FIRST_TURN_CONST
+*   @var e_em_first_turn_types::CONSTANT_TURN
 *     Do a consant turn
 */
 typedef enum
 {
-	END_MISSION_FIRST_TURN_REL,
-	END_MISSION_FIRST_TURN_CONST
-} e_em_first_turn_types;
+	RELATIVE_TURN,
+	CONSTANT_TURN
+} e_turn_types;
 /**
- * @var g_em_first_turn_type
- *		Tells the robot the the first turn of the end of auto
- */
-e_em_first_turn_types g_em_first_turn_type = END_MISSION_FIRST_TURN_REL;
-
-/**
-*  @enum e_em_first_turn_types Tells the robot if it should do a relitive or constant turn as its first one
-*  @var e_em_first_turn_types::END_MISSION_SECOND_TURN_REL
-*     Do a relitive turn
-*   @var e_em_first_turn_types::END_MISSION_SECOND_TURN_CONST
-*     Do a consant turn
+* @var g_em_first_turn_type
+*		Tells the robot the the first turn of the end of auto
 */
-
-typedef enum
-{
-	END_MISSION_SECOND_TURN_REL,
-	END_MISSION_SECOND_TURN_CONST
-} e_em_second_turn_types;
+e_turn_types g_em_first_turn_type = CONSTANT_TURN;
 
 /**
- * @var g_em_second_turn_type
- *		Tells the robot the the second turn of the end of auto
- * @var g_selection_turn
- *		Tells the robot the selected turn
- * @var g_cornor_delay
- *		Tells the robot the time it should wait at the cornor
- * @var g_stay_on_ramp
- *		Tells the robot if it should push back an a robot if it pushes on it
- */
-e_em_second_turn_types g_em_second_turn_type = END_MISSION_FIRST_TURN_REL;
+* @var g_em_second_turn_type
+*		Tells the robot the the second turn of the end of auto
+* @var g_selection_turn
+*		Tells the robot the selected turn
+* @var g_cornor_delay
+*		Tells the robot the time it should wait at the cornor
+* @var g_stay_on_ramp
+*		Tells the robot if it should push back an a robot if it pushes on it
+* @var g_drive_type
+*		Tells the robot if it should drive useing the gyro, encode or non
+*/
+e_turn_types g_em_second_turn_type = RELATIVE_TURN;
 
 int g_selection_turn = 1;
 
@@ -1113,16 +1087,8 @@ bool g_reset_angle = false;
 *		 Tells the robot the value of the accelermoeter
 * @var g_accelermoeter_average
 *		Tells the robot the avage number for the accelermoeter
-*
-* @var g_sensor_num
-*		 Tells the robot the sensor we are reading
-* @var g_sensor_max
-*		Tells the robot he max amoun of sensors
-* @var g_sensor_value
-*		Tells the robot the value of the sensor its reading
-* @var g_sensor_value2
-*		Tells the robot the second line of the senser its reading
 */
+
 int g_accelermoeter_sensor = 0;
 int g_x_axis = 0;
 int g_y_axis = 0;
@@ -1133,52 +1099,12 @@ int g_accelermoeter_array [] = {0,30};
 ubyte g_accelermoeter_total_value = 0;
 int g_accelermoeter_average = 0;
 
-int g_sensor_num = 1;
-int g_sensor_max = 4;
-int g_sensor_value = 0;
-int g_sensor_value2 = 0;
-/**
-*
-*  @def ST_GYRO
-*     The reference value for the sensor in smoke test
-*  @def ST_IR
-*     The reference value for the sensor in smoke test
-*  @def ST_ACCELEROMETER
-*     The reference value for the sensor in smoke test
-*  @def ST_TILT
-*     The reference value for the sensor in smoke test
-*/
-
-#define ST_GYRO 1
-#define ST_IR 2
-#define ST_ACCELEROMETER 3
-#define ST_TILT 4
 
 /**
 * @var g_sensor_reference_drive
-*		Tells the robot if it should run with sensors enabled
-* @var g_sensor_list
-*		 Tells the robot the sensors that are on it
-* @var g_basic_word_list
-*		 Tells the robot the basic word list
-*
 */
 
 bool g_sensor_reference_drive = false;
-
-string g_sensor_list [] = {
-	"unknown ",
-	"gyro    ",
-	"IR   IR2",
-	"accel   ",
-	"tilt    "};
-
-string g_basic_word_list [] = {
-	"unknown ",
-	"in      ",
-	"out     ",
-	"yes     ",
-	"no      "};
 
 /**
 *  @enum e_light_sensor_status Tells the robot if it should turn on the light sensor
@@ -1192,105 +1118,6 @@ typedef enum
 	ACTIVE,
 	INACTIVE
 } e_light_sensor_status;
-
-//=============================================================
-// Define screen related variables
-//=============================================================
-/**
-*
-*  @def S_CLEAR
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_MISSION
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_DELAY
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_CAL_TIME
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_GYRO_CAL
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_READY
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_DELAY_WAIT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_GYRO_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ERROR
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_TEST
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN1
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN2
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SMOKE_RUN3
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SCREEN_CALL
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_IR_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_AC_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_MISC_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_STARTING_POINT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ENDING_POINT
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SELECTION_SUB_GRABBERS
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_ANGLE_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_TIME_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SELECTION_TYPE
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_NUMBER_SELECTION
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_SELECTION_SUB_RAMP
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_MISSION_SHOW
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_QUICK_SELECTION
-*     Tells the robot the screen state number for this screen statestate
-*  @def S_END_TURN_OPTIONS
-*			Tells the robot the screen state number for this screen statestate
-*  @def S_STAY_GROUND_OPTIONS
-*			Tells the robot the screen state number for this screen statestate
-*  @var g_screen_state
-*			Tells the robt what it should desply on the screen
-*/
-
-#define S_CLEAR 0
-#define S_MISSION 1
-#define S_DELAY 2
-#define S_CAL_TIME 3
-#define S_GYRO_CAL 4
-#define S_READY 5
-#define S_DELAY_WAIT 6
-#define S_GYRO_SHOW 7
-#define S_ERROR 8
-#define S_SMOKE_TEST 9
-#define S_SMOKE_RUN1 10
-#define S_SMOKE_RUN2 11
-#define S_SMOKE_RUN3 12
-#define S_SCREEN_CALL 13
-#define S_IR_SHOW 14
-#define S_AC_SHOW 15
-#define S_MISC_SHOW 16
-#define S_STARTING_POINT 17
-#define S_ENDING_POINT 18
-#define S_SELECTION_SUB_GRABBERS 19
-#define S_ANGLE_SHOW 20
-#define S_TIME_SHOW 21
-#define S_SELECTION_TYPE 22
-#define S_NUMBER_SELECTION 23
-#define S_SELECTION_SUB_RAMP 24
-#define S_MISSION_SHOW 25
-#define S_QUICK_SELECTION 26
-#define S_END_TURN_OPTIONS 27
-#define S_STAY_GROUND_OPTIONS 28
-
-int g_screen_state = 1;
 
 //==============================================================
 // Define graph selection variables

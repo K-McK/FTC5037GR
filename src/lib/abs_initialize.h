@@ -15,7 +15,6 @@
 #ifndef ABS_INITIALIZE_H
 #define ABS_INITIALIZE_H
 
-#include "abs_screen.h"
 #include "abs_gyro_wrapper.h"
 #include "abs_sensors.h"
 #include "abs_datalog.h"
@@ -27,7 +26,6 @@
 
 void abs_initialize()
 {
-	StartTask(abs_screen);
 	disableDiagnosticsDisplay();
 	servoChangeRate[abdd] = 3;
 	servo[roger_slide] = 127;
@@ -39,7 +37,7 @@ void abs_initialize()
 	memset(g_input_array,0,INPUT_ARRAY_SIZE);
 	abs_selection_program();
 	PlaySoundFile("! Click.rso");
-	//g_drift = abs_gyro_cal(g_gyro_cal_time);
+	abs_cscreen("Gyros   ","Calbrtng","  lol   ");
 	g_drift = abs_gyro_wrapper();
 
 	if(!HTACreadAllAxes(HTAC, g_x_axis, g_y_axis, g_z_axis))
@@ -65,7 +63,13 @@ void abs_initialize()
 
 	if(g_error != 0)
 	{
-		g_screen_state = S_ERROR;
+		switch(g_error)
+		{
+		case ERR_ACCELERMOETER: abs_cscreen("ERROR N ","Accel   ","        "); break;
+		case ERR_GYRO_CAL: abs_cscreen("ERROR L ","Gryo1   ","cal fail"); break;
+		case ERR_SENSOR_MUX: abs_cscreen("ERROR L ","SensrMux","pwr fail"); break;
+		case ERR_GYRO_MUX: abs_cscreen("ERROR L ","Gyro1Mux","pwr fail"); break;
+		}
 		while(true)
 		{
 			g_gyro_true = true;
@@ -75,8 +79,14 @@ void abs_initialize()
 		}
 	}
 	LogData=true;
-	g_screen_state = S_READY;
+
+	abs_cscreen("Program ","Ready   ","        "); //set the screen to show the program feedback before the auto starts
+	if(g_auto_selection_ramp_continue_options == SUB_SELECTION_RAMP_CONTINUED)
+		nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d Y ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
+	else
+		nxtDisplayBigTextLine(5, "%1d%1d%1d%1d%1d%1d%1d%1d N ",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
 	StartTask(abs_sensors);
+
 	abs_reset_angle_sensor_val(HARD_RESET);
 
 	PlayTone(700, 100);
@@ -94,13 +104,13 @@ if(nNxtButtonPressed != kEnterButton) wait1Msec(5000);
 	StartTask(abs_datalog);
 	eraseDisplay();
 	g_start_time = nPgmTime;
-	g_screen_state = S_DELAY_WAIT;
 	dl_change_event = true;
 	dl_ce_detail = dl_ce_start_delay;
 	dl_speed = g_start_delay*1000;
-	wait1Msec(g_start_delay*1000);
+	while(time1[T1]<g_start_delay*1000)	//wait for start delay, number option tab 2
+	{abs_cscreen("Delay   ","","&1d       ",(g_start_delay*1000)-g_start_time);}
+
 	eraseDisplay();
-	g_screen_state = S_GYRO_SHOW;
 }
 
 #endif /* !ABS_INITIALIZE_H */

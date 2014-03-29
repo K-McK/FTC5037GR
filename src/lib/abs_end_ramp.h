@@ -69,7 +69,7 @@ void abs_end_ramp(int delay, int lift_speed)
 #endif
 	servo[optical_servo] = OPTICAL_SERVO_DOWN;
 
-	if(g_good_gyro && g_em_first_turn_type == END_MISSION_FIRST_TURN_CONST)
+	if(g_good_gyro && g_em_first_turn_type == CONSTANT_TURN)
 	{
 		abs_dlog(__FILE__ ,"first turn: good gyro");
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN_TO, abs_mission_to_turn_amount(g_start_point, g_end_point, g_good_gyro), 40);//was 60
@@ -97,7 +97,7 @@ void abs_end_ramp(int delay, int lift_speed)
 	wait1Msec(500);
 	StartTask(abs_lift_block_lifter);
 
-	if(g_good_gyro && g_em_first_turn_type == END_MISSION_SECOND_TURN_CONST)
+	if(g_good_gyro && g_em_first_turn_type == CONSTANT_TURN)
 	{
 		if(g_end_point == 2)
 		{
@@ -124,7 +124,7 @@ void abs_end_ramp(int delay, int lift_speed)
 	/** before entering the ramp, pause for the requested time */
 	wait1Msec(g_input_array[RAMP_DELAY] * DELAY_MULTIPLICATION_FACTOR);
 
-	if(g_auto_grabber_selection_ramp_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
+	if(g_auto_selection_ramp_continue_options == SUB_SELECTION_RAMP_STOP) abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
 	else abs_drive(FORWARD, E_ANGLE, 130, 50, true, GYRO);
 
 	//if the lift task is still running at this point then stop it

@@ -153,7 +153,7 @@ task abs_sensors()
 		//-------------------------
 #if EOPD_ACTIVE == 1
 		HTEOPDsetLongRange(HTEOPD);
-		g_EOPD_SENSOR = HTEOPDreadRaw(HTEOPD);
+		g_EOPD_sensor = HTEOPDreadRaw(HTEOPD);
 		g_optical_sensor = g_EOPD_sensor;
 #else
 		//-------------------------

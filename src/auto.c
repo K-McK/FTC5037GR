@@ -53,6 +53,7 @@
 #include "lib/abs_s3_mission_execute.h"
 #include "lib/abs_s4_mission_execute.h"
 #include "lib/abs_dlog.h"
+#include "lib/abs_end_ramp.h"
 #include "lib/abs_stay_on_ramp.h"
 
 //========================================
