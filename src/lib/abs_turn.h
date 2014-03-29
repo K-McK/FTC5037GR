@@ -18,7 +18,7 @@
 #ifndef ABS_TURN_H
 #define ABS_TURN_H
 
-#include "abs_log.h"
+#include "abs_dlog.h"
 
 /** macros */
 
@@ -27,31 +27,24 @@
 //=======================================
 void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method e_stop, int degree, int speed)
 {
-	if(dir == COUNTERCLOCKWISE)abs_log(__FILE__ ,"enter CC",speed,degree,g_rel_heading,g_const_heading);
-	else abs_log(__FILE__ ,"enter C",speed,degree,g_rel_heading,g_const_heading);
+        if(dir == COUNTERCLOCKWISE)
+                abs_dlog(__FILE__ ,"enter CC","speed", speed, "degree", degree, "g_rel_heading", g_rel_heading, "g_const_heading", g_const_heading);
+        else
+                abs_dlog(__FILE__ ,"enter C", "speed", speed, "degree", degree, "g_rel_heading", g_rel_heading, "g_const_heading", g_const_heading);
 
-	dl_robot_action_state = dl_gyro_turn;
 	int i = 0;
 	g_rel_heading = 0;
 	int target = 0;
-	dl_step = dl_step+1;
-	dl_speed = speed;
-	dl_dist = degree;
-
-	dl_ce_detail = dl_ce_turn_start;
-	dl_change_event = true;
 
 	if(e_stop == TURN_TO)
 	{
 		if(dir == COUNTERCLOCKWISE)
 		{
-			dl_robot_action_detail = dl_turn_counterclockwise;
 			if(degree<g_recont_heading) target = -(g_recont_heading-degree);
 			else target = -(360-(degree-g_recont_heading));
 		}
 		else
 		{
-			dl_robot_action_detail = dl_turn_clockwise;
 			if(degree<g_recont_heading) target = 360-(g_recont_heading-degree);
 			else target = degree-g_recont_heading;
 		}
@@ -113,10 +106,8 @@ void abs_turn(e_direction dir, e_turn_method turn_method, e_turn_stopping_method
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
 	}
-	//dl_ce_detail = dl_ce_turn_end;
-	//dl_change_event = true;
 
-	abs_log(__FILE__ ,"exit",speed,degree,g_rel_heading,g_const_heading);
+	abs_dlog(__FILE__ ,"exit", "speed", speed, "degree", degree, "g_rel_heading", g_rel_heading, "g_const_heading", g_const_heading);
 }
 
 #endif /* !ABS_TURN_H */

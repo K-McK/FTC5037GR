@@ -89,9 +89,6 @@ task main()
 	switch(g_end_point)
 	{
 	case 1:
-		dl_step = dl_step+1;
-		dl_robot_action_state = dl_wait;
-		dl_speed = 2000;
 		wait1Msec(2000);
 		servo[abdd] = g_abdd_down;
 		abs_stop_robot();
@@ -101,7 +98,7 @@ task main()
 		abs_end_ramp(2000,40);
 		break;
 	default:
-		abs_log(__FILE__,"Invalid Ramp Option",0,0,0,0);
+		abs_dlog(__FILE__,"Invalid Ramp Option");
 		break;
 	}
 
