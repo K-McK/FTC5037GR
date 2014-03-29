@@ -56,8 +56,8 @@ typedef enum
  *     Drive until the robot detects the IR becon using the second IR sensor spesified in dist
  *  @var e_move_stopping_method::E_ANGLE
  *     Drive for a certain amount of degrees spesified in dist
- *  @var e_move_stopping_method::E_LIGHT
- *     Drive until the light sensor detects the lighting condition specified in dist
+ *  @var e_move_stopping_method::E_OPTICAL
+ *     Drive until the optical sensor detects the lighting condition specified in dist
  */
 typedef enum
 {
@@ -68,7 +68,7 @@ typedef enum
  	E_IR_DETECT,
  	E_IR_DETECT2,
  	E_ANGLE,
-  E_LIGHT} e_move_stopping_method; //will make a method with a tilt sensor(wheel in the middle of the robot
+  E_OPTICAL} e_move_stopping_method; //will make a method with a tilt sensor(wheel in the middle of the robot
 
 /**
  *  @enum e_turn_method Tells the robot what type of turn it should do

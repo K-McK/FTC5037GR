@@ -64,8 +64,10 @@ void abs_end_ramp(int delay, int lift_speed)
 	dl_robot_action_state = dl_wait;
 	dl_speed = 200;
 	wait1Msec(200);
+#if EOPD_ACTIVE == 0
 	abs_control_light_sensor(ACTIVE);
-	servo[light_sensor] = LIGHT_SERVO_DOWN;
+#endif
+	servo[optical_servo] = OPTICAL_SERVO_DOWN;
 
 	if(g_good_gyro && g_em_first_turn_type == END_MISSION_FIRST_TURN_CONST)
 	{
@@ -83,7 +85,7 @@ void abs_end_ramp(int delay, int lift_speed)
 	dl_robot_action_state = dl_wait;
 	dl_speed = 200;
 	wait1Msec(200);
-	abs_drive(FORWARD, E_LIGHT, 110, 30, true, GYRO);
+	abs_drive(FORWARD, E_OPTICAL, 110, 30, true, GYRO);
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 20)
 	{
 		abs_drive(FORWARD, E_ANGLE, 110 - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);

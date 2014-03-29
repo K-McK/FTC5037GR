@@ -114,7 +114,7 @@ void abs_s2_mission_execute()
 	dl_dist = g_abdd_up;
 	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);
 	servo[abdd] = g_abdd_up;
-	StartTask (abs_calibrate_light);
+	StartTask (abs_calibrate_optical);
 	wait1Msec(2000);
 	servo[abdd] = g_abdd_down;
 	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);

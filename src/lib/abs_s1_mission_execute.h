@@ -80,10 +80,11 @@ void abs_s1_mission_execute()
 		g_screen_state = S_SMOKE_RUN2;
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
+		servo[optical_servo] = OPTICAL_SERVO_DOWN;
 		while(true)
 		{
-			g_sensor_value = g_rel_heading;
-			g_sensor_value2 = g_const_heading;
+			g_sensor_value = g_optical_sensor;
+			g_sensor_value2 = 0;
 		}
 		break;
 
@@ -127,7 +128,7 @@ void abs_s1_mission_execute()
 	dl_dist = g_abdd_up;
 	abs_log(__FILE__,"abdd up",2,g_abdd_up,0,0);
 	servo[abdd] = g_abdd_up;
-	StartTask (abs_calibrate_light);
+	StartTask (abs_calibrate_optical);
 	wait1Msec(2000);
 	servo[abdd] = g_abdd_down;
 	abs_log(__FILE__,"abdd down",2,g_abdd_down,0,0);

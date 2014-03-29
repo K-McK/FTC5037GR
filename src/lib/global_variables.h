@@ -23,7 +23,12 @@ const tMUXSensor HTIRS2 = msensor_S3_1;     // HiTechnic Infrared sensor
 const tMUXSensor HTAC = msensor_S3_2;
 const tMUXSensor HTGYRO = msensor_S2_1;	   // HiTechnic GYRO sensor
 const tMUXSensor HTIRS2_2 = msensor_S3_3;     // HiTechnic Infrared sensor 2
+
+#if EOPD_ACTIVE == 1
+const tMUXSensor HTEOPD = msensor_S3_4;
+#else
 const tMUXSensor LEGOLS = msensor_S3_4;
+#endif
 
 /**
 * @var g_gyro_true
@@ -58,10 +63,10 @@ bool g_gyro_true = false;
 *  @def GRABBER_RIGHT_CLOSE
 *     tells the robot where the left block grabber needs to be to be closed
 *
-* 	@def LIGHT_SERVO_DOWN
-* 		Tells the robot the poision of the light senser servo when its down
-* 	@def LIGHT_SERVO_UP
-* 		Tells the robot the poision of the light senser servo when its up
+* 	@def OPTICAL_SERVO_DOWN
+* 		Tells the robot the poision of the optical senser servo when its down
+* 	@def OPTICAL_SERVO_UP
+* 		Tells the robot the poision of the optical senser servo when its up
 */
 #define INT_ANGLE_SENSOR_CIRCUMFERENCE 18
 #define FLOAT_ANGLE_SENSOR_CIRCUMFERENCE 17.6
@@ -74,14 +79,18 @@ bool g_gyro_true = false;
 #define GRABBER_LEFT_CLOSE 120
 #define GRABBER_RIGHT_CLOSE 131
 
-#define LIGHT_SERVO_DOWN 255
-#define LIGHT_SERVO_UP 127
+#define OPTICAL_SERVO_DOWN 255
+#define OPTICAL_SERVO_UP 127
 /**
  * @var g_angle_sensor_val
  *		Tells the robot the value of the raw angle sensor
  */
 
 long g_angle_sensor_val = 0;
+
+int g_EOPD_sensor = 0;
+
+int g_optical_sensor = 0;
 
 /**
 *
@@ -159,11 +168,11 @@ long g_angle_sensor_val = 0;
 *
 * @var g_original_gyro_val
 *			Tells the robot what then orginal value of the gyro was
-* @var g_light_threshold
-* 		Tells the robot what the light threshhold is
+* @var g_optical_threshold
+* 		Tells the robot what the optical threshhold is
 *
-* @var g_light_move_min_dist
-* 		Tells the robot how far it should move before it should be in light detection distence
+* @var g_optical_move_min_dist
+* 		Tells the robot how far it should move before it should be in optical detection distence
 */
 const int g_block_speed_down = -60;
 const int g_block_speed_up = 100;
@@ -186,9 +195,13 @@ const int g_ground_arm_up = 0;
 
 const int g_ground_arm_down = 120;
 
-const int g_light_threshold = 30;
+#if EOPD_ACTIVE == 1
+const int g_optical_threshold = 100;//305;
+#else
+const int g_optical_threshold = 30;
+#endif
 
-const int g_light_move_min_dist = 70;
+const int g_optical_move_min_dist = 70;
 
 //=========================================================
 // auto selection points
@@ -831,9 +844,9 @@ int g_selection_value = 0;
 
 /**
  *
- * @var g_light_delta_value
- *	the difference in light between black and white that we are looking for
- * @var g_calibrated_light_threshold_val
+ * @var g_optical_delta_value
+ *	the difference in optical between black and white that we are looking for
+ * @var g_calibrated_optical_threshold_val
  *	a configurable threshold for detecting the white line
  * @var g_end_ramp_lift_speed
  *	the speed to lift the block lifter before entering the ramp
@@ -848,8 +861,12 @@ int g_selection_value = 0;
  * @var g_gyro_ran
  *	flag indicating that we have performed at least one gyro read
  */
-const int g_light_delta_value = 2;
-int g_calibrated_light_threshold_val = 0;
+#if EOPD_ACTIVE == 1
+const int g_optical_delta_value = 300;
+#else
+const int g_optical_delta_value = 2;
+#endif
+int g_calibrated_optical_threshold_val = 0;
 int g_end_ramp_lift_speed = 40;
 bool g_shift_due_to_ir = false;
 bool g_good_gyro = true;
@@ -865,20 +882,20 @@ bool g_gyro_ran = false;
  *		Tells the robot the max rate thats possable to happen so we can know if the gyro gliches
  * @def STAY_ON_RAMP_WAIT_TIME
  *		Tells the robot the wait time before it  gose on the ramp
- * @def LIGHT_SENSOR_CALIBRATION_TIME
+ * @def OPTICAL_SENSOR_CALIBRATION_TIME
  *		Tells the robot the time it needs to calibrate
- * @def LIGHT_CALIBRATION_SAMPLE_RATE
+ * @def OPTICAL_CALIBRATION_SAMPLE_RATE
  *		Tells the robot the Calibration sample rate
- * @def DEFAULT_CALIBRATED_LIGHT_THRESHOLD
- *		Tells the robot the default calibration of the light to force it to fail if it gives us weid readings
+ * @def DEFAULT_CALIBRATED_OPTICAL_THRESHOLD
+ *		Tells the robot the default calibration of the optical to force it to fail if it gives us weid readings
  * @def DELAY_MULTIPLICATION_FACTOR
  *	the factor to multiply all delays by
  */
 #define MAX_TURN_RATE 0.72
 #define STAY_ON_RAMP_WAIT_TIME 100
-#define LIGHT_SENSOR_CALIBRATION_TIME 2000
-#define LIGHT_CALIBRATION_SAMPLE_RATE 100
-#define DEFAULT_CALIBRATED_LIGHT_THRESHOLD 9999
+#define OPTICAL_SENSOR_CALIBRATION_TIME 2000
+#define OPTICAL_CALIBRATION_SAMPLE_RATE 100
+#define DEFAULT_CALIBRATED_OPTICAL_THRESHOLD 9999
 #define DELAY_MULTIPLICATION_FACTOR 1000
 
 //=============================================================

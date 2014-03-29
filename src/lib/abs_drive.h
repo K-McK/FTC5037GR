@@ -49,8 +49,8 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	case E_TIME:
 		abs_log(__FILE__ ,"time enter",speed,dist,time1[T1],abs_get_angle_sensor_val(RELATIVE_BPU));
 		break;
-	case E_LIGHT:
-		abs_log(__FILE__ ,"light enter",speed,dist,g_calibrated_light_threshold_val,abs_get_angle_sensor_val(RELATIVE_BPU));
+	case E_OPTICAL:
+		abs_log(__FILE__ ,"optical enter",speed,dist,g_calibrated_optical_threshold_val,abs_get_angle_sensor_val(RELATIVE_BPU));
 		break;
 	}
 	int i = 0;
@@ -371,41 +371,39 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		abs_log(__FILE__ ,"angle break",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
 	}
 	//================
-	// Light
+	// OPTICAL
 	//================
-	else if(dist_method == E_LIGHT)
+	else if(dist_method == E_OPTICAL)
 	{
-		bool light_fail = false;
+		bool optical_fail = false;
 		abs_reset_angle_sensor_val(SOFT_RESET);
 		abs_log(__FILE__ ,"reset angle",speed,dist,abs_get_angle_sensor_val(RELATIVE_ASU),abs_get_angle_sensor_val(RELATIVE_BPU));
 
-		int max_light_detected = 0;
+		int max_optical_detected = 0;
 		while(true)
 		{
-			//finds out what the highest value of the light sensor was
-			max_light_detected = max(max_light_detected, g_light_sensor);
+			//finds out what the highest value of the optical sensor was
+			max_optical_detected = max(max_optical_detected, g_optical_sensor);
 
-			if(g_light_sensor>g_calibrated_light_threshold_val&&abs_get_angle_sensor_val(RELATIVE_ASU)<g_light_move_min_dist)
+			if(g_optical_sensor>g_calibrated_optical_threshold_val&&abs_get_angle_sensor_val(RELATIVE_ASU)<g_optical_move_min_dist)
 			{
-				abs_log(__FILE__ ,"Premature light detection",g_light_move_min_dist,abs_get_angle_sensor_val(RELATIVE_ASU),g_calibrated_light_threshold_val,g_light_sensor);
-				light_fail = true;
+				abs_log(__FILE__ ,"Premature optical detection",g_optical_move_min_dist,abs_get_angle_sensor_val(RELATIVE_ASU),g_calibrated_optical_threshold_val,g_EOPD_sensor);
+				optical_fail = true;
 			}
-
-			if(g_light_sensor>g_calibrated_light_threshold_val&&light_fail==false)
+			if(g_optical_sensor>g_calibrated_optical_threshold_val&&optical_fail==false)
 			{
 				dl_move_break = DL_LIGHT_BREAK;
-				abs_log(__FILE__ ,"light break",speed,dist,g_calibrated_light_threshold_val,g_light_sensor);
+				abs_log(__FILE__ ,"optical break",speed,dist,g_calibrated_optical_threshold_val,g_optical_sensor);
 				break;
 			}
 			else if (abs_get_angle_sensor_val(RELATIVE_BPU) > dist)
 			{
 				dl_move_break = DL_ANGLE_BREAK;
 
-				abs_log(__FILE__ ,"angle break",speed,dist,g_calibrated_light_threshold_val,max_light_detected);
+				abs_log(__FILE__ ,"angle break",speed,dist,g_calibrated_optical_threshold_val,max_optical_detected);
 
 				break;
 			}
-			dl_cur_dist = g_calibrated_light_threshold_val;
 
 			if(drive_type == GYRO)
 			{
@@ -452,9 +450,11 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 	dl_ce_detail = dl_ce_drive_end;
 	dl_change_event = true;
-	servo[light_sensor] = LIGHT_SERVO_UP;
+	servo[optical_servo] = OPTICAL_SERVO_UP;
 
+#if EOPD_ACTIVE == 0
 	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
+#endif
 	if(dist_record==true)
 	{
 		if(g_start_point==1)

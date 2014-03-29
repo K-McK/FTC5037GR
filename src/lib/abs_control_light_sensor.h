@@ -17,13 +17,17 @@ void abs_control_light_sensor(e_light_sensor_status status)
 {
 	if(status == ACTIVE)
 	{
+#if EOPD_ACTIVE == 0
 		LSsetActive(LEGOLS);
+#endif
 		//LSsetActive(LEGOLS);
 	}
 	else
 	{
+#if EOPD_ACTIVE == 0
 		LSsetInactive(LEGOLS);
 		//LSsetInactive(LEGOLS);
+#endif
 	}
 }
 
