@@ -17,13 +17,11 @@
 
 task abs_lift_block_lifter()
 {
-	//abs_log(__FILE__,"Enter",0,0,0,0);
 	motor[block_lift_motor] = g_end_ramp_lift_speed;
 	motor[block_lift_motor2] = g_end_ramp_lift_speed;
 	wait1Msec(750);
 	motor[block_lift_motor] = 0;
 	motor[block_lift_motor2] = 0;
-	//abs_log(__FILE__,"Exit",0,0,0,0);
 }
 
 #endif /* !TEMPLATE_H */

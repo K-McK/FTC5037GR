@@ -17,8 +17,7 @@
 
 #include "abs_gyro_wrapper.h"
 #include "abs_sensors.h"
-#include "abs_datalog.h"
-#include "abs_log.h"
+#include "abs_dlog.h"
 #include "abs_reset_angle_sensor.h"
 #include "abs_calibrate_optical.h"
 #include "abs_selection_program.h"
@@ -99,14 +98,10 @@ while(nNxtButtonPressed == kEnterButton){}
 if(nNxtButtonPressed != kEnterButton) wait1Msec(5000);
 #endif
 
-	abs_log(__FILE__ ,"auto start",nPgmTime,0,0,0);
+	abs_dlog(__FILE__ ,"auto start","timestamp",nPgmTime);
 
-	StartTask(abs_datalog);
 	eraseDisplay();
 	g_start_time = nPgmTime;
-	dl_change_event = true;
-	dl_ce_detail = dl_ce_start_delay;
-	dl_speed = g_start_delay*1000;
 	while(time1[T1]<g_start_delay*1000)	//wait for start delay, number option tab 2
 	{abs_cscreen("Delay   ","","&1d       ",(g_start_delay*1000)-g_start_time);}
 

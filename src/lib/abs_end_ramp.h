@@ -17,7 +17,7 @@
 
 #include "abs_drive.h"
 #include "abs_turn.h"
-#include "abs_log.h"
+#include "abs_dlog.h"
 #include "abs_get_angle_sensor_val.h"
 #include "abs_control_light_sensor.h"
 #include "abs_mission_to_turn_amount.h"
@@ -25,18 +25,15 @@
 
 void abs_end_ramp(int delay, int lift_speed)
 {
-	abs_log(__FILE__,"Function Enter",delay,lift_speed,0,0);
+	abs_dlog(__FILE__,"Function Enter", "delay", delay);
 
 	if(g_end_point != 2 && g_end_point !=3)
 	{
-		abs_log(__FILE__,"Function called for incorrect ramp",0,0,0,0);
+		abs_dlog(__FILE__,"Function called for incorrect ramp");
 		return;
 	}
 
 	if(g_start_point == 1 || g_start_point == 2) g_to_turn_dist = g_dist_backwards;
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = delay;
 	wait1Msec(delay);
 	servo[abdd] = g_abdd_down;
 
@@ -53,16 +50,13 @@ void abs_end_ramp(int delay, int lift_speed)
 
 	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 5)//15)
 	{
-		abs_log(__FILE__,"dist fail",abs_get_angle_sensor_val(RELATIVE_BPU),0,0,0);
+		abs_dlog(__FILE__,"dist fail","rel BPU", abs_get_angle_sensor_val(RELATIVE_BPU));
 		motor[left_motor] = 0;
 		motor[right_motor] = 0;
 		PlayTone(300,200);
 		return;
 	}
 
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = 200;
 	wait1Msec(200);
 #if EOPD_ACTIVE == 0
 	abs_control_light_sensor(ACTIVE);
@@ -81,9 +75,6 @@ void abs_end_ramp(int delay, int lift_speed)
 	}
 
 	wait1Msec(g_input_array[CORNOR_DELAY]*DELAY_MULTIPLICATION_FACTOR);
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = 200;
 	wait1Msec(200);
 	abs_drive(FORWARD, E_OPTICAL, 110, 30, true, GYRO);
 	//if(abs_get_angle_sensor_val(RELATIVE_BPU) < 20)
@@ -98,9 +89,6 @@ void abs_end_ramp(int delay, int lift_speed)
 	}
 
 	abs_control_light_sensor(INACTIVE);
-	dl_step = dl_step+1;
-	dl_robot_action_state = dl_wait;
-	dl_speed = 500;
 	wait1Msec(500);
 	StartTask(abs_lift_block_lifter);
 

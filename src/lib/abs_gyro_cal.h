@@ -14,7 +14,7 @@
 #ifndef ABS_GYRO_CAL_H
 #define ABS_GYRO_CAL_H
 
-#include "abs_log.h"
+#include "abs_dlog.h"
 
 float abs_gyro_cal(long caltime)
 {
@@ -38,7 +38,7 @@ float abs_gyro_cal(long caltime)
 	g_gyro_noise=abs(highest-lowest);
 
 	g_original_gyro_val = (g_original_gyro_val - (average/samples)) * (float)(nPgmTime - g_start_time) / 1000;
-        abs_log(__FILE__,"Original Gyro Reading",g_original_gyro_val,0,0,0);
+        abs_dlog(__FILE__,"Original Gyro Reading","value",g_original_gyro_val);
 
 	return average/samples;					// and return the average drift
 }
