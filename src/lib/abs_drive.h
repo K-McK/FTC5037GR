@@ -20,6 +20,7 @@
 *
 */
 
+
 #ifndef ABS_DRIVE_H
 #define ABS_DRIVE_H
 
@@ -40,6 +41,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 	int last_heading = g_const_heading;
 
+	//log the paramiters
 	switch(dist_method)
 	{
 	case E_IR_DETECT:
@@ -59,7 +61,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
                 break;
 	}
 	int i = 0;
-
 	nMotorEncoder(right_motor)= 0;
 	g_rel_heading = 0;
 
@@ -69,6 +70,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	if(dist_method == E_TIME)
 	{
 		ClearTimer(T1);
+		//wait a specified time to stop
 		while(time1[T1] < dist)
 		{
 			if(drive_type == GYRO)
@@ -98,6 +100,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	else if(dist_method == E_DEGREES)
 	{
+		//keep going until we get an encoder value
 		while(i<5)
 		{
 			if(abs(nMotorEncoder(right_motor)) > distance_to_encoder_derees(dist)) i++;
@@ -126,6 +129,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	// IR stopping method
 	//------------------------
+	//drive until we see the ir
 	else if(dist_method == E_IR_DETECT)
 	{
 		abs_reset_angle_sensor_val(SOFT_RESET);
@@ -141,11 +145,11 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			half_dist = 100;}
 		if(dir == FORWARD)
 		{
+			//wait intil we get past the specified area or we detect the IR
 			while(true)
 			{
 				if(abs_get_angle_sensor_val(RELATIVE_BPU) > total_dist)
 				{
-
 					abs_dlog(__FILE__ ,"angle break", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 					break;
 				}
@@ -165,6 +169,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 						break;
 					}
 				}
+				//drive
 				if(drive_type == GYRO)
 				{
 					abs_gyro_drive(speed,dir);
@@ -202,6 +207,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 				}
 
 				/** No gyro correction*/
+				/** Drive */
 				if(drive_type == GYRO)
 				{
 					abs_gyro_drive(speed,dir);
@@ -217,6 +223,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	// IR stopping method 2
 	//------------------------
+	//drive useing the second ir
 	else if(dist_method == E_IR_DETECT2)
 	{
 		abs_reset_angle_sensor_val(SOFT_RESET);
@@ -258,6 +265,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	// accelermeoter sensor stopping method
 	//------------------------
+	//Stops the robot baced on the accelermeoter
 	else if(dist_method == E_TILT)
 	{
 		int j = 0;
@@ -290,6 +298,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	// angle sensor stopping method
 	//------------------------
+	//Tells the robot to stop baced on the real distence it has went
 	else if(dist_method == E_ANGLE)
 	{
 		abs_reset_angle_sensor_val(SOFT_RESET);
@@ -299,7 +308,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		{
 			if(drive_type == GYRO)
 			{
-				abs_gyro_drive(speed,dir);
+				abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
 			}
 
 			/** No gyro correction*/
@@ -307,13 +316,13 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				if(dir == FORWARD)
 				{
-					motor[left_motor] = speed;
-					motor[right_motor] = speed;
+					motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
 				}
 				else
 				{
-					motor[left_motor] = -speed;
-					motor[right_motor] = -speed;
+					motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
 				}
 			}
 		}
@@ -323,6 +332,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//================
 	// Light
 	//================
+	//stops baced on the light sensor
 	else if(dist_method == E_LIGHT)
 	{
 		bool light_fail = false;
@@ -336,7 +346,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			//finds out what the highest value of the light sensor was
 			max_light_detected = max(max_light_detected, g_light_sensor);
 
-			if(g_light_sensor>g_calibrated_light_threshold_val&&abs_get_angle_sensor_val(RELATIVE_ASU)<g_light_move_min_dist)
+			if(g_light_sensor>g_calibrated_light_threshold_val&&abs_get_angle_sensor_val(RELATIVE_BPU)<g_light_move_min_dist)
 			{
 				abs_dlog(__FILE__ ,"Premature Optical detection: ", "Min BPU", g_light_move_min_dist, "Actual BPU when detected", abs_get_angle_sensor_val(RELATIVE_BPU), "Optical Threshold", g_calibrated_light_threshold_val, "Optical Value detected", max_light_detected);
 				light_fail = true;
@@ -349,7 +359,6 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			}
 			else if (abs_get_angle_sensor_val(RELATIVE_BPU) > dist)
 			{
-
 				abs_dlog(__FILE__ ,"angle break", "speed", speed, "max distance", dist, "Optical Threshold", g_calibrated_light_threshold_val, "optical Value detected", max_light_detected);
 
 				break;
@@ -357,7 +366,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 
 			if(drive_type == GYRO)
 			{
-				abs_gyro_drive(speed,dir);
+				abs_gyro_drive(adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU)),dir);
 			}
 
 			/** No gyro correction*/
@@ -365,13 +374,13 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 			{
 				if(dir == FORWARD)
 				{
-					motor[left_motor] = speed;
-					motor[right_motor] = speed;
+					motor[left_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[right_motor] = adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
 				}
 				else
 				{
-					motor[left_motor] = -speed;
-					motor[right_motor] = -speed;
+					motor[left_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
+					motor[right_motor] = -adjusted_drive_speed(speed, dist, abs_get_angle_sensor_val(RELATIVE_BPU));
 				}
 			}
 		}
@@ -390,6 +399,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//------------------------
 	// Stop
 	//------------------------
+	//if the robot was set to stop at the end and not cost then stop
 	if(stop_at_end)
 	{
 		motor[left_motor] = 0;
@@ -409,7 +419,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		}
 		else if(g_start_point==2)
 		{
-			if(g_shift_due_to_ir)
+			if(g_mission_number==1)
 			{
 				//subtract 5 to account for drift of stop in ir
 				if(g_end_point == 2) g_dist_backwards = abs_get_angle_sensor_val(RAW_BPU) - 5 - 5;

@@ -34,6 +34,7 @@ void abs_end_ramp(int delay, int lift_speed)
 	}
 
 	if(g_start_point == 1 || g_start_point == 2) g_to_turn_dist = g_dist_backwards;
+	wait1Msec(delay);
 	servo[abdd] = g_abdd_down;
 
 	if(g_end_point == 2)
