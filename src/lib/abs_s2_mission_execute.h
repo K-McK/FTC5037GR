@@ -27,7 +27,6 @@ void abs_s2_mission_execute()
 	switch(g_mission_number)
 	{
 	case 0:
-		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true, GYRO);
 		break;
 
@@ -94,7 +93,7 @@ void abs_s2_mission_execute()
 	}
 	abs_dlog(__FILE__,"abdd up");
 	servo[abdd] = g_abdd_up;
-	StartTask (abs_calibrate_light);
+	StartTask (abs_calibrate_optical);
 	wait1Msec(2000);
 	servoChangeRate[abdd] = 10;
 	servo[abdd] = g_abdd_down;

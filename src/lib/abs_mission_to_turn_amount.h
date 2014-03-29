@@ -10,8 +10,8 @@
 *
 *  @copyright Copyright 2013, Got Robot! FTC Team 5037
 */
-#ifndef ABS_MISSION_TO_TURN_AMOUNT
-#define ABS_MISSION_TO_TURN_AMOUNT
+#ifndef ABS_MISSION_TO_TURN_AMOUNT_H
+#define ABS_MISSION_TO_TURN_AMOUNT_H
 
 int abs_mission_to_turn_amount(int starting_point, int ramp_position, bool good_gyro)
 {

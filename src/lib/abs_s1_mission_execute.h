@@ -21,19 +21,19 @@
 #include "abs_end_ramp.h"
 #include "abs_dlog.h"
 #include "abs_get_angle_sensor_val.h"
+#include "lib/abs_cscreen.h"
+#include "lib/abs_calibrate_optical.h"
 
 void abs_s1_mission_execute()
 {
 	switch(g_mission_number)
 	{
 	case 0:
-		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true, GYRO);
 		break;
 
 	case 1:
 		dist_record=true;
-		g_screen_state = S_ANGLE_SHOW;
 		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, GYRO);
 		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
 		{
@@ -68,14 +68,10 @@ void abs_s1_mission_execute()
 		break;
 
 	case 6:
-		g_screen_state = S_SMOKE_RUN2;
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
-		while(true)
-		{
-			g_sensor_value = g_rel_heading;
-			g_sensor_value2 = g_const_heading;
-		}
+		servo[optical_servo] = OPTICAL_SERVO_DOWN;
+		while(true){abs_cscreen("Optical ","Sensor","%1d ",g_optical_sensor);}
 		break;
 
 	case 7:
@@ -110,7 +106,7 @@ void abs_s1_mission_execute()
 	}
 	abs_dlog(__FILE__,"abdd up");
 	servo[abdd] = g_abdd_up;
-	StartTask (abs_calibrate_light);
+	StartTask (abs_calibrate_optical);
 	wait1Msec(2000);
 	servoChangeRate[abdd] = 10;
 	servo[abdd] = g_abdd_down;
