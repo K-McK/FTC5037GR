@@ -19,6 +19,7 @@
 #include "abs_selection_quick.h"
 #include "abs_selection_advanced.h"
 #include "abs_selection_options.h"
+#include "lib/abs_cscreen.h"
 
 void abs_selection_program()
 {
@@ -27,10 +28,6 @@ void abs_selection_program()
 	//---------------------------------------
 	// number selection, quick selection, or custom selection
 	//---------------------------------------
-
-	g_auto_selection_point = SELECTION_SELECTION_TYPE;
-	g_screen_state = S_SELECTION_TYPE;
-
 	int j = 1;
 	while(nNxtButtonPressed != kEnterButton)
 	{
@@ -50,11 +47,16 @@ void abs_selection_program()
 		}
 		switch(j)
 		{
-		case 1: selection_type = SELECTION_TYPE_CUSTOM; break;
-		case 2: selection_type = SELECTION_TYPE_NUMBER; break;
-		case 3: selection_type = SELECTION_TYPE_QUICK; break;
-		case 4: selection_type = SELECTION_TYPE_ADVANCED; break;
-		case 5: selection_type = SELECTION_TYPE_OPTIONS; break;
+		case 1: abs_cscreen("Selectin","type    ","CUSTOM  ");
+		selection_type = SELECTION_TYPE_CUSTOM; break;
+		case 2: abs_cscreen("Selectin","type    ","NUMBER  ");
+		selection_type = SELECTION_TYPE_NUMBER; break;
+		case 3: abs_cscreen("Selectin","type    ","QUICK   ");
+		selection_type = SELECTION_TYPE_QUICK; break;
+		case 4: abs_cscreen("Selectin","type    ","ADVANCED");
+		selection_type = SELECTION_TYPE_ADVANCED; break;
+		case 5: abs_cscreen("Selectin","type    ","OPTION  ");
+		selection_type = SELECTION_TYPE_OPTIONS; break;
 		}
 	}
 	PlaySoundFile("! Click.rso");
@@ -77,33 +79,13 @@ void abs_selection_program()
 		abs_selection_options();
 		abs_selection_program();
 	}
-
-	g_start_point=g_input_array[STARTING_POINT];
-	g_start_delay=g_input_array[STARTING_DELAY];
-	g_mission_number=g_input_array[SCOREING_POINT];
-	g_end_delay=g_input_array[END_DELAY];
-	//mainly a check to make sure it works fine
-	if(g_input_array[END_POINT] < 4 && g_input_array[END_POINT] > 0)g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
-	if(g_input_array[END_POINT] == 4)
-	{
-		g_end_point=2;
-		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-	}
-	if(g_input_array[END_POINT] == 5)
-	{
-		g_end_point=3;
-		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-	}
-	if(g_input_array[END_POINT] == 1)g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
-
 	//---------------------------------------
 	// Start of gyro cal selection
 	//---------------------------------------
 
-	g_screen_state = S_CAL_TIME;
-
 	while(nNxtButtonPressed != kEnterButton)
 	{
+		abs_cscreen("GyroCal ","time    ","%1d       ",g_gyro_cal_time);
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
@@ -120,7 +102,6 @@ void abs_selection_program()
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
 	eraseDisplay();
-	g_screen_state = S_GYRO_CAL;
 }
 
 #endif /* !ABS_SELECTION_PROGRAM_H */

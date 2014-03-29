@@ -16,217 +16,186 @@
 #define ABS_SMOKE_EXECUTE_H
 
 #include "abs_get_angle_sensor_val.h"
+#include "lib/abs_smoke_test_view.h"
 
-void abs_smoke_execute ()
+void abs_smoke_execute(int test_num)
 {
-	g_screen_state = S_SMOKE_RUN1;
-	while(nNxtButtonPressed != kEnterButton)
+	while(nNxtButtonPressed!=kEnterButton)
 	{
-		switch(g_smoke_test_num)
+		switch(test_num)
 		{
-			//---------------------------------
-			// Jolly Roger
-			//---------------------------------
 		case 1:
-			if(nNxtButtonPressed == kLeftButton)
+			if(nNxtButtonPressed==kLeftButton)
 			{
-				motor[jolly_roger] = g_flag_speed_down;
-				g_test_value = g_flag_speed_down;
+				motor[block_lift_motor] = g_block_speed_down;
+				motor[block_lift_motor2] = g_block_speed_down;
+				abs_smoke_test_view(test_num,g_block_speed_down,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){}
 			}
-			else if(nNxtButtonPressed == kRightButton)
+			else if(nNxtButtonPressed==kRightButton)
 			{
-				motor[jolly_roger] = g_flag_speed_up;
-				g_test_value = g_flag_speed_up;
+				motor[block_lift_motor] = g_block_speed_up;
+				motor[block_lift_motor2] = g_block_speed_up;
+				abs_smoke_test_view(test_num,g_block_speed_up,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){}
 			}
-			else
-			{
-				g_test_value = 0;
-				motor[jolly_roger] = 0;
-			}
+			abs_smoke_test_view(test_num,0,0);
+			motor[block_lift_motor] = 0;
+			motor[block_lift_motor2] = 0;
 			break;
-			//---------------------------------
-			// Drive
-			//---------------------------------
 		case 2:
-			if(nNxtButtonPressed == kLeftButton)
+			if(nNxtButtonPressed==kLeftButton)
 			{
-				motor[right_motor] = 60;
-				motor[left_motor] = 60;
-				g_test_value = 60;
+				motor[sky_hook] = g_robot_lift_down;
+				abs_smoke_test_view(test_num,g_robot_lift_down,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){}
 			}
-			else if(nNxtButtonPressed == kRightButton)
+			else if(nNxtButtonPressed==kRightButton)
 			{
-				motor[right_motor] = -60;
-				motor[left_motor] = -60;
-				g_test_value = -60;
+				motor[sky_hook] = g_robot_lift_up;
+				abs_smoke_test_view(test_num,g_robot_lift_up,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){}
 			}
-			else
-			{
-				g_test_value = 0;
-				motor[right_motor] = 0;
-				motor[left_motor] = 0;
-			}
+			abs_smoke_test_view(test_num,0,0);
+			motor[sky_hook] = 0;
 			break;
-			//---------------------------------
-			// sensors
-			//---------------------------------
 		case 3:
-			g_screen_state = S_SMOKE_RUN2;
-			if(nNxtButtonPressed == kLeftButton)
+			if(nNxtButtonPressed==kLeftButton)
 			{
-				if(g_test_value > 1) g_test_value--;
-				while(nNxtButtonPressed == kLeftButton) {}
+				motor[right_motor] = -80;
+				motor[left_motor] = -80;
+				abs_smoke_test_view(test_num,-80,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){}
 			}
-			if(nNxtButtonPressed == kRightButton)
+			else if(nNxtButtonPressed==kRightButton)
 			{
-				if(g_test_value < g_sensor_max) g_test_value++;
-				while(nNxtButtonPressed == kRightButton) {}
+				motor[right_motor] = 80;
+				motor[left_motor] = 80;
+				abs_smoke_test_view(test_num,80,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){}
 			}
-			g_sensor_num = g_test_value;
-			switch(g_sensor_num)
-			{
-			case ST_GYRO:
-				g_sensor_value = g_rel_heading;
-				break;
-			case ST_IR:
-				g_sensor_value = g_bearing_ac1;
-				g_sensor_value2 = g_bearing_ac2;
-				break;
-			case ST_TILT:
-				g_sensor_value = abs_get_angle_sensor_val(RELATIVE);
-				break;
-			case ST_ACCELEROMETER:
-				g_sensor_value = g_accelermoeter_sensor;
-				break;
-			}
+			abs_smoke_test_view(test_num,0,0);
+			motor[sky_hook] = 0;
 			break;
-			//---------------------------------
-			// Block lift
-			//---------------------------------
 		case 4:
-			if(nNxtButtonPressed == kLeftButton)
+			static int left_grabber = 0;
+			static int right_grabber = 0;
+			static int grabbers_pos = 1;
+			if(nNxtButtonPressed==kLeftButton&&grabbers_pos>1)
 			{
-				motor[block_lift_motor] = g_robot_lift_down;
-				motor[block_lift_motor2] = g_robot_lift_down;
-				g_test_value = g_robot_lift_down;
+				grabbers_pos--;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){}
 			}
-			else if(nNxtButtonPressed == kRightButton)
+			else if(nNxtButtonPressed==kRightButton&&grabbers_pos<3)
 			{
-				motor[block_lift_motor] = g_robot_lift_up;
-				motor[block_lift_motor2] = g_robot_lift_up;
-				g_test_value = g_robot_lift_up;
+				grabbers_pos++;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){}
 			}
-			else
-			{
-				motor[block_lift_motor] = 0;
-				motor[block_lift_motor2] = 0;
-				g_test_value = 0;
-			}
-			break;
-			//---------------------------------
-			// grabbers
-			//---------------------------------
-		case 5:
-			if(nNxtButtonPressed == kLeftButton)
-			{
-				if(g_test_value>1) g_test_value--;
-				while(nNxtButtonPressed == kLeftButton){}
-			}
-			if(nNxtButtonPressed == kRightButton)
-			{
-				if(g_test_value<3) g_test_value++;
-				while(nNxtButtonPressed == kRightButton){}
-			}
-			switch(g_test_value)
+			switch(grabbers_pos)
 			{
 			case 1:
-			servo[grabber_left] = GRABBER_LEFT_OPEN;
-			servo[grabber_right] = GRABBER_RIGHT_OPEN;
+				left_grabber = GRABBER_LEFT_CLOSE;
+				right_grabber = GRABBER_RIGHT_CLOSE;
 				break;
 			case 2:
-			servo[grabber_left] = GRABBER_LEFT_MID;
-			servo[grabber_right] = GRABBER_RIGHT_MID;
+				left_grabber = GRABBER_LEFT_MID;
+				right_grabber = GRABBER_RIGHT_MID;
 				break;
 			case 3:
-			servo[grabber_left] = GRABBER_LEFT_CLOSE;
-			servo[grabber_right] = GRABBER_RIGHT_CLOSE;
+				left_grabber = GRABBER_LEFT_OPEN;
+				right_grabber = GRABBER_RIGHT_OPEN;
 				break;
 			}
-		break;
-		//---------------------------------
-		// sky hook
-		//---------------------------------
-	case 6:
-		if(nNxtButtonPressed == kLeftButton)
-		{
-			motor[sky_hook] = g_robot_lift_up;
-			g_test_value = g_robot_lift_up;
-		}
-		else if(nNxtButtonPressed == kRightButton)
-		{
-			motor[sky_hook] = g_robot_lift_down;
-			g_test_value = g_robot_lift_down;
-		}
-		else
-		{
-			motor[sky_hook] = 0;
-			g_test_value = 0;
-		}
-		break;
-		//---------------------------------
-		// roger slide
-		//---------------------------------
-	case 7:
-		if(nNxtButtonPressed == kLeftButton)
-		{
-			servo[roger_slide] = 255;
-			g_test_value = 255;
-		}
-		else if(nNxtButtonPressed == kRightButton)
-		{
-			servo[roger_slide] = 0;
-			g_test_value = 0;
-		}
-		else
-		{
+			servo[grabber_left] = left_grabber;
+			servo[grabber_right] = right_grabber;
+			abs_smoke_test_view(test_num,left_grabber,right_grabber);
+			break;
+		case 5:
+			static int abdd_pos = 1;
+			if(nNxtButtonPressed==kLeftButton&&abdd_pos>1)
+			{
+				abdd_pos--;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){}
+			}
+			else if(nNxtButtonPressed==kRightButton&&abdd_pos<2)
+			{
+				abdd_pos++;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){}
+			}
+			if(abdd_pos==1){servo[abdd] = g_abdd_up;abs_smoke_test_view(test_num,g_abdd_up,0);}
+			else {servo[abdd] = g_abdd_down;abs_smoke_test_view(test_num,g_abdd_down,0);}
+			break;
+		case 6:
+			if(nNxtButtonPressed==kLeftButton)
+			{
+				servo[roger_slide] = 0;
+				abs_smoke_test_view(test_num,0,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){}
+			}
+			else if(nNxtButtonPressed==kRightButton)
+			{
+				servo[roger_slide] = 255;
+				abs_smoke_test_view(test_num,255,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){}
+			}
+			abs_smoke_test_view(test_num,127,0);
 			servo[roger_slide] = 127;
-			g_test_value = 127;
+			break;
+		case 7:
+			if(nNxtButtonPressed==kLeftButton)
+			{
+				motor[jolly_roger] = g_flag_speed_down;
+				abs_smoke_test_view(test_num,g_flag_speed_down,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){}
+			}
+			else if(nNxtButtonPressed==kRightButton)
+			{
+				motor[jolly_roger] = g_flag_speed_up;
+				abs_smoke_test_view(test_num,g_flag_speed_up,0);
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){}
+			}
+			abs_smoke_test_view(test_num,0,0);
+			motor[jolly_roger] = 0;
+			break;
+		case 8:
+			static int optical_servo_pos = OPTICAL_SERVO_UP;
+			if(nNxtButtonPressed==kLeftButton)
+			{
+				optical_servo_pos = OPTICAL_SERVO_DOWN;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kLeftButton){}
+			}
+			else if(nNxtButtonPressed==kRightButton)
+			{
+				optical_servo_pos = OPTICAL_SERVO_UP;
+				PlaySoundFile("! Click.rso");
+				while(nNxtButtonPressed==kRightButton){}
+			}
+			servo[optical_servo] = optical_servo_pos;
+			abs_smoke_test_view(test_num,optical_servo_pos,0);
+			break;
+		case 9:
+			//abs_smoke_test_view(test_num,g_angle_sensor,g_angle_sensor/INT_ANGLE_SENSOR_CIRCUMFERENCE);
+			break;
+		default: abs_cscreen("ERROR   ","Test 2 B","added   "); break;
 		}
-		break;
-		//---------------------------------
-		// ground arm
-		//---------------------------------
-	case 8:
-		if(nNxtButtonPressed == kLeftButton)
-		{
-			servo[ground_arm] = g_ground_arm_down;
-			g_test_value = g_ground_arm_down;
-		}
-		else if(nNxtButtonPressed == kRightButton)
-		{
-			servo[ground_arm] = g_ground_arm_up;
-			g_test_value = g_ground_arm_up;
-		}
-		break;
-		//---------------------------------
-		// light sensor
-		//---------------------------------
-
-	case 9:
-		if(nNxtButtonPressed == kLeftButton)
-		{
-			servo[ground_arm] = g_ground_arm_down;
-			g_test_value = g_ground_arm_down;
-		}
-		else if(nNxtButtonPressed == kRightButton)
-		{
-			servo[ground_arm] = g_ground_arm_up;
-			g_test_value = g_ground_arm_up;
-		}
-		break;
 	}
-}
-PlaySoundFile("! Click.rso");
+	PlaySoundFile("! Click.rso");
+	while(nNxtButtonPressed==kEnterButton){}
 }
 
 #endif /* !ABS_SMOKE_EXECUTE_H */

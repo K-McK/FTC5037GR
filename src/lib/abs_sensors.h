@@ -25,10 +25,6 @@ task abs_sensors()
 	while(true)
 	{
 		//-------------------------
-		// Light Sensor
-		//-------------------------
-		g_light_sensor = LSvalNorm(LEGOLS);
-		//-------------------------
 		// HiTechnic IR Sensor
 		//-------------------------
 		g_bearing_ac1 = HTIRS2readACDir(HTIRS2);				// Read the IR bearing from the sensor
@@ -153,10 +149,19 @@ task abs_sensors()
 			memset(g_accelermoeter_array,0,30);
 		}
 		//-------------------------
-		// HiTechnic angle sensor
+		// EOPD Sensor
 		//-------------------------
-		//if(g_reset_angle == true) HTANGresetAccumulatedAngle(HTANG);
-		//else angle_sensor = HTANGreadAccumulatedAngle(HTANG);
+#if EOPD_ACTIVE == 1
+		HTEOPDsetLongRange(HTEOPD);
+		g_EOPD_sensor = HTEOPDreadRaw(HTEOPD);
+		g_optical_sensor = g_EOPD_sensor;
+#else
+		//-------------------------
+		// Light Sensor
+		//-------------------------
+		g_light_sensor = LSvalNorm(LEGOLS);
+		g_optical_sensor = g_light_sensor;
+#endif
 	}
 }
 #endif

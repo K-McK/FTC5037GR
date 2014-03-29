@@ -56,7 +56,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
         case E_TIME:
                 abs_dlog(__FILE__ , "time enter", speed_str, speed, dist_str, dist, "time", time1[T1], rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
                 break;
-        case E_LIGHT:
+	case E_OPTICAL:
                 abs_dlog(__FILE__ , "Optical enter", speed_str, speed, dist_str, dist, "g_calibrated_light_threshold_val", g_calibrated_light_threshold_val, rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
                 break;
 	}
@@ -330,37 +330,34 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		abs_dlog(__FILE__ ,"angle break", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 	}
 	//================
-	// Light
+	// OPTICAL
 	//================
-	//stops baced on the light sensor
-	else if(dist_method == E_LIGHT)
+	else if(dist_method == E_OPTICAL)
 	{
-		bool light_fail = false;
+		bool optical_fail = false;
 		abs_reset_angle_sensor_val(SOFT_RESET);
 
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 
-		int max_light_detected = 0;
+		int max_optical_detected = 0;
 		while(true)
 		{
-			//finds out what the highest value of the light sensor was
-			max_light_detected = max(max_light_detected, g_light_sensor);
+			//finds out what the highest value of the optical sensor was
+			max_optical_detected = max(max_optical_detected, g_optical_sensor);
 
-			if(g_light_sensor>g_calibrated_light_threshold_val&&abs_get_angle_sensor_val(RELATIVE_BPU)<g_light_move_min_dist)
+			if(g_optical_sensor>g_calibrated_optical_threshold_val&&abs_get_angle_sensor_val(RELATIVE_ASU)<g_optical_move_min_dist)
 			{
-				abs_dlog(__FILE__ ,"Premature Optical detection: ", "Min BPU", g_light_move_min_dist, "Actual BPU when detected", abs_get_angle_sensor_val(RELATIVE_BPU), "Optical Threshold", g_calibrated_light_threshold_val, "Optical Value detected", max_light_detected);
-				light_fail = true;
+				abs_dlog(__FILE__ ,"Premature Optical detection", "Min BPU", g_optical_move_min_dist, "Actual BPU when detected", abs_get_angle_sensor_val(RELATIVE_BPU), "Optical Threshold", g_calibrated_optical_threshold_val, "Optical Value detected", max_optical_detected);
+				optical_fail = true;
 			}
-
-			if(g_light_sensor>g_calibrated_light_threshold_val&&light_fail==false)
+			if(g_optical_sensor>g_calibrated_optical_threshold_val&&optical_fail==false)
 			{
-				abs_dlog(__FILE__ ,"optical break", speed_str, speed, dist_str, dist, "g_calibrated_light_threshold", g_calibrated_light_threshold_val, "g_light_sensor", g_light_sensor);
+				abs_dlog(__FILE__ ,"optical break", speed_str, speed, dist_str, dist, "g_calibrated_optical_threshold", g_calibrated_optical_threshold_val, "g_optical_sensor", g_optical_sensor);
 				break;
 			}
 			else if (abs_get_angle_sensor_val(RELATIVE_BPU) > dist)
 			{
-				abs_dlog(__FILE__ ,"angle break", "speed", speed, "max distance", dist, "Optical Threshold", g_calibrated_light_threshold_val, "optical Value detected", max_light_detected);
-
+				abs_dlog(__FILE__ ,"angle break", "speed", speed, "max distance", dist, "Optical Threshold", g_calibrated_optical_threshold_val, "optical Value detected", max_optical_detected);
 				break;
 			}
 
@@ -407,9 +404,11 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	}
 	g_debug_time_2 = nPgmTime;
 
-	servo[light_sensor] = LIGHT_SERVO_UP;
+	if(dist_method == E_OPTICAL) servo[optical_servo] = OPTICAL_SERVO_UP;
 
+#if EOPD_ACTIVE == 0
 	if(dist_method==E_LIGHT) LSsetInactive(LEGOLS);
+#endif
 	if(dist_record==true)
 	{
 		if(g_start_point==1)

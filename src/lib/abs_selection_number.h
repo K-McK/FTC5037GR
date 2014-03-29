@@ -14,29 +14,29 @@
 #ifndef ABS_SELECTION_NUMBER_H
 #define ABS_SELECTION_NUMBER_H
 
+#include "lib/abs_cscreen.h"
+#include "lib/abs_ramp_interpret.h"
+
+
 void abs_selection_number()
 {
 	//---------------------------------------
 	// number selection
 	//---------------------------------------
 
-	g_auto_selection_point = SELECTION_GRAPH_NUMBER_INPUT;
-	g_screen_state = S_NUMBER_SELECTION;
+	abs_cscreen("Number  ","00000   ","        ");
 
 	while(g_graph_selection_tab<5)
 	{
 		g_graph_selection_tab++;
 		while(nNxtButtonPressed != kEnterButton)
 		{
+			nxtDisplayBigTextLine(3, "%1d%1d%1d%1d%1d%1d%1d%1d",g_input_array[1],g_input_array[2],g_input_array[3],g_input_array[4],g_input_array[5]);
 			if(nNxtButtonPressed == kRightButton && g_input_array[g_graph_selection_tab] < g_number_max_limit[g_graph_selection_tab])
 			{
 				PlaySoundFile("! Click.rso");
 				while(nNxtButtonPressed == kRightButton){}
 				g_input_array[g_graph_selection_tab] ++;
-			}
-			else
-			{
-				//PlayTone(200,20);
 			}
 			if(nNxtButtonPressed == kLeftButton && g_input_array[g_graph_selection_tab] > g_number_min_limit[g_graph_selection_tab])
 			{
@@ -44,40 +44,19 @@ void abs_selection_number()
 				while(nNxtButtonPressed == kLeftButton){}
 				g_input_array[g_graph_selection_tab] --;
 			}
-			else
+			switch(g_graph_selection_tab)
 			{
-				//PlayTone(200,20);
+				case 1: nxtDisplayBigTextLine(5, "^       "); break;
+				case 2: nxtDisplayBigTextLine(5, " ^      "); break;
+				case 3: nxtDisplayBigTextLine(5, "  ^     "); break;
+				case 4: nxtDisplayBigTextLine(5, "   ^    "); break;
+				case 5: nxtDisplayBigTextLine(5, "    ^   "); break;
 			}
 		}
 		while(nNxtButtonPressed == kEnterButton){}
 		PlaySoundFile("! Click.rso");
 	}
-	g_start_point = g_input_array[STARTING_POINT];
-	g_start_delay = g_input_array[STARTING_DELAY];
-	g_mission_number = g_input_array[SCOREING_POINT];
-	g_end_delay = g_input_array[END_DELAY];
-	if(g_input_array[END_POINT] < 4 && g_input_array[END_POINT] > 0)
-	{
-		g_end_point = g_input_array[END_POINT];
-		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_STOP;
-	}
-	else if(g_input_array[END_POINT] == 4)
-	{
-		g_end_point = 2;
-		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-	}
-	else if(g_input_array[END_POINT] == 5)
-	{
-		g_end_point = 3;
-		g_auto_grabber_selection_ramp_options = SUB_SELECTION_RAMP_CONTINUED;
-	}
-	else
-	{
-		g_end_point = 1; //error for if an invaid value is inputed
-		//PlayTone(400,60);
-	}
-
-	g_screen_state = S_MISSION_SHOW;
+	abs_ramp_interpret();
 }
 
 #endif /* !ABS_SELECTION_NUMBER_H */

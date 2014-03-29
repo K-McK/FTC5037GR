@@ -14,19 +14,18 @@
 #ifndef ABS_SELECTION_ADVANCED_H
 #define ABS_SELECTION_ADVANCED_H
 
+#include "lib/abs_ramp_interpret.h"
+
 void abs_selection_advanced()
 {
 	//---------------------------------------
 	// Start of cornor time selection
 	//---------------------------------------
-
-	g_auto_selection_point = SELECTION_CORNOR_DELAY;
-	g_screen_state = S_DELAY;
 	g_input_array[CORNOR_DELAY] = 0;
 
 	while(nNxtButtonPressed != kEnterButton)
 	{
-		g_delay = g_cornor_delay;
+		abs_cscreen("Corner  ","delay   ","%2d",g_input_array[CORNOR_DELAY]);
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
@@ -47,14 +46,11 @@ void abs_selection_advanced()
 	//---------------------------------------
 	// Start of ramp delay selection
 	//---------------------------------------
-
-	g_auto_selection_point = SELECTION_RAMP_DELAY;
-	g_screen_state = S_DELAY;
 	g_input_array[RAMP_DELAY] = 0;
 
 	while(nNxtButtonPressed != kEnterButton)
 	{
-		g_delay = g_ramp_delay;
+		abs_cscreen("Ramp    ","delay   ","%2d",g_input_array[RAMP_DELAY]);
 		if(nNxtButtonPressed == kRightButton)
 		{
 			PlaySoundFile("! Click.rso");
@@ -70,6 +66,8 @@ void abs_selection_advanced()
 	}
 	PlaySoundFile("! Click.rso");
 	while(nNxtButtonPressed == kEnterButton){}
+
+	abs_ramp_interpret();
 }
 
 #endif /* !ABS_SELECTION_ADVANCED_H */
