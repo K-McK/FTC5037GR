@@ -488,6 +488,21 @@ const int g_backwards_crate2_to_turn_dist = 65;
 const int g_backwards_crate3_to_turn_dist = 115;
 const int g_backwards_crate4_to_turn_dist = 140;
 
+#define MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE 110
+#define MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE 20
+
+#define DRIVE_DIST_TO_OPP_RAMP_SIDE 145
+
+#define FORWARD_IR_THRESHOLD 7
+#define BACKWARD_IR_THRESHOLD 3
+
+#define MIN_DRIVE_SPEED 10
+#define MIN_TURN_SPEED 10
+#define DRIVE_SPEED_PERCENTAGE_DROP 50
+#define DRIVE_SPEED_COEFFICIENT 5
+#define TURN_SPEED_PERCENTAGE_DROP 50
+#define TURN_SPEED_COEFFICIENT 5
+
 //=========================================================
 // auto number input variable
 //=========================================================
@@ -815,7 +830,7 @@ int dl_joy2_btns [] = {0,1,2,3,4,5,6,7,8,9,10,11,12};
 int g_debug_time_1 = 0;
 int g_debug_time_2 = 0;
 
-int g_auto_ending_points = 5;
+int g_auto_ending_points = 9;
 int g_travel_dist = 0;
 int g_auto_starting_points = 4;
 int g_auto_missions = 10;
@@ -848,7 +863,7 @@ int g_selection_value = 0;
  *	flag indicating that we have performed at least one gyro read
  */
 #if EOPD_ACTIVE == 1
-const int g_optical_delta_value = 300;
+const int g_optical_delta_value = 100;
 #else
 const int g_optical_delta_value = 2;
 #endif
@@ -973,7 +988,7 @@ int START_POINT_MAX_VAL = 4;
 int START_POINT_MIN_VAL = 0;
 
 int g_number_min_limit [] = {0,0,0,0,0,0,0};
-int g_number_max_limit [] = {0,4,30,7,30,5};
+int g_number_max_limit [] = {0,4,30,7,30,9};
 //=============================================================
 // Gyro variables
 //=============================================================

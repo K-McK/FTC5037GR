@@ -86,10 +86,17 @@ void abs_end_ramp(int delay, int lift_speed)
 	dl_speed = 200;
 	wait1Msec(200);
 	abs_drive(FORWARD, E_OPTICAL, 110, 30, true, GYRO);
-	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 20)
+	//if(abs_get_angle_sensor_val(RELATIVE_BPU) < 20)
+	//{
+	//	abs_drive(FORWARD, E_ANGLE, 110 - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
+	//}
+	if(g_auto_sub_selection_ramp_side == SUB_SELECTION_RAMP_OPP_SIDE)
 	{
-		abs_drive(FORWARD, E_ANGLE, 110 - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
+		servo[optical_servo] = OPTICAL_SERVO_DOWN;
+		abs_drive(FORWARD, E_ANGLE, DRIVE_DIST_TO_OPP_RAMP_SIDE - abs_get_angle_sensor_val(RELATIVE_BPU), 30, false, GYRO);
+		abs_drive(FORWARD, E_OPTICAL, 25, 30, true, GYRO);
 	}
+
 	abs_control_light_sensor(INACTIVE);
 	dl_step = dl_step+1;
 	dl_robot_action_state = dl_wait;

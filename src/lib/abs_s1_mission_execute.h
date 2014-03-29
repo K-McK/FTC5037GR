@@ -21,6 +21,8 @@
 #include "abs_end_ramp.h"
 #include "abs_log.h"
 #include "abs_get_angle_sensor_val.h"
+#include "lib/abs_cscreen.h"
+#include "lib/abs_calibrate_optical.h"
 
 void abs_s1_mission_execute()
 {
@@ -77,6 +79,8 @@ void abs_s1_mission_execute()
 	case 6:
 		motor[right_motor] = 0;
 		motor[left_motor] = 0;
+		servo[optical_servo] = OPTICAL_SERVO_DOWN;
+		while(true){abs_cscreen("Optical ","Sensor","%1d ",g_optical_sensor);}
 		break;
 
 	case 7:
