@@ -13,7 +13,6 @@
 #ifndef ABS_TELE_OP_INITIALIZE_H
 #define ABS_TELE_OP_INITIALIZE_H
 
-#include "abs_screen.h"
 
 void abs_tele_op_initialize()
 {
@@ -22,8 +21,6 @@ void abs_tele_op_initialize()
 
 	servo[abdd] = g_abdd_down;
 
-	StartTask(abs_screen);
-	g_screen_state = S_MISC_SHOW;
 	getJoystickSettings(joystick);
 }
 #endif /* ABS_TELE_OP_INITIALIZE_H */
