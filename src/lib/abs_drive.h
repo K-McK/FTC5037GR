@@ -138,11 +138,16 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		int total_dist = 0;
 		int half_dist = 0;
 		if(g_start_point == 1||g_start_point == 2)
-		{total_dist = 150;
-			half_dist = 100;}
+		{
+			total_dist = 150;
+			half_dist = 100;
+		}
 		else //start point = 3
-		{total_dist= 100;
-			half_dist = 100;}
+		{
+			total_dist= 100;
+			half_dist = 100;
+		}
+
 		if(dir == FORWARD)
 		{
 			//wait intil we get past the specified area or we detect the IR
