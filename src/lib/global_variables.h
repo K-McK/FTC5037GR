@@ -503,7 +503,7 @@ const int g_backwards_crate4_to_turn_dist = 140;
 #define MAX_DRIVE_DIST_TO_FIRST_RAMP_LINE 110
 #define MIN_DRIVE_DIST_TO_FIRST_RAMP_LINE 20
 
-#define DRIVE_DIST_TO_OPP_RAMP_SIDE 145
+#define DRIVE_DIST_TO_OPP_RAMP_SIDE 142
 
 #define FORWARD_IR_THRESHOLD 7
 #define BACKWARD_IR_THRESHOLD 3
@@ -630,7 +630,7 @@ int g_selection_value = 0;
 */
 
 #define MIN_DRIVE_SPEED 10
-#define MIN_TURN_SPEED 25
+#define MIN_TURN_SPEED 15
 #define DRIVE_SPEED_PERCENTAGE_DROP 50
 #define DRIVE_SPEED_COEFFICIENT 5
 #define TURN_SPEED_PERCENTAGE_DROP 50
@@ -759,7 +759,7 @@ e_turn_types g_em_first_turn_type = CONSTANT_TURN;
 * @var g_drive_type
 *		Tells the robot if it should drive useing the gyro, encode or non
 */
-e_turn_types g_em_second_turn_type = RELATIVE_TURN;
+e_turn_types g_em_second_turn_type = CONSTANT_TURN;
 
 int g_selection_turn = 1;
 

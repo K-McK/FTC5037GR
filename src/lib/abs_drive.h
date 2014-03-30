@@ -411,7 +411,7 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 		if(g_start_point==1)
 		{
 			if(g_end_point == 3) g_dist_backwards = abs_get_angle_sensor_val(RELATIVE_BPU) - 6;//was 9
-			else if(g_end_point == 2) g_dist_backwards = 190 - abs_get_angle_sensor_val(RELATIVE_BPU);
+			else if(g_end_point == 2) g_dist_backwards = 194 - abs_get_angle_sensor_val(RELATIVE_BPU);
 		}
 		else if(g_start_point==2)
 		{
