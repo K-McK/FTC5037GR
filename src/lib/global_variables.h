@@ -201,7 +201,7 @@ const int g_optical_threshold = 30;
 
 const int g_optical_move_min_dist = 70;
 
-#define NON_IR_DRIVE_SPEED 80
+#define NON_IR_DRIVE_SPEED 100
 #define IR_DRIVE_SPEED 40
 
 #define TURN_SPEED 50
@@ -349,6 +349,15 @@ typedef enum
 } e_auto_sub_selection_ramp_sides;
 
 e_auto_sub_selection_ramp_sides g_auto_sub_selection_ramp_side = SUB_SELECTION_RAMP_ALLY_SIDE;
+
+typedef enum
+{
+	SUB_SELECTION_IR_ALL,
+	SUB_SELECTION_IR_1_2,
+	SUB_SELECTION_IR_3_4
+} e_auto_sub_selection_IR_partial_types;
+
+e_auto_sub_selection_IR_partial_types g_auto_sub_selection_IR_partial = SUB_SELECTION_IR_ALL;
 
 /**
 *  @enum e_auto_sub_selection_ramp Tells the robot to drive onto the ramp and continue or stop
