@@ -41,7 +41,6 @@ void abs_s2_mission_execute()
 		}
 		//Only use g_shift_due_to_ir when shifted due the the ir detecting
 		PlayTone(200,20);
-		wait1Msec(1000);
 		if(g_shift_due_to_ir)
 		{
 			abs_drive(FORWARD, E_ANGLE, /*distance in cm*/6, 50, true, GYRO);

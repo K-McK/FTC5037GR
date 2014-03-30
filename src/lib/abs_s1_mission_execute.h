@@ -40,7 +40,6 @@ void abs_s1_mission_execute()
 			abs_drive(FORWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, GYRO);
 		}
 		PlayTone(200,20);
-		wait1Msec(1000);
 		wait1Msec(500);
 		break;
 
