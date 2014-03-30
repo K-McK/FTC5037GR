@@ -33,11 +33,11 @@ void abs_s1_mission_execute()
 
 	case 1:
 		dist_record=true;
-		abs_drive(FORWARD, E_IR_DETECT, 7, 40, true, GYRO);
+		abs_drive(FORWARD, E_IR_DETECT, 7, IR_DRIVE_SPEED, true, GYRO);
 		if(abs_get_angle_sensor_val(RELATIVE_BPU) < 38)
 		{
 			dist_record = true;
-			abs_drive(FORWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), 40, true, GYRO);
+			abs_drive(FORWARD, E_ANGLE, 40 - abs_get_angle_sensor_val(RELATIVE_BPU), IR_DRIVE_SPEED, true, GYRO);
 		}
 		PlayTone(200,20);
 		wait1Msec(1000);
@@ -46,24 +46,24 @@ void abs_s1_mission_execute()
 
 	case 2:
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/150, NON_IR_DRIVE_SPEED, true, GYRO);
 
 		wait1Msec(2000);
 		break;
 
 	case 3:
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/125, NON_IR_DRIVE_SPEED, true, GYRO);
 		break;
 
 	case 4:
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/75, NON_IR_DRIVE_SPEED, true, GYRO);
 		break;
 
 	case 5:
 		dist_record=true;
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/50, NON_IR_DRIVE_SPEED, true, GYRO);
 		break;
 
 	case 6:
@@ -76,13 +76,13 @@ void abs_s1_mission_execute()
 	case 7:
 		abs_turn(COUNTERCLOCKWISE, POINT, TURN, 98, 60);
 		wait1Msec(200);
-		abs_drive(FORWARD, E_ANGLE, 87, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 87, NON_IR_DRIVE_SPEED, true, GYRO);
 		motor[block_lift_motor] = 40;
 		motor[block_lift_motor2] = 40;
 		abs_turn(CLOCKWISE, POINT, TURN, 103, 60);
 		motor[block_lift_motor] = 0;
 		motor[block_lift_motor2] = 0;
-		abs_drive(FORWARD, E_ANGLE, 80, 50, true, GYRO);
+		abs_drive(FORWARD, E_ANGLE, 80, NON_IR_DRIVE_SPEED, true, GYRO);
 		break;
 	}
 	if(g_mission_number != 0)

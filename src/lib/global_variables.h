@@ -201,6 +201,11 @@ const int g_optical_threshold = 30;
 
 const int g_optical_move_min_dist = 70;
 
+#define NON_IR_DRIVE_SPEED 80
+#define IR_DRIVE_SPEED 40
+
+#define TURN_SPEED 50
+
 //=========================================================
 // auto selection points
 //=========================================================
