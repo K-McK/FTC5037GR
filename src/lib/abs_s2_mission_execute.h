@@ -27,7 +27,6 @@ void abs_s2_mission_execute()
 	switch(g_mission_number)
 	{
 	case 0:
-		abs_drive(FORWARD, E_ANGLE, /*distance in cm*/600, 50, true, GYRO);
 		break;
 
 	case 1:
