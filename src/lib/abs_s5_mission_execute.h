@@ -28,12 +28,12 @@ void abs_s5_mission_execute()
 	switch(g_mission_number)
 	{
 	case 0:
+		abs_drive(FORWARD, E_ANGLE, 260, 40, true, GYRO);
+		abs_turn(CLOCKWISE, POINT, TURN, 80, 40);
+		abs_drive(FORWARD, E_ANGLE, 100, 40, true, GYRO);
 		break;
 
-	case 1: //go to other side of the field and block an apponet
-		abs_drive(FORWARD, E_ANGLE, 240, 40, true, GYRO);
-		abs_turn(CLOCKWISE, POINT, TURN, 90, 40);
-		abs_drive(FORWARD, E_ANGLE, 100, 40, true, GYRO);
+	case 1:
 		break;
 
 		default:
