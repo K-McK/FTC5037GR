@@ -201,7 +201,7 @@ const int g_optical_threshold = 30;
 
 const int g_optical_move_min_dist = 70;
 
-#define NON_IR_DRIVE_SPEED 100
+#define NON_IR_DRIVE_SPEED 70
 #define IR_DRIVE_SPEED 40
 
 #define TURN_SPEED 50
@@ -507,6 +507,8 @@ const int g_backwards_crate4_to_turn_dist = 140;
 
 #define FORWARD_IR_THRESHOLD 7
 #define BACKWARD_IR_THRESHOLD 3
+
+bool g_reset_angle_record = true;
 
 //=========================================================
 // auto number input variable

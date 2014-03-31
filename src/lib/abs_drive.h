@@ -298,10 +298,14 @@ void abs_drive(e_drive_direction dir, e_move_stopping_method dist_method, int di
 	//Tells the robot to stop baced on the real distence it has went
 	else if(dist_method == E_ANGLE)
 	{
-		abs_reset_angle_sensor_val(SOFT_RESET);
+		int pre_dist = 0;
+		if(g_reset_angle_record == false) pre_dist = abs_get_angle_sensor_val(RELATIVE_BPU);
+		else abs_reset_angle_sensor_val(SOFT_RESET);
+		g_reset_angle_record = true;
+
 		abs_dlog(__FILE__ ,"reset angle", speed_str, speed, dist_str, dist, rel_asu_str, abs_get_angle_sensor_val(RELATIVE_ASU), rel_bpu_str, abs_get_angle_sensor_val(RELATIVE_BPU));
 
-		while(abs_get_angle_sensor_val(RELATIVE_BPU) < dist)
+		while(abs_get_angle_sensor_val(RELATIVE_BPU) < (dist+pre_dist))
 		{
 			if(drive_type == GYRO)
 			{

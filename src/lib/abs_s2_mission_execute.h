@@ -40,6 +40,7 @@ void abs_s2_mission_execute()
 			int to_crate = 40;
 			if((g_start_point==1&&g_auto_sub_selection_IR_partial==SUB_SELECTION_IR_3_4)||(g_start_point==2&&g_auto_sub_selection_IR_partial==SUB_SELECTION_IR_1_2)) to_crate = 125;
 
+			g_reset_angle_record = false;
 			dist_record = true;
 			abs_drive(FORWARD, E_ANGLE, to_crate - abs_get_angle_sensor_val(RELATIVE_BPU), IR_DRIVE_SPEED, true, GYRO);
 		}
