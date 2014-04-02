@@ -46,7 +46,7 @@ void abs_end_ramp(int delay, int lift_speed)
 		}
 		else
 		{
-			if(g_end_point == 2) {g_to_turn_dist = 5;}
+			if(g_end_point == 2) {g_to_turn_dist = 3;}
 			else if(g_end_point == 3) {g_to_turn_dist = 196;}
 		}
 	}
@@ -92,11 +92,12 @@ void abs_end_ramp(int delay, int lift_speed)
 
 	wait1Msec(g_input_array[CORNOR_DELAY]*DELAY_MULTIPLICATION_FACTOR);
 	wait1Msec(200);
-	abs_drive(FORWARD, E_OPTICAL, 110, 30, true, GYRO);
-	//if(abs_get_angle_sensor_val(RELATIVE_BPU) < 20)
-	//{
-	//	abs_drive(FORWARD, E_ANGLE, 110 - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
-	//}
+	abs_drive(FORWARD, E_OPTICAL, 105, 30, true, GYRO);
+	if(abs_get_angle_sensor_val(RELATIVE_BPU) < 80)
+	{
+		if(g_mission_number!=0)abs_drive(FORWARD, E_ANGLE, 102 - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
+		else abs_drive(FORWARD, E_ANGLE, 105 - abs_get_angle_sensor_val(RELATIVE_BPU), 30, true, GYRO);
+	}
 	if(g_auto_sub_selection_ramp_side == SUB_SELECTION_RAMP_OPP_SIDE)
 	{
 		servo[optical_servo] = OPTICAL_SERVO_DOWN;
