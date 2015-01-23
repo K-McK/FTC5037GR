@@ -10,7 +10,7 @@
 #define time_drive 1
 
 #include "JoystickDriver.c"
-#include "drivers/hitechnic-irseeker-v2.h"
+#include "lib/xander/hitechnic-irseeker-v2.h"
 
 const string LogFileName = "DATALOG.txt";
 TFileIOResult LogIoResult;
